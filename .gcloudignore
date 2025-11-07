@@ -23,8 +23,6 @@ tmp/
 # DataConnect & local DBs
 dataconnect/.dataconnect/**
 dataconnect-debug.log
-dataconnect-generated/**
-dataconnect-generated
 
 **/Integrations/**
 **/pgliteData/**

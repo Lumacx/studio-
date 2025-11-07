@@ -59,8 +59,6 @@ node_modules
 # --- DataConnect local dev state + generated connectors (very large) ---
 dataconnect/.dataconnect/**          # <- directory and everything in it
 dataconnect-debug.log
-dataconnect-generated/**
-dataconnect-generated
 
 # Ignore ALL Integrations folders (anywhere in repo)
 **/Integrations/**
