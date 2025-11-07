@@ -1,0 +1,576 @@
+/*src/app/story.css*/
+/* ────────────────────────────────
+   Basic Setup & Fonts
+   ──────────────────────────────── */
+   @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+   :root{
+     /* Reader frame caps (you can tweak these) */
+     --reader-w: 90vw;
+     --reader-h: 90vh;
+   
+     /* Grid and spacing */
+     --avatar-w: 26%;
+     --gap: 18px;
+   
+     /* Text bubble scaling (JS updates this var) */
+     --font-size-multiplier: 1;
+   }
+   
+   /* Global background (page wallpaper). JS may update background-image inline. */
+   html, body {
+     height: 100%;
+     margin: 0;
+     padding: 0;
+     overflow: auto;                   /* allow scrollbars when content exceeds viewport */
+     font-family: 'Poppins', sans-serif;
+     background-color: #1a2e2a;
+     background-image: url('../../public/story_reader_backgrounds/dream-background.png');
+     background-size: cover;
+     background-position: center;
+     background-repeat: no-repeat;
+   }
+   
+   /* Avoid flex centering that can hide scrollbars on small screens */
+   body { display: block; }
+   
+   /* ────────────────────────────────
+      Main App Container
+      ──────────────────────────────── */
+   #app-container{
+     width: min(1200px, var(--reader-w));
+     height: min(900px, var(--reader-h));
+     margin: 5vh auto;                 /* 5% vertical margin; with 90vw width → ~5% sides */
+     background-color: rgba(26,46,42,0.85);
+     backdrop-filter: blur(5px);
+     border-radius: 24px;
+     box-shadow: 0 10px 30px rgba(0,0,0,.3);
+     display: flex;
+     flex-direction: column;
+     padding: clamp(12px, 2vw, 20px);
+     box-sizing: border-box;
+     color: #f0f0f0;
+     overflow: auto;                   /* internal scrolling if needed */
+     position: relative;
+   }
+   
+   /* ────────────────────────────────
+      Header
+      ──────────────────────────────── */
+   #app-header{
+     display: flex;
+     flex-wrap: wrap;                  /* wrap to a second row on narrow widths */
+     align-items: center;
+     justify-content: space-between;
+     gap: 10px 12px;
+     padding-bottom: 12px;
+     border-bottom: 1px solid rgba(255,255,255,.1);
+     position: sticky;
+     top: 8px;
+     z-index: 40;
+     background: transparent;
+   }
+   
+   #app-header > div:first-child{
+     display:flex;
+     align-items:center;
+     gap:10px;
+     min-width: 0;
+   }
+   
+   #welcome-text{
+     font-size: clamp(1.1rem, 2vw, 1.6rem);
+     font-weight: 700;
+     color: #fff;
+   }
+   
+   /* Header control cluster */
+   #header-icons{
+     display: flex;
+     flex-wrap: wrap;
+     gap: 8px;
+     min-width: 220px;
+   }
+   
+   #header-icons .header-icon-btn{
+     background: rgba(255,255,255,0.12);
+     border: 1px solid rgba(255,255,255,0.18);
+     color: #eee;
+     padding: 8px 10px;
+     border-radius: 10px;
+     cursor: pointer;
+     font-size: clamp(0.95rem, 1.5vw, 1.05rem);
+     min-width: 42px;
+     min-height: 38px;
+     display: grid;
+     place-items: center;
+     transition: background-color .2s, transform .1s;
+   }
+   #header-icons .header-icon-btn:hover{ background: rgba(255,255,255,0.22); }
+   #header-icons .header-icon-btn:active{ transform: scale(.98); }
+   
+   /* ────────────────────────────────
+      Transport Bar (arrows + progress)
+      ──────────────────────────────── */
+   #navigation-controls-bar{
+     display:flex;
+     align-items:center;
+     justify-content:space-between;
+     gap:12px;
+     margin-top:10px;
+     width: 100%;
+     padding: 6px 0;
+     box-sizing:border-box;
+     flex-wrap: nowrap;                /* never wrap; keep arrows accessible */
+   }
+   
+   .nav-arrow{
+     background: rgba(255,255,255,0.12);
+     border: none;
+     color: #eee;
+     padding: 8px 12px;
+     border-radius: 50%;
+     cursor: pointer;
+     font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+     transition: background-color .2s, transform .1s;
+     width: 42px; height: 42px;
+     display:flex; justify-content:center; align-items:center;
+   }
+   .nav-arrow:hover{ background: rgba(255,255,255,0.22); }
+   .nav-arrow:active{ transform: scale(.98); }
+   .nav-arrow.hidden{ visibility:hidden; opacity:0; }
+   
+   /* Optional glow cue */
+   .arrow-glow{
+     box-shadow: 0 0 12px 4px #76FF03, 0 0 20px 7px rgba(118,255,3,.7);
+     animation: pulse-glow 1.2s infinite alternate;
+   }
+   @keyframes pulse-glow{
+     from{ box-shadow: 0 0 10px 2px #76FF03, 0 0 15px 5px rgba(118,255,3,.6); }
+     to{   box-shadow: 0 0 18px 6px #76FF03, 0 0 25px 10px rgba(118,255,3,.8); }
+   }
+   
+   /* Audio progress track + fill (JS updates width of #audio-progress-bar) */
+   #audio-progress-container{
+     flex: 1 1 auto;
+     height: 8px;
+     background: rgba(0,0,0,.35);
+     border-radius: 4px;
+     overflow: hidden;
+     display: flex;
+     align-items: center;
+   }
+   #audio-progress-bar{
+     width: 0%;
+     height: 100%;
+     background: #76FF03;
+     border-radius: 4px;
+     transition: width .1s linear;
+   }
+   
+   /* ────────────────────────────────
+      Main Content Grid
+      ──────────────────────────────── */
+   #app-main{
+     flex: 1 1 auto;
+     display: grid;
+     grid-template-columns: minmax(220px, var(--avatar-w)) 1fr;
+     gap: var(--gap);
+     padding: 12px 0;
+     min-height: 0;                   /* allow children to size/scroll */
+   }
+   
+   /* Sidebar / Avatar panel */
+   #avatar-panel{
+     background: rgba(20,60,60,0.35);
+     border-radius: 14px;
+     padding: clamp(12px, 2vw, 16px);
+     display: grid;
+     place-items: center;
+     gap: 10px;
+     min-height: 160px;
+     overflow: hidden;
+   }
+   
+   #avatar-image{
+     width: clamp(80px, 12vw, 130px);
+     height: clamp(80px, 12vw, 130px);
+     border-radius: 50%;
+     object-fit: cover;
+     border: 4px solid rgba(255,255,255,.45);
+   }
+   
+   #start-story-button{
+     padding: 10px 16px;
+     border-radius: 10px;
+     background: #2d3f50;
+     color: #fff;
+     font-weight: 700;
+     border: 0;
+     cursor: pointer;
+   }
+   
+   /* ────────────────────────────────
+      Overview Index chips (uniform size & centered)
+      ──────────────────────────────── */
+   .chip-btn{
+     --chip-bg: rgba(255,255,255,0.10);
+     --chip-brd: rgba(255,255,255,0.25);
+     --chip-bg-active: rgba(255,255,255,0.25);
+   
+     display: flex;                   /* center text perfectly */
+     align-items: center;
+     justify-content: center;
+     width: 100%;                     /* fills the grid cell for uniform widths */
+     height: 42px;                    /* consistent height for all */
+     padding: 0 10px;                 /* inner spacing */
+     border-radius: 10px;
+     border: 1px solid var(--chip-brd);
+     background: var(--chip-bg);
+     color: #fff;
+     font-size: 12px;
+     cursor: pointer;
+     text-align: center;
+     transition: background .2s, transform .08s;
+   }
+   .chip-btn:hover{ background: rgba(255,255,255,0.18); }
+   .chip-btn:active{ transform: scale(.98); }
+   .chip-btn.active{ background: var(--chip-bg-active); }
+   
+   .index-box{
+     margin-top: 8px;
+     background: rgba(0,0,0,0.20);
+     border-radius: 10px;
+     padding: 8px;
+     max-height: 240px;
+     overflow: auto;
+   }
+   .index-title{
+     font-size: 12px;
+     font-weight: 700;
+     margin-bottom: 6px;
+     color: #fff;
+     opacity: .9;
+   }
+   
+   /* Up to 4 buttons per row; wraps automatically */
+   .index-grid{
+     display: grid;
+     grid-template-columns: repeat(4, minmax(0, 1fr));  /* max 4 per row */
+     gap: 8px;
+     justify-items: stretch;   /* buttons fill the cell width */
+   }
+   
+   /* ───────── Responsive columns for the index grid ───────── */
+   @media (max-width: 900px){
+     .index-grid{ grid-template-columns: repeat(3, minmax(0, 1fr)); }
+   }
+   @media (max-width: 768px){
+     .index-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+   }
+   @media (max-width: 380px){
+     .index-grid{ grid-template-columns: 1fr; }
+   }
+   
+   /* Compact pager above the grid when there are multiple index pages */
+.index-pager{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 6px 0 10px;
+}
+
+.index-nav{
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.25);
+  color: #fff;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.index-nav:disabled{
+  opacity: .4;
+  cursor: default;
+}
+.index-page-indicator{
+  font-size: 12px;
+  opacity: .9;
+}
+
+/* Ensure the index block itself never grows too tall on tiny screens.
+   With pagination we rarely hit this, but it's a safe guard. */
+@media (max-width: 768px){
+  .index-box{
+    max-height: none;   /* let the two rows render fully */
+  }
+}
+
+/* The app container may scroll when content stacks vertically */
+#app-container{
+  overflow-y: auto;   /* already present in your file; keep it */
+}
+
+
+   /* ────────────────────────────────
+      Image panel + strict letterboxed frame (no crop, no overflow)
+      ──────────────────────────────── */
+   #image-panel{
+     background: rgba(0,0,0,0.25);
+     border-radius: 16px;
+     padding: clamp(8px, 1.5vw, 14px);
+     display: grid;
+     place-items: center;
+     min-height: 180px;
+     margin-bottom: min(2.2vh, 18px);   /* breathing room above text */
+     overflow: hidden;                  /* panel itself never scrolls */
+   }
+   
+   
+   /* The frame that centers content; fixed responsive height */
+    .image-frame,
+      #story-background {                 /* keep alias in case some code still uses the id */
+        width: 100%;
+        height: clamp(260px, 45vh, 720px);  /* single source of truth for frame height */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0,0,0,0.65);      /* dark letterbox */
+        border-radius: 14px;
+        overflow: hidden;                  /* nothing can extend past the frame */
+      }
+
+      /* The image SHRINKS TO FIT inside the frame (no crop) */
+      #story-image,
+      .story-img {
+        width: auto;                       /* don’t force to fill the frame */
+        height: auto;
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;               /* preserve ratio, never crop */
+        object-position: center;
+        display: block;
+        border-radius: 10px;
+        background: transparent;
+      }
+   
+   /* ────────────────────────────────
+      Text Area (centered, scrollable if long)
+      ──────────────────────────────── */
+   #text-area{
+     padding: 10px 0 16px;
+     display: grid;
+     justify-items: center;
+     gap: 10px;
+     flex-shrink: 0;
+     padding-top: min(1.8vh, 16px);     /* extra guard against image overlap */
+   }
+   
+   /* ⬇️ UPDATED: 10% margins left/right from app edges → bubble is 80% wide */
+      #text-bubble{
+        width: 98%;                         /* 1% side margins inside the reader */
+        max-width: 1100px;                  /* optional hard cap to avoid ultra-wide text */
+        max-height: 22vh;                   /* prevents colliding with footer */
+        overflow-y: auto;
+        scrollbar-gutter: stable;
+        background: #fff9e6;
+        color: #4d4122;
+        padding: 12px 22px;
+        border-radius: 26px;
+        text-align: center;
+        font-weight: 600;
+        font-size: calc( clamp(0.95rem, 1.8vw, 1.25rem) * var(--font-size-multiplier) );
+        box-shadow: 0 2px 5px rgba(0,0,0,.10);
+        margin: 0 auto;
+        transform-origin: center center !important;  /* keeps bubble centered when scaled */
+      }
+   
+   #read-again-button{
+     padding: 8px 18px;
+     font-size: clamp(.85rem, 1.3vw, 1rem);
+     background: #3a5f5a;
+     color: #fff;
+     border: 0;
+     border-radius: 20px;
+     cursor: pointer;
+     transition: background-color .2s;
+   }
+   #read-again-button:hover{ background:#4a7f7a; }
+   #read-again-button i{ margin-right: 6px; }
+   
+   /* ────────────────────────────────
+      Footer
+      ──────────────────────────────── */
+   #app-footer{
+     display:flex;
+     align-items:center;
+     justify-content:flex-start;
+     gap:10px;
+     padding-top: 12px;
+     border-top: 1px solid rgba(255,255,255,.1);
+     flex-shrink:0;
+   }
+   
+   #page-info{
+     font-size: clamp(.85rem, 1.2vw, 1rem);
+     color:#ccc;
+     margin: 0 10px;
+     text-align:center;
+   }
+   
+   /* ────────────────────────────────
+      Options Pop-up (settings)
+      ──────────────────────────────── */
+   #options-popup{
+     position: fixed;
+     top: 70px;
+     right: 20px;
+     background-color: #2c4a44;
+     color: #f0f0f0;
+     padding: 20px;
+     border-radius: 12px;
+     border: 1px solid rgba(255,255,255,.15);
+     box-shadow: 0 10px 24px rgba(0,0,0,.25);
+     display: none;
+     flex-direction: column;
+     gap: 14px;
+     z-index: 999;
+     min-width: 240px;
+   }
+   #options-popup.visible{ display:flex !important; }
+   #close-popup-button{
+     position:absolute; top:10px; right:10px;
+     background:none; border:none; color:#eee;
+     font-size:1.2rem; cursor:pointer; line-height:1;
+   }
+   #options-popup h4{
+     margin: 0 0 8px 0;
+     text-align:center;
+     font-size:1.2rem; color:#fff;
+     border-bottom:1px solid rgba(255,255,255,.12);
+     padding-bottom:8px;
+   }
+   .popup-option{ display:flex; align-items:center; gap:10px; }
+   .popup-option label{ color:#eee; flex-basis:35%; }
+   .popup-option select{
+     flex:1; padding:8px 10px;
+     background:#3a5f5a; color:#fff;
+     border:1px solid #5a7f7a; border-radius:6px;
+     font-size:.95rem;
+   }
+   .popup-nav-button{
+     padding:10px 14px; font-weight:700;
+     background:#3a5f5a; color:#fff; border:1px solid #5a7f7a;
+     border-radius:8px; cursor:pointer;
+   }
+   .popup-nav-button:hover{ background:#4a7f7a; border-color:#6a9f9a; }
+   
+   /* ────────────────────────────────
+      Loading Screen
+      ──────────────────────────────── */
+   #loading-screen{
+     position: fixed;
+     inset: 0;
+     background: rgba(0,0,0,.8);
+     display: flex; justify-content:center; align-items:center;
+     font-size: 1.8rem; color:#fff; z-index: 200;
+   }
+   
+   /* ────────────────────────────────
+      Reader Mode: hide external chrome
+      ──────────────────────────────── */
+   html.reader-mode .site-header,
+   html.reader-mode .site-footer,
+   html.reader-mode .site-chrome,
+   html.reader-mode .global-footer,
+   html.reader-mode .floating-toolbar,
+   html.reader-mode .subscriptions-bar{
+     display:none !important;
+   }
+   
+   /* ────────────────────────────────
+      Responsive (other areas)
+      ──────────────────────────────── */
+   @media (max-width: 1080px){
+     :root{ --avatar-w: 28%; }
+     /* adjust the frame height slightly on midsize screens */
+     #story-background{ height: clamp(260px, 46vh, 720px); }
+   }
+   
+   @media (max-width: 900px){
+     :root{ --avatar-w: 30%; }
+     #story-background{ height: clamp(240px, 44vh, 680px); }
+     #text-bubble{ max-height: 24vh; }
+   }
+   
+   @media (max-width: 768px){
+     /* Collapse to single column */
+     #app-main{
+       grid-template-columns: 1fr;
+       gap: 12px;
+     }
+     #avatar-panel{
+       padding: 12px;
+       border-radius: 12px;
+     }
+     #avatar-image{ width: clamp(64px, 18vw, 100px); height: clamp(64px, 18vw, 100px); }
+   
+     /* slightly taller frame on mobile for visibility */
+     #story-background{ height: clamp(220px, 48vh, 640px); }
+   
+     /* Header icons wrap to ensure tappable access */
+     #header-icons{ width: 100%; justify-content: flex-end; }
+   
+      /* keep the 10% margins concept on mobile too (80% width) */
+      #text-bubble{
+      width: 80%;
+      max-width: none;
+      max-height: 28vh;
+      padding: 10px 16px;
+      }
+      .nav-arrow{ width: 38px; height: 38px; }
+      }
+   
+   @media (max-width: 480px){
+     #app-container{
+       width: 100vw; height: 100vh; margin: 0;
+       border-radius: 0;                   /* edge-to-edge on tiny screens */
+     }
+     #app-header{ padding-bottom: 10px; }
+      #image-panel{ padding: 10px; }
+      #story-background{ height: clamp(200px, 50vh, 560px); }
+      #text-bubble{
+        width: 80%;
+        max-width: none;
+        max-height: 30vh;
+        font-size: calc(1rem * var(--font-size-multiplier));
+      }
+      .nav-arrow{ width: 34px; height: 34px; }
+      #options-popup{ width: 90%; right: 5%; }
+      }
+
+      /* Neon-green glow for the "Next" arrow */
+.nav-arrow.glow-next {
+  color: #76FF03;               /* make the chevron itself green */
+  box-shadow:
+    0 0 10px 2px #76FF03,
+    0 0 22px 8px rgba(118, 255, 3, 0.65);
+  animation: glowPulse 1.15s ease-in-out infinite alternate;
+  border-color: #76FF03;        /* if your .nav-arrow has a border */
+}
+
+@keyframes glowPulse {
+  from {
+    box-shadow:
+      0 0 8px 1px #76FF03,
+      0 0 16px 4px rgba(118, 255, 3, 0.55);
+    transform: translateZ(0);
+  }
+  to {
+    box-shadow:
+      0 0 16px 4px #76FF03,
+      0 0 28px 10px rgba(118, 255, 3, 0.85);
+    transform: translateZ(0);
+  }
+}

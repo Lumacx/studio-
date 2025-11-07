@@ -1,0 +1,264 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    /* ----------------- Global Helpers ----------------- */
+    function isSignedIn() { return request.auth != null; }
+    function isOwner(uid) { return isSignedIn() && request.auth.uid == uid; }
+
+    function isOwnerDoc() {
+      return isSignedIn() && resource.data.ownerUid == request.auth.uid;
+    }
+    function isOwnerCreate() {
+      return isSignedIn() && request.resource.data.ownerUid == request.auth.uid;
+    }
+
+    function unchanged(fields) {
+      return !request.resource.data.diff(resource.data).changedKeys().hasAny(fields);
+    }
+
+    function isPublishedBool(d)        { return d.published == true; }
+    function isPublishedAtNow(d)       { return (d.publishedAt is timestamp) && d.publishedAt <= request.time; }
+    function isPublicishData(d) {
+      return isPublishedBool(d) ||
+             isPublishedAtNow(d) ||
+             (d.status == "published") ||
+             (d.visibility == "public") ||
+             (d.isPublic == true);
+    }
+    function isPublicStory()           { return isPublicishData(resource.data); }
+
+    function isStoryOwner(storyId) {
+      return isSignedIn() &&
+        get(/databases/$(database)/documents/stories/$(storyId)).data.ownerUid == request.auth.uid;
+    }
+    function storyIsPublic(storyId) {
+      let s = get(/databases/$(database)/documents/stories/$(storyId)).data;
+      return isPublicishData(s);
+    }
+    function canReadStoryById(storyId) {
+      return storyIsPublic(storyId) || isStoryOwner(storyId);
+    }
+
+    function isTimestampOrMissing(field) { return !(field in request.resource.data) || (request.resource.data[field] is timestamp); }
+    function isStringOrMissing(field)    { return !(field in request.resource.data) || (request.resource.data[field] is string); }
+
+    function isValidStoryType(type) {
+      return type in ['basic', 'premium', 'convai'];
+    }
+
+    /* --------- Gallery index doc (flat lists shown in UploadImageReference) --------- */
+    function validAssetIndexDoc(d, uid, storyId) {
+      return
+        ( !('ownerUid' in d) || d.ownerUid == uid ) &&
+        (
+          (storyId == null && (!('storyId' in d) || d.storyId == null)) ||
+          (storyId != null && d.storyId == storyId)
+        ) &&
+        (d.url is string) &&
+        ( !('fileName' in d)    || (d.fileName is string) ) &&
+        ( !('contentType' in d) || (d.contentType is string) ) &&
+        ( !('name' in d)        || (d.name is string) ) &&
+        ( !('nameLower' in d)   || (d.nameLower is string) ) &&
+        ( !('storagePath' in d) || (d.storagePath is string) ) &&
+        ( !('source' in d)      || (d.source is string) ) &&
+        ( !('role' in d)        || (d.role is string) ) &&
+        isTimestampOrMissing('createdAt') &&
+        isTimestampOrMissing('updatedAt');
+    }
+
+    /* --------- StoryAssets hub (Option B) --------- */
+    function allowedAssetType(t) {
+      return t in ['images','audio','narration','soundfx','videos'];
+    }
+    function validStoryAsset(d, uid, storyId, assetType) {
+      return
+        (d.ownerUid == uid) &&
+        (d.storyId == storyId) &&
+        (d.assetType == assetType) &&
+
+        ( !('kind' in d)        || (d.kind in ['page','teaser','raw']) ) &&
+        ( !('source' in d)      || (d.source in ['storage','youtube']) ) &&
+        isStringOrMissing('youtubeUrl') &&
+        isStringOrMissing('storagePath') &&
+        isStringOrMissing('mimeType') &&
+        isTimestampOrMissing('createdAt') &&
+        ( !('pageNumber' in d)  || (d.pageNumber is int  || d.pageNumber == null) ) &&
+        ( !('sceneIndex' in d)  || (d.sceneIndex is int  || d.sceneIndex == null) ) &&
+        ( !('name' in d)        || (d.name is string) ) &&
+        ( !('tags' in d)        || (d.tags is list) );
+    }
+
+    /* ===========================================================
+       TOP-LEVEL _meta
+       ============================================================ */
+    match /_meta/{docId} {
+      allow read, write: if isSignedIn();
+    }
+
+    /* ===========================================================
+       USERS TREE
+       ============================================================ */
+    match /users/{uid} {
+
+      // READ: owner OR the referrer of this user (for “Referral Transactions” tab)
+      allow read: if isOwner(uid) || (isSignedIn() && resource.data.referredBy == request.auth.uid);
+
+      allow create: if isOwner(uid)
+        && !('plan' in request.resource.data)
+        && !('subscriptionTier' in request.resource.data)
+        && ( !('credits' in request.resource.data) || (request.resource.data.credits is int && request.resource.data.credits >= 0) )
+        && ( !('lastMonthlyCreditGrant' in request.resource.data) || (request.resource.data.lastMonthlyCreditGrant is timestamp) )
+        && !('ownerUid' in request.resource.data)
+        && !('email' in request.resource.data)
+        && !('createdAt' in request.resource.data)
+        && !('referralCode' in request.resource.data)
+        && ( !('referredBy' in request.resource.data) || (request.resource.data.referredBy is string) );
+
+      allow update: if isOwner(uid)
+        && request.resource.data.diff(resource.data).changedKeys().hasOnly([
+          'displayName','bio','location','website','socials','walletAddress','photoURL'
+        ])
+        && unchanged(['plan','subscriptionTier','credits','ownerUid','email','createdAt','referredBy','referralCode','lastMonthlyCreditGrant']);
+
+      allow delete: if isOwner(uid);
+
+      match /_meta/{docId}         { allow read, write: if isOwner(uid); }
+      match /assets/{assetId}      { allow read, write: if isOwner(uid); }
+      match /favorites/{favId}     { allow read, write: if isOwner(uid); }
+      match /reads/{storyId}       { allow read, write: if isOwner(uid); }
+      match /ratings/{storyId}     { allow read, write: if isOwner(uid); }
+
+      // ✅ NEW: Owned purchases used by Discover/reader
+      match /purchases/{storyId} {
+        allow read: if isOwner(uid);       // owner can see what they own
+        allow create, update, delete: if false; // server/Admin only
+      }
+
+      // Personal transaction history (owner can read, client cannot mutate)
+      match /transactions/{txId} {
+        allow read: if isOwner(uid);
+        allow create, update, delete: if false; // server (Admin SDK) writes only
+      }
+
+      // Collection-group access for referral earnings (read only)
+      match /{path=**}/transactions/{txId} {
+        allow read: if isSignedIn() && resource.data.referrerUid == request.auth.uid;
+        allow write: if false;
+      }
+
+      match /creditTransactions/{docId} {
+        allow read: if isSignedIn() &&
+          (resource.data.userId == request.auth.uid ||
+           resource.data.referrerUid == request.auth.uid);
+        allow write: if false;
+      }
+
+      match /stories/{storyId} {
+        allow read, write: if isOwner(uid);
+        match /scenes/{sceneId} { allow read, write: if isOwner(uid); }
+        match /assets/{assetId} { allow read, write: if isOwner(uid); }
+      }
+
+      // assetIndex subtree …
+      match /assetIndex/{docId} {
+        allow read, write: if isOwner(uid) && docId == 'default';
+        match /stories/{storyId}/{category}/{docId2} {
+          allow read: if isOwner(uid) || storyIsPublic(storyId);
+          allow create: if isOwner(uid);
+          allow update: if isOwner(uid);
+          allow delete: if isOwner(uid);
+        }
+        match /stories/{storyId}/storyAssets/{hubId} {
+          allow read: if isOwner(uid) || storyIsPublic(storyId);
+          allow write, update, delete: if isOwner(uid) && hubId == 'default';
+          match /{assetType}/{assetId} {
+            allow read: if (isOwner(uid) || storyIsPublic(storyId));
+            allow create: if isOwner(uid);
+            allow update: if isOwner(uid);
+            allow delete: if isOwner(uid);
+          }
+        }
+        match /uncategorized/{category}/{docId3} {
+          allow read: if isOwner(uid);
+          allow create, update: if isOwner(uid);
+          allow delete: if isOwner(uid);
+        }
+      }
+
+      // legacy read-only (unchanged)
+      match /assetIndex/stories/{storyId}/{category}/{assetId} {
+        allow read: if isOwner(uid) || storyIsPublic(storyId);
+        allow create, update, delete: if false;
+      }
+      match /assetIndex/uncategorized/{category}/{assetId} {
+        allow read: if isOwner(uid);
+        allow create, update, delete: if false;
+      }
+    }
+
+    /* ===========================================================
+       TOP-LEVEL STORIES
+       ============================================================ */
+    match /stories/{storyId} {
+      allow create: if isOwnerCreate()
+        && (
+             (('type' in request.resource.data) && isValidStoryType(request.resource.data.type))
+          || (('category' in request.resource.data) && request.resource.data.category in ['short','novela','campaign'])
+        )
+        && (request.resource.data.title is string)
+        && (request.resource.data.pageCount is int);
+
+      allow read: if isPublicStory() || isOwnerDoc();
+
+      allow update, delete: if isOwnerDoc()
+        && request.resource.data.ownerUid == resource.data.ownerUid
+        && ( !('type' in request.resource.data) || isValidStoryType(request.resource.data.type) )
+        && unchanged(['ownerUid']);
+
+      match /ratings/{raterUid} {
+        allow read: if canReadStoryById(storyId) || (isSignedIn() && request.auth.uid == raterUid);
+        allow create, update, delete: if isSignedIn() && request.auth.uid == raterUid;
+      }
+
+      match /comments/{commentId} {
+        allow read: if canReadStoryById(storyId);
+        allow create: if isSignedIn() && request.resource.data.authorId == request.auth.uid;
+        allow update, delete: if isSignedIn()
+          && resource.data.authorId == request.auth.uid
+          && request.resource.data.authorId == resource.data.authorId;
+
+        match /reactions/{userId} {
+          allow read: if canReadStoryById(storyId);
+          allow create, update, delete: if isSignedIn() && request.auth.uid == userId;
+        }
+      }
+
+      match /reactions/{userId} {
+        allow read: if canReadStoryById(storyId);
+        allow create, update, delete: if isSignedIn() && request.auth.uid == userId;
+      }
+    }
+
+    /* ===========================================================
+       TOP-LEVEL storyContents
+       ============================================================ */
+    match /storyContents/{id} {
+      function storyIdFromExisting() { return resource != null ? resource.data.storyId : null; }
+      function storyIdFromRequest()  { return request.resource != null ? request.resource.data.storyId : null; }
+      function effectiveStoryId()    { return storyIdFromExisting() != null ? storyIdFromExisting() : storyIdFromRequest(); }
+
+      allow read: if effectiveStoryId() != null && canReadStoryById(effectiveStoryId());
+      allow create: if effectiveStoryId() != null && isStoryOwner(effectiveStoryId());
+      allow update, delete: if effectiveStoryId() != null
+        && isStoryOwner(effectiveStoryId())
+        && request.resource.data.storyId == resource.data.storyId;
+    }
+
+    /* ----------------- Default deny ----------------- */
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

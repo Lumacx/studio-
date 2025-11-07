@@ -1,0 +1,31 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "es2020",
+    "outDir": "lib",
+    "rootDir": "src",
+    "baseUrl": ".",
+    "noEmit": false,
+    "sourceMap": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "types": ["node", "firebase-functions"],
+    "typeRoots": [
+      "./node_modules/@types",
+      "./node_modules"
+    ]
+  },
+  "include": [
+    "src/ai/functions/**/*.ts",
+    "src/ai/genkit.ts",
+    "src/functions/**/*.ts",
+    "../dataconnect/connector/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "lib",
+    "src/app",
+    "src/components",
+    "src/hooks"
+  ]
+}

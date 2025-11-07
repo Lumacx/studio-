@@ -1,0 +1,45 @@
+{  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "outDir": "./lib",
+    "sourceMap": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@/context/*": ["./src/context/*"],
+      "@/lib/*": ["./src/lib/*"],
+      "@firebasegen/*": ["./dataconnect-generated/js/*"],
+      "@firebasegen/default-connector": ["./dataconnect-generated/js/default-connector"],
+      "@firebasegen/default-connector/*": ["./dataconnect-generated/js/default-connector/*"]
+    },
+    "noEmit": true,
+    "plugins": [{ "name": "next" }],
+    "allowSyntheticDefaultImports": true
+  },
+  "include": [
+    "next-env.d.ts",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    ".next/types/**/*.ts",
+    "dataconnect-generated/js/**/*.ts",
+    "src/types",
+    "src/types/firebase-fix.d.ts",
+    "src/types/firebasegen.d.ts"
+, "src/components/ThemeToggle.js"  ],
+  "exclude": [
+    "node_modules",
+    "lib",
+    "**/*.test.ts",
+    "**/*.test.tsx"
+  ]
+}

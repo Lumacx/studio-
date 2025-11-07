@@ -1,0 +1,142 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    /* ----------------- Helpers ----------------- */
+    function isSignedIn() { return request.auth != null; }
+    function isOwner(uid) { return isSignedIn() && request.auth.uid == uid; }
+
+    // Image types
+    function isPng()  { return request.resource.contentType == 'image/png'; }
+    function isJpg()  { return request.resource.contentType == 'image/jpeg'; }
+    function isWebp() { return request.resource.contentType == 'image/webp'; }
+    function isImg()  { return isPng() || isJpg() || isWebp(); }
+
+    // Audio types
+    function isMp3()  {
+      return request.resource.contentType == 'audio/mpeg' ||
+             request.resource.contentType == 'audio/mp3';
+    }
+    function isWav()  {
+      return request.resource.contentType == 'audio/wav' ||
+             request.resource.contentType == 'audio/x-wav' ||
+             request.resource.contentType == 'audio/wave';
+    }
+
+    // Video
+    function isMp4()  { return request.resource.contentType == 'video/mp4'; }
+
+    // Size guard
+    function sizeBetween(minBytes, maxBytes) {
+      return request.resource.size >= minBytes && request.resource.size <= maxBytes;
+    }
+
+    /* ---------- Story publish check (reads allowed if story is public) ---------- */
+    function isPublicishData(d) {
+      return d.published == true ||
+             (d.publishedAt is timestamp && d.publishedAt <= request.time) ||
+             d.status == "published" ||
+             d.visibility == "public" ||
+             d.isPublic == true;
+    }
+    function storyIsPublic(storyId) {
+      return isPublicishData(
+        firestore.get(/databases/(default)/documents/stories/$(storyId)).data
+      );
+    }
+
+    /* ----------------- Categories & folders ----------------- */
+    function isImageCategory(cat) {
+      return cat in ['covers','avatars','characters','locations','backgrounds','generatedImages'];
+    }
+    function isAudioCategory(cat) { return cat in ['audioNarrations','audioEffects']; }
+    function isVideoCategory(cat) { return cat in ['videos']; }
+    function isOtherCategory(cat) { return cat == 'others'; }
+
+    function assetValidForCategory(cat) {
+      return
+        // IMAGES: PNG/JPG/WEBP (10 KB – 12 MB)
+        (isImageCategory(cat) && isImg() && sizeBetween(10*1024, 12*1024*1024)) ||
+
+        // AUDIO: MP3/WAV (10 KB – 16 MB)
+        (isAudioCategory(cat) && (isMp3() || isWav()) && sizeBetween(10*1024, 16*1024*1024)) ||
+
+        // VIDEO: MP4 (0.5 MB – 64 MB)
+        (isVideoCategory(cat) && isMp4() && sizeBetween(0.5*1024*1024, 64*1024*1024)) ||
+
+        // OTHERS mirrors the above
+        (isOtherCategory(cat) && (
+          (isImg()  && sizeBetween(10*1024, 12*1024*1024)) ||
+          (isMp3()  && sizeBetween(10*1024, 16*1024*1024)) ||
+          (isWav()  && sizeBetween(10*1024, 16*1024*1024)) ||
+          (isMp4()  && sizeBetween(0.5*1024*1024, 64*1024*1024))
+        ));
+    }
+
+    // New canonical story folders (to pair with Asset Hub types)
+    function allowedStoryFolder(folder) {
+      return folder in ['images','audio','narration','soundfx','videos'];
+    }
+    function fileValidForStoryFolder(folder) {
+      return
+        (folder == 'images'    && isImg()                && sizeBetween(10*1024, 12*1024*1024)) ||
+        (folder == 'audio'     && (isMp3() || isWav())   && sizeBetween(10*1024, 16*1024*1024)) ||
+        (folder == 'narration' && (isMp3() || isWav())   && sizeBetween(10*1024, 16*1024*1024)) ||
+        (folder == 'soundfx'   && (isMp3() || isWav())   && sizeBetween(10*1024, 16*1024*1024)) ||
+        (folder == 'videos'    && isMp4()                && sizeBetween(0.5*1024*1024, 64*1024*1024));
+    }
+
+    /* ----------------- Routes ----------------- */
+
+    // Profile avatars
+    match /avatars/{uid}/{file=**} {
+      allow read: if true;
+      allow create, update: if isOwner(uid) && isImg() && sizeBetween(10*1024, 5*1024*1024);
+      allow delete: if isOwner(uid);
+    }
+
+    // Personal gallery (legacy): /users/{uid}/assets/{category}/{file...}
+    match /users/{uid}/assets/{category}/{file=**} {
+      allow read: if isOwner(uid);
+      allow create, update: if isOwner(uid) && assetValidForCategory(category);
+      allow delete: if isOwner(uid);
+    }
+
+    // Story assets (non-assetIndex route): /users/{uid}/stories/{storyId}/{folder}/{file...}
+    match /users/{uid}/stories/{storyId}/{folder}/{file=**} {
+      allow read: if (isOwner(uid) || storyIsPublic(storyId)) && allowedStoryFolder(folder);
+      allow create, update: if isOwner(uid) && allowedStoryFolder(folder) && fileValidForStoryFolder(folder);
+      allow delete: if isOwner(uid);
+    }
+    // list() for story folders (needed by listAll)
+    match /users/{uid}/stories/{storyId}/{folder} {
+      allow list: if (isOwner(uid) || storyIsPublic(storyId)) && allowedStoryFolder(folder);
+    }
+
+    // Your uploader paths (assetIndex storage buckets):
+    // /users/{uid}/assetIndex/stories/{storyId}/{category}/{file...}
+    // /users/{uid}/assetIndex/uncategorized/{category}/{file...}
+    match /users/{uid}/assetIndex/stories/{storyId}/{category}/{file=**} {
+      allow read: if isOwner(uid);
+      allow create, update: if isOwner(uid) && assetValidForCategory(category);
+      allow delete: if isOwner(uid);
+    }
+    match /users/{uid}/assetIndex/uncategorized/{category}/{file=**} {
+      allow read: if isOwner(uid);
+      allow create, update: if isOwner(uid) && assetValidForCategory(category);
+      allow delete: if isOwner(uid);
+    }
+    // list() for listAll on assetIndex
+    match /users/{uid}/assetIndex/stories/{storyId}/{category} {
+      allow list: if isOwner(uid);
+    }
+    match /users/{uid}/assetIndex/uncategorized/{category} {
+      allow list: if isOwner(uid);
+    }
+
+    // Default deny
+    match /{path=**} {
+      allow read, write, list: if false;
+    }
+  }
+}

@@ -1,0 +1,91 @@
+'use client';
+
+import React, { useState } from 'react';
+import Link from 'next/link';
+import { useLocale } from '@/context/LocaleContext'; // Assuming LocaleContext is in '@/context/LocaleContext'
+
+const LegalDisclaimerPage: React.FC = () => {
+  const [isChecked, setIsChecked] = useState(false);
+  const [message, setMessage] = useState('');
+  const { t } = useLocale();
+
+  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setIsChecked(event.target.checked);
+    setMessage('');
+  };
+
+  const handleAccept = () => {
+    if (isChecked) {
+      console.log("Agreement accepted. User ID (placeholder): USER_ID_HERE");
+      setMessage(t('thankYouForAccepting'));
+    } else {
+      setMessage(t('pleaseAcceptTerms'));
+    }
+  };
+
+  return (
+    <div className="min-h-screen relative flex flex-col items-center justify-center 
+    bg-gradient-to-b from-[#D4E1EE] to-[#F0D1B0] dark:from-[#1A2533] dark:to-[#3A2B26] 
+    text-[#3A4B5C] dark:text-[#E0C9A0] font-['Georgia'] p-5 md:p-10 box-border text-center">
+      <div className="fixed top-7 right-4 z-50">
+        <Link
+          href="/"
+          className="px-6 py-3 bg-gray-600 text-white font-semibold rounded-full shadow-md hover:bg-gray-700 transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-gray-300"
+        >
+          {t('backToLanding')}
+        </Link>
+      </div>
+      {/* Added pt-16 to disclaimer-container to avoid overlap */}
+      <div className="disclaimer-container w-full max-w-xl pt-16">
+        <header className="page-title mb-10 md:mb-12">
+          <h1 className="font-['Merriweather'] text-4xl md:text-5xl font-extrabold uppercase tracking-wide text-[#3A4B5C] dark:text-[#E0C9A0] leading-tight m-0">
+            {t('legalDisclaimerPageTitle')}
+          </h1>
+        </header>
+
+        <section className="disclaimer-content mb-8">
+          <div className="text-box bg-[#FAF6EE] border-2 border-[#C1A98A] rounded-xl p-6 md:p-8 inline-block max-w-[90%] shadow-md mx-auto">
+            <p className="font-['Georgia'] text-lg md:text-xl leading-relaxed text-[#3A4B5C] m-0">
+              {t('legalDisclaimerIntro')} <a href="#" onClick={(e) => {e.preventDefault(); setMessage('Terms and Conditions link clicked! (Content not implemented)')}} className="text-[#3A4B5C] underline font-bold hover:text-[#3A4B5C] ">{t('termsAndConditions')}</a>.
+            </p>
+          </div>
+        </section>
+
+        {message && (
+          <div className={`mb-6 p-3 rounded-lg text-sm ${message.includes('Error') || message.includes(t('pleaseAcceptTerms')) ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}`}>
+            {message}
+          </div>
+        )}
+
+        <section className="acceptance-section mb-8 flex justify-center items-center">
+          <input
+            type="checkbox"
+            id="accept-checkbox"
+            name="accept-terms"
+            checked={isChecked}
+            onChange={handleCheckboxChange}
+            className="appearance-none w-5 h-5 border-2 border-[#A88F72] rounded-sm bg-[#FDFBF5] mr-2 cursor-pointer checked:bg-[#A88F72] checked:border-[#8B6F4E] focus:outline-none focus:ring-2 focus:ring-[#A88F72]"
+          />
+          <label htmlFor="accept-checkbox" className="font-['Georgia'] text-base text-[#3A4B5C] dark:text-[#E0C9A0] cursor-pointer">
+            {t('iAcceptTerms')}
+          </label>
+        </section>
+
+        <section className="action-section">
+          <button
+            type="button"
+            onClick={handleAccept}
+            disabled={!isChecked}
+            className={`font-['Merriweather'] bg-[#5D6D7E] text-[#FDFCFB] border-none rounded-xl py-3 px-10 text-lg font-bold uppercase tracking-wide cursor-pointer transition-all duration-300 shadow-md
+              ${!isChecked ? 'opacity-50 cursor-not-allowed bg-[#85929E] text-[#CDD3D8] shadow-none' : 'hover:bg-[#4E5C6A]'}`}
+          >
+            {t('accept')}
+          </button>
+        </section>
+        {/* Removed old Back to Landing button */}
+      </div>
+    </div>
+  );
+};
+
+export default LegalDisclaimerPage;

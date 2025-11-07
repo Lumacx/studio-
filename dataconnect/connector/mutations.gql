@@ -1,0 +1,65 @@
+# Mutations
+mutation CreateUserProfile($username: String!, $email: String!, $displayname: String!, $avatarUrl: String) @auth(level: USER) {
+  user_insert( data: { username: $username, email: $email, displayname: $displayname, avatarUrl: $avatarUrl } )
+}
+mutation CreateStory($creatorId: String!, $title: String, $genres: [String!], $description: String, $coverImageUrl: String) @auth(level: USER) {
+  story_insert( data: { creatorId: $creatorId, title: $title, genres: $genres, description: $description, coverImageUrl: $coverImageUrl } )
+}
+mutation CreateStoryContent($storyId: String!, $textContent: String, $pageNumber: Int, $imageUrl: String, $audioUrl: String) @auth(level: USER) {
+  storyContent_insert( data: { storyId: $storyId, textContent: $textContent, pageNumber: $pageNumber, imageUrl: $imageUrl, audioUrl: $audioUrl } )
+}
+mutation CreateTemplate($title: String!, $structureJson: String, $exampleStoryId: String) @auth(level: USER) {
+  template_insert( data: { title: $title, structureJson: $structureJson, exampleStoryId: $exampleStoryId } )
+}
+mutation CreateAiGeneratedImage($imageId: String!, $userId: String!, $promptText: String, $sketchUrl: String, $generatedImageUrl: String) @auth(level: USER) { # Added $imageId parameter
+  aiGeneratedImage_insert(
+    data: {
+      id: $imageId, # ID is now provided@tanstack-query-firebase/react/data-connect
+      userId: $userId,
+      promptText: $promptText,
+      sketchUrl: $sketchUrl,
+      generatedImageUrl: $generatedImageUrl
+      # status will use schema default ('generated')
+    }
+  )
+}
+mutation CreateAiGeneratedGif($imageId: String!, $gifUrl: String!) @auth(level: USER) {
+  aiGeneratedGif_insert( data: { imageId: $imageId, gifUrl: $gifUrl } )
+}
+mutation CreatePayment($userId: String!, $appSubscriptionId: String!, $amount: Float!) @auth(level: USER) {
+  payment_insert( data: { userId: $userId, appSubscriptionId: $appSubscriptionId, amount: $amount } )
+}
+mutation CreateAdminAction($adminId: String!, $actionType: String!, $targetId: String, $description: String) @auth(level: USER) { # TODO: Change to ADMIN_ONLY when roles are robust
+  adminAction_insert( data: { adminId: $adminId, actionType: $actionType, targetId: $targetId, description: $description } )
+}
+mutation CreateAnalyticsEntry($userId: String!, $storyId: String!, $action: String!) @auth(level: USER) {
+  analytics_insert( data: { userId: $userId, storyId: $storyId, action: $action } )
+}
+mutation LogLegalDisclaimerAcceptance($userId: String!) @auth(level: USER) {
+  legalDisclaimer_insert( data: { userId: $userId, accepted: true } ) # acceptedDate is nullable, set by app
+}
+
+# ✅ Update an existing StoryContent page
+mutation UpdateStoryContent(
+  $id: String!,
+  $textContent: String,
+  $pageNumber: Int,
+  $imageUrl: String,
+  $audioUrl: String
+) @auth(level: USER) {
+  storyContent_update(
+    id: $id,
+    data: { textContent: $textContent, pageNumber: $pageNumber, imageUrl: $imageUrl, audioUrl: $audioUrl }
+  )
+}
+
+# Add UpdateStory mutation to support commentsCount
+mutation UpdateStory(
+  $id: String!,
+  $commentsCount: Int
+) @auth(level: USER) {
+  story_update(
+    id: $id,
+    data: { commentsCount: $commentsCount }
+  )
+}

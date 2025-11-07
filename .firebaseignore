@@ -1,0 +1,78 @@
+# Node & VCS
+**/node_modules/**
+**/.git/**
+
+# Logs & caches
+*.log
+firebase-debug.log
+firestore-debug.log
+ui-debug.log
+**/.DS_Store
+**/.cache/**
+**/.parcel-cache/**
+
+# Python & local tooling
+.venv/
+venv/
+.python-version
+playwright/.cache/
+
+# Env files (keep examples)
+.env
+.env.local
+.env.*.local
+!.env.example
+private.pem
+
+# Framework build outputs
+.next/
+out/
+coverage/
+dist/
+build/
+tmp/
+.turbo/
+
+# Emulator artifacts (optional)
+.emulator_data/
+.firestore/
+.storage/
+
+# Functions — ignore sources that shouldn't ship, but keep compiled output
+functions/node_modules/
+!functions/lib/**
+
+# Local/build artifacts
+node_modules
+**/.next
+**/dist
+**/build
+**/*.map
+**/.DS_Store
+
+# Editor/IDE/cache
+.vscode
+.idx
+.firebase/logs
+*.log
+
+# --- DataConnect local dev state + generated connectors (very large) ---
+dataconnect/.dataconnect/**          # <- directory and everything in it
+dataconnect-debug.log
+dataconnect-generated/**
+dataconnect-generated
+
+# Ignore ALL Integrations folders (anywhere in repo)
+**/Integrations/**
+
+# --- Postgres/pglite data trees (very large; catch all levels) ---
+**/pgliteData/**
+**/pg_wal/**
+**/pg_multixact/**
+**/pg_xact/**
+**/pg_logical/**
+**/global/**
+**/base/**
+
+# Misc
+workspace/.modified
