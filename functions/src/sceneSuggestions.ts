@@ -1,90 +1,99 @@
+// functions/src/sceneSuggestions.ts
 import * as functions from 'firebase-functions';
+import type { Request, Response } from 'express';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
-function buildPrompt(b: any) {
-    const lang = b.language || 'en';
-    const genres = (b.genres || []).join(', ') || 'Any';
-    const idx = b.sceneIndex ?? 1;
-  
-    return `
-  You are a professional story developer and visual director.
-  
-  Language to WRITE IN: ${lang}
-  
-  Story context:
-  - Title: ${b.title || 'Untitled'}
-  - Genres: ${genres}
-  - Synopsis: ${b.synopsis || '(none)'}
-  
-  Task for SCENE #${idx}:
-  1) Write a vivid paragraph (70–120 words) of story text, self-contained, suitable for narration.
-  2) Provide ONE concise illustration prompt for an image generator (no text overlays).
-  
-  Return JSON ONLY with exactly:
-  {
-    "storyText": "<paragraph>",
-    "imagePrompt": "<one-sentence prompt>"
-  }
-  `.trim();
-  }
-
-  function safeParseJson(s: string) {
-    const cleaned = s.replace(/```json|```/g, '').trim();
-    try {
-      return JSON.parse(cleaned);
-    } catch {
-      const m = cleaned.match(/\{[\s\S]*\}$/);
-      if (!m) throw new Error('Invalid JSON from model');
-      return JSON.parse(m[0]);
-    }
-  }
-
-  function extractText(resp: any): string {
-    // Newer shape
-    if (resp?.response?.text && typeof resp.response.text === 'function') {
-      return resp.response.text().trim();
-    }
-    // Helper on some versions
-    if (typeof resp?.text === 'function') {
-      return resp.text().trim();
-    }
-    // Candidates (older)
-    const cand = resp?.candidates?.[0]?.content?.parts?.[0]?.text;
-    if (typeof cand === 'string') return cand.trim();
-    return '';
-  }
-
-
-export const suggestScene = functions.https.onRequest(async (req, res) => {
+export const suggestScene = functions
+  .region('us-central1')
+  .runWith({ secrets: ['GEMINI_API_KEY'], timeoutSeconds: 60, memory: '256MB' })
+  .https.onRequest(async (req: Request, res: Response) => {
     if (req.method !== 'POST') {
-        res.status(405).send('Method Not Allowed');
+      res.status(405).send('Method Not Allowed');
+      return;
+    }
+
+    try {
+      const b = (req.body ?? {}) as any;
+      const language = String(b.language || 'en').slice(0, 5);
+      const title    = String(b.title || 'Untitled').slice(0, 120);
+      const synopsis = String(b.synopsis || '').slice(0, 2000);
+      const genres   = Array.isArray(b.genres) ? b.genres.map((g: any) => String(g)).slice(0, 8) : [];
+      const idx      = Number.isFinite(b.sceneIndex) ? Number(b.sceneIndex) : 1;
+
+      const apiKey = process.env.GEMINI_API_KEY;
+      if (!apiKey) {
+        res.status(500).json({ error: 'Secret GEMINI_API_KEY not found at runtime' });
         return;
       }
 
-    try {
-        const body = req.body;
-        const apiKey = functions.config().gemini.key;
-        if (!apiKey) {
-            throw new functions.https.HttpsError('internal', 'Missing GEMINI_API_KEY');
-        }
+      const genAI = new GoogleGenerativeAI(apiKey);
+      const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
 
-        const genAI = new GoogleGenerativeAI(apiKey);
-        const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash-image-preview' });
+      const prompt = buildPrompt({ language, title, synopsis, genres, idx });
 
-        const prompt = buildPrompt(body);
+      const result = await model.generateContent({
+        contents: [{ role: 'user', parts: [{ text: prompt }] }],
+        generationConfig: {
+          temperature: 0.7,
+          topP: 0.9,
+          topK: 40,
+          maxOutputTokens: 512,
+          responseMimeType: 'application/json',
+        },
+      });
 
-        const result = await model.generateContent(prompt);
-        const text = extractText(result);
+      const text = result?.response?.text?.() || '';
+      if (!text) throw new Error('Model returned empty response');
 
-        if (!text) {
-            throw new functions.https.HttpsError('internal', 'Model returned no content');
-        }
+      const cleaned = text.replace(/```json|```/gi, '').trim();
+      let json: any;
+      try {
+        json = JSON.parse(cleaned);
+      } catch {
+        const m = cleaned.match(/\{[\s\S]*\}$/);
+        if (!m) throw new Error('Invalid JSON from model');
+        json = JSON.parse(m[0]);
+      }
 
-        const json = safeParseJson(text);
+      const out = {
+        storyText: String(json?.storyText || '').trim(),
+        imagePrompt: String(json?.imagePrompt || '').trim(),
+      };
+      if (!out.storyText || !out.imagePrompt) {
+        throw new Error('Incomplete model response (expected storyText & imagePrompt)');
+      }
 
-        res.json(json);
+      res.status(200).json(out);
     } catch (e: any) {
-        console.error('suggestScene error:', e?.stack || e);
-        res.status(500).json({ error: e.message });
+      console.error('[suggestScene] error:', e?.stack || e);
+      res.status(500).json({ error: e?.message || 'Internal error' });
     }
-});
+  });
+
+function buildPrompt({
+  language, title, synopsis, genres, idx,
+}: { language: string; title: string; synopsis: string; genres: string[]; idx: number; }) {
+  const langName = language.startsWith('es') ? 'Spanish' : 'English';
+  const genresStr = genres.length ? genres.join(', ') : 'Any';
+  return `
+You are a professional story developer and visual director.
+
+Write the output strictly in ${langName}.
+Return JSON ONLY. No commentary, no Markdown, no code fences.
+
+Story context:
+- Title: ${title}
+- Genres: ${genresStr}
+- Synopsis: ${synopsis || '(none)'}
+
+Task for SCENE #${idx}:
+1) "storyText": one vivid paragraph (70–120 words), self-contained, suitable for narration.
+2) "imagePrompt": a single concise illustration prompt (no text overlay).
+
+Return exactly:
+{
+  "storyText": "<paragraph>",
+  "imagePrompt": "<one-sentence prompt>"
+}
+`.trim();
+}
