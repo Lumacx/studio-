@@ -126,7 +126,7 @@ type Scene = {
   audioUrl?: string | null;
   audioName?: string | null;
   voiceId?: string | null;
-  durationMs?: number | null;
+  durationMs: number | null;
   youtubeVideoUrl?: string | null;   // NEW
 };
 
@@ -204,23 +204,51 @@ function makeDefaultScene(index = 0): Scene {
   return { id, index, title: `Scene ${index + 1}`, text: '', imageUrl: null, imageName: null, audioUrl: null, audioName: null, voiceId: null, durationMs: null };
 }
 
+function toDenseScene(s: Scene | undefined, i: number): Scene {
+  const base = s ?? makeDefaultScene(i);
+  return {
+    id: base.id || (typeof crypto?.randomUUID === 'function' ? crypto.randomUUID() : String(Math.random()).slice(2)),
+    index: Number.isFinite(base.index) ? base.index : i,
+    title: (base.title ?? `Scene ${i + 1}`),
+    text: (base.text ?? ''),
+    imageUrl: base.imageUrl ?? null,
+    imageName: base.imageName ?? null,
+    audioUrl: base.audioUrl ?? null,
+    audioName: base.audioName ?? null,
+    voiceId: base.voiceId ?? null,
+    durationMs: Number.isFinite(base.durationMs as any) && (base.durationMs as any) >= 0 ? base.durationMs : null,
+    youtubeVideoUrl: (typeof base.youtubeVideoUrl === 'string' && base.youtubeVideoUrl.trim()) ? base.youtubeVideoUrl.trim() : null,
+  };
+}
+
 function deepClean(value: any): any {
   if (value === undefined || value === null) return null;
-  if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') return value;
-  if (Array.isArray(value)) return value.map(deepClean);
+  if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean')
+    return value;
+  if (Array.isArray(value))
+    return value
+      .filter((v) => v !== undefined && v !== null) // avoid sparse arrays
+      .map(deepClean);
   if (value instanceof Date) return value;
-  const tag = Object.prototype.toString.call(value);
-  if (tag === '[object Object]') {
+  if (Object.prototype.toString.call(value) === '[object Object]') {
     const out: any = {};
     for (const [k, v] of Object.entries(value)) out[k] = deepClean(v);
     return out;
   }
-  try { return JSON.parse(JSON.stringify(value)); } catch { return null; }
+  try {
+    return JSON.parse(JSON.stringify(value));
+  } catch {
+    return null;
+  }
 }
 
 function serializeScene(s: Scene, i: number) {
   const base = {
-    id: s?.id || (typeof crypto?.randomUUID === 'function' ? crypto.randomUUID() : String(Math.random()).slice(2)),
+    id:
+      s?.id ||
+      (typeof crypto?.randomUUID === 'function'
+        ? crypto.randomUUID()
+        : String(Math.random()).slice(2)),
     index: Number.isFinite(s?.index) ? s.index : i,
     title: (s?.title ?? '').toString(),
     text: (s?.text ?? '').toString(),
@@ -229,18 +257,28 @@ function serializeScene(s: Scene, i: number) {
     audioUrl: s?.audioUrl ?? null,
     audioName: s?.audioName ?? null,
     voiceId: s?.voiceId ?? null,
-    durationMs: Number.isFinite(s?.durationMs as any) ? s.durationMs : null,
-    youtubeVideoUrl: s?.youtubeVideoUrl ?? null,   // NEW
+    durationMs:
+      Number.isFinite(s?.durationMs as any) && s?.durationMs! >= 0
+        ? s.durationMs
+        : null,
+    youtubeVideoUrl:
+      typeof s?.youtubeVideoUrl === 'string' && s.youtubeVideoUrl.trim()
+        ? s.youtubeVideoUrl.trim()
+        : null,
   };
   return deepClean(base);
 }
 
 function serializeStoryForWrite(story: StoryDoc | null, scenes: Scene[]) {
-  const safeScenes = scenes.map((s, i) => serializeScene(s, i));
+  const safeScenes = (scenes || [])
+    .filter((s) => s && typeof s === 'object')
+    .map((s, i) => serializeScene(s, i));
   const out: any = {
     title: story?.title ?? '',
     synopsis: story?.synopsis ?? '',
-    genres: Array.isArray(story?.genres) ? story!.genres.map(g => String(g)) : [],
+    genres: Array.isArray(story?.genres)
+      ? story!.genres.map((g) => String(g))
+      : [],
     language: (story?.language as LangCode) ?? 'en',
     reader: deepClean({
       avatarUrl: story?.reader?.avatarUrl ?? DEFAULTS.avatarUrl,
@@ -355,10 +393,15 @@ async function normalizeScenesBeforeSave(
   storyId: string,
   raw: Scene[]
 ): Promise<Scene[]> {
-  if (!userId) return raw;
+  if (!userId) return raw.filter(Boolean).map((s, i) => s ?? makeDefaultScene(i));
   const out: Scene[] = [];
   for (let i = 0; i < raw.length; i++) {
-    const s = { ...raw[i] };
+    let s = raw[i];
+    if (!s || typeof s !== 'object') {
+      out.push(makeDefaultScene(i));
+      continue;
+    }
+    if (!Number.isFinite(s.durationMs as any)) s.durationMs = null;
     if (typeof s.imageUrl === 'string' && s.imageUrl.startsWith('data:')) {
       const fname = s.imageName || `scene-${i + 1}-${Date.now()}.png`;
       try {
@@ -366,13 +409,16 @@ async function normalizeScenesBeforeSave(
         s.imageUrl = up.https;
         s.imageName = fname;
       } catch (err) {
-        console.warn('Image upload failed during normalization; clearing image to avoid 1MB overflow.', err);
+        console.warn(
+          'Image upload failed during normalization; clearing image to avoid 1MB overflow.',
+          err
+        );
         s.imageUrl = null;
       }
     }
     out.push(s);
   }
-  return out;
+  return out.filter(Boolean);
 }
 
 // --- YouTube helpers ---
@@ -625,22 +671,11 @@ export default function ScenesPage() {
         if (snap.exists()) docData = (snap.data() as StoryDoc) || {};
 
         const fixedScenes: Scene[] = (docData.scenes || [])
-        .map((s, i) => ({
-          id: s?.id || crypto.randomUUID(),
-          index: Number.isFinite(s?.index as any) ? (s!.index as number) : i,
-          title: s?.title ?? `Scene ${i + 1}`,
-          text: s?.text ?? '',
-          imageUrl: s?.imageUrl ?? null,
-          imageName: s?.imageName ?? null,
-          audioUrl: s?.audioUrl ?? null,
-          audioName: s?.audioName ?? null,
-          voiceId: s?.voiceId ?? null,
-          durationMs: Number.isFinite(s?.durationMs as any) ? s!.durationMs! : null,
-          youtubeVideoUrl: s?.youtubeVideoUrl ?? null,   // NEW
-        }))
-          .sort((a, b) => a.index - b.index);
+        .map((s, i) => toDenseScene(s as Scene, i))
+        .sort((a, b) => a.index - b.index);
 
         const ensured = fixedScenes.length > 0 ? fixedScenes : [makeDefaultScene(0)];
+
 
         const existingAvatar = docData.reader?.avatarUrl || DEFAULTS.avatarUrl;
         const computedAvatar = resolveAvatarForVoiceAndGenre(docData.voiceId || ensured[0]?.voiceId || voice, docData.genres);
@@ -976,43 +1011,66 @@ export default function ScenesPage() {
     ? `/ereader?storyId=${encodeURIComponent(selectedStoryId)}&back=%2Fcreate%2Fscenes`
     : '#';
 
-  async function persistScenes(nextScenes: Scene[]) {
-    if (!selectedStoryId) { alert('Please select a story before saving scenes.'); return false; }
-    try {
-      const normalized = await normalizeScenesBeforeSave(user?.uid, selectedStoryId, nextScenes);
-      const storyRef = fsDoc(db, 'stories', selectedStoryId);
-      const safeDoc = serializeStoryForWrite(story, normalized);
-      await setDoc(storyRef, safeDoc, { merge: true });
-      return true;
-    } catch (e: any) {
-      console.error('Save error:', e);
-      alert(`Failed to save scene.\n\n${e?.message || ''}`);
-      return false;
+    async function persistScenes(nextScenes: Scene[]) {
+      if (!selectedStoryId) {
+        alert('Please select a story before saving scenes.');
+        return false;
+      }
+      try {
+        const normalized = await normalizeScenesBeforeSave(
+          user?.uid,
+          selectedStoryId,
+          nextScenes
+        );
+        const storyRef = fsDoc(db, 'stories', selectedStoryId);
+        const safeDoc = serializeStoryForWrite(story, normalized);
+        console.log('about to write', JSON.stringify(safeDoc, null, 2)); // debug
+        await setDoc(storyRef, safeDoc, { merge: true });
+        return true;
+      } catch (e: any) {
+        console.error('Save error:', e);
+        alert(`Failed to save scene.\n\n${e?.message || ''}`);
+        return false;
+      }
+    }    
+
+    async function handleSaveScene() {
+      const clipped: Scene[] = scenes
+        .slice(0, selectedPages)
+        .map((s, i) => {
+          const d = toDenseScene(s, i);
+          return { ...d, index: i, durationMs: d.durationMs }; // keep explicit index
+        });
+    
+      const ok = await persistScenes(clipped);
+      if (ok) alert('Scene saved.');
     }
-  }
-
-  async function handleSaveScene() {
-    const clipped = scenes.slice(0, selectedPages).map((s, i) => ({ ...s, index: i }));
-    const ok = await persistScenes(clipped);
-    if (ok) alert('Scene saved.');
-  }
-
-  async function handleSaveSceneAndNext() {
-    let nextScenes = scenes.slice(0, selectedPages).map((s, i) => ({ ...s, index: i }));
-    const onLastExisting = currentIndex === nextScenes.length - 1;
-    const canAddMore = nextScenes.length < selectedPages;
-    if (onLastExisting && canAddMore) {
-      const newIdx = nextScenes.length;
-      nextScenes = [...nextScenes, makeDefaultScene(newIdx)];
-    }
-    const ok = await persistScenes(nextScenes);
-    if (!ok) return;
-    setScenes(nextScenes);
-    if (onLastExisting && canAddMore) setCurrentIndex(i => Math.min(i + 1, nextScenes.length - 1));
-    else if (currentIndex < nextScenes.length - 1) setCurrentIndex(i => i + 1);
-    else alert('Reached selected page limit.');
-  }
-
+    
+    async function handleSaveSceneAndNext() {
+      let nextScenes: Scene[] = scenes
+        .slice(0, selectedPages)
+        .map((s, i) => {
+          const d = toDenseScene(s, i);
+          return { ...d, index: i, durationMs: d.durationMs };
+        });
+    
+      const onLastExisting = currentIndex === nextScenes.length - 1;
+      const canAddMore = nextScenes.length < selectedPages;
+    
+      if (onLastExisting && canAddMore) {
+        const newIdx = nextScenes.length;
+        nextScenes = [...nextScenes, makeDefaultScene(newIdx)];
+      }
+    
+      const ok = await persistScenes(nextScenes);
+      if (!ok) return;
+    
+      setScenes(nextScenes);
+      if (onLastExisting && canAddMore) setCurrentIndex(i => Math.min(i + 1, nextScenes.length - 1));
+      else if (currentIndex < nextScenes.length - 1) setCurrentIndex(i => i + 1);
+      else alert('Reached selected page limit.');
+    }    
+  
   async function handlePublishStory() {
     if (!selectedStoryId) { alert('Please select a story before publishing.'); return; }
     try {
