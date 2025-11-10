@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "module": "esnext",
     "moduleResolution": "bundler",
     "strict": true,
@@ -10,25 +14,43 @@
     "jsx": "preserve",
     "incremental": true,
     "noEmit": true,
-
-    "types": ["node", "next", "next/navigation"],
-
+    "types": [
+      "node",
+      "next",
+      "next/navigation"
+    ],
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"],
-      "@/context/*": ["./src/context/*"],
-      "@/lib/*": ["./src/lib/*"],
-      "@firebasegen/*": ["./dataconnect-generated/js/*"],
-      "@firebasegen/default-connector": ["./dataconnect-generated/js/default-connector"],
-      "@firebasegen/default-connector/*": ["./dataconnect-generated/js/default-connector/*"]
+      "@/*": [
+        "src/*"
+      ],
+      "@/context/*": [
+        "./src/context/*"
+      ],
+      "@/lib/*": [
+        "./src/lib/*"
+      ],
+      "@firebasegen/*": [
+        "./dataconnect-generated/js/*"
+      ],
+      "@firebasegen/default-connector": [
+        "./dataconnect-generated/js/default-connector"
+      ],
+      "@firebasegen/default-connector/*": [
+        "./dataconnect-generated/js/default-connector/*"
+      ]
     },
-
     "outDir": "./lib",
     "sourceMap": true,
-    "plugins": [{ "name": "next" }],
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
     "allowJs": true,
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "isolatedModules": true
   },
   "include": [
     "next-env.d.ts",
@@ -41,5 +63,10 @@
     "src/types/firebasegen.d.ts",
     "src/components/ThemeToggle.js"
   ],
-  "exclude": ["node_modules", "lib", "**/*.test.ts", "**/*.test.tsx"]
+  "exclude": [
+    "node_modules",
+    "lib",
+    "**/*.test.ts",
+    "**/*.test.tsx"
+  ]
 }

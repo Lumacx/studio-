@@ -37,6 +37,58 @@ exports.suggestScene = void 0;
 // functions/src/sceneSuggestions.ts
 const functions = __importStar(require("firebase-functions"));
 const generative_ai_1 = require("@google/generative-ai");
+/**
+ * Orden de preferencia de modelos:
+ *  1) gemini-2.5-flash    ← objetivo
+ *  2) gemini-2.0-flash    ← fallback intermedio
+ *  3) gemini-1.5-flash    ← fallback compatible amplio
+ *  4) gemini-1.0-pro      ← SDKs/entornos más antiguos (v1beta)
+ *  5) gemini-pro          ← último recurso
+ */
+function preferredModels() {
+    return [
+        'gemini-2.5-flash',
+        'gemini-2.0-flash',
+        'gemini-1.5-flash',
+        'gemini-1.0-pro',
+        'gemini-pro',
+    ];
+}
+async function generateJsonWithModelFallback(genAI, prompt) {
+    const candidates = preferredModels();
+    let lastErr = null;
+    for (const name of candidates) {
+        try {
+            const model = genAI.getGenerativeModel({ model: name });
+            const r = await model.generateContent({
+                contents: [{ role: 'user', parts: [{ text: prompt }] }],
+                generationConfig: {
+                    temperature: 0.7,
+                    topP: 0.9,
+                    topK: 40,
+                    maxOutputTokens: 512,
+                    responseMimeType: 'application/json',
+                },
+            });
+            const text = r?.response?.text?.() || '';
+            if (!text)
+                throw new Error(`Empty response from ${name}`);
+            if (name !== 'gemini-2.5-flash') {
+                console.warn(`[suggestScene] downgraded model to: ${name}`);
+            }
+            else {
+                console.log('[suggestScene] using model: gemini-2.5-flash');
+            }
+            return text;
+        }
+        catch (e) {
+            // 404/unsupported/quotas: prueba siguiente modelo
+            console.warn(`[suggestScene] model ${name} failed:`, e?.message || e);
+            lastErr = e;
+        }
+    }
+    throw lastErr || new Error('All Gemini models failed');
+}
 exports.suggestScene = functions
     .region('us-central1')
     .runWith({ secrets: ['GEMINI_API_KEY'], timeoutSeconds: 60, memory: '256MB' })
@@ -52,25 +104,16 @@ exports.suggestScene = functions
         const synopsis = String(b.synopsis || '').slice(0, 2000);
         const genres = Array.isArray(b.genres) ? b.genres.map((g) => String(g)).slice(0, 8) : [];
         const idx = Number.isFinite(b.sceneIndex) ? Number(b.sceneIndex) : 1;
+        // Secret inyectado por Firebase (sin .env)
         const apiKey = process.env.GEMINI_API_KEY;
         if (!apiKey) {
             res.status(500).json({ error: 'Secret GEMINI_API_KEY not found at runtime' });
             return;
         }
         const genAI = new generative_ai_1.GoogleGenerativeAI(apiKey);
-        const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
         const prompt = buildPrompt({ language, title, synopsis, genres, idx });
-        const result = await model.generateContent({
-            contents: [{ role: 'user', parts: [{ text: prompt }] }],
-            generationConfig: {
-                temperature: 0.7,
-                topP: 0.9,
-                topK: 40,
-                maxOutputTokens: 512,
-                responseMimeType: 'application/json',
-            },
-        });
-        const text = result?.response?.text?.() || '';
+        // → generación con fallback de modelos (2.5 → 2.0 → 1.5 → 1.0-pro → pro)
+        const text = await generateJsonWithModelFallback(genAI, prompt);
         if (!text)
             throw new Error('Model returned empty response');
         const cleaned = text.replace(/```json|```/gi, '').trim();
