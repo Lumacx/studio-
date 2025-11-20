@@ -87,6 +87,7 @@ export const generateWithGemini = onRequest(
       // 2. gemini-2.5-flash-image-preview
       const modelsToTry = [
         "gemini-3-pro-image-preview",
+        'gemini-2.5-flash-image',
         "gemini-2.5-flash-image-preview"
       ];
       
