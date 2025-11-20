@@ -12,7 +12,14 @@ This document outlines the planned features and development tasks for the Narrat
 - [x] Story Discovery Page with Search and Filtering: Implement queries to fetch stories based on filters (e.g., by genre, popularity).
 - [x] Story Discovery Page with Search and Filtering: Display enriched story card information (author, comments count).
 - [ ] User Profile Page with user's stories and stats
-- [ ] Subscription model and payment integration
+- [x] Subscription model and payment integration
+    - [x] **Subscription Page:**
+        - [x] Build the UI for the subscription page (`src/app/subscription/page.tsx` and `src/app/subscription/SubscriptionClient.tsx`).
+        - [x] Display pricing tiers and benefits.
+        - [x] Integrate with backend for subscription management.
+    - [x] **Payment Integration:**
+        - [x] Integrate PayPal for handling payments (`src/app/api/paypal-verify-subscription/route.ts` and `functions/lib/utils/paypal.js`).
+        - [x] Implement webhooks for handling subscription updates (`functions/src/paypalWebhook.ts`).
 - [x] Interactive story display with multimedia support - *Basic display is working, with dynamic loading of images.*
     - [x] **Create Page (Initial Prompt Guidance & References):**
         - [x] Develop UI for initial story prompt input and guidance. - *Managed by `src/app/create/begin/page.tsx`.*

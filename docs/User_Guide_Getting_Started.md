@@ -33,9 +33,13 @@ Narratum offers flexible authentication methods:
 *   **Google Sign-In:** Use your existing Google account for a quick and easy login.
 *   **Starknet Wallet:** For our blockchain-savvy users, connect your Starknet wallet to access Narratum. Your Starknet address will be linked to an anonymous Firebase user, allowing you to seamlessly use all features while maintaining your web3 identity.
 
-### Credits
+### Credits and Subscriptions
 
-Narratum utilizes a credit system for accessing premium stories and features. Your current credit balance is displayed and managed within your user profile. Credits can be purchased or earned through various in-app activities.
+Narratum utilizes a credit system for accessing premium stories and features. 
+
+*   **One-Time Purchases:** You can buy credit packs directly via PayPal.
+*   **Subscriptions:** Subscribe to a recurring plan (Reader, Creator, or Pro) to receive a monthly allowance of credits and access exclusive features. Manage your subscription on the Subscription page.
+*   **Credit Balance:** Your current credit balance is displayed and managed within your user profile and the subscription page.
 
 ## Creating Your First Story
 
@@ -52,9 +56,9 @@ Provide the foundational information for your story:
 *   **Title:** A captivating name for your narrative.
 *   **Genres:** Select relevant genres to help other users discover your story.
 *   **Synopsis:** A brief overview of your story's plot and themes.
-*   **Category:** The main category your story belongs to.
+*   **Category:** The main category your story belongs to (Short Story, Novela, Campaign). This selection affects the credit cost to create the story.
 *   **Pages:** The estimated number of pages for your story.
-*   **Language:** The language your story is written in.
+*   **Language:** The language your story is written in. Narratum's AI will adapt its outputs to this language.
 *   **Campaign Name (Optional):** If your story is part of a larger campaign, specify its name.
 
 ### Managing Your Story's Cover Image
@@ -65,7 +69,7 @@ The `CoverImageManager` component helps you set the perfect visual for your stor
 
 ### Understanding and Configuring Premium Features
 
-Narratum offers exciting premium features to enhance your stories:
+Narratum offers exciting premium features to enhance your stories (available for Novela/Campaign categories):
 *   **Convai Agent ID:** Integrate a Convai AI agent for dynamic character interactions within your story. Enter the agent ID here.
 *   **Teaser Video URL:** Add a teaser video to intrigue your readers. Provide the video's URL.
 *   **Free Navigation Index:** Define how far into your story users can navigate freely before hitting a paywall or premium content boundary.

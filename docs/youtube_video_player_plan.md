@@ -23,16 +23,19 @@ Set up a reusable component of a YouTube video player pop up similar to the one 
     *   Extract the modal and video player logic into a new, reusable component.
     *   Define props for `videoUrl` (string), `isOpen` (boolean), and `onClose` (function).
     *   Update `src/app/page.tsx` to use this new component.
+    *   **STATUS: DONE.** The component has been created and integrated into the landing page.
 
 **Phase 2: Data Model & Story Creation Integration**
 
 *   **Task 2: Update Story Data Model (`src/lib/story-types.ts`)**
     *   Add `youtubeVideoUrl?: string;` to the scene data structure.
-    *   Add `teaserYoutubeUrl?: string;` to the story data structure.
+    *   Add `teaserVideoUrl?: string;` to the story data structure (Note: `teaserVideoUrl` was used in implementation instead of `teaserYoutubeUrl` for consistency with existing fields).
+    *   **STATUS: DONE.** `src/lib/story-types.ts` has been updated.
 
 *   **Task 3: Integrate YouTube Video Input into Scenes/Page (`src/app/create/scenes/page.tsx`)**
     *   Add an input field for users to paste a YouTube video URL for each scene.
     *   Implement logic to save this URL to the corresponding scene's `youtubeVideoUrl` field.
+    *   **STATUS: DONE.** The input field is present and functional in the scene editor.
 
 **Phase 3: Video Management & Gallery Integration**
 
@@ -40,20 +43,24 @@ Set up a reusable component of a YouTube video player pop up similar to the one 
     *   Replace the existing video upload option with an "Insert URL link" input.
     *   Allow users to input a YouTube URL and a custom name.
     *   Implement logic to store these user-defined YouTube links, making them accessible in a "My Gallery"/videos category. This will likely involve updating a user-specific data model.
+    *   **STATUS: DONE.** The support page now allows adding YouTube links which are saved as assets with a 'video' category.
 
 **Phase 4: Discover Page & Teaser Integration**
 
 *   **Task 5: Discover Page Integration (`src/app/discover/page.tsx`)**
-    *   For premium stories with a `teaserYoutubeUrl`, add a button/icon that opens the `YoutubeVideoPlayer` with the teaser URL.
+    *   For premium stories with a `teaserVideoUrl`, add a button/icon that opens the `YoutubeVideoPlayer` with the teaser URL.
+    *   **STATUS: DONE.** The Discover page now features a play button on cards for stories with teasers.
 
 **Phase 5: Story Reader & UI/UX Refinements**
 
-*   **Task 6: Story Reader - Teaser & Scene Video Logic (`src/app/ereader/page.tsx`)**
+*   **Task 6: Story Reader - Teaser & Scene Video Logic (`src/components/StoryReader.tsx` / `src/app/ereader/page.tsx`)**
     *   Import and use the `YoutubeVideoPlayer` component.
     *   Add a "Video" button (with a "Cinema icon") in the bottom center above the footer.
-    *   Implement logic to play the current scene's `youtubeVideoUrl` if available; otherwise, play the story's `teaserYoutubeUrl`.
+    *   Implement logic to play the current scene's `youtubeVideoUrl` if available; otherwise, play the story's `teaserVideoUrl`.
+    *   **STATUS: DONE.** The `StoryReader` component includes the video player and logic to prioritize scene videos over the story teaser.
 
-*   **Task 7: Rename Buttons and Layout in Story Reader (`src/app/ereader/page.tsx`)**
+*   **Task 7: Rename Buttons and Layout in Story Reader (`src/components/StoryReader.tsx`)**
     *   Rename "Download in PDF" to "Down arrow icon" + "PDF".
     *   Rename "Download resources Separate (no synchronization just files)" to "Down arrow icon" + "All Files".
     *   Adjust the layout to position "PDF" and "All Files" buttons on the bottom left, the "Video" button in the bottom center, and the Elevenlabs Widget on the bottom right.
+    *   **STATUS: DONE.** The layout and button labels in `StoryReader.tsx` have been updated to match these requirements.

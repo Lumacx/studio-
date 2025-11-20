@@ -6,12 +6,13 @@ This document outlines the recommended development plan for Narratum, based on t
 
 ### Current Status Assessment
 
-Based on `docs/todo.md`, the following foundational pieces are in place:
+Based on `docs/todo.md` and current project state, the following foundational pieces are in place:
 - **User Authentication:** Core email, wallet login, and automated user profile creation (via `authTriggers.ts`) are functional.
 - **Story Creation:** Basic metadata (title, genre, description) can be created, and the initial UI for content generation (including AI image generation and saving to page content) is in place through the multi-step flow in `src/app/create/`.
 - **AI Integration:** A basic flow for generating writing prompts exists, and AI image generation with saving capabilities is implemented, utilizing the `generateNarratumImage` Cloud Function and `assetsIndex.ts` for asset management.
 - **Database:** An initial schema for users, stories, and content is set up via DataConnect, with asset indexing and comment counting functionality (via `commentCounter.ts`).
 - **UI:** Core pages (Landing, Discover) and the multi-step `create` flow have a basic to advanced structure.
+- **Subscription & Payments:** The subscription page (`src/app/subscription/page.tsx`) and PayPal integration (`src/app/api/paypal-verify-subscription/route.ts`, `functions/src/paypalWebhook.ts`) have been implemented.
 
 ---
 
@@ -46,8 +47,8 @@ The highest priority is to complete the core loop of the application: a creator 
 With the core functionality in place, the next phase focuses on monetization and empowering creators with better tools.
 
 **1. Membership & Subscription System:**
-   - **Task:** Integrate a payment gateway (e.g., Stripe) and build the subscription management flow.
-   - **Details:** Define the "Premium" and "Creator" tiers. Allow users to subscribe, manage, and cancel their memberships.
+   - **Task:** Integrate a payment gateway (e.g., Stripe, PayPal) and build the subscription management flow.
+   - **Details:** Define the "Premium" and "Creator" tiers. Allow users to subscribe, manage, and cancel their memberships. *PayPal integration is mostly complete.*
    - **OG_Modules Ref:** `5. Monetization: Subscriptions & Royalties`
 
 **2. Implement Role-Based Access Control (RBAC):**

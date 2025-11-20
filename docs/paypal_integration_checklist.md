@@ -1,34 +1,23 @@
 # PayPal Integration To-Do Checklist
 
-This checklist outlines the necessary adjustments and improvements for the PayPal integration, taking into account the revised plan for separate one-time payment and subscription pages.
+This checklist outlines the successful completion and remaining tasks for the PayPal integration, which now features a standardized flow for both one-time payments and subscriptions.
 
 ---
 
 ## I. Frontend - Restructuring One-Time Payments and Referrals/Promo Codes
 
 *   **1. Migrate One-Time Payment Components to `src/app/buy-credits/page.tsx`:**
-    *   Move the `PayButtonsOneTime` and `HostedPayPalButtonRenderer` components (along with `PayPalProviderClient` and `usePayPalScriptReducer`) from `src/app/subscription/page.tsx` to `src/app/buy-credits/page.tsx`.
-    *   Modify `src/app/buy-credits/page.tsx` to utilize these components for rendering one-time payment buttons, replacing its current redirect-based PayPal flow.
-    *   Ensure `src/app/subscription/page.tsx` no longer renders one-time payment buttons, focusing exclusively on subscription management.
-    *   **STATUS: DONE.**
+    *   **STATUS: DONE.** `PayButtonsOneTime` and `HostedPayPalButtonRenderer` (with provider logic) are now in `src/app/buy-credits/page.tsx`. `src/app/subscription/page.tsx` focuses on subscription management.
 *   **2. Standardize One-Time Payment Flow on `src/app/buy-credits/page.tsx`:**
-    *   Remove the `buildHostedButtonUrl` and `startOtpPurchase` (redirect-based) logic from `src/app/buy-credits/page.tsx`.
-    *   Implement the `onApproveOneTime` handler (similar to the one in `subscription/page.tsx`) to process successful one-time payments via the `processPayPalOneTimePayment` Cloud Function.
-    *   **STATUS: DONE.**
+    *   **STATUS: DONE.** Removed redirect logic. Implemented `onApproveOneTime` handler to call `processPayPalOneTimePayment` Cloud Function.
 *   **3. Add Referrer Input to Both Pages:**
-    *   Implement a referrer input field and its associated state/logic in both `src/app/subscription/page.tsx` and `src/app/buy-credits/page.tsx`.
-    *   Ensure the `referredBy` value is correctly passed to the respective Firebase Cloud Functions (`processPayPalSubscription` for subscriptions, and `processPayPalOneTimePayment` for one-time purchases).
-    *   **STATUS: DONE.**
+    *   **STATUS: DONE.** Referrer input field and logic implemented in both `subscription` and `buy-credits` pages. `referredBy` is passed to backend functions.
 *   **4. Add Promo Code Functionality to `src/app/subscription/page.tsx`:**
-    *   Migrate the promo code input field and `handleRedeemPromoCode` logic from `src/app/buy-credits/page.tsx` to `src/app/subscription/page.tsx`.
-    *   (The `src/app/buy-credits/page.tsx` already contains this, so no changes needed there for this item).
-    *   **STATUS: DONE.**
+    *   **STATUS: DONE.** Promo code logic migrated and implemented in `subscription/page.tsx`.
 *   **5. Standardize Firebase Functions Import:**
-    *   Ensure all callable Firebase functions are consistently imported and used via `functions` from `@/lib/firebase` (remove `getClientFunctions` from `buy-credits/page.tsx` after moving logic).
-    *   **STATUS: DONE.**
-*   **6. Improve Hosted Buttons Type Safety (Optional but Recommended):**
-    *   Investigate why `(window.paypal as any).HostedButtons` casting is necessary in `HostedPayPalButtonRenderer`. Ensuring `import '@paypal/paypal-js';` is effectively augmenting the `window.paypal` type.
-    *   **STATUS: DONE.**
+    *   **STATUS: DONE.** Consistent use of `@/lib/firebase` imports.
+*   **6. Improve Hosted Buttons Type Safety:**
+    *   **STATUS: DONE.** `window.paypal` type augmentation resolved.
 
 ---
 
@@ -37,58 +26,57 @@ This checklist outlines the necessary adjustments and improvements for the PayPa
 ### **`functions/src/processPayPalOneTimePayment.ts` (Callable Function for One-Time Payments)**
 
 *   **1. REPLACE MOCK PAYPAL API (CRITICAL & URGENT):**
-    *   **STATUS: DONE.** Real PayPal API calls are now used for capturing orders.
+    *   **STATUS: DONE.** Real PayPal API calls are used for order capture.
 *   **2. Implement Credit Granting and Transaction Recording:**
-    *   **STATUS: DONE.** User credits are updated, and detailed transaction records are created in Firestore.
+    *   **STATUS: DONE.** Credits updated, detailed transaction records created in Firestore.
 *   **3. Implement Idempotency for Credit Grants:**
-    *   **STATUS: DONE.** A `processedOneTimePayments` collection is used to prevent double-crediting.
+    *   **STATUS: DONE.** `processedOneTimePayments` collection prevents double-crediting.
 *   **4. Fix TypeScript Errors for `captureResult`:**
-    *   **STATUS: DONE.** Explicitly cast `captureRes.json()` to `PayPalOrderCaptureResponse`.
+    *   **STATUS: DONE.** Explicit casting to `PayPalOrderCaptureResponse`.
 
 ### **`functions/src/paypalWebhook.ts` (HTTP Cloud Function for Webhooks)**
 
 *   **1. IMPLEMENT WEBHOOK VERIFICATION (CRITICAL & URGENT):**
-    *   **STATUS: DONE.** Full PayPal webhook signature verification is now implemented using `verifyPayPalWebhookSignature` and the `PAYPAL_WEBHOOK_ID` configured as a Firebase Function environment variable.
+    *   **STATUS: DONE.** Full signature verification implemented using `verifyPayPalWebhookSignature` and `PAYPAL_WEBHOOK_ID`.
 *   **2. PROCESS SUBSCRIPTION EVENTS (CRITICAL & URGENT):**
-    *   **STATUS: DONE.** The function now handles `BILLING.SUBSCRIPTION.ACTIVATED`, `RENEWED`, `CANCELLED`, `SUSPENDED`, and `PAYMENT_FAILED` events.
+    *   **STATUS: DONE.** Handles `BILLING.SUBSCRIPTION.ACTIVATED`, `RENEWED`, `CANCELLED`, `SUSPENDED`, and `PAYMENT_FAILED`.
 *   **3. Implement Idempotency for ALL Webhook Events:**
-    *   **STATUS: DONE.** A `processedWebhookEvents` collection is used to prevent duplicate processing of all webhook events.
+    *   **STATUS: DONE.** `processedWebhookEvents` collection prevents duplicate processing.
 *   **4. Ensure `paypalOrderId` in Transaction Records:**
-    *   **STATUS: DONE.** `paypalOrderId` is explicitly stored in `creditTransactions` and `pendingHostedCreditPurchases` (for one-time payments).
+    *   **STATUS: DONE.** `paypalOrderId` stored in transaction logs.
 *   **5. Fix TypeScript Errors/Typos:**
-    *   **STATUS: DONE.** Corrected `packageId` and `pricePaid` references, and `paypalButtonId` to `paypalHostedButtonId` typos.
+    *   **STATUS: DONE.** Typo fixes and type corrections applied.
 
 ### **`functions/src/utils/paypal.ts` (PayPal Utilities)**
 
 *   **1. Export PayPal API Response Interfaces:**
-    *   **STATUS: DONE.** `PayPalAccessTokenResponse`, `PayPalWebhookVerificationResponse`, `PayPalOrderCaptureResponse`, and `PayPalSubscriptionDetailsResponse` are now correctly exported.
+    *   **STATUS: DONE.** Interfaces for AccessToken, WebhookVerification, OrderCapture, and SubscriptionDetails exported.
 *   **2. Fix TypeScript Errors for `unknown` type assignments:**
-    *   **STATUS: DONE.** Explicitly cast `tokenRes.json()` to `PayPalAccessTokenResponse` and `verifyRes.json()` to `PayPalWebhookVerificationResponse`.
+    *   **STATUS: DONE.** Explicit casting applied.
 *   **3. Add `getPayPalOrderDetails` function:**
-    *   **STATUS: DONE.** Added a function to fetch PayPal order details.
+    *   **STATUS: DONE.** Function added to fetch order details.
 
 ### **`functions/src/credits.ts` (Callable Function for One-Time Payments)**
 
 *   **1. Update `processPayPalOneTimePayment` to use `getPayPalOrderDetails`:**
-    *   **STATUS: DONE.** Modified the function to correctly import and use `getPayPalOrderDetails`.
+    *   **STATUS: DONE.** Function updated to use the utility.
 
 ---
 
 ## III. Backend - Next.js API Routes
 
 *   **`src/app/api/paypal-webhook/route.ts`:**
-    *   **STATUS: DONE.** Removed as `functions/src/paypalWebhook.ts` is now the sole, verified handler for all PayPal webhooks.
+    *   **STATUS: DONE.** Removed. Webhooks handled by `functions/src/paypalWebhook.ts`.
 *   **`src/app/api/paypal-verify-subscription/route.ts`:**
-    *   **STATUS: RETAINED.** This route remains as a client-initiated status check for subscriptions. The webhook remains the authoritative source.
+    *   **STATUS: RETAINED.** Used for client-side status checks.
 *   **`src/app/api/paypal-config/route.ts`:**
-    *   **STATUS: DONE.** Removed as `process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID` is used directly on the frontend.
-    
+    *   **STATUS: DONE.** Removed in favor of direct environment variable usage on frontend.
+
 ---
 
 ## IV. General
 
-*   **Environment Variable Consistency:** Ensure that all PayPal-related environment variables (`PAYPAL_CLIENT_ID`, `PAYPAL_SECRET_KEY`, `PAYPAL_WEBHOOK_ID`, `PAYPAL_ENV`, `NEXT_PUBLIC_PAYPAL_CLIENT_ID`) are correctly configured and accessible in the respective environments (frontend, Firebase Cloud Functions, Next.js API routes).
-*   **PayPal API Response Interfaces:** Newly defined `PayPalAccessTokenResponse`, `PayPalWebhookVerificationResponse`, `PayPalOrderCaptureResponse`, and `PayPalSubscriptionDetailsResponse` interfaces in `functions/src/utils/paypal.ts` improve type safety for PayPal API interactions.
-*   **Comprehensive Testing:** After implementing these changes, thorough testing of both one-time payments and subscription flows (including activation, renewal, cancellation, and edge cases like failed payments) is essential.
-*   **Security Review:** Perform a security review of the entire PayPal integration, focusing on data integrity, prevention of fraud (especially double-crediting), and secure handling of sensitive information.
-
+*   **Environment Variable Consistency:** Verified. `PAYPAL_CLIENT_ID`, `PAYPAL_SECRET_KEY`, `PAYPAL_WEBHOOK_ID`, `PAYPAL_ENV`, `NEXT_PUBLIC_PAYPAL_CLIENT_ID` are configured.
+*   **PayPal API Response Interfaces:** Verified. Type safety improved.
+*   **Comprehensive Testing:** Testing of one-time and subscription flows (success, failure, cancellation) is ongoing.
+*   **Security Review:** Security review of payment flow, data integrity, and secret handling is complete.

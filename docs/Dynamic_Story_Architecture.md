@@ -1,8 +1,83 @@
-# Dynamic Story Architecture Documentation\n\n## 1. Overview\n\nThis document outlines a scalable, database-driven architecture for creating, storing, and reading user-generated stories. This approach replaces the static, single-story structure of the original `Story_Reader` tool with a dynamic system capable of handling multiple unique stories.\n\nThis architecture is designed to integrate seamlessly with the existing Next.js application, Firebase Data Connect (PostgreSQL), and Cloud Storage.\n\n## 2. Data Storage & Cost Model\n\nOur strategy separates story metadata (stored in the database) from story assets (stored in cloud storage).\n\n-   **Database (Cloud SQL for PostgreSQL):**\n    -   **Usage:** Stores all metadata, such as titles, descriptions, page order, and references to asset URLs.\n    -   **Cost:** Billed based on Cloud SQL instance size (vCPU/RAM), storage duration (GB/month), and network egress. Scales by upgrading the instance size as demand grows.\n\n-   **File Storage (Cloud Storage for Firebase):**\n    -   **Usage:** Stores all large, static assets, including images, audio files, and video files.\n    -   **Cost:** Billed primarily on storage duration (GB/month) and bandwidth for user downloads. This is the most cost-effective way to handle large media files.\n\n## 3. Proposed Data Model (PostgreSQL)\n\nTo align with your existing `schema.gql` and `documentation.md`, we will use two primary tables: `stories` and a new `story_pages` table.\n\n### `stories` Table\n\nStores the high-level metadata for each story.\n\n| Column | Type | Description |\n| :--- | :--- | :--- |\n| `id` | `SERIAL PRIMARY KEY` | Unique identifier for the story. |\n| `title` | `VARCHAR(255)` | The title of the story. |\n| `description`| `TEXT` | A brief summary of the story. |\n| `cover_image_url` | `VARCHAR(255)` | URL to the story\'s cover image in Cloud Storage. |\n| `author_id` | `VARCHAR(255)` | Foreign key referencing the `users` table. |\n| `created_at` | `TIMESTAMP` | When the story was created. |\n\n### `story_pages` Table\n\nStores the content for each individual page within a story.\n\n| Column | Type | Description |\n| :--- | :--- | :--- |\
-| `id` | `SERIAL PRIMARY KEY` | Unique identifier for the page. |\
-| `story_id` | `INTEGER` | Foreign key referencing the `stories` table. |\
-| `page_number` | `INTEGER` | The order of the page within the story (e.g., 1, 2, 3). |\
-| `image_url` | `VARCHAR(255)` | **(Optional)** URL to the page\'s image. |\
-| `note_url` | `VARCHAR(255)` | **(Optional)** URL to the page\'s text file. |\
-| `audio_url` | `VARCHAR(255)` | **(Optional)** URL to the page\'s narration audio. |\
-| `video_url` | `VARCHAR(255)` | **(Optional)** URL to the page\'s video file. |\n\n## 4. Proposed File Storage Structure\n\nAll user-generated assets will be stored in a dedicated `stories` directory within your `public/` folder, which syncs with Cloud Storage for Firebase. Each story\'s assets will be organized into a subfolder named with its unique `story.id`.\n\n```\npublic/\n└── stories/\n    └── 1/              <-- Corresponds to a story with id=1\n    │   ├── cover.png\n    │   ├── images/\n    │   │   ├── page_1.png\n    │   │   └── page_2.png\n    │   ├── audio/\n    │   │   ├── narration_1.mp3\n    │   │   └── narration_2.mp3\n    │   ├── videos/\n    │   │   ├── intro.mp4\n    │   └── notes/\n    │       ├── note_1.txt\n    │       └── note_2.txt\n    └── 2/              <-- Corresponds to a story with id=2\n        └── ...\n```\n\nWhile the proposed structure organizes files in Cloud Storage, the `assetsIndex.ts` Firebase Function automatically indexes metadata for these user-uploaded assets (e.g., covers, page images, audio narrations) into a Firestore collection. This `assetsIndex` collection serves as a searchable catalog of all user assets, providing a centralized and efficient way to query and manage multimedia content associated with stories and user profiles.\n\n## 5. Implementation Plan\n\n1.  **Update Database Schema:** Add the `story_pages` table definition to the `dataconnect/schema/schema.gql` file.\n2.  **Create Dynamic Route:** Create a new page in the app at `src/app/story/[storyId]/page.tsx`. This page will fetch the `storyId` from the URL.\n3.  **Develop `<StoryReader />` Component:**\n    -   Convert the logic from `Integrations/Story_Reader/Story.js` into a React component.\n    -   The component will accept `storyId` as a prop.\n    -   On load, it will fetch the story\'s metadata and the list of pages from the database using the `storyId`.\n    -   It will dynamically construct asset URLs based on the data returned from the database (e.g., `https://<your-project>.firebaseapp.com/stories/1/images/page_1.png`).\n    -   **Add a video player** to the component, which becomes visible if a `video_url` exists for the current page.\n4.  **Update \"Create Story\" Flow:** Modify the story creation logic to:\n    -   Create a new entry in the `stories` table.\n    -   For each page added, create a corresponding entry in the `story_pages` table.\n    -   Upload all generated assets to the correct folder in Cloud Storage.\n5.  **Update \"Discover Page\":** The discover page will query the `stories` table and display a list of all stories, with each entry linking to `/story/[storyId]`.\n
+# Dynamic Story Architecture Documentation
+
+## 1. Overview
+
+This document outlines a scalable, database-driven architecture for creating, storing, and reading user-generated stories. This approach replaces static, single-story structures with a dynamic system capable of handling multiple unique stories.
+
+This architecture is designed to integrate seamlessly with the existing Next.js application, Firebase Data Connect (PostgreSQL), Cloud Firestore, and Cloud Storage.
+
+## 2. Data Storage & Cost Model
+
+Our strategy separates story metadata (stored in the database) from story assets (stored in cloud storage).
+
+-   **Database (Cloud Firestore & Cloud SQL):**
+    -   **Usage:** Stores all metadata, such as titles, descriptions, page order, and references to asset URLs.
+    -   **Cost:** Billed based on instance size (PostgreSQL) or read/write operations and storage (Firestore). Scales automatically.
+-   **File Storage (Cloud Storage for Firebase):**
+    -   **Usage:** Stores all large, static assets, including images, audio files, and video files.
+    -   **Cost:** Billed primarily on storage duration (GB/month) and bandwidth for user downloads. This is the most cost-effective way to handle large media files.
+
+## 3. Proposed Data Model (Hybrid)
+
+The application currently uses a hybrid approach with Cloud Firestore serving as the primary document store for stories and pages.
+
+### `stories` Collection (Firestore)
+
+Stores the high-level metadata for each story.
+
+| Field | Type | Description |
+| :--- | :--- | :--- |
+| `id` | `string` | Unique document identifier for the story. |
+| `title` | `string` | The title of the story. |
+| `synopsis` | `string` | A brief summary of the story. |
+| `coverImageUrl` | `string` | HTTPS URL to the story's cover image in Cloud Storage. |
+| `ownerUid` | `string` | Firebase Auth UID of the creator. |
+| `createdAt` | `timestamp` | Creation timestamp. |
+| `status` | `string` | 'draft' or 'published'. |
+| `visibility` | `string` | 'public' or 'private'. |
+| `pageCount` | `number` | Total number of pages. |
+| `genres` | `array` | List of genre strings. |
+| `type` | `string` | 'basic', 'premium', or 'convai'. |
+
+### `storyContents` Collection (Firestore)
+
+Stores the content for each individual page within a story. Each document represents one page.
+
+| Field | Type | Description |
+| :--- | :--- | :--- |
+| `id` | `string` | Unique identifier (often `${storyId}_${pageNumber}`). |
+| `storyId` | `string` | Reference to the parent story ID. |
+| `pageNumber` | `number` | The order of the page (0-indexed or 1-indexed). |
+| `textContent` | `string` | The narrative text for the page. |
+| `imageUrl` | `string` | HTTPS URL to the page's image. |
+| `audioUrl` | `string` | **(Optional)** HTTPS URL to the page's narration audio. |
+
+## 4. File Storage Structure
+
+All user-generated assets are stored in Firebase Cloud Storage, organized by user and story ID.
+
+```
+/users/{userId}/
+    stories/
+        {storyId}/
+            images/
+                cover.png
+                page_1.png
+                page_2.png
+            audio/
+                narration_1.mp3
+                narration_2.mp3
+    assets/                 <-- General reference assets
+        characters/
+        locations/
+```
+
+The `assetsIndex.ts` Cloud Function automatically listens to storage events and indexes metadata for these user-uploaded assets into a Firestore collection named `assetsIndex`. This serves as a searchable catalog of all user assets.
+
+## 5. Implementation Status
+
+1.  **Database Schema:** The Firestore schema for `stories` and `storyContents` is fully implemented and in use by the application.
+2.  **Dynamic Route:** The application uses `src/app/story/[storyId]/page.tsx` to dynamically load and display stories based on the URL parameter.
+3.  **Story Reader Component:** The `StoryReader` component (`src/components/StoryReader.tsx`) is fully functional. It fetches story data, handles navigation, plays audio, and renders images/text dynamically.
+4.  **Create Story Flow:** The multi-step creation process (`/create/begin`, `/create/support`, `/create/scenes`) correctly creates `stories` documents, uploads assets to the structured storage paths, and creates `storyContents` documents for each page.
+5.  **Discover Page:** The `src/app/discover/page.tsx` page queries the `stories` collection (filtering for public/published stories) and displays them in a grid, linking correctly to the dynamic reader route.
