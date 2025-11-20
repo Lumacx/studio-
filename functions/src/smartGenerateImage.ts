@@ -47,7 +47,7 @@ async function getToken(): Promise<string> {
 }
 
 // ==============================================================================
-// 1) GEMINI image (2.5-flash-image-preview)
+// 1) GEMINI image (gemini-3-pro-image-preview requested, 2.5-flash fallback)
 // ==============================================================================
 const GEMINI_API_KEY = defineSecret("GEMINI_API_KEY");
 
@@ -81,8 +81,15 @@ export const generateWithGemini = onRequest(
       }
 
       const genAI = new GoogleGenerativeAI(GEMINI_API_KEY.value());
-      const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-image-preview" });
-
+      
+      // Updated fallback strategy as requested:
+      // 1. gemini-3-pro-image-preview
+      // 2. gemini-2.5-flash-image-preview
+      const modelsToTry = [
+        "gemini-3-pro-image-preview",
+        "gemini-2.5-flash-image-preview"
+      ];
+      
       const imageParts: Part[] = (inputImages ?? [])
         .filter((img) => img && img.startsWith("data:image/"))
         .map((imgDataUrl) => {
@@ -90,12 +97,30 @@ export const generateWithGemini = onRequest(
           const mimeType = header.match(/:(.*?);/)?.[1] || "image/png";
           return { inlineData: { data, mimeType } };
         });
-
       const contents: Content[] = [{ role: "user", parts: [...imageParts, { text: prompt }] }];
 
-      const result = await model.generateContent({ contents });
-      const response = result.response;
+      let result: any = null;
+      let usedModel = "";
+      let lastError: any = null;
 
+      for (const modelName of modelsToTry) {
+        try {
+          const model = genAI.getGenerativeModel({ model: modelName });
+          result = await model.generateContent({ contents });
+          // If we get here without error, we succeeded
+          usedModel = modelName;
+          break;
+        } catch (err: any) {
+          console.warn(`Model ${modelName} failed:`, err?.message || err);
+          lastError = err;
+        }
+      }
+
+      if (!result) {
+        throw lastError || new Error("All Gemini image models failed.");
+      }
+
+      const response = result.response;
       const imagePart = response.candidates?.[0]?.content?.parts?.find(
         (p: any) => p?.inlineData
       ) as { inlineData?: { data?: string } } | undefined;
@@ -108,12 +133,12 @@ export const generateWithGemini = onRequest(
             return "";
           }
         })();
-        console.error("Gemini returned no image. Text:", maybeText);
+        console.error(`Gemini (${usedModel}) returned no image. Text:`, maybeText);
         throw new Error("The model did not return an image (possibly blocked by safety filters).");
       }
 
       res.status(200).json({
-        model: "gemini-2.5-flash-image-preview",
+        model: usedModel,
         images: [imagePart.inlineData.data], // base64 (no data: prefix)
       });
     } catch (e: any) {

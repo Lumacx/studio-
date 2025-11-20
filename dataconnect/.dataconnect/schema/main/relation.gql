@@ -69,6 +69,10 @@ extend type AdminAction {
   ✨ Maximum of the `actionDate` field in the `AdminAction` table.
   """
   actionDate_max: Timestamp @fdc_generated(from: "AdminAction.actionDate", purpose: QUERY_MAX)
+  """
+  A generated field that is used for caching results in SDKs.
+  """
+  _id: ID! @fdc_generated(from: "AdminAction.id", purpose: GLOBAL_ID)
 }
 extend type AiGeneratedGif {
   """
@@ -123,6 +127,10 @@ extend type AiGeneratedGif {
   ✨ Maximum of the `createdAt` field in the `AiGeneratedGif` table.
   """
   createdAt_max: Timestamp @fdc_generated(from: "AiGeneratedGif.createdAt", purpose: QUERY_MAX)
+  """
+  A generated field that is used for caching results in SDKs.
+  """
+  _id: ID! @fdc_generated(from: "AiGeneratedGif.id", purpose: GLOBAL_ID)
 }
 extend type AiGeneratedImage {
   """
@@ -238,6 +246,10 @@ extend type AiGeneratedImage {
   ✨ Maximum of the `createdAt` field in the `AiGeneratedImage` table.
   """
   createdAt_max: Timestamp @fdc_generated(from: "AiGeneratedImage.createdAt", purpose: QUERY_MAX)
+  """
+  A generated field that is used for caching results in SDKs.
+  """
+  _id: ID! @fdc_generated(from: "AiGeneratedImage.id", purpose: GLOBAL_ID)
 }
 extend type Analytics {
   """
@@ -301,6 +313,10 @@ extend type Analytics {
   ✨ Maximum of the `actionTimestamp` field in the `Analytics` table.
   """
   actionTimestamp_max: Timestamp @fdc_generated(from: "Analytics.actionTimestamp", purpose: QUERY_MAX)
+  """
+  A generated field that is used for caching results in SDKs.
+  """
+  _id: ID! @fdc_generated(from: "Analytics.id", purpose: GLOBAL_ID)
 }
 extend type AppSubscription {
   """
@@ -458,6 +474,10 @@ extend type AppSubscription {
   ✨ Maximum of the `price` field in the `AppSubscription` table.
   """
   price_max: Float @fdc_generated(from: "AppSubscription.price", purpose: QUERY_MAX)
+  """
+  A generated field that is used for caching results in SDKs.
+  """
+  _id: ID! @fdc_generated(from: "AppSubscription.id", purpose: GLOBAL_ID)
 }
 extend type LegalDisclaimer {
   """
@@ -529,6 +549,10 @@ extend type LegalDisclaimer {
   ✨ Maximum of the `createdAt` field in the `LegalDisclaimer` table.
   """
   createdAt_max: Timestamp @fdc_generated(from: "LegalDisclaimer.createdAt", purpose: QUERY_MAX)
+  """
+  A generated field that is used for caching results in SDKs.
+  """
+  _id: ID! @fdc_generated(from: "LegalDisclaimer.id", purpose: GLOBAL_ID)
 }
 extend type Payment {
   """
@@ -644,6 +668,10 @@ extend type Payment {
   ✨ Maximum of the `paymentDate` field in the `Payment` table.
   """
   paymentDate_max: Timestamp @fdc_generated(from: "Payment.paymentDate", purpose: QUERY_MAX)
+  """
+  A generated field that is used for caching results in SDKs.
+  """
+  _id: ID! @fdc_generated(from: "Payment.id", purpose: GLOBAL_ID)
 }
 extend type Story {
   """
@@ -888,6 +916,10 @@ extend type Story {
   ✨ Maximum of the `updatedAt` field in the `Story` table.
   """
   updatedAt_max: Timestamp @fdc_generated(from: "Story.updatedAt", purpose: QUERY_MAX)
+  """
+  A generated field that is used for caching results in SDKs.
+  """
+  _id: ID! @fdc_generated(from: "Story.id", purpose: GLOBAL_ID)
 }
 extend type StoryContent {
   """
@@ -1013,6 +1045,10 @@ extend type StoryContent {
   ✨ Maximum of the `pageNumber` field in the `StoryContent` table.
   """
   pageNumber_max: Int @fdc_generated(from: "StoryContent.pageNumber", purpose: QUERY_MAX)
+  """
+  A generated field that is used for caching results in SDKs.
+  """
+  _id: ID! @fdc_generated(from: "StoryContent.id", purpose: GLOBAL_ID)
 }
 extend type Template {
   """
@@ -1076,6 +1112,10 @@ extend type Template {
   ✨ Maximum of the `createdAt` field in the `Template` table.
   """
   createdAt_max: Timestamp @fdc_generated(from: "Template.createdAt", purpose: QUERY_MAX)
+  """
+  A generated field that is used for caching results in SDKs.
+  """
+  _id: ID! @fdc_generated(from: "Template.id", purpose: GLOBAL_ID)
 }
 extend type User {
   """
@@ -1387,4 +1427,8 @@ extend type User {
   ✨ Maximum of the `updatedAt` field in the `User` table.
   """
   updatedAt_max: Timestamp @fdc_generated(from: "User.updatedAt", purpose: QUERY_MAX)
+  """
+  A generated field that is used for caching results in SDKs.
+  """
+  _id: ID! @fdc_generated(from: "User.id", purpose: GLOBAL_ID)
 }

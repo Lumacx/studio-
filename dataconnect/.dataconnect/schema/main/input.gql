@@ -23,11 +23,23 @@ It has the same format as `Analytics_Key`, but is only used as mutation return v
 """
 scalar Analytics_KeyOutput
 """
+✨ `AnalyticsAction_Expr` is a server value variant of enum type `AnalyticsAction`.
+
+It accepts a CEL expression.
+"""
+scalar AnalyticsAction_Expr
+"""
 ✨ `AppSubscription_KeyOutput` returns the primary key fields of table type `AppSubscription`.
 
 It has the same format as `AppSubscription_Key`, but is only used as mutation return value.
 """
 scalar AppSubscription_KeyOutput
+"""
+✨ `ImageGenerationStatus_Expr` is a server value variant of enum type `ImageGenerationStatus`.
+
+It accepts a CEL expression.
+"""
+scalar ImageGenerationStatus_Expr
 """
 ✨ `LegalDisclaimer_KeyOutput` returns the primary key fields of table type `LegalDisclaimer`.
 
@@ -41,6 +53,12 @@ It has the same format as `Payment_Key`, but is only used as mutation return val
 """
 scalar Payment_KeyOutput
 """
+✨ `PaymentStatus_Expr` is a server value variant of enum type `PaymentStatus`.
+
+It accepts a CEL expression.
+"""
+scalar PaymentStatus_Expr
+"""
 ✨ `Story_KeyOutput` returns the primary key fields of table type `Story`.
 
 It has the same format as `Story_Key`, but is only used as mutation return value.
@@ -52,6 +70,12 @@ scalar Story_KeyOutput
 It has the same format as `StoryContent_Key`, but is only used as mutation return value.
 """
 scalar StoryContent_KeyOutput
+"""
+✨ `StoryStatus_Expr` is a server value variant of enum type `StoryStatus`.
+
+It accepts a CEL expression.
+"""
+scalar StoryStatus_Expr
 """
 ✨ `Template_KeyOutput` returns the primary key fields of table type `Template`.
 

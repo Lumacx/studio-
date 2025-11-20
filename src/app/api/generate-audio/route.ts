@@ -31,7 +31,7 @@ type Body = {
   sceneIndex?: number;  // optional; helps build the filename
 };
 
-const DEFAULT_MODEL = 'gemini-2.5-flash-preview-tts';
+const DEFAULT_MODEL = 'gemini-2.5-pro-preview-tts' //'gemini-2.5-flash-preview-tts';
 const VOICES = new Set(['Kore', 'Puck', 'Zephyr', 'Achird', 'Leda', 'Sadachbia']);
 
 /* ------------------------- Helpers PCM -> WAV ------------------------- */

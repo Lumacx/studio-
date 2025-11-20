@@ -5,19 +5,19 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 
 /**
  * Orden de preferencia de modelos:
- *  1) gemini-2.5-flash    ← objetivo
- *  2) gemini-2.0-flash    ← fallback intermedio
- *  3) gemini-1.5-flash    ← fallback compatible amplio
- *  4) gemini-1.0-pro      ← SDKs/entornos más antiguos (v1beta)
- *  5) gemini-pro          ← último recurso
+ *  1) gemini-3-pro-preview        ← requested latest
+ *  2) gemini-2.0-pro-exp-02-05    ← known latest experimental
+ *  3) gemini-2.5-flash            ← fallback requested
+ *  4) gemini-2.0-flash            ← fallback stable
+ *  5) gemini-1.5-flash            ← fallback legacy
  */
 function preferredModels(): string[] {
   return [
+    'gemini-3-pro-preview',
     'gemini-2.5-flash',
     'gemini-2.0-flash',
+    'gemini-2.0-pro-exp-02-05',
     'gemini-1.5-flash',
-    'gemini-1.0-pro',
-    'gemini-pro',
   ];
 }
 
@@ -43,11 +43,13 @@ async function generateJsonWithModelFallback(
       });
       const text = r?.response?.text?.() || '';
       if (!text) throw new Error(`Empty response from ${name}`);
-      if (name !== 'gemini-2.5-flash') {
-        console.warn(`[suggestScene] downgraded model to: ${name}`);
+      
+      if (name === candidates[0]) {
+         console.log(`[suggestScene] using primary model: ${name}`);
       } else {
-        console.log('[suggestScene] using model: gemini-2.5-flash');
+         console.warn(`[suggestScene] downgraded model to: ${name}`);
       }
+      
       return text;
     } catch (e: any) {
       // 404/unsupported/quotas: prueba siguiente modelo
@@ -85,7 +87,7 @@ export const suggestScene = functions
       const genAI = new GoogleGenerativeAI(apiKey);
       const prompt = buildPrompt({ language, title, synopsis, genres, idx });
 
-      // → generación con fallback de modelos (2.5 → 2.0 → 1.5 → 1.0-pro → pro)
+      // → generación con fallback de modelos
       const text = await generateJsonWithModelFallback(genAI, prompt);
       if (!text) throw new Error('Model returned empty response');
 

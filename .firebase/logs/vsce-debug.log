@@ -3999,3 +3999,378 @@ Generated sources: .guides/usage.md [4620B] .guides/setup.md [1690B] index.d.ts 
  {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1110 22:57:25.539182     510 load.go:109] Finished reloading\n"}}
 [debug] [2025-11-10T22:57:25.630Z] I1110 22:57:25.630245     510 dev.go:102] Listening on address (HTTP + gRPC): 127.0.0.1:50001
  {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1110 22:57:25.630245     510 dev.go:102] Listening on address (HTTP + gRPC): 127.0.0.1:50001\n"}}
+[debug] [2025-11-11T16:07:12.464Z] [Firebase Plugin] Activating Firebase extension.
+[debug] [2025-11-11T16:07:37.444Z] [Firebase Plugin] requireAuthWrapper
+[debug] [2025-11-11T16:07:37.448Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/userinfo.email"]
+[debug] [2025-11-11T16:07:37.450Z] > authorizing via signed-in user (lumacx@gmail.com)
+[debug] [2025-11-11T16:07:37.459Z] Checked if tokens are valid: false, expires at: 1762819034885
+[debug] [2025-11-11T16:07:37.460Z] Checked if tokens are valid: false, expires at: 1762819034885
+[debug] [2025-11-11T16:07:37.462Z] > refreshing access token with scopes: []
+[debug] [2025-11-11T16:07:37.468Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2025-11-11T16:07:37.470Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-11-11T16:07:37.715Z] [Firebase Plugin] VSCode notification server listening on port 40001
+[debug] [2025-11-11T16:07:38.256Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2025-11-11T16:07:38.259Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-11-11T16:07:38.338Z] [Firebase Plugin] User found:  lumacx@gmail.com
+[info] [Firebase Plugin] (Core:Project) New user detected, fetching projects
+[debug] [2025-11-11T16:07:38.349Z] Checked if tokens are valid: true, expires at: 1762880857260
+[debug] [2025-11-11T16:07:38.371Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=1000
+[debug] [2025-11-11T16:07:38.919Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2025-11-11T16:07:38.922Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[info] [Firebase Plugin] Starting Data Connect toolkit (version 2.15.0) on port 50001
+[debug] [2025-11-11T16:07:48.547Z] I1111 16:07:48.239173     472 control.go:94] [/emulator/studio-v0 6967] UpdateResources(): done
+Main schema: sources: schema/schema.gql [3721B] 
+Connector "default": sources: connector/queries.gql [2742B] connector/mutations.gql [3182B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1111 16:07:48.239173     472 control.go:94] [/emulator/studio-v0 6967] UpdateResources(): done\nMain schema: sources: schema/schema.gql [3721B] \nConnector \"default\": sources: connector/queries.gql [2742B] connector/mutations.gql [3182B] \n"}}
+[debug] [2025-11-11T16:07:48.551Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"dataconnect"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2025-11-11T16:07:48.552Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"dataconnect"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2025-11-11T16:07:48.553Z] Starting Data Connect Emulator with command {"binary":"/home/user/.cache/firebase/emulators/dataconnect-emulator-2.15.0","args":["--logtostderr","-v=2","dev","--listen=localhost:50001","--config_dir=/home/user/studio/dataconnect","--enable_output_schema_extensions=true","--enable_output_generated_sdk=true"],"optionalArgs":["listen","config_dir","enable_output_schema_extensions","enable_output_generated_sdk"],"joinArgs":true,"shell":false,"port":9399} {"metadata":{"emulator":{"name":"dataconnect"},"message":"Starting Data Connect Emulator with command {\"binary\":\"/home/user/.cache/firebase/emulators/dataconnect-emulator-2.15.0\",\"args\":[\"--logtostderr\",\"-v=2\",\"dev\",\"--listen=localhost:50001\",\"--config_dir=/home/user/studio/dataconnect\",\"--enable_output_schema_extensions=true\",\"--enable_output_generated_sdk=true\"],\"optionalArgs\":[\"listen\",\"config_dir\",\"enable_output_schema_extensions\",\"enable_output_generated_sdk\"],\"joinArgs\":true,\"shell\":false,\"port\":9399}"}}
+[info] i  dataconnect: Data Connect Emulator logging to dataconnect-debug.log {"metadata":{"emulator":{"name":"dataconnect"},"message":"Data Connect Emulator logging to dataconnect-debug.log"}}
+[debug] [2025-11-11T16:07:49.444Z] I1111 16:07:48.659874     477 load.go:31] Reloading schema and connectors...
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1111 16:07:48.659874     477 load.go:31] Reloading schema and connectors...\n"}}
+[debug] [2025-11-11T16:07:50.104Z] I1111 16:07:49.583961     477 control.go:94] [/emulator/studio-v0 9752] UpdateResources(): done
+Main schema: sources: schema/schema.gql [3721B] 
+Connector "default": sources: connector/mutations.gql [3182B] connector/queries.gql [2742B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1111 16:07:49.583961     477 control.go:94] [/emulator/studio-v0 9752] UpdateResources(): done\nMain schema: sources: schema/schema.gql [3721B] \nConnector \"default\": sources: connector/mutations.gql [3182B] connector/queries.gql [2742B] \n"}}
+[debug] [2025-11-11T16:07:50.685Z] W1111 16:07:50.609878     477 parser.go:185] Type includes_expr not found in full typeMap, possibly a CEL expression type
+W1111 16:07:50.637850     477 parser.go:185] Type excludes_expr not found in full typeMap, possibly a CEL expression type
+W1111 16:07:50.638062     477 parser.go:185] Type eq_expr not found in full typeMap, possibly a CEL expression type
+W1111 16:07:50.638083     477 parser.go:185] Type ne_expr not found in full typeMap, possibly a CEL expression type
+W1111 16:07:50.638091     477 parser.go:185] Type gt_expr not found in full typeMap, possibly a CEL expression type
+W1111 16:07:50.638098     477 parser.go:185] Type ge_expr not found in full typeMap, possibly a CEL expression type
+W1111 16:07:50.638104     477 parser.go:185] Type lt_expr not found in full typeMap, possibly a CEL expression type
+W1111 16:07:50.638110     477 parser.go:185] Type le_expr not found in full typeMap, possibly a CEL expression type
+W1111 16:07:50.638147     477 parser.go:185] Type includes_expr not found in full typeMap, possibly a CEL expression type
+W1111 16:07:50.638156     477 parser.go:185] Type excludes_expr not found in full typeMap, possibly a CEL expression type
+W1111 16:07:50.638168     477 parser.go:185] Type eq_expr not found in full typeMap, possibly a CEL expression type
+W1111 16:07:50.638176     477 parser.go:185] Type ne_expr not found in full typeMap, possibly a CEL expression type
+W1111 16:07:50.638183     477 parser.go:185] Type gt_expr not found in full typeMap, possibly a CEL expression type
+W1111 16:07:50.638192     477 parser.go:185] Type ge_expr not found in full typeMap, possibly a CEL expression type
+W1111 16:07:50.638200     477 parser.go:185] Type lt_expr not found in full typeMap, possibly a CEL expression type
+W1111 16:07:50.638208     477 parser.go:185] Type le_expr not found in full typeMap, possibly a CEL expression type
+W1111 16:07:50.638289     477 parser.go:185] Type includes_expr not found in full typeMap, possibly a CEL expression type
+W1111 16:07:50.638299     477 parser.go:185] Type excludes_expr not found in full typeMap, possibly a CEL expression type
+W1111 16:07:50.638335     477 parser.go:185] Type includes_expr not found in full typeMap, possibly a CEL expression type
+W1111 16:07:50.638341     477 parser.go:185] Type excludes_expr not found in full typeMap, possibly a CEL expression type
+W1111 16:07:50.638462     477 parser.go:185] Type eq_expr not found in full typeMap, possibly a CEL expression type
+W1111 16:07:50.638469     477 parser.go:185] Type ne_expr not found in full typeMap, possibly a CEL expression type
+W1111 16:07:50.638475     477 parser.go:185] Type gt_expr not found in full typeMap, possibly a CEL expression type
+W1111 16:07:50.638481     477 parser.go:185] Type ge_expr not found in full typeMap, possibly a CEL expression type
+W1111 16:07:50.638487     477 parser.go:185] Type lt_expr not found in full typeMap, possibly a CEL expression type
+W1111 16:07:50.638493     477 parser.go:185] Type le_expr not found in full typeMap, possibly a CEL expression type
+W1111 16:07:50.638508     477 parser.go:185] Type eq_expr not found in full typeMap, possibly a CEL expression type
+W1111 16:07:50.638514     477 parser.go:185] Type ne_expr not found in full typeMap, possibly a CEL expression type
+W1111 16:07:50.638520     477 parser.go:185] Type gt_expr not found in full typeMap, possibly a CEL expression type
+W1111 16:07:50.638530     477 parser.go:185] Type ge_expr not found in full typeMap, possibly a CEL expression type
+W1111 16:07:50.638536     477 parser.go:185] Type lt_expr not found in full typeMap, possibly a CEL expression type
+W1111 16:07:50.638543     477 parser.go:185] Type le_expr not found in full typeMap, possibly a CEL expression type
+I1111 16:07:50.641881     477 codegen.go:82] [connector "default" javascriptSdk] Generating sources into "/home/user/studio/dataconnect-generated/js/default-connector"
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"W1111 16:07:50.609878     477 parser.go:185] Type includes_expr not found in full typeMap, possibly a CEL expression type\nW1111 16:07:50.637850     477 parser.go:185] Type excludes_expr not found in full typeMap, possibly a CEL expression type\nW1111 16:07:50.638062     477 parser.go:185] Type eq_expr not found in full typeMap, possibly a CEL expression type\nW1111 16:07:50.638083     477 parser.go:185] Type ne_expr not found in full typeMap, possibly a CEL expression type\nW1111 16:07:50.638091     477 parser.go:185] Type gt_expr not found in full typeMap, possibly a CEL expression type\nW1111 16:07:50.638098     477 parser.go:185] Type ge_expr not found in full typeMap, possibly a CEL expression type\nW1111 16:07:50.638104     477 parser.go:185] Type lt_expr not found in full typeMap, possibly a CEL expression type\nW1111 16:07:50.638110     477 parser.go:185] Type le_expr not found in full typeMap, possibly a CEL expression type\nW1111 16:07:50.638147     477 parser.go:185] Type includes_expr not found in full typeMap, possibly a CEL expression type\nW1111 16:07:50.638156     477 parser.go:185] Type excludes_expr not found in full typeMap, possibly a CEL expression type\nW1111 16:07:50.638168     477 parser.go:185] Type eq_expr not found in full typeMap, possibly a CEL expression type\nW1111 16:07:50.638176     477 parser.go:185] Type ne_expr not found in full typeMap, possibly a CEL expression type\nW1111 16:07:50.638183     477 parser.go:185] Type gt_expr not found in full typeMap, possibly a CEL expression type\nW1111 16:07:50.638192     477 parser.go:185] Type ge_expr not found in full typeMap, possibly a CEL expression type\nW1111 16:07:50.638200     477 parser.go:185] Type lt_expr not found in full typeMap, possibly a CEL expression type\nW1111 16:07:50.638208     477 parser.go:185] Type le_expr not found in full typeMap, possibly a CEL expression type\nW1111 16:07:50.638289     477 parser.go:185] Type includes_expr not found in full typeMap, possibly a CEL expression type\nW1111 16:07:50.638299     477 parser.go:185] Type excludes_expr not found in full typeMap, possibly a CEL expression type\nW1111 16:07:50.638335     477 parser.go:185] Type includes_expr not found in full typeMap, possibly a CEL expression type\nW1111 16:07:50.638341     477 parser.go:185] Type excludes_expr not found in full typeMap, possibly a CEL expression type\nW1111 16:07:50.638462     477 parser.go:185] Type eq_expr not found in full typeMap, possibly a CEL expression type\nW1111 16:07:50.638469     477 parser.go:185] Type ne_expr not found in full typeMap, possibly a CEL expression type\nW1111 16:07:50.638475     477 parser.go:185] Type gt_expr not found in full typeMap, possibly a CEL expression type\nW1111 16:07:50.638481     477 parser.go:185] Type ge_expr not found in full typeMap, possibly a CEL expression type\nW1111 16:07:50.638487     477 parser.go:185] Type lt_expr not found in full typeMap, possibly a CEL expression type\nW1111 16:07:50.638493     477 parser.go:185] Type le_expr not found in full typeMap, possibly a CEL expression type\nW1111 16:07:50.638508     477 parser.go:185] Type eq_expr not found in full typeMap, possibly a CEL expression type\nW1111 16:07:50.638514     477 parser.go:185] Type ne_expr not found in full typeMap, possibly a CEL expression type\nW1111 16:07:50.638520     477 parser.go:185] Type gt_expr not found in full typeMap, possibly a CEL expression type\nW1111 16:07:50.638530     477 parser.go:185] Type ge_expr not found in full typeMap, possibly a CEL expression type\nW1111 16:07:50.638536     477 parser.go:185] Type lt_expr not found in full typeMap, possibly a CEL expression type\nW1111 16:07:50.638543     477 parser.go:185] Type le_expr not found in full typeMap, possibly a CEL expression type\nI1111 16:07:50.641881     477 codegen.go:82] [connector \"default\" javascriptSdk] Generating sources into \"/home/user/studio/dataconnect-generated/js/default-connector\"\n"}}
+[debug] [2025-11-11T16:07:50.970Z] I1111 16:07:50.956336     477 collector.go:107] schema extensions wrote into "/home/user/studio/dataconnect/.dataconnect/schema"
+Generated sources: prelude.gql [73219B] main/implicit.gql [3267B] main/input.gql [121564B] main/relation.gql [50205B] main/query.gql [15655B] main/mutation.gql [41655B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1111 16:07:50.956336     477 collector.go:107] schema extensions wrote into \"/home/user/studio/dataconnect/.dataconnect/schema\"\nGenerated sources: prelude.gql [73219B] main/implicit.gql [3267B] main/input.gql [121564B] main/relation.gql [50205B] main/query.gql [15655B] main/mutation.gql [41655B] \n"}}
+[debug] [2025-11-11T16:07:50.992Z] I1111 16:07:50.987487     477 collector.go:107] connector "default" javascriptSdk wrote into "/home/user/studio/dataconnect-generated/js/default-connector"
+Generated sources: .guides/setup.md [1690B] index.d.ts [24807B] esm/package.json [17B] README.md [116341B] react/index.d.ts [12119B] react/esm/package.json [17B] react/index.cjs.js [9597B] react/esm/index.esm.js [9027B] react/README.md [119856B] esm/index.esm.js [10374B] index.cjs.js [12004B] package.json [871B] react/package.json [468B] .guides/usage.md [4620B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1111 16:07:50.987487     477 collector.go:107] connector \"default\" javascriptSdk wrote into \"/home/user/studio/dataconnect-generated/js/default-connector\"\nGenerated sources: .guides/setup.md [1690B] index.d.ts [24807B] esm/package.json [17B] README.md [116341B] react/index.d.ts [12119B] react/esm/package.json [17B] react/index.cjs.js [9597B] react/esm/index.esm.js [9027B] react/README.md [119856B] esm/index.esm.js [10374B] index.cjs.js [12004B] package.json [871B] react/package.json [468B] .guides/usage.md [4620B] \n"}}
+[debug] [2025-11-11T16:07:51.016Z] I1111 16:07:51.014811     477 installsdk.go:55] Package @firebasegen/default-connector is already installed. Skipping installation
+I1111 16:07:51.014885     477 load.go:109] Finished reloading
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1111 16:07:51.014811     477 installsdk.go:55] Package @firebasegen/default-connector is already installed. Skipping installation\nI1111 16:07:51.014885     477 load.go:109] Finished reloading\n"}}
+[debug] [2025-11-11T16:07:51.271Z] I1111 16:07:51.087734     477 dev.go:102] Listening on address (HTTP + gRPC): 127.0.0.1:50001
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1111 16:07:51.087734     477 dev.go:102] Listening on address (HTTP + gRPC): 127.0.0.1:50001\n"}}
+[info] [Firebase Plugin] Stopping Data Connect toolkit
+[warn] ⚠  Data Connect Emulator has exited upon receiving signal: SIGINT 
+[debug] [2025-11-11T16:12:06.422Z] [Firebase Plugin] Activating Firebase extension.
+[debug] [2025-11-11T16:12:36.419Z] [Firebase Plugin] requireAuthWrapper
+[debug] [2025-11-11T16:12:36.423Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/userinfo.email"]
+[debug] [2025-11-11T16:12:36.424Z] > authorizing via signed-in user (lumacx@gmail.com)
+[debug] [2025-11-11T16:12:36.438Z] Checked if tokens are valid: true, expires at: 1762880857260
+[debug] [2025-11-11T16:12:36.439Z] Checked if tokens are valid: true, expires at: 1762880857260
+[debug] [2025-11-11T16:12:36.440Z] [Firebase Plugin] User found:  lumacx@gmail.com
+[info] [Firebase Plugin] (Core:Project) New user detected, fetching projects
+[debug] [2025-11-11T16:12:36.445Z] Checked if tokens are valid: true, expires at: 1762880857260
+[debug] [2025-11-11T16:12:36.449Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=1000
+[debug] [2025-11-11T16:12:36.570Z] [Firebase Plugin] VSCode notification server listening on port 40001
+[debug] [2025-11-11T16:12:37.973Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2025-11-11T16:12:37.975Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[info] [Firebase Plugin] Starting Data Connect toolkit (version 2.15.0) on port 50001
+[debug] [2025-11-11T16:12:42.075Z] I1111 16:12:41.782435    1731 control.go:94] [/emulator/studio-v0 57d0] UpdateResources(): done
+Main schema: sources: schema/schema.gql [3721B] 
+Connector "default": sources: connector/mutations.gql [3182B] connector/queries.gql [2742B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1111 16:12:41.782435    1731 control.go:94] [/emulator/studio-v0 57d0] UpdateResources(): done\nMain schema: sources: schema/schema.gql [3721B] \nConnector \"default\": sources: connector/mutations.gql [3182B] connector/queries.gql [2742B] \n"}}
+[debug] [2025-11-11T16:12:42.082Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"dataconnect"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2025-11-11T16:12:42.086Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"dataconnect"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2025-11-11T16:12:42.087Z] Starting Data Connect Emulator with command {"binary":"/home/user/.cache/firebase/emulators/dataconnect-emulator-2.15.0","args":["--logtostderr","-v=2","dev","--listen=localhost:50001","--config_dir=/home/user/studio/dataconnect","--enable_output_schema_extensions=true","--enable_output_generated_sdk=true"],"optionalArgs":["listen","config_dir","enable_output_schema_extensions","enable_output_generated_sdk"],"joinArgs":true,"shell":false,"port":9399} {"metadata":{"emulator":{"name":"dataconnect"},"message":"Starting Data Connect Emulator with command {\"binary\":\"/home/user/.cache/firebase/emulators/dataconnect-emulator-2.15.0\",\"args\":[\"--logtostderr\",\"-v=2\",\"dev\",\"--listen=localhost:50001\",\"--config_dir=/home/user/studio/dataconnect\",\"--enable_output_schema_extensions=true\",\"--enable_output_generated_sdk=true\"],\"optionalArgs\":[\"listen\",\"config_dir\",\"enable_output_schema_extensions\",\"enable_output_generated_sdk\"],\"joinArgs\":true,\"shell\":false,\"port\":9399}"}}
+[info] i  dataconnect: Data Connect Emulator logging to dataconnect-debug.log {"metadata":{"emulator":{"name":"dataconnect"},"message":"Data Connect Emulator logging to dataconnect-debug.log"}}
+[debug] [2025-11-11T16:12:42.310Z] I1111 16:12:42.221299    1736 load.go:31] Reloading schema and connectors...
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1111 16:12:42.221299    1736 load.go:31] Reloading schema and connectors...\n"}}
+[debug] [2025-11-11T16:12:43.129Z] I1111 16:12:43.019337    1736 control.go:94] [/emulator/studio-v0 d998] UpdateResources(): done
+Main schema: sources: schema/schema.gql [3721B] 
+Connector "default": sources: connector/mutations.gql [3182B] connector/queries.gql [2742B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1111 16:12:43.019337    1736 control.go:94] [/emulator/studio-v0 d998] UpdateResources(): done\nMain schema: sources: schema/schema.gql [3721B] \nConnector \"default\": sources: connector/mutations.gql [3182B] connector/queries.gql [2742B] \n"}}
+[debug] [2025-11-11T16:12:44.103Z] W1111 16:12:43.770432    1736 parser.go:185] Type eq_expr not found in full typeMap, possibly a CEL expression type
+W1111 16:12:43.773813    1736 parser.go:185] Type ne_expr not found in full typeMap, possibly a CEL expression type
+W1111 16:12:43.773830    1736 parser.go:185] Type gt_expr not found in full typeMap, possibly a CEL expression type
+W1111 16:12:43.773837    1736 parser.go:185] Type ge_expr not found in full typeMap, possibly a CEL expression type
+W1111 16:12:43.773844    1736 parser.go:185] Type lt_expr not found in full typeMap, possibly a CEL expression type
+W1111 16:12:43.773850    1736 parser.go:185] Type le_expr not found in full typeMap, possibly a CEL expression type
+W1111 16:12:43.773866    1736 parser.go:185] Type includes_expr not found in full typeMap, possibly a CEL expression type
+W1111 16:12:43.773872    1736 parser.go:185] Type excludes_expr not found in full typeMap, possibly a CEL expression type
+W1111 16:12:43.773909    1736 parser.go:185] Type eq_expr not found in full typeMap, possibly a CEL expression type
+W1111 16:12:43.773915    1736 parser.go:185] Type ne_expr not found in full typeMap, possibly a CEL expression type
+W1111 16:12:43.773922    1736 parser.go:185] Type gt_expr not found in full typeMap, possibly a CEL expression type
+W1111 16:12:43.773928    1736 parser.go:185] Type ge_expr not found in full typeMap, possibly a CEL expression type
+W1111 16:12:43.773935    1736 parser.go:185] Type lt_expr not found in full typeMap, possibly a CEL expression type
+W1111 16:12:43.773942    1736 parser.go:185] Type le_expr not found in full typeMap, possibly a CEL expression type
+W1111 16:12:43.774027    1736 parser.go:185] Type eq_expr not found in full typeMap, possibly a CEL expression type
+W1111 16:12:43.774034    1736 parser.go:185] Type ne_expr not found in full typeMap, possibly a CEL expression type
+W1111 16:12:43.774042    1736 parser.go:185] Type gt_expr not found in full typeMap, possibly a CEL expression type
+W1111 16:12:43.774048    1736 parser.go:185] Type ge_expr not found in full typeMap, possibly a CEL expression type
+W1111 16:12:43.774054    1736 parser.go:185] Type lt_expr not found in full typeMap, possibly a CEL expression type
+W1111 16:12:43.774061    1736 parser.go:185] Type le_expr not found in full typeMap, possibly a CEL expression type
+W1111 16:12:43.774109    1736 parser.go:185] Type includes_expr not found in full typeMap, possibly a CEL expression type
+W1111 16:12:43.774118    1736 parser.go:185] Type excludes_expr not found in full typeMap, possibly a CEL expression type
+W1111 16:12:43.774217    1736 parser.go:185] Type includes_expr not found in full typeMap, possibly a CEL expression type
+W1111 16:12:43.774225    1736 parser.go:185] Type excludes_expr not found in full typeMap, possibly a CEL expression type
+W1111 16:12:43.774302    1736 parser.go:185] Type eq_expr not found in full typeMap, possibly a CEL expression type
+W1111 16:12:43.774308    1736 parser.go:185] Type ne_expr not found in full typeMap, possibly a CEL expression type
+W1111 16:12:43.774315    1736 parser.go:185] Type gt_expr not found in full typeMap, possibly a CEL expression type
+W1111 16:12:43.774322    1736 parser.go:185] Type ge_expr not found in full typeMap, possibly a CEL expression type
+W1111 16:12:43.774336    1736 parser.go:185] Type lt_expr not found in full typeMap, possibly a CEL expression type
+W1111 16:12:43.774343    1736 parser.go:185] Type le_expr not found in full typeMap, possibly a CEL expression type
+W1111 16:12:43.774351    1736 parser.go:185] Type includes_expr not found in full typeMap, possibly a CEL expression type
+W1111 16:12:43.774357    1736 parser.go:185] Type excludes_expr not found in full typeMap, possibly a CEL expression type
+I1111 16:12:43.774760    1736 codegen.go:82] [connector "default" javascriptSdk] Generating sources into "/home/user/studio/dataconnect-generated/js/default-connector"
+I1111 16:12:44.095636    1736 collector.go:107] schema extensions wrote into "/home/user/studio/dataconnect/.dataconnect/schema"
+Generated sources: main/mutation.gql [41655B] prelude.gql [73219B] main/implicit.gql [3267B] main/input.gql [121564B] main/relation.gql [50205B] main/query.gql [15655B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"W1111 16:12:43.770432    1736 parser.go:185] Type eq_expr not found in full typeMap, possibly a CEL expression type\nW1111 16:12:43.773813    1736 parser.go:185] Type ne_expr not found in full typeMap, possibly a CEL expression type\nW1111 16:12:43.773830    1736 parser.go:185] Type gt_expr not found in full typeMap, possibly a CEL expression type\nW1111 16:12:43.773837    1736 parser.go:185] Type ge_expr not found in full typeMap, possibly a CEL expression type\nW1111 16:12:43.773844    1736 parser.go:185] Type lt_expr not found in full typeMap, possibly a CEL expression type\nW1111 16:12:43.773850    1736 parser.go:185] Type le_expr not found in full typeMap, possibly a CEL expression type\nW1111 16:12:43.773866    1736 parser.go:185] Type includes_expr not found in full typeMap, possibly a CEL expression type\nW1111 16:12:43.773872    1736 parser.go:185] Type excludes_expr not found in full typeMap, possibly a CEL expression type\nW1111 16:12:43.773909    1736 parser.go:185] Type eq_expr not found in full typeMap, possibly a CEL expression type\nW1111 16:12:43.773915    1736 parser.go:185] Type ne_expr not found in full typeMap, possibly a CEL expression type\nW1111 16:12:43.773922    1736 parser.go:185] Type gt_expr not found in full typeMap, possibly a CEL expression type\nW1111 16:12:43.773928    1736 parser.go:185] Type ge_expr not found in full typeMap, possibly a CEL expression type\nW1111 16:12:43.773935    1736 parser.go:185] Type lt_expr not found in full typeMap, possibly a CEL expression type\nW1111 16:12:43.773942    1736 parser.go:185] Type le_expr not found in full typeMap, possibly a CEL expression type\nW1111 16:12:43.774027    1736 parser.go:185] Type eq_expr not found in full typeMap, possibly a CEL expression type\nW1111 16:12:43.774034    1736 parser.go:185] Type ne_expr not found in full typeMap, possibly a CEL expression type\nW1111 16:12:43.774042    1736 parser.go:185] Type gt_expr not found in full typeMap, possibly a CEL expression type\nW1111 16:12:43.774048    1736 parser.go:185] Type ge_expr not found in full typeMap, possibly a CEL expression type\nW1111 16:12:43.774054    1736 parser.go:185] Type lt_expr not found in full typeMap, possibly a CEL expression type\nW1111 16:12:43.774061    1736 parser.go:185] Type le_expr not found in full typeMap, possibly a CEL expression type\nW1111 16:12:43.774109    1736 parser.go:185] Type includes_expr not found in full typeMap, possibly a CEL expression type\nW1111 16:12:43.774118    1736 parser.go:185] Type excludes_expr not found in full typeMap, possibly a CEL expression type\nW1111 16:12:43.774217    1736 parser.go:185] Type includes_expr not found in full typeMap, possibly a CEL expression type\nW1111 16:12:43.774225    1736 parser.go:185] Type excludes_expr not found in full typeMap, possibly a CEL expression type\nW1111 16:12:43.774302    1736 parser.go:185] Type eq_expr not found in full typeMap, possibly a CEL expression type\nW1111 16:12:43.774308    1736 parser.go:185] Type ne_expr not found in full typeMap, possibly a CEL expression type\nW1111 16:12:43.774315    1736 parser.go:185] Type gt_expr not found in full typeMap, possibly a CEL expression type\nW1111 16:12:43.774322    1736 parser.go:185] Type ge_expr not found in full typeMap, possibly a CEL expression type\nW1111 16:12:43.774336    1736 parser.go:185] Type lt_expr not found in full typeMap, possibly a CEL expression type\nW1111 16:12:43.774343    1736 parser.go:185] Type le_expr not found in full typeMap, possibly a CEL expression type\nW1111 16:12:43.774351    1736 parser.go:185] Type includes_expr not found in full typeMap, possibly a CEL expression type\nW1111 16:12:43.774357    1736 parser.go:185] Type excludes_expr not found in full typeMap, possibly a CEL expression type\nI1111 16:12:43.774760    1736 codegen.go:82] [connector \"default\" javascriptSdk] Generating sources into \"/home/user/studio/dataconnect-generated/js/default-connector\"\nI1111 16:12:44.095636    1736 collector.go:107] schema extensions wrote into \"/home/user/studio/dataconnect/.dataconnect/schema\"\nGenerated sources: main/mutation.gql [41655B] prelude.gql [73219B] main/implicit.gql [3267B] main/input.gql [121564B] main/relation.gql [50205B] main/query.gql [15655B] \n"}}
+[debug] [2025-11-11T16:12:44.516Z] I1111 16:12:44.123786    1736 collector.go:107] connector "default" javascriptSdk wrote into "/home/user/studio/dataconnect-generated/js/default-connector"
+Generated sources: react/package.json [468B] react/esm/package.json [17B] .guides/setup.md [1690B] esm/index.esm.js [10374B] package.json [871B] react/index.d.ts [12119B] react/index.cjs.js [9597B] react/esm/index.esm.js [9027B] react/README.md [119856B] .guides/usage.md [4620B] index.d.ts [24807B] esm/package.json [17B] index.cjs.js [12004B] README.md [116341B] 
+I1111 16:12:44.154331    1736 installsdk.go:55] Package @firebasegen/default-connector is already installed. Skipping installation
+I1111 16:12:44.158083    1736 load.go:109] Finished reloading
+I1111 16:12:44.184205    1736 dev.go:102] Listening on address (HTTP + gRPC): 127.0.0.1:50001
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1111 16:12:44.123786    1736 collector.go:107] connector \"default\" javascriptSdk wrote into \"/home/user/studio/dataconnect-generated/js/default-connector\"\nGenerated sources: react/package.json [468B] react/esm/package.json [17B] .guides/setup.md [1690B] esm/index.esm.js [10374B] package.json [871B] react/index.d.ts [12119B] react/index.cjs.js [9597B] react/esm/index.esm.js [9027B] react/README.md [119856B] .guides/usage.md [4620B] index.d.ts [24807B] esm/package.json [17B] index.cjs.js [12004B] README.md [116341B] \nI1111 16:12:44.154331    1736 installsdk.go:55] Package @firebasegen/default-connector is already installed. Skipping installation\nI1111 16:12:44.158083    1736 load.go:109] Finished reloading\nI1111 16:12:44.184205    1736 dev.go:102] Listening on address (HTTP + gRPC): 127.0.0.1:50001\n"}}
+[debug] [2025-11-14T18:33:35.020Z] [Firebase Plugin] Activating Firebase extension.
+[debug] [2025-11-14T18:34:00.347Z] [Firebase Plugin] requireAuthWrapper
+[debug] [2025-11-14T18:34:00.393Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/userinfo.email"]
+[debug] [2025-11-14T18:34:00.400Z] > authorizing via signed-in user (lumacx@gmail.com)
+[debug] [2025-11-14T18:34:00.550Z] Checked if tokens are valid: false, expires at: 1762880857260
+[debug] [2025-11-14T18:34:00.603Z] Checked if tokens are valid: false, expires at: 1762880857260
+[debug] [2025-11-14T18:34:00.613Z] > refreshing access token with scopes: []
+[debug] [2025-11-14T18:34:00.662Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2025-11-14T18:34:00.677Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-11-14T18:34:01.033Z] [Firebase Plugin] VSCode notification server listening on port 40001
+[debug] [2025-11-14T18:34:03.066Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2025-11-14T18:34:03.070Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-11-14T18:34:03.101Z] [Firebase Plugin] User found:  lumacx@gmail.com
+[info] [Firebase Plugin] (Core:Project) New user detected, fetching projects
+[debug] [2025-11-14T18:34:03.104Z] Checked if tokens are valid: true, expires at: 1763148842073
+[debug] [2025-11-14T18:34:03.114Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=1000
+[info] [Firebase Plugin] Starting Data Connect toolkit (version 2.15.0) on port 50001
+[debug] [2025-11-14T18:34:11.833Z] I1114 18:34:11.698997     890 control.go:94] [/emulator/studio-v0 0d6b] UpdateResources(): done
+Main schema: sources: schema/schema.gql [3721B] 
+Connector "default": sources: connector/mutations.gql [3182B] connector/queries.gql [2742B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1114 18:34:11.698997     890 control.go:94] [/emulator/studio-v0 0d6b] UpdateResources(): done\nMain schema: sources: schema/schema.gql [3721B] \nConnector \"default\": sources: connector/mutations.gql [3182B] connector/queries.gql [2742B] \n"}}
+[debug] [2025-11-14T18:34:11.836Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"dataconnect"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2025-11-14T18:34:11.836Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"dataconnect"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2025-11-14T18:34:11.837Z] Starting Data Connect Emulator with command {"binary":"/home/user/.cache/firebase/emulators/dataconnect-emulator-2.15.0","args":["--logtostderr","-v=2","dev","--listen=localhost:50001","--config_dir=/home/user/studio/dataconnect","--enable_output_schema_extensions=true","--enable_output_generated_sdk=true"],"optionalArgs":["listen","config_dir","enable_output_schema_extensions","enable_output_generated_sdk"],"joinArgs":true,"shell":false,"port":9399} {"metadata":{"emulator":{"name":"dataconnect"},"message":"Starting Data Connect Emulator with command {\"binary\":\"/home/user/.cache/firebase/emulators/dataconnect-emulator-2.15.0\",\"args\":[\"--logtostderr\",\"-v=2\",\"dev\",\"--listen=localhost:50001\",\"--config_dir=/home/user/studio/dataconnect\",\"--enable_output_schema_extensions=true\",\"--enable_output_generated_sdk=true\"],\"optionalArgs\":[\"listen\",\"config_dir\",\"enable_output_schema_extensions\",\"enable_output_generated_sdk\"],\"joinArgs\":true,\"shell\":false,\"port\":9399}"}}
+[info] i  dataconnect: Data Connect Emulator logging to dataconnect-debug.log {"metadata":{"emulator":{"name":"dataconnect"},"message":"Data Connect Emulator logging to dataconnect-debug.log"}}
+[debug] [2025-11-14T18:34:12.028Z] I1114 18:34:11.923953     895 load.go:31] Reloading schema and connectors...
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1114 18:34:11.923953     895 load.go:31] Reloading schema and connectors...\n"}}
+[debug] [2025-11-14T18:34:12.664Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2025-11-14T18:34:12.668Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[debug] [2025-11-14T18:34:12.670Z] I1114 18:34:12.598008     895 control.go:94] [/emulator/studio-v0 b175] UpdateResources(): done
+Main schema: sources: schema/schema.gql [3721B] 
+Connector "default": sources: connector/mutations.gql [3182B] connector/queries.gql [2742B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1114 18:34:12.598008     895 control.go:94] [/emulator/studio-v0 b175] UpdateResources(): done\nMain schema: sources: schema/schema.gql [3721B] \nConnector \"default\": sources: connector/mutations.gql [3182B] connector/queries.gql [2742B] \n"}}
+[debug] [2025-11-14T18:34:13.045Z] W1114 18:34:13.045518     895 parser.go:185] Type eq_expr not found in full typeMap, possibly a CEL expression type
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"W1114 18:34:13.045518     895 parser.go:185] Type eq_expr not found in full typeMap, possibly a CEL expression type\n"}}
+[debug] [2025-11-14T18:34:13.055Z] W1114 18:34:13.046730     895 parser.go:185] Type ne_expr not found in full typeMap, possibly a CEL expression type
+W1114 18:34:13.046760     895 parser.go:185] Type gt_expr not found in full typeMap, possibly a CEL expression type
+W1114 18:34:13.046768     895 parser.go:185] Type ge_expr not found in full typeMap, possibly a CEL expression type
+W1114 18:34:13.046776     895 parser.go:185] Type lt_expr not found in full typeMap, possibly a CEL expression type
+W1114 18:34:13.046783     895 parser.go:185] Type le_expr not found in full typeMap, possibly a CEL expression type
+W1114 18:34:13.046894     895 parser.go:185] Type eq_expr not found in full typeMap, possibly a CEL expression type
+W1114 18:34:13.046906     895 parser.go:185] Type ne_expr not found in full typeMap, possibly a CEL expression type
+W1114 18:34:13.046914     895 parser.go:185] Type gt_expr not found in full typeMap, possibly a CEL expression type
+W1114 18:34:13.046923     895 parser.go:185] Type ge_expr not found in full typeMap, possibly a CEL expression type
+W1114 18:34:13.046932     895 parser.go:185] Type lt_expr not found in full typeMap, possibly a CEL expression type
+W1114 18:34:13.046943     895 parser.go:185] Type le_expr not found in full typeMap, possibly a CEL expression type
+W1114 18:34:13.047052     895 parser.go:185] Type eq_expr not found in full typeMap, possibly a CEL expression type
+W1114 18:34:13.047065     895 parser.go:185] Type ne_expr not found in full typeMap, possibly a CEL expression type
+W1114 18:34:13.047074     895 parser.go:185] Type gt_expr not found in full typeMap, possibly a CEL expression type
+W1114 18:34:13.047081     895 parser.go:185] Type ge_expr not found in full typeMap, possibly a CEL expression type
+W1114 18:34:13.047087     895 parser.go:185] Type lt_expr not found in full typeMap, possibly a CEL expression type
+W1114 18:34:13.047096     895 parser.go:185] Type le_expr not found in full typeMap, possibly a CEL expression type
+W1114 18:34:13.047240     895 parser.go:185] Type includes_expr not found in full typeMap, possibly a CEL expression type
+W1114 18:34:13.047252     895 parser.go:185] Type excludes_expr not found in full typeMap, possibly a CEL expression type
+W1114 18:34:13.047340     895 parser.go:185] Type includes_expr not found in full typeMap, possibly a CEL expression type
+W1114 18:34:13.047352     895 parser.go:185] Type excludes_expr not found in full typeMap, possibly a CEL expression type
+W1114 18:34:13.047441     895 parser.go:185] Type includes_expr not found in full typeMap, possibly a CEL expression type
+W1114 18:34:13.047449     895 parser.go:185] Type excludes_expr not found in full typeMap, possibly a CEL expression type
+W1114 18:34:13.047475     895 parser.go:185] Type eq_expr not found in full typeMap, possibly a CEL expression type
+W1114 18:34:13.047483     895 parser.go:185] Type ne_expr not found in full typeMap, possibly a CEL expression type
+W1114 18:34:13.047491     895 parser.go:185] Type gt_expr not found in full typeMap, possibly a CEL expression type
+W1114 18:34:13.047500     895 parser.go:185] Type ge_expr not found in full typeMap, possibly a CEL expression type
+W1114 18:34:13.047511     895 parser.go:185] Type lt_expr not found in full typeMap, possibly a CEL expression type
+W1114 18:34:13.047520     895 parser.go:185] Type le_expr not found in full typeMap, possibly a CEL expression type
+W1114 18:34:13.047681     895 parser.go:185] Type includes_expr not found in full typeMap, possibly a CEL expression type
+W1114 18:34:13.047700     895 parser.go:185] Type excludes_expr not found in full typeMap, possibly a CEL expression type
+I1114 18:34:13.048332     895 codegen.go:82] [connector "default" javascriptSdk] Generating sources into "/home/user/studio/dataconnect-generated/js/default-connector"
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"W1114 18:34:13.046730     895 parser.go:185] Type ne_expr not found in full typeMap, possibly a CEL expression type\nW1114 18:34:13.046760     895 parser.go:185] Type gt_expr not found in full typeMap, possibly a CEL expression type\nW1114 18:34:13.046768     895 parser.go:185] Type ge_expr not found in full typeMap, possibly a CEL expression type\nW1114 18:34:13.046776     895 parser.go:185] Type lt_expr not found in full typeMap, possibly a CEL expression type\nW1114 18:34:13.046783     895 parser.go:185] Type le_expr not found in full typeMap, possibly a CEL expression type\nW1114 18:34:13.046894     895 parser.go:185] Type eq_expr not found in full typeMap, possibly a CEL expression type\nW1114 18:34:13.046906     895 parser.go:185] Type ne_expr not found in full typeMap, possibly a CEL expression type\nW1114 18:34:13.046914     895 parser.go:185] Type gt_expr not found in full typeMap, possibly a CEL expression type\nW1114 18:34:13.046923     895 parser.go:185] Type ge_expr not found in full typeMap, possibly a CEL expression type\nW1114 18:34:13.046932     895 parser.go:185] Type lt_expr not found in full typeMap, possibly a CEL expression type\nW1114 18:34:13.046943     895 parser.go:185] Type le_expr not found in full typeMap, possibly a CEL expression type\nW1114 18:34:13.047052     895 parser.go:185] Type eq_expr not found in full typeMap, possibly a CEL expression type\nW1114 18:34:13.047065     895 parser.go:185] Type ne_expr not found in full typeMap, possibly a CEL expression type\nW1114 18:34:13.047074     895 parser.go:185] Type gt_expr not found in full typeMap, possibly a CEL expression type\nW1114 18:34:13.047081     895 parser.go:185] Type ge_expr not found in full typeMap, possibly a CEL expression type\nW1114 18:34:13.047087     895 parser.go:185] Type lt_expr not found in full typeMap, possibly a CEL expression type\nW1114 18:34:13.047096     895 parser.go:185] Type le_expr not found in full typeMap, possibly a CEL expression type\nW1114 18:34:13.047240     895 parser.go:185] Type includes_expr not found in full typeMap, possibly a CEL expression type\nW1114 18:34:13.047252     895 parser.go:185] Type excludes_expr not found in full typeMap, possibly a CEL expression type\nW1114 18:34:13.047340     895 parser.go:185] Type includes_expr not found in full typeMap, possibly a CEL expression type\nW1114 18:34:13.047352     895 parser.go:185] Type excludes_expr not found in full typeMap, possibly a CEL expression type\nW1114 18:34:13.047441     895 parser.go:185] Type includes_expr not found in full typeMap, possibly a CEL expression type\nW1114 18:34:13.047449     895 parser.go:185] Type excludes_expr not found in full typeMap, possibly a CEL expression type\nW1114 18:34:13.047475     895 parser.go:185] Type eq_expr not found in full typeMap, possibly a CEL expression type\nW1114 18:34:13.047483     895 parser.go:185] Type ne_expr not found in full typeMap, possibly a CEL expression type\nW1114 18:34:13.047491     895 parser.go:185] Type gt_expr not found in full typeMap, possibly a CEL expression type\nW1114 18:34:13.047500     895 parser.go:185] Type ge_expr not found in full typeMap, possibly a CEL expression type\nW1114 18:34:13.047511     895 parser.go:185] Type lt_expr not found in full typeMap, possibly a CEL expression type\nW1114 18:34:13.047520     895 parser.go:185] Type le_expr not found in full typeMap, possibly a CEL expression type\nW1114 18:34:13.047681     895 parser.go:185] Type includes_expr not found in full typeMap, possibly a CEL expression type\nW1114 18:34:13.047700     895 parser.go:185] Type excludes_expr not found in full typeMap, possibly a CEL expression type\nI1114 18:34:13.048332     895 codegen.go:82] [connector \"default\" javascriptSdk] Generating sources into \"/home/user/studio/dataconnect-generated/js/default-connector\"\n"}}
+[debug] [2025-11-14T18:34:13.182Z] I1114 18:34:13.182225     895 collector.go:107] schema extensions wrote into "/home/user/studio/dataconnect/.dataconnect/schema"
+Generated sources: main/input.gql [121564B] main/relation.gql [50205B] main/query.gql [15655B] prelude.gql [73219B] main/mutation.gql [41655B] main/implicit.gql [3267B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1114 18:34:13.182225     895 collector.go:107] schema extensions wrote into \"/home/user/studio/dataconnect/.dataconnect/schema\"\nGenerated sources: main/input.gql [121564B] main/relation.gql [50205B] main/query.gql [15655B] prelude.gql [73219B] main/mutation.gql [41655B] main/implicit.gql [3267B] \n"}}
+[debug] [2025-11-14T18:34:13.292Z] I1114 18:34:13.292147     895 collector.go:107] connector "default" javascriptSdk wrote into "/home/user/studio/dataconnect-generated/js/default-connector"
+Generated sources: README.md [116341B] react/index.d.ts [12119B] react/esm/package.json [17B] react/index.cjs.js [9597B] react/esm/index.esm.js [9027B] react/README.md [119856B] .guides/setup.md [1690B] index.d.ts [24807B] esm/index.esm.js [10374B] index.cjs.js [12004B] package.json [871B] react/package.json [468B] .guides/usage.md [4620B] esm/package.json [17B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1114 18:34:13.292147     895 collector.go:107] connector \"default\" javascriptSdk wrote into \"/home/user/studio/dataconnect-generated/js/default-connector\"\nGenerated sources: README.md [116341B] react/index.d.ts [12119B] react/esm/package.json [17B] react/index.cjs.js [9597B] react/esm/index.esm.js [9027B] react/README.md [119856B] .guides/setup.md [1690B] index.d.ts [24807B] esm/index.esm.js [10374B] index.cjs.js [12004B] package.json [871B] react/package.json [468B] .guides/usage.md [4620B] esm/package.json [17B] \n"}}
+[debug] [2025-11-14T18:34:13.590Z] I1114 18:34:13.545162     895 installsdk.go:55] Package @firebasegen/default-connector is already installed. Skipping installation
+I1114 18:34:13.545219     895 load.go:109] Finished reloading
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1114 18:34:13.545162     895 installsdk.go:55] Package @firebasegen/default-connector is already installed. Skipping installation\nI1114 18:34:13.545219     895 load.go:109] Finished reloading\n"}}
+[debug] [2025-11-14T18:34:13.624Z] I1114 18:34:13.623474     895 dev.go:102] Listening on address (HTTP + gRPC): 127.0.0.1:50001
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1114 18:34:13.623474     895 dev.go:102] Listening on address (HTTP + gRPC): 127.0.0.1:50001\n"}}
+[debug] [2025-11-17T20:14:32.944Z] [Firebase Plugin] Activating Firebase extension.
+[debug] [2025-11-17T20:15:32.453Z] [Firebase Plugin] requireAuthWrapper
+[debug] [2025-11-17T20:15:32.456Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/userinfo.email"]
+[debug] [2025-11-17T20:15:32.458Z] > authorizing via signed-in user (lumacx@gmail.com)
+[debug] [2025-11-17T20:15:32.467Z] Checked if tokens are valid: false, expires at: 1763148842073
+[debug] [2025-11-17T20:15:32.468Z] Checked if tokens are valid: false, expires at: 1763148842073
+[debug] [2025-11-17T20:15:32.470Z] > refreshing access token with scopes: []
+[debug] [2025-11-17T20:15:32.475Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2025-11-17T20:15:32.476Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-11-17T20:15:32.578Z] [Firebase Plugin] VSCode notification server listening on port 40001
+[debug] [2025-11-17T20:15:34.003Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2025-11-17T20:15:34.006Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-11-17T20:15:34.051Z] [Firebase Plugin] User found:  lumacx@gmail.com
+[info] [Firebase Plugin] (Core:Project) New user detected, fetching projects
+[debug] [2025-11-17T20:15:34.062Z] Checked if tokens are valid: true, expires at: 1763414133007
+[debug] [2025-11-17T20:15:34.064Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=1000
+[debug] [2025-11-17T20:15:35.746Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2025-11-17T20:15:35.748Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[info] [Firebase Plugin] Starting Data Connect toolkit (version 2.17.0) on port 50001
+[info] i  dataconnect: downloading dataconnect-emulator-2.17.0... {"metadata":{"emulator":{"name":"dataconnect"},"message":"downloading dataconnect-emulator-2.17.0..."}}
+[debug] [2025-11-17T20:15:38.224Z] >>> [apiv2][query] GET https://storage.googleapis.com/firemat-preview-drop/emulator/dataconnect-emulator-linux-amd64-v2.17.0 
+[debug] [2025-11-17T20:15:38.830Z] <<< [apiv2][status] GET https://storage.googleapis.com/firemat-preview-drop/emulator/dataconnect-emulator-linux-amd64-v2.17.0 200
+[debug] [2025-11-17T20:15:38.831Z] <<< [apiv2][body] GET https://storage.googleapis.com/firemat-preview-drop/emulator/dataconnect-emulator-linux-amd64-v2.17.0 [stream]
+[info] i  dataconnect: Removing outdated emulator files: dataconnect-emulator-2.15.0 {"metadata":{"emulator":{"name":"dataconnect"},"message":"Removing outdated emulator files: dataconnect-emulator-2.15.0"}}
+[debug] [2025-11-17T20:15:58.365Z] I1117 20:15:58.135472     644 control.go:94] [/emulator/studio-v0 0b5b] UpdateResources(): done
+Main schema: sources: schema/schema.gql [3721B] 
+Connector "default": sources: connector/mutations.gql [3182B] connector/queries.gql [2742B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1117 20:15:58.135472     644 control.go:94] [/emulator/studio-v0 0b5b] UpdateResources(): done\nMain schema: sources: schema/schema.gql [3721B] \nConnector \"default\": sources: connector/mutations.gql [3182B] connector/queries.gql [2742B] \n"}}
+[debug] [2025-11-17T20:15:58.368Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"dataconnect"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2025-11-17T20:15:58.369Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"dataconnect"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2025-11-17T20:15:58.369Z] Starting Data Connect Emulator with command {"binary":"/home/user/.cache/firebase/emulators/dataconnect-emulator-2.17.0","args":["--logtostderr","-v=2","dev","--listen=localhost:50001","--config_dir=/home/user/studio/dataconnect","--enable_output_schema_extensions=true","--enable_output_generated_sdk=true"],"optionalArgs":["listen","config_dir","enable_output_schema_extensions","enable_output_generated_sdk"],"joinArgs":true,"shell":false,"port":9399} {"metadata":{"emulator":{"name":"dataconnect"},"message":"Starting Data Connect Emulator with command {\"binary\":\"/home/user/.cache/firebase/emulators/dataconnect-emulator-2.17.0\",\"args\":[\"--logtostderr\",\"-v=2\",\"dev\",\"--listen=localhost:50001\",\"--config_dir=/home/user/studio/dataconnect\",\"--enable_output_schema_extensions=true\",\"--enable_output_generated_sdk=true\"],\"optionalArgs\":[\"listen\",\"config_dir\",\"enable_output_schema_extensions\",\"enable_output_generated_sdk\"],\"joinArgs\":true,\"shell\":false,\"port\":9399}"}}
+[info] i  dataconnect: Data Connect Emulator logging to dataconnect-debug.log {"metadata":{"emulator":{"name":"dataconnect"},"message":"Data Connect Emulator logging to dataconnect-debug.log"}}
+[debug] [2025-11-17T20:15:58.461Z] I1117 20:15:58.458966     650 load.go:31] Reloading schema and connectors...
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1117 20:15:58.458966     650 load.go:31] Reloading schema and connectors...\n"}}
+[debug] [2025-11-17T20:15:58.946Z] I1117 20:15:58.943538     650 control.go:94] [/emulator/studio-v0 95df] UpdateResources(): done
+Main schema: sources: schema/schema.gql [3721B] 
+Connector "default": sources: connector/mutations.gql [3182B] connector/queries.gql [2742B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1117 20:15:58.943538     650 control.go:94] [/emulator/studio-v0 95df] UpdateResources(): done\nMain schema: sources: schema/schema.gql [3721B] \nConnector \"default\": sources: connector/mutations.gql [3182B] connector/queries.gql [2742B] \n"}}
+[debug] [2025-11-17T20:15:59.537Z] I1117 20:15:59.534498     650 codegen.go:80] [connector "default" javascriptSdk] Generating sources into "/home/user/studio/dataconnect-generated/js/default-connector"
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1117 20:15:59.534498     650 codegen.go:80] [connector \"default\" javascriptSdk] Generating sources into \"/home/user/studio/dataconnect-generated/js/default-connector\"\n"}}
+[debug] [2025-11-17T20:15:59.660Z] I1117 20:15:59.658708     650 collector.go:107] schema extensions wrote into "/home/user/studio/dataconnect/.dataconnect/schema"
+Generated sources: prelude.gql [73219B] main/mutation.gql [41655B] main/implicit.gql [3267B] main/input.gql [122168B] main/relation.gql [51784B] main/query.gql [15655B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1117 20:15:59.658708     650 collector.go:107] schema extensions wrote into \"/home/user/studio/dataconnect/.dataconnect/schema\"\nGenerated sources: prelude.gql [73219B] main/mutation.gql [41655B] main/implicit.gql [3267B] main/input.gql [122168B] main/relation.gql [51784B] main/query.gql [15655B] \n"}}
+[debug] [2025-11-17T20:15:59.669Z] I1117 20:15:59.668427     650 collector.go:107] connector "default" javascriptSdk wrote into "/home/user/studio/dataconnect-generated/js/default-connector"
+Generated sources: index.cjs.js [12004B] react/index.cjs.js [9597B] react/esm/index.esm.js [9027B] .guides/setup.md [1690B] esm/index.esm.js [10374B] react/index.d.ts [12119B] react/README.md [119856B] .guides/config.json [236B] index.d.ts [24807B] esm/package.json [17B] README.md [116341B] react/package.json [468B] package.json [871B] react/esm/package.json [17B] .guides/usage.md [4176B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1117 20:15:59.668427     650 collector.go:107] connector \"default\" javascriptSdk wrote into \"/home/user/studio/dataconnect-generated/js/default-connector\"\nGenerated sources: index.cjs.js [12004B] react/index.cjs.js [9597B] react/esm/index.esm.js [9027B] .guides/setup.md [1690B] esm/index.esm.js [10374B] react/index.d.ts [12119B] react/README.md [119856B] .guides/config.json [236B] index.d.ts [24807B] esm/package.json [17B] README.md [116341B] react/package.json [468B] package.json [871B] react/esm/package.json [17B] .guides/usage.md [4176B] \n"}}
+[debug] [2025-11-17T20:15:59.708Z] I1117 20:15:59.706775     650 installsdk.go:55] Package @firebasegen/default-connector is already installed. Skipping installation
+I1117 20:15:59.706899     650 load.go:109] Finished reloading
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1117 20:15:59.706775     650 installsdk.go:55] Package @firebasegen/default-connector is already installed. Skipping installation\nI1117 20:15:59.706899     650 load.go:109] Finished reloading\n"}}
+[debug] [2025-11-17T20:15:59.740Z] I1117 20:15:59.739387     650 dev.go:105] Listening on address (HTTP + gRPC): 127.0.0.1:50001
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1117 20:15:59.739387     650 dev.go:105] Listening on address (HTTP + gRPC): 127.0.0.1:50001\n"}}
+[debug] [2025-11-17T20:16:00.011Z] I1117 20:16:00.003646     650 engine.go:171] [/emulator/studio-v0 95df] ExecuteGraphqlRead IntrospectionQuery: succeeded. 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1117 20:16:00.003646     650 engine.go:171] [/emulator/studio-v0 95df] ExecuteGraphqlRead IntrospectionQuery: succeeded. \n"}}
+[debug] [2025-11-20T18:26:12.685Z] [Firebase Plugin] Activating Firebase extension.
+[debug] [2025-11-20T18:26:47.710Z] [Firebase Plugin] requireAuthWrapper
+[debug] [2025-11-20T18:26:47.717Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/userinfo.email"]
+[debug] [2025-11-20T18:26:47.718Z] > authorizing via signed-in user (lumacx@gmail.com)
+[debug] [2025-11-20T18:26:47.736Z] Checked if tokens are valid: false, expires at: 1763414133007
+[debug] [2025-11-20T18:26:47.738Z] Checked if tokens are valid: false, expires at: 1763414133007
+[debug] [2025-11-20T18:26:47.741Z] > refreshing access token with scopes: []
+[debug] [2025-11-20T18:26:47.751Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2025-11-20T18:26:47.751Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-11-20T18:26:48.003Z] [Firebase Plugin] VSCode notification server listening on port 40001
+[debug] [2025-11-20T18:26:48.278Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2025-11-20T18:26:48.279Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-11-20T18:26:48.307Z] [Firebase Plugin] User found:  lumacx@gmail.com
+[info] [Firebase Plugin] (Core:Project) New user detected, fetching projects
+[debug] [2025-11-20T18:26:48.320Z] Checked if tokens are valid: true, expires at: 1763666807280
+[debug] [2025-11-20T18:26:48.321Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=1000
+[debug] [2025-11-20T18:26:48.964Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2025-11-20T18:26:48.967Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[info] [Firebase Plugin] Starting Data Connect toolkit (version 2.17.0) on port 50001
+[debug] [2025-11-20T18:26:56.071Z] I1120 18:26:55.748101     685 control.go:94] [/emulator/studio-v0 42a9] UpdateResources(): done
+Main schema: sources: schema/schema.gql [3721B] 
+Connector "default": sources: connector/mutations.gql [3182B] connector/queries.gql [2742B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1120 18:26:55.748101     685 control.go:94] [/emulator/studio-v0 42a9] UpdateResources(): done\nMain schema: sources: schema/schema.gql [3721B] \nConnector \"default\": sources: connector/mutations.gql [3182B] connector/queries.gql [2742B] \n"}}
+[debug] [2025-11-20T18:26:56.076Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"dataconnect"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2025-11-20T18:26:56.081Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"dataconnect"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2025-11-20T18:26:56.081Z] Starting Data Connect Emulator with command {"binary":"/home/user/.cache/firebase/emulators/dataconnect-emulator-2.17.0","args":["--logtostderr","-v=2","dev","--listen=localhost:50001","--config_dir=/home/user/studio/dataconnect","--enable_output_schema_extensions=true","--enable_output_generated_sdk=true"],"optionalArgs":["listen","config_dir","enable_output_schema_extensions","enable_output_generated_sdk"],"joinArgs":true,"shell":false,"port":9399} {"metadata":{"emulator":{"name":"dataconnect"},"message":"Starting Data Connect Emulator with command {\"binary\":\"/home/user/.cache/firebase/emulators/dataconnect-emulator-2.17.0\",\"args\":[\"--logtostderr\",\"-v=2\",\"dev\",\"--listen=localhost:50001\",\"--config_dir=/home/user/studio/dataconnect\",\"--enable_output_schema_extensions=true\",\"--enable_output_generated_sdk=true\"],\"optionalArgs\":[\"listen\",\"config_dir\",\"enable_output_schema_extensions\",\"enable_output_generated_sdk\"],\"joinArgs\":true,\"shell\":false,\"port\":9399}"}}
+[info] i  dataconnect: Data Connect Emulator logging to dataconnect-debug.log {"metadata":{"emulator":{"name":"dataconnect"},"message":"Data Connect Emulator logging to dataconnect-debug.log"}}
+[debug] [2025-11-20T18:26:56.306Z] I1120 18:26:56.211298     690 load.go:31] Reloading schema and connectors...
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1120 18:26:56.211298     690 load.go:31] Reloading schema and connectors...\n"}}
+[debug] [2025-11-20T18:26:56.892Z] I1120 18:26:56.859449     690 control.go:94] [/emulator/studio-v0 1be3] UpdateResources(): done
+Main schema: sources: schema/schema.gql [3721B] 
+Connector "default": sources: connector/mutations.gql [3182B] connector/queries.gql [2742B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1120 18:26:56.859449     690 control.go:94] [/emulator/studio-v0 1be3] UpdateResources(): done\nMain schema: sources: schema/schema.gql [3721B] \nConnector \"default\": sources: connector/mutations.gql [3182B] connector/queries.gql [2742B] \n"}}
+[debug] [2025-11-20T18:26:57.923Z] I1120 18:26:57.920352     690 codegen.go:80] [connector "default" javascriptSdk] Generating sources into "/home/user/studio/dataconnect-generated/js/default-connector"
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1120 18:26:57.920352     690 codegen.go:80] [connector \"default\" javascriptSdk] Generating sources into \"/home/user/studio/dataconnect-generated/js/default-connector\"\n"}}
+[debug] [2025-11-20T18:26:58.531Z] I1120 18:26:58.232603     690 collector.go:107] schema extensions wrote into "/home/user/studio/dataconnect/.dataconnect/schema"
+Generated sources: main/implicit.gql [3267B] main/input.gql [122168B] main/relation.gql [51784B] prelude.gql [73219B] main/query.gql [15655B] main/mutation.gql [41655B] 
+I1120 18:26:58.335175     690 collector.go:107] connector "default" javascriptSdk wrote into "/home/user/studio/dataconnect-generated/js/default-connector"
+Generated sources: package.json [871B] react/index.d.ts [12119B] react/index.cjs.js [9597B] esm/index.esm.js [10374B] esm/package.json [17B] README.md [116341B] react/esm/index.esm.js [9027B] react/README.md [119856B] index.cjs.js [12004B] .guides/usage.md [4620B] .guides/setup.md [1690B] index.d.ts [24807B] react/package.json [468B] react/esm/package.json [17B] .guides/config.json [236B] 
+I1120 18:26:58.348270     690 installsdk.go:55] Package @firebasegen/default-connector is already installed. Skipping installation
+I1120 18:26:58.348349     690 load.go:109] Finished reloading
+I1120 18:26:58.391093     690 dev.go:105] Listening on address (HTTP + gRPC): 127.0.0.1:50001
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1120 18:26:58.232603     690 collector.go:107] schema extensions wrote into \"/home/user/studio/dataconnect/.dataconnect/schema\"\nGenerated sources: main/implicit.gql [3267B] main/input.gql [122168B] main/relation.gql [51784B] prelude.gql [73219B] main/query.gql [15655B] main/mutation.gql [41655B] \nI1120 18:26:58.335175     690 collector.go:107] connector \"default\" javascriptSdk wrote into \"/home/user/studio/dataconnect-generated/js/default-connector\"\nGenerated sources: package.json [871B] react/index.d.ts [12119B] react/index.cjs.js [9597B] esm/index.esm.js [10374B] esm/package.json [17B] README.md [116341B] react/esm/index.esm.js [9027B] react/README.md [119856B] index.cjs.js [12004B] .guides/usage.md [4620B] .guides/setup.md [1690B] index.d.ts [24807B] react/package.json [468B] react/esm/package.json [17B] .guides/config.json [236B] \nI1120 18:26:58.348270     690 installsdk.go:55] Package @firebasegen/default-connector is already installed. Skipping installation\nI1120 18:26:58.348349     690 load.go:109] Finished reloading\nI1120 18:26:58.391093     690 dev.go:105] Listening on address (HTTP + gRPC): 127.0.0.1:50001\n"}}
+[debug] [2025-11-20T18:26:59.529Z] I1120 18:26:59.465376     690 engine.go:171] [/emulator/studio-v0 1be3] ExecuteGraphqlRead IntrospectionQuery: succeeded. 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1120 18:26:59.465376     690 engine.go:171] [/emulator/studio-v0 1be3] ExecuteGraphqlRead IntrospectionQuery: succeeded. \n"}}
+[debug] [2025-11-20T19:19:07.511Z] [Firebase Plugin] Activating Firebase extension.
+[debug] [2025-11-20T19:19:22.581Z] [Firebase Plugin] requireAuthWrapper
+[debug] [2025-11-20T19:19:22.586Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/userinfo.email"]
+[debug] [2025-11-20T19:19:22.589Z] > authorizing via signed-in user (lumacx@gmail.com)
+[debug] [2025-11-20T19:19:22.604Z] Checked if tokens are valid: false, expires at: 1763666807280
+[debug] [2025-11-20T19:19:22.605Z] Checked if tokens are valid: false, expires at: 1763666807280
+[debug] [2025-11-20T19:19:22.606Z] > refreshing access token with scopes: []
+[debug] [2025-11-20T19:19:22.618Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2025-11-20T19:19:22.619Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-11-20T19:19:22.849Z] [Firebase Plugin] VSCode notification server listening on port 40001
+[debug] [2025-11-20T19:19:23.042Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2025-11-20T19:19:23.043Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-11-20T19:19:23.448Z] [Firebase Plugin] User found:  lumacx@gmail.com
+[info] [Firebase Plugin] (Core:Project) New user detected, fetching projects
+[debug] [2025-11-20T19:19:23.454Z] Checked if tokens are valid: true, expires at: 1763669962044
+[debug] [2025-11-20T19:19:23.459Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=1000
+[info] [Firebase Plugin] Starting Data Connect toolkit (version 2.17.0) on port 50001
+[debug] [2025-11-20T19:19:31.900Z] I1120 19:19:31.758093     609 control.go:94] [/emulator/studio-v0 15cf] UpdateResources(): done
+Main schema: sources: schema/schema.gql [3721B] 
+Connector "default": sources: connector/mutations.gql [3182B] connector/queries.gql [2742B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1120 19:19:31.758093     609 control.go:94] [/emulator/studio-v0 15cf] UpdateResources(): done\nMain schema: sources: schema/schema.gql [3721B] \nConnector \"default\": sources: connector/mutations.gql [3182B] connector/queries.gql [2742B] \n"}}
+[debug] [2025-11-20T19:19:31.902Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"dataconnect"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2025-11-20T19:19:31.905Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"dataconnect"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2025-11-20T19:19:31.906Z] Starting Data Connect Emulator with command {"binary":"/home/user/.cache/firebase/emulators/dataconnect-emulator-2.17.0","args":["--logtostderr","-v=2","dev","--listen=localhost:50001","--config_dir=/home/user/studio/dataconnect","--enable_output_schema_extensions=true","--enable_output_generated_sdk=true"],"optionalArgs":["listen","config_dir","enable_output_schema_extensions","enable_output_generated_sdk"],"joinArgs":true,"shell":false,"port":9399} {"metadata":{"emulator":{"name":"dataconnect"},"message":"Starting Data Connect Emulator with command {\"binary\":\"/home/user/.cache/firebase/emulators/dataconnect-emulator-2.17.0\",\"args\":[\"--logtostderr\",\"-v=2\",\"dev\",\"--listen=localhost:50001\",\"--config_dir=/home/user/studio/dataconnect\",\"--enable_output_schema_extensions=true\",\"--enable_output_generated_sdk=true\"],\"optionalArgs\":[\"listen\",\"config_dir\",\"enable_output_schema_extensions\",\"enable_output_generated_sdk\"],\"joinArgs\":true,\"shell\":false,\"port\":9399}"}}
+[info] i  dataconnect: Data Connect Emulator logging to dataconnect-debug.log {"metadata":{"emulator":{"name":"dataconnect"},"message":"Data Connect Emulator logging to dataconnect-debug.log"}}
+[debug] [2025-11-20T19:19:32.278Z] I1120 19:19:31.977964     615 load.go:31] Reloading schema and connectors...
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1120 19:19:31.977964     615 load.go:31] Reloading schema and connectors...\n"}}
+[debug] [2025-11-20T19:19:32.963Z] I1120 19:19:32.543370     615 control.go:94] [/emulator/studio-v0 fa5d] UpdateResources(): done
+Main schema: sources: schema/schema.gql [3721B] 
+Connector "default": sources: connector/mutations.gql [3182B] connector/queries.gql [2742B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1120 19:19:32.543370     615 control.go:94] [/emulator/studio-v0 fa5d] UpdateResources(): done\nMain schema: sources: schema/schema.gql [3721B] \nConnector \"default\": sources: connector/mutations.gql [3182B] connector/queries.gql [2742B] \n"}}
+[debug] [2025-11-20T19:19:33.076Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2025-11-20T19:19:33.082Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[debug] [2025-11-20T19:19:33.266Z] I1120 19:19:33.266539     615 codegen.go:80] [connector "default" javascriptSdk] Generating sources into "/home/user/studio/dataconnect-generated/js/default-connector"
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1120 19:19:33.266539     615 codegen.go:80] [connector \"default\" javascriptSdk] Generating sources into \"/home/user/studio/dataconnect-generated/js/default-connector\"\n"}}
+[debug] [2025-11-20T19:19:36.947Z] I1120 19:19:36.888802     615 collector.go:107] schema extensions wrote into "/home/user/studio/dataconnect/.dataconnect/schema"
+Generated sources: prelude.gql [73219B] main/implicit.gql [3267B] main/input.gql [122168B] main/relation.gql [51784B] main/query.gql [15655B] main/mutation.gql [41655B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1120 19:19:36.888802     615 collector.go:107] schema extensions wrote into \"/home/user/studio/dataconnect/.dataconnect/schema\"\nGenerated sources: prelude.gql [73219B] main/implicit.gql [3267B] main/input.gql [122168B] main/relation.gql [51784B] main/query.gql [15655B] main/mutation.gql [41655B] \n"}}
+[debug] [2025-11-20T19:19:37.012Z] I1120 19:19:36.999802     615 collector.go:107] connector "default" javascriptSdk wrote into "/home/user/studio/dataconnect-generated/js/default-connector"
+Generated sources: index.d.ts [24807B] .guides/setup.md [1690B] esm/index.esm.js [10374B] index.cjs.js [12004B] react/index.d.ts [12119B] react/esm/package.json [17B] react/index.cjs.js [9597B] react/esm/index.esm.js [9027B] esm/package.json [17B] README.md [116341B] react/package.json [468B] react/README.md [119856B] package.json [871B] .guides/usage.md [4620B] .guides/config.json [236B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1120 19:19:36.999802     615 collector.go:107] connector \"default\" javascriptSdk wrote into \"/home/user/studio/dataconnect-generated/js/default-connector\"\nGenerated sources: index.d.ts [24807B] .guides/setup.md [1690B] esm/index.esm.js [10374B] index.cjs.js [12004B] react/index.d.ts [12119B] react/esm/package.json [17B] react/index.cjs.js [9597B] react/esm/index.esm.js [9027B] esm/package.json [17B] README.md [116341B] react/package.json [468B] react/README.md [119856B] package.json [871B] .guides/usage.md [4620B] .guides/config.json [236B] \n"}}
+[debug] [2025-11-20T19:19:37.121Z] I1120 19:19:37.088026     615 installsdk.go:55] Package @firebasegen/default-connector is already installed. Skipping installation
+I1120 19:19:37.088077     615 load.go:109] Finished reloading
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1120 19:19:37.088026     615 installsdk.go:55] Package @firebasegen/default-connector is already installed. Skipping installation\nI1120 19:19:37.088077     615 load.go:109] Finished reloading\n"}}
+[debug] [2025-11-20T19:19:37.270Z] I1120 19:19:37.124594     615 dev.go:105] Listening on address (HTTP + gRPC): 127.0.0.1:50001
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1120 19:19:37.124594     615 dev.go:105] Listening on address (HTTP + gRPC): 127.0.0.1:50001\n"}}
+[debug] [2025-11-20T19:19:37.925Z] I1120 19:19:37.921796     615 engine.go:171] [/emulator/studio-v0 fa5d] ExecuteGraphqlRead IntrospectionQuery: succeeded. 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1120 19:19:37.921796     615 engine.go:171] [/emulator/studio-v0 fa5d] ExecuteGraphqlRead IntrospectionQuery: succeeded. \n"}}
