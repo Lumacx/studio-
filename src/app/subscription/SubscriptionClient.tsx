@@ -142,11 +142,13 @@ function tagLabel(t: (k: string)=>string, tag?: string) {
 function PayButtonsSubscription({
   planId,
   description,
+  userId, // <--- NEW
   onSuccess,
   onMessage,
 }: {
   planId: string;
   description: string;
+  userId: string; // <--- NEW
   onSuccess: (sub: any) => void;
   onMessage: (status: 'idle' | 'success' | 'error' | 'pending', msg: string) => void;
 }) {
@@ -167,7 +169,12 @@ function PayButtonsSubscription({
     <PayPalButtons
       fundingSource="paypal"
       style={{ layout: 'vertical' }}
-      createSubscription={(data, actions) => actions.subscription.create({ plan_id: planId })}
+      createSubscription={(data, actions) => 
+        actions.subscription.create({ 
+          plan_id: planId,
+          custom_id: userId // <--- CRITICAL FIX
+        })
+      }
       onApprove={async (data, actions) => {
         try {
           const getSubId = async (): Promise<string | null> => {
@@ -792,6 +799,7 @@ useEffect(() => {
                       options={options}
                       deferLoading={false}
                     >
+                   // Add userId={user.uid} prop:
                       <PayButtonsSubscription
                         planId={paypalPlanId!}
                         description={formatT(t, 'paypalSubscriptionDescription', {
@@ -799,6 +807,7 @@ useEffect(() => {
                           frequency: t(subscriptionFrequency),
                           ref: refSuffix,
                         })}
+                        userId={user.uid} // <--- NEW
                         onSuccess={(sub) => onApproveSubscription(sub, paypalPlanId)}
                         onMessage={setMsg}
                       />
