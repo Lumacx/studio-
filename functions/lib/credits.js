@@ -481,6 +481,10 @@ exports.processPayPalSubscription = functions
         const snap = await tx.get(userRef);
         if (!snap.exists)
             throw new functions.https.HttpsError('not-found', 'User not found.');
+        // START NEW CODE
+        // Create lookup doc for webhook
+        tx.set(firebaseAdmin_1.db.collection('paypalSubscriptions').doc(subscriptionId), { userId: uid, planId: paypalPlan, status, updatedAt: firebaseAdmin_1.FieldValue.serverTimestamp() }, { merge: true });
+        // END NEW CODE
         tx.set(userRef, {
             paypalSubscriptionId: subscriptionId,
             subscriptionStatus: activeNow ? 'paid' : 'pending',
@@ -588,6 +592,9 @@ exports.processPayPalSubscriptionHttp = functions
             const snap = await tx.get(userRef);
             if (!snap.exists)
                 throw new functions.https.HttpsError('not-found', 'User not found.');
+            // START NEW CODE
+            tx.set(firebaseAdmin_1.db.collection('paypalSubscriptions').doc(subscriptionId), { userId: uid, planId: paypalPlan, status, updatedAt: firebaseAdmin_1.FieldValue.serverTimestamp() }, { merge: true });
+            // END NEW CODE
             tx.set(userRef, {
                 paypalSubscriptionId: subscriptionId,
                 subscriptionStatus: activeNow ? 'paid' : 'pending',
