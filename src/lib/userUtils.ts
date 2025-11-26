@@ -1,37 +1,49 @@
 // src/lib/userUtils.ts
-import * as dc from '@firebasegen/default-connector';
-import type { GetUserProfileData } from '@firebasegen/default-connector';
+import { db } from '@/lib/firebase';
+import { 
+  doc, 
+  getDoc, 
+  setDoc, 
+  collection, 
+  query, 
+  where, 
+  getDocs,
+  serverTimestamp 
+} from 'firebase/firestore';
 
-// Canonical user profile type from the generated query result
-export type UserProfile = NonNullable<GetUserProfileData['user']>;
-
-/**
- * Small helper that normalizes SDK returns across versions:
- * Some builds return GetUserProfileData directly, others wrap it as { data }.
- */
-function unwrapData<T>(res: T | { data: T }): T {
-  return (res as any)?.data ?? (res as any);
+// Define the shape that matches your Firestore 'users' documents
+export interface UserProfile {
+  id: string;
+  username: string;
+  email: string;
+  displayname: string;
+  avatarUrl?: string | null;
+  role?: string;
+  createdAt?: any;
+  updatedAt?: any;
+  // Add other fields you expect in your Firestore user doc
 }
 
 /**
- * Fetch a user's profile by uid using the generated SDK.
+ * Fetch a user's profile by uid from Firestore.
  */
 export async function getUserProfile(userId: string): Promise<UserProfile | null> {
   try {
-    // NOTE: In your SDK build, dc.getUserProfile is typed as a QueryResult wrapper.
-    // We normalize the return shape with unwrapData.
-    const raw = await (dc as any).getUserProfile({ userId });
-    const data = unwrapData<GetUserProfileData>(raw);
-    return (data?.user ?? null) as UserProfile | null;
+    const docRef = doc(db, 'users', userId);
+    const snap = await getDoc(docRef);
+    
+    if (snap.exists()) {
+      return { id: snap.id, ...snap.data() } as UserProfile;
+    }
+    return null;
   } catch (err) {
-    console.error('DataConnect getUserProfile failed:', err);
+    console.error('Firestore getUserProfile failed:', err);
     return null;
   }
 }
 
 /**
- * Create a user profile, then refetch it to return the canonical shape.
- * The mutation does not accept userId; auth context supplies it.
+ * Create (or overwrite) a user profile in Firestore.
  */
 export async function createUserProfile(profileData: {
   userId: string;
@@ -41,44 +53,48 @@ export async function createUserProfile(profileData: {
   avatarUrl?: string;
 }): Promise<UserProfile> {
   try {
-    await (dc as any).createUserProfile({
-      username: profileData.username,
-      email: profileData.email,
-      displayname: profileData.displayname,
-      avatarUrl: profileData.avatarUrl,
-    });
+    const { userId, ...rest } = profileData;
+    const docRef = doc(db, 'users', userId);
+    
+    // We merge true to avoid wiping existing fields if any (though create usually implies new)
+    const now = serverTimestamp();
+    const newData = {
+      ...rest,
+      createdAt: now,
+      updatedAt: now,
+      role: 'reader' // Default role
+    };
 
-    const newUser = await getUserProfile(profileData.userId);
-    if (!newUser) throw new Error('Failed to fetch user profile after creation.');
-    return newUser;
+    await setDoc(docRef, newData, { merge: true });
+
+    // Return what we just wrote (approximate, since serverTimestamp is pending)
+    return {
+      id: userId,
+      ...newData,
+      avatarUrl: newData.avatarUrl ?? null
+    } as UserProfile;
+
   } catch (err) {
-    console.error('DataConnect createUserProfile failed:', err);
+    console.error('Firestore createUserProfile failed:', err);
     throw err;
   }
 }
 
 /**
- * Username availability check.
- * If you add this query to dataconnect/connector/queries.gql and regenerate:
- *
- *   query CheckUsernameAvailable($username: String!) {
- *     users(where: { username: { eq: $username } }, limit: 1) { id }
- *   }
- *
- * it will be available as dc.checkUsernameAvailable.
- * Until then, we fall back to "true" so the UI can proceed.
+ * Check if a username is available by querying the 'users' collection.
  */
 export async function isUsernameAvailable(username: string): Promise<boolean> {
   try {
-    const maybe = (dc as any).checkUsernameAvailable;
-    if (typeof maybe === 'function') {
-      const raw = await maybe({ username });
-      const data = unwrapData<{ users?: Array<{ id: string }> }>(raw);
-      return (data.users?.length ?? 0) === 0;
-    }
-    return true; // op not generated yet
+    const usersRef = collection(db, 'users');
+    const q = query(usersRef, where('username', '==', username));
+    const snap = await getDocs(q);
+    
+    return snap.empty;
   } catch (err) {
-    console.error('DataConnect isUsernameAvailable failed:', err);
-    return false;
+    console.error('Firestore isUsernameAvailable failed:', err);
+    // Fail safe: assume not available to prevent dupes or assume available?
+    // Usually safer to say FALSE if we can't check, but blocking UI is bad.
+    // Let's return false to be safe.
+    return false; 
   }
 }

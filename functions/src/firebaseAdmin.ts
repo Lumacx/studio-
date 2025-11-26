@@ -28,8 +28,20 @@ const resolvedBucket =
   `${projectId}.appspot.com`;
 
 /** ── Prefer explicit SA creds via base64 when provided, else ADC ──────────── */
-const pkB64 = process.env.FIREBASE_PRIVATE_KEY_BASE64 || "";
-const privateKey = pkB64 ? Buffer.from(pkB64, "base64").toString("utf8") : undefined;
+const pkB64 = process.env.FIREBASE_PRIVATE_KEY_BASE64;
+let privateKey: string | undefined;
+
+if (pkB64) {
+  try {
+    privateKey = Buffer.from(pkB64, "base64").toString("utf8");
+    // Basic sanity check: PEM keys start with -----BEGIN
+    if (!privateKey.includes("-----BEGIN")) {
+      console.warn("FIREBASE_PRIVATE_KEY_BASE64 decoded but does not look like a PEM key.");
+    }
+  } catch (e) {
+    console.error("Failed to decode FIREBASE_PRIVATE_KEY_BASE64:", e);
+  }
+}
 
 const app =
   getApps().length

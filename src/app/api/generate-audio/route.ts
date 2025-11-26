@@ -2,15 +2,10 @@
 import { NextResponse } from 'next/server';
 import { GoogleGenAI } from '@google/genai';
 
-// ❌ remove client imports
- import { storage, db } from '@/lib/firebase';
-// import { ref as sref, uploadString, getDownloadURL } from 'firebase/storage';
-// import { doc as fsDoc, setDoc, serverTimestamp } from 'firebase/firestore';
-
 // ✅ admin-only
-import { getAdminDb, getAdminBucket, FieldValue } from '@/lib/firebaseAdmin';
+import { getAdminDb, getAdminBucket, getAdminApp, FieldValue } from '@/lib/firebaseAdmin';
+import { getAuth } from 'firebase-admin/auth';
 import { v4 as uuidv4 } from 'uuid';
-
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -33,6 +28,39 @@ type Body = {
 
 const DEFAULT_MODEL = 'gemini-2.5-pro-preview-tts' //'gemini-2.5-flash-preview-tts';
 const VOICES = new Set(['Kore', 'Puck', 'Zephyr', 'Achird', 'Leda', 'Sadachbia']);
+
+/* ------------------------- Helper: Billing ------------------------- */
+async function chargeUserForCreation(
+  uid: string, 
+  cost: number, 
+  metadata: { type: string; description?: string }
+) {
+  const db = getAdminDb();
+  const userRef = db.collection('users').doc(uid);
+
+  return await db.runTransaction(async (tx) => {
+    const snap = await tx.get(userRef);
+    if (!snap.exists) throw new Error('User not found.');
+    
+    const current = Number(snap.data()?.credits ?? 0);
+    if (current < cost) {
+      throw new Error(`Insufficient credits. Need ${cost}, have ${current}.`);
+    }
+
+    const newBalance = current - cost;
+    tx.update(userRef, { credits: newBalance, updatedAt: FieldValue.serverTimestamp() });
+    
+    const txRef = userRef.collection('transactions').doc();
+    tx.set(txRef, {
+      type: metadata.type, 
+      creditsDelta: -cost,
+      timestamp: FieldValue.serverTimestamp(),
+      description: metadata.description || `Charged ${cost} credits.`,
+      status: 'confirmed'
+    });
+    return newBalance;
+  });
+}
 
 /* ------------------------- Helpers PCM -> WAV ------------------------- */
 function pcm16ToWav(pcm: Uint8Array, sampleRate = 24000, channels = 1) {
@@ -213,10 +241,46 @@ async function saveAudioToStorageAndIndex(params: {
   return { https, fullPath: path, filename, mime };
 }
 
+/** 
+ * VERIFY AUTH TOKEN 
+ * Extracts Bearer token from headers and verifies via Admin SDK.
+ */
+async function verifyUser(req: Request) {
+  const authHeader = req.headers.get('Authorization') || '';
+  const token = authHeader.replace(/^Bearer\s+/, '');
+  if (!token) return null;
+
+  try {
+    const adminAuth = getAuth(getAdminApp());
+    const decoded = await adminAuth.verifyIdToken(token);
+    return decoded;
+  } catch (err) {
+    console.error('Auth verification failed:', err);
+    return null;
+  }
+}
+
 /* ------------------------------- Handler ------------------------------ */
 export async function POST(req: Request) {
   try {
+    // 🔐 SECURE ENDPOINT: Check Auth
+    const user = await verifyUser(req);
+    if (!user) {
+      return NextResponse.json({ error: 'Unauthorized: Missing or invalid token' }, { status: 401 });
+    }
+
     const body = (await req.json()) as Body;
+
+    // 🔐 VALIDATE OWNERSHIP: Ensure requester matches userId in body (if provided)
+    if (body.userId && body.userId !== user.uid) {
+      return NextResponse.json({ error: 'Unauthorized: User ID mismatch' }, { status: 403 });
+    }
+
+    // Default userId to authenticated user if missing
+    if (!body.userId) {
+      body.userId = user.uid;
+    }
+
     const text = (body.text ?? '').trim();
     if (!text) return NextResponse.json({ error: 'Missing text' }, { status: 400 });
 
@@ -227,6 +291,18 @@ export async function POST(req: Request) {
 
     if (!apiKey) {
       return NextResponse.json({ error: 'Missing GEMINI_API_KEY / GOOGLE_API_KEY' }, { status: 500 });
+    }
+
+    // 💰 CHARGE CREDIT (Atomic Transaction)
+    // Charge 1 credit per TTS generation (adjust logic as needed)
+    try {
+      await chargeUserForCreation(user.uid, 1, { 
+        type: 'tts_generation', 
+        description: 'Generated audio narration' 
+      });
+    } catch (billingErr: any) {
+      console.warn('Billing failed:', billingErr);
+      return NextResponse.json({ error: 'Insufficient credits or billing error.' }, { status: 402 });
     }
 
     const language = (body.language || 'en').trim();

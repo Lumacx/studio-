@@ -2,6 +2,14 @@
 // Pure shared interfaces used by both client and server.
 // No React imports, no runtime code — types only.
 
+import type { Firestore } from 'firebase-admin/firestore';
+import type { Auth } from 'firebase-admin/auth';
+
+export interface GraphQLContext {
+  db: Firestore;
+  auth: Auth;
+}
+
 /* =========================
    Core enums / aliases
    ========================= */
@@ -16,7 +24,7 @@
      id: string;
      username?: string;
      email?: string;
-     avatarUrl?: string;
+     avatarUrl?: string | null;
      displayname?: string;
      role?: string;
      createdAt?: string;
@@ -29,6 +37,7 @@
      author: User;          // 👈 Change authorId to this line     // user who wrote the comment
      storyId: string;      // story this comment belongs to
      createdAt: string;
+     authorId: string; // Used for resolution
    }
    
    export interface Reaction {
