@@ -6,18 +6,14 @@ const https_1 = require("firebase-functions/v2/https");
 const params_1 = require("firebase-functions/params");
 const generative_ai_1 = require("@google/generative-ai");
 const google_auth_library_1 = require("google-auth-library");
-/**
- * Node 18+ has global `fetch` – no need for node-fetch.
- * Ensure functions/package.json includes:
- *   "engines": { "node": "18" }
- */
+const firebaseAdmin_1 = require("./firebaseAdmin");
+const billing_1 = require("./utils/billing");
 // ────────────────────────────────────────────────────────────────────────────────
 // Common config
 // ────────────────────────────────────────────────────────────────────────────────
 const HOST = "https://us-central1-aiplatform.googleapis.com";
 const PROJECT_ID = process.env.GCLOUD_PROJECT || process.env.GCP_PROJECT || "narratum";
 const SERVICE_ACCOUNT = "vertex-runner@narratum.iam.gserviceaccount.com";
-// Small helper to set CORS headers on all responses
 function setCors(res) {
     res.set({
         "Access-Control-Allow-Origin": "*",
@@ -25,9 +21,14 @@ function setCors(res) {
         "Access-Control-Allow-Headers": "Content-Type, Authorization",
     });
 }
-// ────────────────────────────────────────────────────────────────────────────────
-// Auth helper for Vertex/Imagen
-// ────────────────────────────────────────────────────────────────────────────────
+async function verifyAuth(req) {
+    const authHeader = req.headers.authorization;
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+        throw new Error("Missing or invalid Authorization header");
+    }
+    const token = authHeader.split("Bearer ")[1];
+    return await firebaseAdmin_1.adminAuth.verifyIdToken(token);
+}
 async function getToken() {
     const auth = new google_auth_library_1.GoogleAuth({ scopes: ["https://www.googleapis.com/auth/cloud-platform"] });
     const client = await auth.getClient();
@@ -36,9 +37,6 @@ async function getToken() {
         throw new Error("Failed to obtain access token");
     return token;
 }
-// ==============================================================================
-// 1) GEMINI image (gemini-3-pro-image-preview requested, 2.5-flash fallback)
-// ==============================================================================
 const GEMINI_API_KEY = (0, params_1.defineSecret)("GEMINI_API_KEY");
 exports.generateWithGemini = (0, https_1.onRequest)({
     region: "us-central1",
@@ -47,7 +45,6 @@ exports.generateWithGemini = (0, https_1.onRequest)({
     invoker: "public",
     secrets: [GEMINI_API_KEY],
 }, async (req, res) => {
-    // CORS preflight
     if (req.method === "OPTIONS") {
         setCors(res);
         res.status(204).end();
@@ -55,15 +52,27 @@ exports.generateWithGemini = (0, https_1.onRequest)({
     }
     try {
         setCors(res);
+        let uid;
+        try {
+            const decoded = await verifyAuth(req);
+            uid = decoded.uid;
+        }
+        catch (err) {
+            res.status(401).json({ error: "Unauthorized" });
+            return;
+        }
+        // 💰 Freemium Charge (Images)
+        await (0, billing_1.chargeUserForCreation)(uid, 1, {
+            type: "image_generation_gemini",
+            description: "Generated 1 image with Gemini",
+            resourceType: 'image'
+        });
         const { prompt, images: inputImages } = (req.body ?? {});
         if (!prompt) {
             res.status(400).json({ error: "Missing prompt" });
             return;
         }
         const genAI = new generative_ai_1.GoogleGenerativeAI(GEMINI_API_KEY.value());
-        // Updated fallback strategy as requested:
-        // 1. gemini-3-pro-image-preview
-        // 2. gemini-2.5-flash-image-preview
         const modelsToTry = [
             "gemini-3-pro-image-preview",
             'gemini-2.5-flash-image',
@@ -84,7 +93,6 @@ exports.generateWithGemini = (0, https_1.onRequest)({
             try {
                 const model = genAI.getGenerativeModel({ model: modelName });
                 result = await model.generateContent({ contents });
-                // If we get here without error, we succeeded
                 usedModel = modelName;
                 break;
             }
@@ -93,36 +101,27 @@ exports.generateWithGemini = (0, https_1.onRequest)({
                 lastError = err;
             }
         }
-        if (!result) {
+        if (!result)
             throw lastError || new Error("All Gemini image models failed.");
-        }
         const response = result.response;
         const imagePart = response.candidates?.[0]?.content?.parts?.find((p) => p?.inlineData);
         if (!imagePart?.inlineData?.data) {
-            const maybeText = (() => {
-                try {
-                    return response.text();
-                }
-                catch {
-                    return "";
-                }
-            })();
-            console.error(`Gemini (${usedModel}) returned no image. Text:`, maybeText);
             throw new Error("The model did not return an image (possibly blocked by safety filters).");
         }
         res.status(200).json({
             model: usedModel,
-            images: [imagePart.inlineData.data], // base64 (no data: prefix)
+            images: [imagePart.inlineData.data],
         });
     }
     catch (e) {
         console.error("Critical error in generateWithGemini:", e);
+        if (e?.code === 'failed-precondition') {
+            res.status(402).json({ error: e.message }); // Send billing error message to client
+            return;
+        }
         res.status(500).json({ error: e?.message || "Internal server error" });
     }
 });
-// ==============================================================================
-// 2) IMAGEN (Vertex AI) fallback
-// ==============================================================================
 const IMAGEN_MODELS = [
     "imagen-4.0-fast-generate-001",
     "imagen-4.0-generate-001",
@@ -136,7 +135,6 @@ exports.generateWithImagen = (0, https_1.onRequest)({
     serviceAccount: SERVICE_ACCOUNT,
     invoker: "public",
 }, async (req, res) => {
-    // CORS preflight
     if (req.method === "OPTIONS") {
         setCors(res);
         res.status(204).end();
@@ -144,17 +142,33 @@ exports.generateWithImagen = (0, https_1.onRequest)({
     }
     try {
         setCors(res);
+        let uid;
+        try {
+            const decoded = await verifyAuth(req);
+            uid = decoded.uid;
+        }
+        catch (err) {
+            res.status(401).json({ error: "Unauthorized" });
+            return;
+        }
         const { prompt, count = 1, aspectRatio } = (req.body ?? {});
         if (!prompt) {
             res.status(400).json({ error: "Missing prompt" });
             return;
         }
+        // 💰 Freemium Charge (Images)
+        const quantity = Math.max(Number(count) || 1, 1);
+        await (0, billing_1.chargeUserForCreation)(uid, quantity, {
+            type: "image_generation_imagen",
+            description: `Generated ${quantity} image(s) with Imagen`,
+            resourceType: 'image'
+        });
         const token = await getToken();
         for (const model of IMAGEN_MODELS) {
             const url = `${HOST}/v1/projects/${PROJECT_ID}/locations/us-central1/publishers/google/models/${model}:predict`;
             const body = {
                 instances: [{ prompt, ...(aspectRatio ? { aspectRatio } : {}) }],
-                parameters: { sampleCount: Math.min(Math.max(Number(count) || 1, 1), 4) },
+                parameters: { sampleCount: quantity },
             };
             const r = await fetch(url, {
                 method: "POST",
@@ -182,6 +196,10 @@ exports.generateWithImagen = (0, https_1.onRequest)({
     }
     catch (e) {
         console.error("Critical error in generateWithImagen:", e);
+        if (e?.code === 'failed-precondition') {
+            res.status(402).json({ error: e.message });
+            return;
+        }
         res.status(500).json({ error: e?.message || "Internal server error" });
     }
 });

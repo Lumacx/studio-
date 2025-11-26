@@ -32,32 +32,63 @@ const VOICES = new Set(['Kore', 'Puck', 'Zephyr', 'Achird', 'Leda', 'Sadachbia']
 /* ------------------------- Helper: Billing ------------------------- */
 async function chargeUserForCreation(
   uid: string, 
-  cost: number, 
-  metadata: { type: string; description?: string }
+  quantity: number,
+  metadata: { type: string; description?: string; resourceType: 'image' | 'audio' }
 ) {
   const db = getAdminDb();
   const userRef = db.collection('users').doc(uid);
+  const FREE_LIMIT = 10;
+  const UNIT_PRICE = 0.1;
 
   return await db.runTransaction(async (tx) => {
     const snap = await tx.get(userRef);
     if (!snap.exists) throw new Error('User not found.');
     
-    const current = Number(snap.data()?.credits ?? 0);
-    if (current < cost) {
-      throw new Error(`Insufficient credits. Need ${cost}, have ${current}.`);
+    const data = snap.data();
+    const currentCredits = Number(data?.credits ?? 0);
+    const usage = data?.usage || {};
+    const currentUsageCount = Number(usage[metadata.resourceType] || 0);
+
+    let cost = 0;
+    
+    // Calculate cost based on remaining free quota
+    let paidCount = 0;
+    
+    for (let i = 0; i < quantity; i++) {
+      if ((currentUsageCount + i) >= FREE_LIMIT) {
+        paidCount++;
+      }
+    }
+    
+    cost = paidCount * UNIT_PRICE;
+
+    // Check balance
+    if (currentCredits < cost) {
+      throw new Error(`Insufficient credits. Need ${cost.toFixed(1)}, have ${currentCredits.toFixed(1)}. (Free allowance exceeded)`);
     }
 
-    const newBalance = current - cost;
-    tx.update(userRef, { credits: newBalance, updatedAt: FieldValue.serverTimestamp() });
-    
-    const txRef = userRef.collection('transactions').doc();
-    tx.set(txRef, {
-      type: metadata.type, 
-      creditsDelta: -cost,
-      timestamp: FieldValue.serverTimestamp(),
-      description: metadata.description || `Charged ${cost} credits.`,
-      status: 'confirmed'
+    const newBalance = currentCredits - cost;
+
+    // 1. Update counters and balance
+    tx.update(userRef, {
+      credits: newBalance,
+      [`usage.${metadata.resourceType}`]: FieldValue.increment(quantity),
+      updatedAt: FieldValue.serverTimestamp(),
     });
+
+    // 2. Log transaction (only if there was a cost)
+    if (cost > 0) {
+      const txRef = userRef.collection('transactions').doc();
+      tx.set(txRef, {
+        type: metadata.type,
+        creditsDelta: -cost,
+        timestamp: FieldValue.serverTimestamp(),
+        description: metadata.description || `Charged ${cost.toFixed(1)} credits for ${paidCount} items (freemium exceeded).`,
+        status: 'confirmed',
+        resourceType: metadata.resourceType
+      });
+    }
+
     return newBalance;
   });
 }
@@ -294,11 +325,12 @@ export async function POST(req: Request) {
     }
 
     // 💰 CHARGE CREDIT (Atomic Transaction)
-    // Charge 1 credit per TTS generation (adjust logic as needed)
+    // Charge 1 unit per TTS generation with 'audio' type for counters
     try {
       await chargeUserForCreation(user.uid, 1, { 
         type: 'tts_generation', 
-        description: 'Generated audio narration' 
+        description: 'Generated audio narration',
+        resourceType: 'audio' // ✅ Correctly sets resourceType
       });
     } catch (billingErr: any) {
       console.warn('Billing failed:', billingErr);
