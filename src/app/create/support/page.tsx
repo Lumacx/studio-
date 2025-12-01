@@ -472,20 +472,31 @@ export default function SupportPage() {
       alert('Please enter a description to generate an image.');
       return;
     }
+    // Added: Check for user existence
+    if (!user) { alert('You must be signed in to generate images.'); return; }
+
     setIsGenerating(true);
     setGeneratedImageUrlForChild('');
 
     try {
       const { prompt, negativePrompt } = composePromptForImagen(userPrompt, memoizedPromptContext);
+      
+      // ADDED: Get Auth Token
+      const token = await user.getIdToken();
+
       const res = await fetch('/api/generate-image', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}` // <--- ADDED Header
+        },
         body: JSON.stringify({
           prompt,
           negativePrompt,
           count: 1,
           // Pass undefined to mean "uncategorized"
           storyId: showUncategorized ? undefined : selectedStoryId,
+          userId: user.uid, // explicitly pass userId
         }),
       });
 
@@ -507,6 +518,8 @@ export default function SupportPage() {
 
   async function handleDescribeSelected() {
     if (!canDescribeSelected) return;
+    if (!user) { setDescError('You must be signed in.'); return; } // Added check
+    
     setDescError('');
     setDesc('');
     setDescLoading(true);
@@ -518,9 +531,16 @@ export default function SupportPage() {
         lang === 'es'
           ? 'Describe esta imagen en un solo párrafo claro y conciso...'
           : `Describe this image in one clear, concise paragraph... Respond only in ${langLabel}.`;
+      
+      // ADDED: Get Auth Token
+      const token = await user.getIdToken();
+
       const res = await fetch('/api/describe-image', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}` // <--- ADDED Header
+        },
         body: JSON.stringify({
           ...body,
           prompt: promptText,
@@ -550,6 +570,9 @@ export default function SupportPage() {
       alert('Please select at least one image and provide a prompt.');
       return;
     }
+    // Added: Check for user existence
+    if (!user) { alert('You must be signed in.'); return; }
+
     setIsComposing(true);
     setGeneratedImageUrlForChild('');
 
@@ -557,13 +580,20 @@ export default function SupportPage() {
       const imageUrls = [...selectedCharacters, ...selectedLocations];
       const imagesAsDataUrls = await Promise.all(imageUrls.map(url => urlToDataUrl(url)));
 
+      // ADDED: Get Auth Token
+      const token = await user.getIdToken();
+
       const res = await fetch('/api/generate-image', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}` // <--- ADDED Header
+        },
         body: JSON.stringify({
           prompt: composerPrompt,
           images: imagesAsDataUrls,
           storyId: showUncategorized ? undefined : selectedStoryId,
+          userId: user.uid, // explicitly pass userId
         }),
       });
 

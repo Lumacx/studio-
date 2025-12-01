@@ -1,4 +1,4 @@
-//src/app/create/begin/page.tsx
+// src/app/create/begin/page.tsx
 'use client';
 
 import React, { useEffect, useMemo, useState, useCallback, useRef } from 'react';
@@ -471,6 +471,9 @@ export default function BeginPage() {
       setDescError(t('alertsCoverFirst'));
       return;
     }
+    // ADDED: Check for user existence
+    if (!user) { setDescError(t('alertsSignIn')); return; }
+
     setDescLoading(true);
     try {
       const payload = isHttpUrl(draft.coverUrl)
@@ -493,9 +496,15 @@ export default function BeginPage() {
           ? 'Describe esta imagen en un solo párrafo claro y conciso (sin viñetas). Concéntrate en el sujeto, el entorno, la iluminación y el estado de ánimo. Responde únicamente en español.'
           : `Describe this image in one clear, concise paragraph (no bullets). Focus on subject, setting, lighting, and mood. Respond only in ${langLabel}.`;
 
+      // ADDED: Get Auth Token
+      const token = await user.getIdToken();
+
       const res = await fetch('/api/describe-image', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}` // <--- ADDED Header
+        },
         body: JSON.stringify({
           ...payload,
           prompt: promptText,
@@ -508,7 +517,8 @@ export default function BeginPage() {
       const json = await res.json();
       if (!res.ok) throw new Error(json?.error || 'Describe failed');
       setDescText(json.description || '');
-    } catch {
+    } catch (e) {
+      console.error(e);
       setDescError(t('aiDescribeFailed'));
     } finally {
       setDescLoading(false);
