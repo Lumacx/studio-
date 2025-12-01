@@ -9,6 +9,20 @@ run:
   command: pnpm start -- -p $PORT
 
 env:
+  # ── Fix for pnpm permission issues in Buildpacks ─────────────────────────────
+  - variable: XDG_CACHE_HOME
+    value: /workspace/.cache
+    availability: [ BUILD ]
+  - variable: XDG_DATA_HOME
+    value: /workspace/.local/share
+    availability: [ BUILD ]
+  - variable: XDG_CONFIG_HOME
+    value: /workspace/.config
+    availability: [ BUILD ]
+  - variable: PNPM_HOME
+    value: /workspace/.local/share/pnpm
+    availability: [ BUILD ]
+
   # ── Runtime basics ────────────────────────────────────────────────────────────
   - variable: NODE_ENV
     value: production

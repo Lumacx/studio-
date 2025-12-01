@@ -33,9 +33,11 @@ import { downloadStoryPdf } from './downloadStoryPdf';
 import {
   processPayPalOneTimePayment,   // callable
   deductCreditsForRead,          // callable
+  deductCreditsForReadHttp,      // HTTP
   sendTipToWriter,               // callable
   grantMonthlyFreeCredits,       // scheduled
   processPayPalSubscription,     // callable (SUBSCRIPTIONS – from credits.ts)
+  processPayPalSubscriptionHttp, // HTTP
 } from './credits';
 
 // Promo Codes / Hosted Payments
@@ -118,9 +120,11 @@ export {
   processPayPalOneTimePayment,
   createPayPalOrder,
   deductCreditsForRead,
+  deductCreditsForReadHttp,
   sendTipToWriter,
   grantMonthlyFreeCredits,
   processPayPalSubscription,
+  processPayPalSubscriptionHttp,
 
   // Promo codes & hosted flows
   redeemPromoCode,
@@ -136,5 +140,3 @@ export * from './hostedPayments';
 
 // Subscription utilities (free plan, get status, cancel)
 export * from './subscriptions';
-
-

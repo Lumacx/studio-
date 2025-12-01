@@ -872,6 +872,9 @@ export default function ScenesPage() {
       alert('Please write an image description or fill the story synopsis/genres on the Begin page.');
       return;
     }
+    // Added: Check for user existence
+    if (!user) { alert('You must be signed in to generate images.'); return; }
+
     setIsGenImage(true);
     try {
       const { prompt, negativePrompt } = composePromptForImagen(imagePrompt, {
@@ -879,6 +882,9 @@ export default function ScenesPage() {
       });
       const refNames = (references || []).map(r => r.name).filter(Boolean);
       const promptWithRefs = refNames.length ? `${prompt}\nVISUAL REFERENCES (soft influence): ${refNames.join(', ')}.` : prompt;
+
+    // ADDED: Get Auth Token
+    const token = await user.getIdToken();
 
       const r = await fetch('/api/generate-image', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
@@ -889,7 +895,7 @@ export default function ScenesPage() {
       const { dataUrl } = extractImageAndModel(json);
       if (!dataUrl) throw new Error('No image returned by generator.');
 
-      if (!user) throw new Error('You must be signed in to save generated images.');
+      //if (!user) throw new Error('You must be signed in to save generated images.');
       const fname = `scene-${currentIndex + 1}-${Date.now()}.png`;
       const uploaded = await uploadDataUrlToStorage(user.uid, selectedStoryId, dataUrl, fname);
       updateCurrentScene({ imageUrl: uploaded.https, imageName: fname });
@@ -1491,18 +1497,29 @@ export default function ScenesPage() {
                     </select>
                   </div>
                   <div className="flex gap-2 mt-2">
-                    <button
+                    
+                  <button
                       onClick={async () => {
                         const base = (narrationText || currentScene?.text || '').trim();
                         if (!canManageAssets) { alert(t('alertSelectStoryForNarration')); return; }
                         if (!base || !currentScene) { alert(t('alertEnterNarrationFirst')); return; }
+                        // Added: Check for user existence
+                        if (!user) { alert('You must be signed in.'); return; } 
+
                         setIsGenAudio(true);
                         try {
                           const lang = (story?.language || 'en') as LangCode;
                           const { ssml, style } = buildSSML(base, tone, lang);
+                          
+                          // ADDED: Get Auth Token
+                          const token = await user.getIdToken();
+
                           const r = await fetch('/api/generate-audio', {
                             method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
+                            headers: { 
+                                'Content-Type': 'application/json',
+                                'Authorization': `Bearer ${token}` // <--- ADDED Header
+                            },
                             body: JSON.stringify({
                               text: base, ssml, useSsml: true, voice, tone, style, toneHint: `[TONE=${tone}]`,
                               language: lang, model: 'gemini-2.5-flash-preview-tts', format: 'auto',
@@ -1525,6 +1542,8 @@ export default function ScenesPage() {
                       {isGenAudio ? <Loader2 className="w-4 h-4 animate-spin inline mr-2" /> : null}
                       {currentScene?.audioUrl ? t('regenNarration') : t('genNarration')}
                     </button>
+
+
                     {currentScene?.audioUrl && (
                       <a href={currentScene.audioUrl} className="px-4 py-2 rounded-md border" download>
                         {t('download')}

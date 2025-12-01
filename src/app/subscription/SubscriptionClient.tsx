@@ -799,7 +799,7 @@ useEffect(() => {
                       options={options}
                       deferLoading={false}
                     >
-                   // Add userId={user.uid} prop:
+                   {/* Add userId={user.uid} prop:*/}
                       <PayButtonsSubscription
                         planId={paypalPlanId!}
                         description={formatT(t, 'paypalSubscriptionDescription', {

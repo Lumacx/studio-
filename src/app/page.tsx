@@ -86,7 +86,7 @@ const LandingPage: React.FC = () => {
         {/* Pills row — same spacing as cards; same width as cards (w-48 md:w-56) */}
         <div className="flex flex-wrap justify-center gap-6 md:gap-8 mb-12">
           <button
-            onClick={() => setVideoUrl('https://www.youtube.com/embed/utV8LROR3f4')}
+            onClick={() => setVideoUrl('https://www.youtube.com/embed/GoQ_b97XTv8')}
             className={`
               w-48 md:w-56 inline-flex items-center justify-center px-6 py-3 rounded-full
               bg-purple-600 text-white font-semibold shadow-md hover:bg-purple-700
