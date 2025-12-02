@@ -813,6 +813,16 @@ useEffect(() => {
                         >
                           {t('edit')}
                         </Link>
+
+                          {/* 👇 ADD THIS BUTTON 👇 */}
+                          <Link
+                              href={`/profile/protect-ip?storyId=${s.id}`}
+                              className="px-3 py-1.5 rounded-full text-sm font-semibold bg-[#1e293b] text-[#E0C9A0] border border-[#BFA071]/50 hover:bg-[#BFA071] hover:text-[#1A2533] transition-colors"
+                            >
+                              Activate IP for Royalties
+                            </Link>
+                            {/* 👆 END ADDITION 👆 */}
+
                       </div>
                     </div>
                   </CardWrap>
