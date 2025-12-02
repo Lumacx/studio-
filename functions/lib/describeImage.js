@@ -73,9 +73,16 @@ exports.describeImage = functions.https.onRequest(async (req, res) => {
     }
     try {
         const body = req.body;
-        const apiKey = functions.config().gemini.key;
+        // 🛡️ Fix: Safely access config or fallback to env vars.
+        // Cast functions.config to any to avoid "Type 'never'" TS error in some environments.
+        const config = functions.config();
+        const apiKey = config?.gemini?.key ||
+            process.env.GEMINI_API_KEY ||
+            process.env.GOOGLE_API_KEY;
         if (!apiKey) {
-            throw new functions.https.HttpsError('internal', 'Missing GEMINI_API_KEY');
+            console.error("Missing API Key. Checked functions.config().gemini.key and process.env.GEMINI_API_KEY");
+            res.status(500).json({ error: 'Server configuration error: Missing GEMINI_API_KEY.' });
+            return;
         }
         if (!body.dataUrl && !body.imageUrl) {
             res.status(400).json({ error: 'Missing dataUrl or imageUrl' });
@@ -95,7 +102,7 @@ exports.describeImage = functions.https.onRequest(async (req, res) => {
             })()
             : await fetchImageAsBase64(body.imageUrl);
         const genAI = new generative_ai_1.GoogleGenerativeAI(apiKey);
-        const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-image-preview" });
+        const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
         const result = await model.generateContent([finalPrompt, { inlineData: { data: b64, mimeType } }]);
         const text = result.response.text();
         if (!text) {
