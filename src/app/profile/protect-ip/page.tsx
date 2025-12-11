@@ -276,7 +276,7 @@ export default function ProtectIPPage() {
 
       // 2. Use a placeholder NFT.
       const placeholderNft = {
-        tokenContract: "0x5a33aA38f2Ce351584A596515869446973416c14",
+        tokenContract: "0xe1379300Be45C9201537A4902a8430Fbc4075c5a", //"0x5a33aA38f2Ce351584A596515869446973416c14", original placeholder, i put my wallet as token contract *need to validate*
         tokenId: 1n,
       };
       toast({ title: "Using Placeholder NFT", description: `Contract: ${placeholderNft.tokenContract}` });

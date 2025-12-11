@@ -184,3 +184,11 @@ I1211 08:15:09.079938     570 load.go:109] Finished reloading
  {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1211 08:15:09.144396     570 dev.go:105] Listening on address (HTTP + gRPC): 127.0.0.1:50001\n"}}
 [debug] [2025-12-11T08:15:10.239Z] I1211 08:15:09.351461     570 engine.go:171] [/emulator/studio-v0 5063] ExecuteGraphqlRead IntrospectionQuery: succeeded. 
  {"metadata":{"emulator":{"name":"dataconnect"},"message":"I1211 08:15:09.351461     570 engine.go:171] [/emulator/studio-v0 5063] ExecuteGraphqlRead IntrospectionQuery: succeeded. \n"}}
+[error] [Firebase Plugin] (Webview) Unhandled rejected promise: {} 
+ i: Failed to connect to MetaMask
+    at Object.connect (chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/scripts/inpage.js:1:58695)
+    at async s (chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/scripts/inpage.js:1:56490)
+[error] [Firebase Plugin] (Webview) Unhandled rejected promise: {} 
+ i: Failed to connect to MetaMask
+    at Object.connect (chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/scripts/inpage.js:1:58695)
+    at async s (chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn/scripts/inpage.js:1:56490)
