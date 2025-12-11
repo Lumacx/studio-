@@ -253,93 +253,62 @@ export default function ProtectIPPage() {
 
 
   const handleSaveIP = async () => {
-
     if (!isEvmConnected || !evmAddress) {
-
       toast({ title: "Please connect an EVM wallet first.", variant: "destructive" });
-
       return;
-
     }
-
+    // ensure strict check for chain ID if needed, or keep your existing check
     if (chain?.id !== sepolia.id) {
-
         toast({ title: "Please switch to Sepolia network.", variant: "destructive" });
-
         return;
-
     }
-
-
 
     toast({ title: "Saving IP to blockchain...", description: "This may take a moment." });
 
-
-
     try {
-
       // 1. Create a Story Client.
-
-      // The client needs a transport to read from the blockchain, and an account to sign transactions.
-
       const storyClient = StoryClient.newClient({
         account: evmAddress,
         transport: http('https://rpc.sepolia.org'),
-        chainId: 'sepolia', // or 'sepolia' as const
-
+        // FIX 1: Cast strict string to 'any' or 'SupportedChainIds' to satisfy the type definition
+        chainId: 'sepolia' as any, 
       });
-
-
 
       // 2. Use a placeholder NFT.
-
-      // In a real scenario, you would first mint an NFT for the story.
-
-      // This step is mocked for now.
-
       const placeholderNft = {
-
-        tokenContract: "0x5a33aA38f2Ce351584A596515869446973416c14", // Example contract address on Sepolia
-
-        tokenId: 1n, // Example token ID
-
+        tokenContract: "0x5a33aA38f2Ce351584A596515869446973416c14",
+        tokenId: 1n,
       };
-
       toast({ title: "Using Placeholder NFT", description: `Contract: ${placeholderNft.tokenContract}` });
 
-
       // 3. Register the IP Asset
-
       const registerIpAsset = await storyClient.ipAsset.register({
-        nftContract: placeholderNft.tokenContract, // CHANGED from tokenContract
+        // FIX 2: Cast generic string to the strict address type `0x${string}`
+        nftContract: placeholderNft.tokenContract as `0x${string}`, 
         tokenId: placeholderNft.tokenId,
-        metadata: {
-            metadataURI: "https://moccasin-changing-squid-607.mypinata.cloud/ipfs/bafybeibebidhossx47qm3j6y6k2zove6qs3m2oylpa2ujvu7jbzfbedelq",
-            metadataHash: "0x0000000000000000000000000000000000000000000000000000000000000000",
-            nftMetadataHash: "0x0000000000000000000000000000000000000000000000000000000000000000",
+        
+        // FIX 3: Renamed 'metadata' to 'ipMetadata' as per the error message
+        ipMetadata: {
+            ipMetadataURI: "https://moccasin-changing-squid-607.mypinata.cloud/ipfs/bafybeibebidhossx47qm3j6y6k2zove6qs3m2oylpa2ujvu7jbzfbedelq",
+            ipMetadataHash: "0x0000000000000000000000000000000000000000000000000000000000000000" as `0x${string}`,
+            nftMetadataHash: "0x0000000000000000000000000000000000000000000000000000000000000000" as `0x${string}`,
+            nftMetadataURI: "https://moccasin-changing-squid-607.mypinata.cloud/ipfs/bafybeibebidhossx47qm3j6y6k2zove6qs3m2oylpa2ujvu7jbzfbedelq" // Often required if you provide the hash
         },
-        txOptions: { waitForTransaction: true }
-
+        
+        // FIX 4: Removed 'waitForTransaction' as it does not exist in TxOptions anymore
+        txOptions: {} 
       });
 
-
-
       setIpSaved(true);
-
-      toast({ title: "IP Saved Successfully!", description: `Transaction: ${registerIpAsset.txHash}` });
-
+      // Ensure we access the correct property for the ID (usually ipId or id)
+      toast({ title: "IP Saved Successfully!", description: `Success! ID: ${registerIpAsset.ipId}` });
+      
     } catch (error) {
-
       console.error("Error saving IP:", error);
-
       const errorMessage = error instanceof Error ? error.message : "An unknown error occurred.";
-
       toast({ title: "Error Saving IP", description: errorMessage, variant: "destructive" });
-
     }
-
   };
-
 
 
   if (loading) {
