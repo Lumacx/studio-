@@ -9,6 +9,17 @@ import KeepAliveProvider from '@/app/providers/KeepAliveProvider';
 import Header from '@/components/header';
 import Footer from '@/components/layout/Footer';
 
+import { WagmiProvider, createConfig, http } from 'wagmi';
+import { mainnet, sepolia } from 'wagmi/chains';
+
+export const wagmiConfig = createConfig({
+  chains: [mainnet, sepolia],
+  transports: {
+    [mainnet.id]: http(),
+    [sepolia.id]: http(),
+  },
+});
+
 function LangSetter() {
   const { locale } = useLocale();
   useEffect(() => {
@@ -41,26 +52,28 @@ export default function ClientShell({ children }: { children: React.ReactNode })
       <GsiScript />
 
       {/* All client-side providers live here */}
-      <LocaleProvider>
-        <LangSetter />
-        <StarknetProvider>
-          <AuthProvider>
-            <KeepAliveProvider requireAuth={false} rtdbPath="_meta/keepalive">
-              <div className="site-header">
-                <Suspense fallback={<div style={{ height: 56 }} />}><Header /></Suspense>
-              </div>
+      <WagmiProvider config={wagmiConfig}>
+        <LocaleProvider>
+          <LangSetter />
+          <StarknetProvider>
+            <AuthProvider>
+              <KeepAliveProvider requireAuth={false} rtdbPath="_meta/keepalive">
+                <div className="site-header">
+                  <Suspense fallback={<div style={{ height: 56 }} />}><Header /></Suspense>
+                </div>
 
-              <Suspense fallback={<div className="min-h-[40vh] flex items-center justify-center">Loading…</div>}>
-                {children}
-              </Suspense>
+                <Suspense fallback={<div className="min-h-[40vh] flex items-center justify-center">Loading…</div>}>
+                  {children}
+                </Suspense>
 
-              <div className="site-footer">
-                <Suspense fallback={null}><Footer /></Suspense>
-              </div>
-            </KeepAliveProvider>
-          </AuthProvider>
-        </StarknetProvider>
-      </LocaleProvider>
+                <div className="site-footer">
+                  <Suspense fallback={null}><Footer /></Suspense>
+                </div>
+              </KeepAliveProvider>
+            </AuthProvider>
+          </StarknetProvider>
+        </LocaleProvider>
+      </WagmiProvider>
     </>
   );
 }
