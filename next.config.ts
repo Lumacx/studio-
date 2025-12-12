@@ -82,6 +82,8 @@ const nextConfig: NextConfig = {
       'https://www.gstatic.com',
       'https://accounts.google.com',
       'https://apis.google.com',
+      // Worldcoin / World IDKit
+      'https://*.worldcoin.org',
       // YouTube (some SDKs touch these)
       'https://www.youtube.com',
       'https://s.ytimg.com',
@@ -111,6 +113,11 @@ const nextConfig: NextConfig = {
       // ElevenLabs
       'https://api.elevenlabs.io',
       'https://*.elevenlabs.io',
+      // Worldcoin / World IDKit
+      'https://bridge.worldcoin.org',
+      'https://api.worldcoin.org',
+      'https://identity.worldcoin.org',
+      'https://*.worldcoin.org',
     ].join(' ');
 
     const imgSrc = [
@@ -143,6 +150,9 @@ const nextConfig: NextConfig = {
       // **Fix:** Firebase RTDB hidden iframe + GSI iframes
       'https://*.firebaseio.com',
       'https://accounts.google.com',
+       // Worldcoin / World IDKit
+       'https://bridge.worldcoin.org',
+       'https://*.worldcoin.org',
     ].join(' ');
 
     const styleSrc = [
