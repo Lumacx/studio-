@@ -28,6 +28,9 @@ import {
 } from '@starknet-react/core';
 
 import { useAccount as useEvmAccount, useConnect as useEvmConnect, type Connector } from 'wagmi';
+import { getWalletClient } from 'wagmi/actions';
+import { wagmiConfig } from '@/app/ClientShell'; // or move wagmiConfig to a shared file
+
 
 import { StoryClient } from '@story-protocol/core-sdk';
 import { http } from 'viem';
@@ -240,12 +243,21 @@ export default function ProtectIPPage() {
     try {
       // NOTE: This may still fail depending on Story SDK version if it needs a signer/walletClient
       // (address alone is often not enough to sign a tx). This at least will show errors via toast+console.
+      
+      const walletClient = await getWalletClient(wagmiConfig, { chainId: 1514 });
+      if (!walletClient) {
+        toast({ title: 'Wallet client not available', variant: 'destructive' });
+        return;
+      }
+
       const storyClient = StoryClient.newClient({
-        account: evmAddress as any,
+        // Story SDK versions differ in typing; walletClient is the key
+        account: walletClient as any,
         transport: http('https://mainnet.storyrpc.io'),
-        chainId: 1514 as any, // prefer number; using any to satisfy strict SDK types
+        chainId: 1514 as any,
       });
 
+      
       const placeholderNft = {
         tokenContract: '0xe1379300Be45C9201537A4902a8430Fbc4075c5a',
         tokenId: 1n,
@@ -266,6 +278,8 @@ export default function ProtectIPPage() {
         },
         txOptions: {},
       });
+      console.log('register result', registerIpAsset);
+      toast({ title: 'Register submitted', description: JSON.stringify(registerIpAsset).slice(0, 120) });
 
       setIpSaved(true);
       toast({

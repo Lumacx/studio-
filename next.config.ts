@@ -150,6 +150,10 @@ const nextConfig: NextConfig = {
       // **Fix:** Firebase RTDB hidden iframe + GSI iframes
       'https://*.firebaseio.com',
       'https://accounts.google.com',
+       // Firebase Auth / Hosting iframes (required for some auth flows)
+       'https://*.firebaseapp.com',
+       'https://*.web.app',
+       'https://narratum.firebaseapp.com',
        // Worldcoin / World IDKit
        'https://bridge.worldcoin.org',
        'https://*.worldcoin.org',
