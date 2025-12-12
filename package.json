@@ -99,7 +99,7 @@
     "jszip": "^3.10.1",
     "lottie-react": "^2.4.0",
     "lucide-react": "^0.475.0",
-    "next": "15.2.6",
+    "next": "15.2.8",
     "patch-package": "^8.0.0",
     "pinata": "^2.3.0",
     "playwright-chromium": "^1.55.0",
