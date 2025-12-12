@@ -803,27 +803,33 @@ useEffect(() => {
                       <div className="pt-2 flex gap-2">
                         <Link
                           href={`/read/${s.id}`}
-                          className="px-3 py-1.5 rounded-full text-sm font-semibold bg-[#BFA071] text-[#1A2533] hover:bg-[#E0C9A0]"
+                          className="px-3 py-1.5 rounded-full text-sm font-semibold 
+                                    flex items-center justify-center
+                                    bg-[#BFA071] text-[#1A2533] hover:bg-[#E0C9A0]"
                         >
                           {t('read')}
                         </Link>
+
                         <Link
                           href={`/create/begin?storyId=${s.id}`}
-                          className="px-3 py-1.5 rounded-full text-sm font-semibold bg-[#233446] text-[#E0C9A0] hover:bg-[#2b3e52]"
+                          className="px-3 py-1.5 rounded-full text-sm font-semibold 
+                                    flex items-center justify-center
+                                    bg-[#233446] text-[#E0C9A0] hover:bg-[#2b3e52]"
                         >
                           {t('edit')}
                         </Link>
 
-                          {/* 👇 ADD THIS BUTTON 👇 */}
-                          <Link
-                              href={`/profile/protect-ip?storyId=${s.id}`}
-                              className="px-3 py-1.5 rounded-full text-sm font-semibold bg-[#1e293b] text-[#E0C9A0] border border-[#BFA071]/50 hover:bg-[#BFA071] hover:text-[#1A2533] transition-colors"
-                            >
-                              Activate IP for Royalties
-                            </Link>
-                            {/* 👆 END ADDITION 👆 */}
-
+                        <Link
+                          href={`/profile/protect-ip?storyId=${s.id}`}
+                          className="px-3 py-1.5 rounded-full text-sm font-semibold 
+                                    flex items-center justify-center
+                                    bg-[#1e293b] text-[#E0C9A0] border border-[#BFA071]/50 
+                                    hover:bg-[#BFA071] hover:text-[#1A2533] transition-colors"
+                        >
+                          Activate IP for Royalties
+                        </Link>
                       </div>
+
                     </div>
                   </CardWrap>
                 ))}
