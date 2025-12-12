@@ -11,10 +11,28 @@ import Footer from '@/components/layout/Footer';
 
 import { WagmiProvider, createConfig, http } from 'wagmi';
 import { mainnet, sepolia } from 'wagmi/chains';
+import { defineChain } from 'viem';
+import { Toaster } from "@/components/ui/toaster";
+
+export const storyMainnet = defineChain({
+  id: 1514,
+  name: 'Story Mainnet',
+  network: 'story',
+  nativeCurrency: {
+    name: 'IP',
+    symbol: 'IP',
+    decimals: 18,
+  },
+  rpcUrls: {
+    default: { http: ['https://mainnet.storyrpc.io'] },
+    public: { http: ['https://mainnet.storyrpc.io'] },
+  },
+});
 
 export const wagmiConfig = createConfig({
-  chains: [mainnet, sepolia],
+  chains: [storyMainnet, mainnet, sepolia],
   transports: {
+    [storyMainnet.id]: http('https://mainnet.storyrpc.io'),
     [mainnet.id]: http(),
     [sepolia.id]: http(),
   },
@@ -74,6 +92,7 @@ export default function ClientShell({ children }: { children: React.ReactNode })
           </StarknetProvider>
         </LocaleProvider>
       </WagmiProvider>
+          <Toaster />
     </>
   );
 }
