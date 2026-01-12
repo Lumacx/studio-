@@ -819,15 +819,16 @@ useEffect(() => {
                           {t('edit')}
                         </Link>
 
-                        <Link
-                          href={`/profile/protect-ip?storyId=${s.id}`}
+                        <button
+                          disabled
+                          title="Coming soon"
                           className="px-3 py-1.5 rounded-full text-sm font-semibold 
                                     flex items-center justify-center
                                     bg-[#1e293b] text-[#E0C9A0] border border-[#BFA071]/50 
-                                    hover:bg-[#BFA071] hover:text-[#1A2533] transition-colors"
+                                    opacity-50 cursor-not-allowed"
                         >
                           Activate IP for Royalties
-                        </Link>
+                        </button>
                       </div>
 
                     </div>

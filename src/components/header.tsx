@@ -141,13 +141,13 @@ const Header: FC = () => {
           {isDropdownOpen && (
             <div className="absolute left-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg z-20">
               <div className="py-1">
-                <Link
-                  href="/subscription"
-                  className={dropdownItemClasses}
-                  onClick={() => setIsDropdownOpen(false)}
+                <button
+                  disabled
+                  title="Coming soon"
+                  className={`${dropdownItemClasses} opacity-50 cursor-not-allowed`}
                 >
                   {t('subscriptions')}
-                </Link>
+                </button>
                 {dropdownLogoutContent}
               </div>
             </div>
@@ -156,9 +156,13 @@ const Header: FC = () => {
 
         {/* Desktop buttons */}
         <div className="hidden md:flex items-center space-x-4">
-          <Link href="/subscription" className={purpleButtonClasses}>
+          <button
+            disabled
+            title="Coming soon"
+            className={`${purpleButtonClasses} opacity-50 cursor-not-allowed hover:bg-purple-600 hover:scale-100`}
+          >
             {t('subscriptions')}
-          </Link>
+          </button>
           {loginLogoutContent}
         </div>
       </div>
