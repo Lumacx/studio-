@@ -33,7 +33,7 @@ const { data, isPending, isSuccess, isError, error } = useCreateAdminAction(crea
 
 const { data, isPending, isSuccess, isError, error } = useCreateAnalyticsEntry(createAnalyticsEntryVars);
 
-const { data, isPending, isSuccess, isError, error } = useLogLegalDisclaimerAcceptance(logLegalDisclaimerAcceptanceVars);
+const { data, isPending, isSuccess, isError, error } = useLogLegalDisclaimerAcceptance();
 
 ```
 
@@ -102,8 +102,8 @@ const { data } = await CreateAdminAction(dataConnect, createAdminActionVars);
 // Operation CreateAnalyticsEntry:  For variables, look at type CreateAnalyticsEntryVars in ../index.d.ts
 const { data } = await CreateAnalyticsEntry(dataConnect, createAnalyticsEntryVars);
 
-// Operation LogLegalDisclaimerAcceptance:  For variables, look at type LogLegalDisclaimerAcceptanceVars in ../index.d.ts
-const { data } = await LogLegalDisclaimerAcceptance(dataConnect, logLegalDisclaimerAcceptanceVars);
+// Operation LogLegalDisclaimerAcceptance: 
+const { data } = await LogLegalDisclaimerAcceptance(dataConnect);
 
 
 ```

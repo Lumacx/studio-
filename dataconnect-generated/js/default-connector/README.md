@@ -1576,22 +1576,22 @@ executeMutation(ref).then((response) => {
 ## CreateStory
 You can execute the `CreateStory` mutation using the following action shortcut function, or by calling `executeMutation()` after calling the following `MutationRef` function, both of which are defined in [default-connector/index.d.ts](./index.d.ts):
 ```typescript
-createStory(vars: CreateStoryVariables): MutationPromise<CreateStoryData, CreateStoryVariables>;
+createStory(vars?: CreateStoryVariables): MutationPromise<CreateStoryData, CreateStoryVariables>;
 
 interface CreateStoryRef {
   ...
   /* Allow users to create refs without passing in DataConnect */
-  (vars: CreateStoryVariables): MutationRef<CreateStoryData, CreateStoryVariables>;
+  (vars?: CreateStoryVariables): MutationRef<CreateStoryData, CreateStoryVariables>;
 }
 export const createStoryRef: CreateStoryRef;
 ```
 You can also pass in a `DataConnect` instance to the action shortcut function or `MutationRef` function.
 ```typescript
-createStory(dc: DataConnect, vars: CreateStoryVariables): MutationPromise<CreateStoryData, CreateStoryVariables>;
+createStory(dc: DataConnect, vars?: CreateStoryVariables): MutationPromise<CreateStoryData, CreateStoryVariables>;
 
 interface CreateStoryRef {
   ...
-  (dc: DataConnect, vars: CreateStoryVariables): MutationRef<CreateStoryData, CreateStoryVariables>;
+  (dc: DataConnect, vars?: CreateStoryVariables): MutationRef<CreateStoryData, CreateStoryVariables>;
 }
 export const createStoryRef: CreateStoryRef;
 ```
@@ -1603,11 +1603,10 @@ console.log(name);
 ```
 
 ### Variables
-The `CreateStory` mutation requires an argument of type `CreateStoryVariables`, which is defined in [default-connector/index.d.ts](./index.d.ts). It has the following fields:
+The `CreateStory` mutation has an optional argument of type `CreateStoryVariables`, which is defined in [default-connector/index.d.ts](./index.d.ts). It has the following fields:
 
 ```typescript
 export interface CreateStoryVariables {
-  creatorId: string;
   title?: string | null;
   genres?: string[] | null;
   description?: string | null;
@@ -1629,9 +1628,8 @@ export interface CreateStoryData {
 import { getDataConnect } from 'firebase/data-connect';
 import { connectorConfig, createStory, CreateStoryVariables } from '@firebasegen/default-connector';
 
-// The `CreateStory` mutation requires an argument of type `CreateStoryVariables`:
+// The `CreateStory` mutation has an optional argument of type `CreateStoryVariables`:
 const createStoryVars: CreateStoryVariables = {
-  creatorId: ..., 
   title: ..., // optional
   genres: ..., // optional
   description: ..., // optional
@@ -1642,7 +1640,9 @@ const createStoryVars: CreateStoryVariables = {
 // You can use the `await` keyword to wait for the promise to resolve.
 const { data } = await createStory(createStoryVars);
 // Variables can be defined inline as well.
-const { data } = await createStory({ creatorId: ..., title: ..., genres: ..., description: ..., coverImageUrl: ..., });
+const { data } = await createStory({ title: ..., genres: ..., description: ..., coverImageUrl: ..., });
+// Since all variables are optional for this mutation, you can omit the `CreateStoryVariables` argument.
+const { data } = await createStory();
 
 // You can also pass in a `DataConnect` instance to the action shortcut function.
 const dataConnect = getDataConnect(connectorConfig);
@@ -1663,9 +1663,8 @@ createStory(createStoryVars).then((response) => {
 import { getDataConnect, executeMutation } from 'firebase/data-connect';
 import { connectorConfig, createStoryRef, CreateStoryVariables } from '@firebasegen/default-connector';
 
-// The `CreateStory` mutation requires an argument of type `CreateStoryVariables`:
+// The `CreateStory` mutation has an optional argument of type `CreateStoryVariables`:
 const createStoryVars: CreateStoryVariables = {
-  creatorId: ..., 
   title: ..., // optional
   genres: ..., // optional
   description: ..., // optional
@@ -1675,7 +1674,9 @@ const createStoryVars: CreateStoryVariables = {
 // Call the `createStoryRef()` function to get a reference to the mutation.
 const ref = createStoryRef(createStoryVars);
 // Variables can be defined inline as well.
-const ref = createStoryRef({ creatorId: ..., title: ..., genres: ..., description: ..., coverImageUrl: ..., });
+const ref = createStoryRef({ title: ..., genres: ..., description: ..., coverImageUrl: ..., });
+// Since all variables are optional for this mutation, you can omit the `CreateStoryVariables` argument.
+const ref = createStoryRef();
 
 // You can also pass in a `DataConnect` instance to the `MutationRef` function.
 const dataConnect = getDataConnect(connectorConfig);
@@ -1965,7 +1966,6 @@ The `CreateAiGeneratedImage` mutation requires an argument of type `CreateAiGene
 ```typescript
 export interface CreateAiGeneratedImageVariables {
   imageId: string;
-  userId: string;
   promptText?: string | null;
   sketchUrl?: string | null;
   generatedImageUrl?: string | null;
@@ -1989,7 +1989,6 @@ import { connectorConfig, createAiGeneratedImage, CreateAiGeneratedImageVariable
 // The `CreateAiGeneratedImage` mutation requires an argument of type `CreateAiGeneratedImageVariables`:
 const createAiGeneratedImageVars: CreateAiGeneratedImageVariables = {
   imageId: ..., 
-  userId: ..., 
   promptText: ..., // optional
   sketchUrl: ..., // optional
   generatedImageUrl: ..., // optional
@@ -1999,7 +1998,7 @@ const createAiGeneratedImageVars: CreateAiGeneratedImageVariables = {
 // You can use the `await` keyword to wait for the promise to resolve.
 const { data } = await createAiGeneratedImage(createAiGeneratedImageVars);
 // Variables can be defined inline as well.
-const { data } = await createAiGeneratedImage({ imageId: ..., userId: ..., promptText: ..., sketchUrl: ..., generatedImageUrl: ..., });
+const { data } = await createAiGeneratedImage({ imageId: ..., promptText: ..., sketchUrl: ..., generatedImageUrl: ..., });
 
 // You can also pass in a `DataConnect` instance to the action shortcut function.
 const dataConnect = getDataConnect(connectorConfig);
@@ -2023,7 +2022,6 @@ import { connectorConfig, createAiGeneratedImageRef, CreateAiGeneratedImageVaria
 // The `CreateAiGeneratedImage` mutation requires an argument of type `CreateAiGeneratedImageVariables`:
 const createAiGeneratedImageVars: CreateAiGeneratedImageVariables = {
   imageId: ..., 
-  userId: ..., 
   promptText: ..., // optional
   sketchUrl: ..., // optional
   generatedImageUrl: ..., // optional
@@ -2032,7 +2030,7 @@ const createAiGeneratedImageVars: CreateAiGeneratedImageVariables = {
 // Call the `createAiGeneratedImageRef()` function to get a reference to the mutation.
 const ref = createAiGeneratedImageRef(createAiGeneratedImageVars);
 // Variables can be defined inline as well.
-const ref = createAiGeneratedImageRef({ imageId: ..., userId: ..., promptText: ..., sketchUrl: ..., generatedImageUrl: ..., });
+const ref = createAiGeneratedImageRef({ imageId: ..., promptText: ..., sketchUrl: ..., generatedImageUrl: ..., });
 
 // You can also pass in a `DataConnect` instance to the `MutationRef` function.
 const dataConnect = getDataConnect(connectorConfig);
@@ -2197,7 +2195,6 @@ The `CreatePayment` mutation requires an argument of type `CreatePaymentVariable
 
 ```typescript
 export interface CreatePaymentVariables {
-  userId: string;
   appSubscriptionId: string;
   amount: number;
 }
@@ -2219,7 +2216,6 @@ import { connectorConfig, createPayment, CreatePaymentVariables } from '@firebas
 
 // The `CreatePayment` mutation requires an argument of type `CreatePaymentVariables`:
 const createPaymentVars: CreatePaymentVariables = {
-  userId: ..., 
   appSubscriptionId: ..., 
   amount: ..., 
 };
@@ -2228,7 +2224,7 @@ const createPaymentVars: CreatePaymentVariables = {
 // You can use the `await` keyword to wait for the promise to resolve.
 const { data } = await createPayment(createPaymentVars);
 // Variables can be defined inline as well.
-const { data } = await createPayment({ userId: ..., appSubscriptionId: ..., amount: ..., });
+const { data } = await createPayment({ appSubscriptionId: ..., amount: ..., });
 
 // You can also pass in a `DataConnect` instance to the action shortcut function.
 const dataConnect = getDataConnect(connectorConfig);
@@ -2251,7 +2247,6 @@ import { connectorConfig, createPaymentRef, CreatePaymentVariables } from '@fire
 
 // The `CreatePayment` mutation requires an argument of type `CreatePaymentVariables`:
 const createPaymentVars: CreatePaymentVariables = {
-  userId: ..., 
   appSubscriptionId: ..., 
   amount: ..., 
 };
@@ -2259,7 +2254,7 @@ const createPaymentVars: CreatePaymentVariables = {
 // Call the `createPaymentRef()` function to get a reference to the mutation.
 const ref = createPaymentRef(createPaymentVars);
 // Variables can be defined inline as well.
-const ref = createPaymentRef({ userId: ..., appSubscriptionId: ..., amount: ..., });
+const ref = createPaymentRef({ appSubscriptionId: ..., amount: ..., });
 
 // You can also pass in a `DataConnect` instance to the `MutationRef` function.
 const dataConnect = getDataConnect(connectorConfig);
@@ -2312,7 +2307,6 @@ The `CreateAdminAction` mutation requires an argument of type `CreateAdminAction
 
 ```typescript
 export interface CreateAdminActionVariables {
-  adminId: string;
   actionType: string;
   targetId?: string | null;
   description?: string | null;
@@ -2335,7 +2329,6 @@ import { connectorConfig, createAdminAction, CreateAdminActionVariables } from '
 
 // The `CreateAdminAction` mutation requires an argument of type `CreateAdminActionVariables`:
 const createAdminActionVars: CreateAdminActionVariables = {
-  adminId: ..., 
   actionType: ..., 
   targetId: ..., // optional
   description: ..., // optional
@@ -2345,7 +2338,7 @@ const createAdminActionVars: CreateAdminActionVariables = {
 // You can use the `await` keyword to wait for the promise to resolve.
 const { data } = await createAdminAction(createAdminActionVars);
 // Variables can be defined inline as well.
-const { data } = await createAdminAction({ adminId: ..., actionType: ..., targetId: ..., description: ..., });
+const { data } = await createAdminAction({ actionType: ..., targetId: ..., description: ..., });
 
 // You can also pass in a `DataConnect` instance to the action shortcut function.
 const dataConnect = getDataConnect(connectorConfig);
@@ -2368,7 +2361,6 @@ import { connectorConfig, createAdminActionRef, CreateAdminActionVariables } fro
 
 // The `CreateAdminAction` mutation requires an argument of type `CreateAdminActionVariables`:
 const createAdminActionVars: CreateAdminActionVariables = {
-  adminId: ..., 
   actionType: ..., 
   targetId: ..., // optional
   description: ..., // optional
@@ -2377,7 +2369,7 @@ const createAdminActionVars: CreateAdminActionVariables = {
 // Call the `createAdminActionRef()` function to get a reference to the mutation.
 const ref = createAdminActionRef(createAdminActionVars);
 // Variables can be defined inline as well.
-const ref = createAdminActionRef({ adminId: ..., actionType: ..., targetId: ..., description: ..., });
+const ref = createAdminActionRef({ actionType: ..., targetId: ..., description: ..., });
 
 // You can also pass in a `DataConnect` instance to the `MutationRef` function.
 const dataConnect = getDataConnect(connectorConfig);
@@ -2430,7 +2422,6 @@ The `CreateAnalyticsEntry` mutation requires an argument of type `CreateAnalytic
 
 ```typescript
 export interface CreateAnalyticsEntryVariables {
-  userId: string;
   storyId: string;
   action: string;
 }
@@ -2452,7 +2443,6 @@ import { connectorConfig, createAnalyticsEntry, CreateAnalyticsEntryVariables } 
 
 // The `CreateAnalyticsEntry` mutation requires an argument of type `CreateAnalyticsEntryVariables`:
 const createAnalyticsEntryVars: CreateAnalyticsEntryVariables = {
-  userId: ..., 
   storyId: ..., 
   action: ..., 
 };
@@ -2461,7 +2451,7 @@ const createAnalyticsEntryVars: CreateAnalyticsEntryVariables = {
 // You can use the `await` keyword to wait for the promise to resolve.
 const { data } = await createAnalyticsEntry(createAnalyticsEntryVars);
 // Variables can be defined inline as well.
-const { data } = await createAnalyticsEntry({ userId: ..., storyId: ..., action: ..., });
+const { data } = await createAnalyticsEntry({ storyId: ..., action: ..., });
 
 // You can also pass in a `DataConnect` instance to the action shortcut function.
 const dataConnect = getDataConnect(connectorConfig);
@@ -2484,7 +2474,6 @@ import { connectorConfig, createAnalyticsEntryRef, CreateAnalyticsEntryVariables
 
 // The `CreateAnalyticsEntry` mutation requires an argument of type `CreateAnalyticsEntryVariables`:
 const createAnalyticsEntryVars: CreateAnalyticsEntryVariables = {
-  userId: ..., 
   storyId: ..., 
   action: ..., 
 };
@@ -2492,7 +2481,7 @@ const createAnalyticsEntryVars: CreateAnalyticsEntryVariables = {
 // Call the `createAnalyticsEntryRef()` function to get a reference to the mutation.
 const ref = createAnalyticsEntryRef(createAnalyticsEntryVars);
 // Variables can be defined inline as well.
-const ref = createAnalyticsEntryRef({ userId: ..., storyId: ..., action: ..., });
+const ref = createAnalyticsEntryRef({ storyId: ..., action: ..., });
 
 // You can also pass in a `DataConnect` instance to the `MutationRef` function.
 const dataConnect = getDataConnect(connectorConfig);
@@ -2514,22 +2503,22 @@ executeMutation(ref).then((response) => {
 ## LogLegalDisclaimerAcceptance
 You can execute the `LogLegalDisclaimerAcceptance` mutation using the following action shortcut function, or by calling `executeMutation()` after calling the following `MutationRef` function, both of which are defined in [default-connector/index.d.ts](./index.d.ts):
 ```typescript
-logLegalDisclaimerAcceptance(vars: LogLegalDisclaimerAcceptanceVariables): MutationPromise<LogLegalDisclaimerAcceptanceData, LogLegalDisclaimerAcceptanceVariables>;
+logLegalDisclaimerAcceptance(): MutationPromise<LogLegalDisclaimerAcceptanceData, undefined>;
 
 interface LogLegalDisclaimerAcceptanceRef {
   ...
   /* Allow users to create refs without passing in DataConnect */
-  (vars: LogLegalDisclaimerAcceptanceVariables): MutationRef<LogLegalDisclaimerAcceptanceData, LogLegalDisclaimerAcceptanceVariables>;
+  (): MutationRef<LogLegalDisclaimerAcceptanceData, undefined>;
 }
 export const logLegalDisclaimerAcceptanceRef: LogLegalDisclaimerAcceptanceRef;
 ```
 You can also pass in a `DataConnect` instance to the action shortcut function or `MutationRef` function.
 ```typescript
-logLegalDisclaimerAcceptance(dc: DataConnect, vars: LogLegalDisclaimerAcceptanceVariables): MutationPromise<LogLegalDisclaimerAcceptanceData, LogLegalDisclaimerAcceptanceVariables>;
+logLegalDisclaimerAcceptance(dc: DataConnect): MutationPromise<LogLegalDisclaimerAcceptanceData, undefined>;
 
 interface LogLegalDisclaimerAcceptanceRef {
   ...
-  (dc: DataConnect, vars: LogLegalDisclaimerAcceptanceVariables): MutationRef<LogLegalDisclaimerAcceptanceData, LogLegalDisclaimerAcceptanceVariables>;
+  (dc: DataConnect): MutationRef<LogLegalDisclaimerAcceptanceData, undefined>;
 }
 export const logLegalDisclaimerAcceptanceRef: LogLegalDisclaimerAcceptanceRef;
 ```
@@ -2541,13 +2530,7 @@ console.log(name);
 ```
 
 ### Variables
-The `LogLegalDisclaimerAcceptance` mutation requires an argument of type `LogLegalDisclaimerAcceptanceVariables`, which is defined in [default-connector/index.d.ts](./index.d.ts). It has the following fields:
-
-```typescript
-export interface LogLegalDisclaimerAcceptanceVariables {
-  userId: string;
-}
-```
+The `LogLegalDisclaimerAcceptance` mutation has no variables.
 ### Return Type
 Recall that executing the `LogLegalDisclaimerAcceptance` mutation returns a `MutationPromise` that resolves to an object with a `data` property.
 
@@ -2561,27 +2544,21 @@ export interface LogLegalDisclaimerAcceptanceData {
 
 ```typescript
 import { getDataConnect } from 'firebase/data-connect';
-import { connectorConfig, logLegalDisclaimerAcceptance, LogLegalDisclaimerAcceptanceVariables } from '@firebasegen/default-connector';
+import { connectorConfig, logLegalDisclaimerAcceptance } from '@firebasegen/default-connector';
 
-// The `LogLegalDisclaimerAcceptance` mutation requires an argument of type `LogLegalDisclaimerAcceptanceVariables`:
-const logLegalDisclaimerAcceptanceVars: LogLegalDisclaimerAcceptanceVariables = {
-  userId: ..., 
-};
 
 // Call the `logLegalDisclaimerAcceptance()` function to execute the mutation.
 // You can use the `await` keyword to wait for the promise to resolve.
-const { data } = await logLegalDisclaimerAcceptance(logLegalDisclaimerAcceptanceVars);
-// Variables can be defined inline as well.
-const { data } = await logLegalDisclaimerAcceptance({ userId: ..., });
+const { data } = await logLegalDisclaimerAcceptance();
 
 // You can also pass in a `DataConnect` instance to the action shortcut function.
 const dataConnect = getDataConnect(connectorConfig);
-const { data } = await logLegalDisclaimerAcceptance(dataConnect, logLegalDisclaimerAcceptanceVars);
+const { data } = await logLegalDisclaimerAcceptance(dataConnect);
 
 console.log(data.legalDisclaimer_insert);
 
 // Or, you can use the `Promise` API.
-logLegalDisclaimerAcceptance(logLegalDisclaimerAcceptanceVars).then((response) => {
+logLegalDisclaimerAcceptance().then((response) => {
   const data = response.data;
   console.log(data.legalDisclaimer_insert);
 });
@@ -2591,21 +2568,15 @@ logLegalDisclaimerAcceptance(logLegalDisclaimerAcceptanceVars).then((response) =
 
 ```typescript
 import { getDataConnect, executeMutation } from 'firebase/data-connect';
-import { connectorConfig, logLegalDisclaimerAcceptanceRef, LogLegalDisclaimerAcceptanceVariables } from '@firebasegen/default-connector';
+import { connectorConfig, logLegalDisclaimerAcceptanceRef } from '@firebasegen/default-connector';
 
-// The `LogLegalDisclaimerAcceptance` mutation requires an argument of type `LogLegalDisclaimerAcceptanceVariables`:
-const logLegalDisclaimerAcceptanceVars: LogLegalDisclaimerAcceptanceVariables = {
-  userId: ..., 
-};
 
 // Call the `logLegalDisclaimerAcceptanceRef()` function to get a reference to the mutation.
-const ref = logLegalDisclaimerAcceptanceRef(logLegalDisclaimerAcceptanceVars);
-// Variables can be defined inline as well.
-const ref = logLegalDisclaimerAcceptanceRef({ userId: ..., });
+const ref = logLegalDisclaimerAcceptanceRef();
 
 // You can also pass in a `DataConnect` instance to the `MutationRef` function.
 const dataConnect = getDataConnect(connectorConfig);
-const ref = logLegalDisclaimerAcceptanceRef(dataConnect, logLegalDisclaimerAcceptanceVars);
+const ref = logLegalDisclaimerAcceptanceRef(dataConnect);
 
 // Call `executeMutation()` on the reference to execute the mutation.
 // You can use the `await` keyword to wait for the promise to resolve.

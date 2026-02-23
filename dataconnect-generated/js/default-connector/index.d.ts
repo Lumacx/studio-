@@ -40,7 +40,6 @@ export interface CreateAdminActionData {
 }
 
 export interface CreateAdminActionVariables {
-  adminId: string;
   actionType: string;
   targetId?: string | null;
   description?: string | null;
@@ -61,7 +60,6 @@ export interface CreateAiGeneratedImageData {
 
 export interface CreateAiGeneratedImageVariables {
   imageId: string;
-  userId: string;
   promptText?: string | null;
   sketchUrl?: string | null;
   generatedImageUrl?: string | null;
@@ -72,7 +70,6 @@ export interface CreateAnalyticsEntryData {
 }
 
 export interface CreateAnalyticsEntryVariables {
-  userId: string;
   storyId: string;
   action: string;
 }
@@ -82,7 +79,6 @@ export interface CreatePaymentData {
 }
 
 export interface CreatePaymentVariables {
-  userId: string;
   appSubscriptionId: string;
   amount: number;
 }
@@ -104,7 +100,6 @@ export interface CreateStoryData {
 }
 
 export interface CreateStoryVariables {
-  creatorId: string;
   title?: string | null;
   genres?: string[] | null;
   description?: string | null;
@@ -312,10 +307,6 @@ export interface LogLegalDisclaimerAcceptanceData {
   legalDisclaimer_insert: LegalDisclaimer_Key;
 }
 
-export interface LogLegalDisclaimerAcceptanceVariables {
-  userId: string;
-}
-
 export interface Payment_Key {
   id: string;
   __typename?: 'Payment_Key';
@@ -376,15 +367,15 @@ export function createUserProfile(dc: DataConnect, vars: CreateUserProfileVariab
 
 interface CreateStoryRef {
   /* Allow users to create refs without passing in DataConnect */
-  (vars: CreateStoryVariables): MutationRef<CreateStoryData, CreateStoryVariables>;
+  (vars?: CreateStoryVariables): MutationRef<CreateStoryData, CreateStoryVariables>;
   /* Allow users to pass in custom DataConnect instances */
-  (dc: DataConnect, vars: CreateStoryVariables): MutationRef<CreateStoryData, CreateStoryVariables>;
+  (dc: DataConnect, vars?: CreateStoryVariables): MutationRef<CreateStoryData, CreateStoryVariables>;
   operationName: string;
 }
 export const createStoryRef: CreateStoryRef;
 
-export function createStory(vars: CreateStoryVariables): MutationPromise<CreateStoryData, CreateStoryVariables>;
-export function createStory(dc: DataConnect, vars: CreateStoryVariables): MutationPromise<CreateStoryData, CreateStoryVariables>;
+export function createStory(vars?: CreateStoryVariables): MutationPromise<CreateStoryData, CreateStoryVariables>;
+export function createStory(dc: DataConnect, vars?: CreateStoryVariables): MutationPromise<CreateStoryData, CreateStoryVariables>;
 
 interface CreateStoryContentRef {
   /* Allow users to create refs without passing in DataConnect */
@@ -472,15 +463,15 @@ export function createAnalyticsEntry(dc: DataConnect, vars: CreateAnalyticsEntry
 
 interface LogLegalDisclaimerAcceptanceRef {
   /* Allow users to create refs without passing in DataConnect */
-  (vars: LogLegalDisclaimerAcceptanceVariables): MutationRef<LogLegalDisclaimerAcceptanceData, LogLegalDisclaimerAcceptanceVariables>;
+  (): MutationRef<LogLegalDisclaimerAcceptanceData, undefined>;
   /* Allow users to pass in custom DataConnect instances */
-  (dc: DataConnect, vars: LogLegalDisclaimerAcceptanceVariables): MutationRef<LogLegalDisclaimerAcceptanceData, LogLegalDisclaimerAcceptanceVariables>;
+  (dc: DataConnect): MutationRef<LogLegalDisclaimerAcceptanceData, undefined>;
   operationName: string;
 }
 export const logLegalDisclaimerAcceptanceRef: LogLegalDisclaimerAcceptanceRef;
 
-export function logLegalDisclaimerAcceptance(vars: LogLegalDisclaimerAcceptanceVariables): MutationPromise<LogLegalDisclaimerAcceptanceData, LogLegalDisclaimerAcceptanceVariables>;
-export function logLegalDisclaimerAcceptance(dc: DataConnect, vars: LogLegalDisclaimerAcceptanceVariables): MutationPromise<LogLegalDisclaimerAcceptanceData, LogLegalDisclaimerAcceptanceVariables>;
+export function logLegalDisclaimerAcceptance(): MutationPromise<LogLegalDisclaimerAcceptanceData, undefined>;
+export function logLegalDisclaimerAcceptance(dc: DataConnect): MutationPromise<LogLegalDisclaimerAcceptanceData, undefined>;
 
 interface UpdateStoryContentRef {
   /* Allow users to create refs without passing in DataConnect */

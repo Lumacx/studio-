@@ -35,12 +35,12 @@ var __importStar = (this && this.__importStar) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ai = void 0;
 // functions/src/genkit.ts
-const functions = __importStar(require("firebase-functions"));
+const functions = __importStar(require("firebase-functions/v1"));
 const generative_ai_1 = require("@google/generative-ai");
 let _model = null;
 function getApiKey() {
     // 1) firebase functions:config:set genai.apikey="XYZ"
-    const cfgKey = functions.config()?.genai?.apikey;
+    const cfgKey = functions.config?.()?.genai?.apikey;
     // 2) variables de entorno comunes
     const envKey = process.env.GOOGLE_GENAI_API_KEY ||
         process.env.GEMINI_API_KEY ||

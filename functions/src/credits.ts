@@ -3,7 +3,7 @@
 // ────────────────────────────────────────────────────────────
 // Firebase Functions (Gen-1) & Admin wrappers
 // ────────────────────────────────────────────────────────────
-import * as functions from 'firebase-functions';
+import * as functions from 'firebase-functions/v1';
 import { db, adminAuth, FieldValue, Timestamp } from './firebaseAdmin';
 
 

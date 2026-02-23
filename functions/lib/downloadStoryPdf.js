@@ -37,7 +37,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.downloadStoryPdf = void 0;
-const functions = __importStar(require("firebase-functions"));
+const functions = __importStar(require("firebase-functions/v1"));
 const chromium_1 = __importDefault(require("@sparticuz/chromium"));
 const puppeteer_core_1 = __importDefault(require("puppeteer-core"));
 exports.downloadStoryPdf = functions

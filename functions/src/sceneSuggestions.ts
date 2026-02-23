@@ -1,5 +1,5 @@
 // functions/src/sceneSuggestions.ts
-import * as functions from 'firebase-functions';
+import * as functions from 'firebase-functions/v1';
 import type { Request, Response } from 'express';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
@@ -15,7 +15,6 @@ function preferredModels(): string[] {
   return [
     'gemini-3-pro-preview',
     'gemini-2.5-flash',
-    'gemini-2.0-flash',
     'gemini-2.0-pro-exp-02-05',
     'gemini-1.5-flash',
   ];

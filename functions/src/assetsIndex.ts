@@ -1,6 +1,6 @@
 // Gen2 Storage indexer — ONLY index under users/{uid}/assetIndex/(stories|uncategorized)/{category}/...
 
-import * as functions from "firebase-functions";
+import * as functions from "firebase-functions/v1";
 import { db, Timestamp } from "./firebaseAdmin";
 
 import type {

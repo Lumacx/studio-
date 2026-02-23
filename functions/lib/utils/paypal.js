@@ -39,7 +39,7 @@ exports.verifyPayPalWebhookSignature = verifyPayPalWebhookSignature;
 exports.getPayPalOrderDetails = getPayPalOrderDetails;
 exports.getPayPalSubscriptionDetails = getPayPalSubscriptionDetails;
 exports.cancelPayPalSubscriptionApi = cancelPayPalSubscriptionApi;
-const functions = __importStar(require("firebase-functions"));
+const functions = __importStar(require("firebase-functions/v1"));
 const buffer_1 = require("buffer");
 // ---- Base URL (LIVE ONLY) ----
 function resolvePayPalBase() {
@@ -52,11 +52,11 @@ function resolvePayPalBase() {
 // ────────────────────────────────────────────────────────────
 let cachedAccessToken = null;
 async function getPayPalAccessToken() {
-    const PAYPAL_CLIENT_ID = process.env.PAYPAL_CLIENT_ID || functions.config().paypal?.client_id;
+    const PAYPAL_CLIENT_ID = process.env.PAYPAL_CLIENT_ID || functions.config()?.paypal?.client_id;
     const PAYPAL_SECRET_KEY = process.env.PAYPAL_CLIENT_SECRET ||
         process.env.PAYPAL_SECRET_KEY || // fallback naming support
-        functions.config().paypal?.secret ||
-        functions.config().paypal?.secret_key;
+        functions.config()?.paypal?.secret ||
+        functions.config()?.paypal?.secret_key;
     if (!PAYPAL_CLIENT_ID || !PAYPAL_SECRET_KEY) {
         throw new functions.https.HttpsError('internal', 'PayPal API credentials not configured.');
     }
@@ -91,7 +91,7 @@ async function getPayPalAccessToken() {
 // Webhook Verification (unchanged except accessToken source)
 // ────────────────────────────────────────────────────────────
 async function verifyPayPalWebhookSignature(headers, webhookEvent) {
-    const PAYPAL_WEBHOOK_ID = process.env.PAYPAL_WEBHOOK_ID || functions.config().paypal?.webhook_id;
+    const PAYPAL_WEBHOOK_ID = process.env.PAYPAL_WEBHOOK_ID || functions.config()?.paypal?.webhook_id;
     if (!PAYPAL_WEBHOOK_ID) {
         throw new functions.https.HttpsError('internal', 'PayPal Webhook ID not configured.');
     }

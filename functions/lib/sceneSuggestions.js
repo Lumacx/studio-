@@ -35,7 +35,7 @@ var __importStar = (this && this.__importStar) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.suggestScene = void 0;
 // functions/src/sceneSuggestions.ts
-const functions = __importStar(require("firebase-functions"));
+const functions = __importStar(require("firebase-functions/v1"));
 const generative_ai_1 = require("@google/generative-ai");
 /**
  * Orden de preferencia de modelos:
@@ -49,7 +49,6 @@ function preferredModels() {
     return [
         'gemini-3-pro-preview',
         'gemini-2.5-flash',
-        'gemini-2.0-flash',
         'gemini-2.0-pro-exp-02-05',
         'gemini-1.5-flash',
     ];

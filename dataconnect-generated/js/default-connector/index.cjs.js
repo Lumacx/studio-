@@ -20,7 +20,7 @@ exports.createUserProfile = function createUserProfile(dcOrVars, vars) {
 };
 
 const createStoryRef = (dcOrVars, vars) => {
-  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars, true);
+  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars);
   dcInstance._useGeneratedSdk();
   return mutationRef(dcInstance, 'CreateStory', inputVars);
 }
@@ -115,16 +115,16 @@ exports.createAnalyticsEntry = function createAnalyticsEntry(dcOrVars, vars) {
   return executeMutation(createAnalyticsEntryRef(dcOrVars, vars));
 };
 
-const logLegalDisclaimerAcceptanceRef = (dcOrVars, vars) => {
-  const { dc: dcInstance, vars: inputVars} = validateArgs(connectorConfig, dcOrVars, vars, true);
+const logLegalDisclaimerAcceptanceRef = (dc) => {
+  const { dc: dcInstance} = validateArgs(connectorConfig, dc, undefined);
   dcInstance._useGeneratedSdk();
-  return mutationRef(dcInstance, 'LogLegalDisclaimerAcceptance', inputVars);
+  return mutationRef(dcInstance, 'LogLegalDisclaimerAcceptance');
 }
 logLegalDisclaimerAcceptanceRef.operationName = 'LogLegalDisclaimerAcceptance';
 exports.logLegalDisclaimerAcceptanceRef = logLegalDisclaimerAcceptanceRef;
 
-exports.logLegalDisclaimerAcceptance = function logLegalDisclaimerAcceptance(dcOrVars, vars) {
-  return executeMutation(logLegalDisclaimerAcceptanceRef(dcOrVars, vars));
+exports.logLegalDisclaimerAcceptance = function logLegalDisclaimerAcceptance(dc) {
+  return executeMutation(logLegalDisclaimerAcceptanceRef(dc));
 };
 
 const updateStoryContentRef = (dcOrVars, vars) => {

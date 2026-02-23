@@ -38,7 +38,7 @@ exports.grantMonthlyFreeCredits = exports.processPayPalSubscriptionHttp = export
 // ────────────────────────────────────────────────────────────
 // Firebase Functions (Gen-1) & Admin wrappers
 // ────────────────────────────────────────────────────────────
-const functions = __importStar(require("firebase-functions"));
+const functions = __importStar(require("firebase-functions/v1"));
 const firebaseAdmin_1 = require("./firebaseAdmin");
 // PayPal utilities used by subscription flow
 const paypal_1 = require("./utils/paypal");

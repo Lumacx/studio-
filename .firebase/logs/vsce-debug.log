@@ -557,3 +557,524 @@ I0112 18:37:59.912922   12233 dev.go:104] Listening on address (HTTP + gRPC): 12
  {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0112 18:37:59.471027   12233 codegen.go:80] [connector \"default\" javascriptSdk] Generating sources into \"/home/user/studio/dataconnect-generated/js/default-connector\"\nI0112 18:37:59.754378   12233 collector.go:107] schema extensions wrote into \"/home/user/studio/dataconnect/.dataconnect/schema\"\nGenerated sources: main/input.gql [122168B] main/relation.gql [51784B] main/query.gql [15655B] main/mutation.gql [41655B] prelude.gql [73219B] main/implicit.gql [3267B] \nI0112 18:37:59.773396   12233 collector.go:107] connector \"default\" javascriptSdk wrote into \"/home/user/studio/dataconnect-generated/js/default-connector\"\nGenerated sources: .guides/setup.md [1690B] esm/index.esm.js [10374B] react/esm/package.json [17B] react/index.cjs.js [9597B] react/package.json [468B] .guides/config.json [236B] react/README.md [119856B] index.d.ts [24807B] esm/package.json [17B] package.json [871B] README.md [116341B] react/esm/index.esm.js [9027B] index.cjs.js [12004B] react/index.d.ts [12119B] .guides/usage.md [4620B] \nI0112 18:37:59.839115   12233 installsdk.go:55] Package @firebasegen/default-connector is already installed. Skipping installation\nI0112 18:37:59.839244   12233 load.go:109] Finished reloading\nI0112 18:37:59.912922   12233 dev.go:104] Listening on address (HTTP + gRPC): 127.0.0.1:50001\n"}}
 [debug] [2026-01-12T18:38:01.897Z] I0112 18:38:01.630592   12233 engine.go:179] [/emulator/studio-v0 9573] ExecuteGraphqlRead IntrospectionQuery: succeeded. 
  {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0112 18:38:01.630592   12233 engine.go:179] [/emulator/studio-v0 9573] ExecuteGraphqlRead IntrospectionQuery: succeeded. \n"}}
+[info] [Firebase Plugin] Stopping Data Connect toolkit
+[warn] ⚠  Data Connect Emulator has exited upon receiving signal: SIGINT 
+[debug] [2026-02-18T23:43:17.567Z] [Firebase Plugin] Activating Firebase extension.
+[debug] [2026-02-18T23:43:32.070Z] [Firebase Plugin] requireAuthWrapper
+[debug] [2026-02-18T23:43:32.073Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/userinfo.email"]
+[debug] [2026-02-18T23:43:32.074Z] > authorizing via signed-in user (lumacx@gmail.com)
+[debug] [2026-02-18T23:43:32.082Z] Checked if tokens are valid: false, expires at: 1768246670047
+[debug] [2026-02-18T23:43:32.083Z] Checked if tokens are valid: false, expires at: 1768246670047
+[debug] [2026-02-18T23:43:32.084Z] > refreshing access token with scopes: []
+[debug] [2026-02-18T23:43:32.089Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2026-02-18T23:43:32.089Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-02-18T23:43:32.210Z] [Firebase Plugin] VSCode notification server listening on port 40001
+[debug] [2026-02-18T23:43:32.644Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2026-02-18T23:43:32.645Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-02-18T23:43:32.674Z] [Firebase Plugin] User found:  lumacx@gmail.com
+[info] [Firebase Plugin] (Core:Project) New user detected, fetching projects
+[debug] [2026-02-18T23:43:32.678Z] Checked if tokens are valid: true, expires at: 1771461811646
+[debug] [2026-02-18T23:43:32.684Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=1000
+[info] [Firebase Plugin] Starting Data Connect toolkit (version 3.0.0) on port 50001
+[debug] [2026-02-18T23:43:36.519Z] I0218 23:43:36.363814     553 control.go:94] [/emulator/studio-v0 64c5] UpdateResources(): done
+Main schema: sources: schema/schema.gql [3721B] 
+Connector "default": sources: connector/mutations.gql [3182B] connector/queries.gql [2742B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0218 23:43:36.363814     553 control.go:94] [/emulator/studio-v0 64c5] UpdateResources(): done\nMain schema: sources: schema/schema.gql [3721B] \nConnector \"default\": sources: connector/mutations.gql [3182B] connector/queries.gql [2742B] \n"}}
+[debug] [2026-02-18T23:43:36.522Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"dataconnect"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2026-02-18T23:43:36.523Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"dataconnect"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2026-02-18T23:43:36.524Z] Starting Data Connect Emulator with command {"binary":"/home/user/.cache/firebase/emulators/dataconnect-emulator-3.0.0","args":["--logtostderr","-v=2","dev","--listen=localhost:50001","--config_dir=/home/user/studio/dataconnect","--enable_output_schema_extensions=true","--enable_output_generated_sdk=true"],"optionalArgs":["listen","config_dir","enable_output_schema_extensions","enable_output_generated_sdk"],"joinArgs":true,"shell":false,"port":9399} {"metadata":{"emulator":{"name":"dataconnect"},"message":"Starting Data Connect Emulator with command {\"binary\":\"/home/user/.cache/firebase/emulators/dataconnect-emulator-3.0.0\",\"args\":[\"--logtostderr\",\"-v=2\",\"dev\",\"--listen=localhost:50001\",\"--config_dir=/home/user/studio/dataconnect\",\"--enable_output_schema_extensions=true\",\"--enable_output_generated_sdk=true\"],\"optionalArgs\":[\"listen\",\"config_dir\",\"enable_output_schema_extensions\",\"enable_output_generated_sdk\"],\"joinArgs\":true,\"shell\":false,\"port\":9399}"}}
+[info] i  dataconnect: Data Connect Emulator logging to dataconnect-debug.log {"metadata":{"emulator":{"name":"dataconnect"},"message":"Data Connect Emulator logging to dataconnect-debug.log"}}
+[debug] [2026-02-18T23:43:36.616Z] I0218 23:43:36.607486     559 load.go:31] Reloading schema and connectors...
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0218 23:43:36.607486     559 load.go:31] Reloading schema and connectors...\n"}}
+[debug] [2026-02-18T23:43:37.147Z] I0218 23:43:37.136341     559 control.go:94] [/emulator/studio-v0 19ec] UpdateResources(): done
+Main schema: sources: schema/schema.gql [3721B] 
+Connector "default": sources: connector/mutations.gql [3182B] connector/queries.gql [2742B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0218 23:43:37.136341     559 control.go:94] [/emulator/studio-v0 19ec] UpdateResources(): done\nMain schema: sources: schema/schema.gql [3721B] \nConnector \"default\": sources: connector/mutations.gql [3182B] connector/queries.gql [2742B] \n"}}
+[debug] [2026-02-18T23:43:37.194Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2026-02-18T23:43:37.195Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[debug] [2026-02-18T23:43:38.209Z] I0218 23:43:37.836969     559 codegen.go:80] [connector "default" javascriptSdk] Generating sources into "/home/user/studio/dataconnect-generated/js/default-connector"
+I0218 23:43:38.021803     559 collector.go:107] schema extensions wrote into "/home/user/studio/dataconnect/.dataconnect/schema"
+Generated sources: main/implicit.gql [3267B] main/input.gql [122168B] main/relation.gql [51784B] main/query.gql [15655B] main/mutation.gql [41655B] prelude.gql [73219B] 
+I0218 23:43:38.065938     559 collector.go:107] connector "default" javascriptSdk wrote into "/home/user/studio/dataconnect-generated/js/default-connector"
+Generated sources: react/index.d.ts [12119B] react/esm/package.json [17B] .guides/config.json [236B] esm/index.esm.js [10374B] index.cjs.js [12004B] package.json [871B] README.md [116341B] .guides/usage.md [4176B] index.d.ts [24807B] react/package.json [468B] esm/package.json [17B] react/index.cjs.js [9597B] react/esm/index.esm.js [9027B] react/README.md [119856B] .guides/setup.md [1690B] 
+I0218 23:43:38.148266     559 installsdk.go:55] Package @firebasegen/default-connector is already installed. Skipping installation
+I0218 23:43:38.148575     559 load.go:109] Finished reloading
+I0218 23:43:38.170536     559 dev.go:104] Listening on address (HTTP + gRPC): 127.0.0.1:50001
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0218 23:43:37.836969     559 codegen.go:80] [connector \"default\" javascriptSdk] Generating sources into \"/home/user/studio/dataconnect-generated/js/default-connector\"\nI0218 23:43:38.021803     559 collector.go:107] schema extensions wrote into \"/home/user/studio/dataconnect/.dataconnect/schema\"\nGenerated sources: main/implicit.gql [3267B] main/input.gql [122168B] main/relation.gql [51784B] main/query.gql [15655B] main/mutation.gql [41655B] prelude.gql [73219B] \nI0218 23:43:38.065938     559 collector.go:107] connector \"default\" javascriptSdk wrote into \"/home/user/studio/dataconnect-generated/js/default-connector\"\nGenerated sources: react/index.d.ts [12119B] react/esm/package.json [17B] .guides/config.json [236B] esm/index.esm.js [10374B] index.cjs.js [12004B] package.json [871B] README.md [116341B] .guides/usage.md [4176B] index.d.ts [24807B] react/package.json [468B] esm/package.json [17B] react/index.cjs.js [9597B] react/esm/index.esm.js [9027B] react/README.md [119856B] .guides/setup.md [1690B] \nI0218 23:43:38.148266     559 installsdk.go:55] Package @firebasegen/default-connector is already installed. Skipping installation\nI0218 23:43:38.148575     559 load.go:109] Finished reloading\nI0218 23:43:38.170536     559 dev.go:104] Listening on address (HTTP + gRPC): 127.0.0.1:50001\n"}}
+[debug] [2026-02-18T23:43:42.717Z] I0218 23:43:40.561080     559 engine.go:179] [/emulator/studio-v0 19ec] ExecuteGraphqlRead IntrospectionQuery: succeeded. 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0218 23:43:40.561080     559 engine.go:179] [/emulator/studio-v0 19ec] ExecuteGraphqlRead IntrospectionQuery: succeeded. \n"}}
+[info] [Firebase Plugin] Stopping Data Connect toolkit
+[warn] ⚠  Data Connect Emulator has exited upon receiving signal: SIGINT 
+[debug] [2026-02-18T23:47:48.786Z] [Firebase Plugin] Activating Firebase extension.
+[debug] [2026-02-18T23:48:04.015Z] [Firebase Plugin] requireAuthWrapper
+[debug] [2026-02-18T23:48:04.018Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/userinfo.email"]
+[debug] [2026-02-18T23:48:04.019Z] > authorizing via signed-in user (lumacx@gmail.com)
+[debug] [2026-02-18T23:48:04.027Z] Checked if tokens are valid: true, expires at: 1771461811646
+[debug] [2026-02-18T23:48:04.028Z] Checked if tokens are valid: true, expires at: 1771461811646
+[debug] [2026-02-18T23:48:04.029Z] [Firebase Plugin] User found:  lumacx@gmail.com
+[info] [Firebase Plugin] (Core:Project) New user detected, fetching projects
+[debug] [2026-02-18T23:48:04.034Z] Checked if tokens are valid: true, expires at: 1771461811646
+[debug] [2026-02-18T23:48:04.039Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=1000
+[debug] [2026-02-18T23:48:04.125Z] [Firebase Plugin] VSCode notification server listening on port 40001
+[debug] [2026-02-18T23:48:04.923Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2026-02-18T23:48:04.925Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[info] [Firebase Plugin] Starting Data Connect toolkit (version 3.1.1) on port 50001
+[info] i  dataconnect: downloading dataconnect-emulator-3.1.1... {"metadata":{"emulator":{"name":"dataconnect"},"message":"downloading dataconnect-emulator-3.1.1..."}}
+[debug] [2026-02-18T23:48:06.218Z] >>> [apiv2][query] GET https://storage.googleapis.com/firemat-preview-drop/emulator/dataconnect-emulator-linux-amd64-v3.1.1 
+[debug] [2026-02-18T23:48:06.775Z] <<< [apiv2][status] GET https://storage.googleapis.com/firemat-preview-drop/emulator/dataconnect-emulator-linux-amd64-v3.1.1 200
+[debug] [2026-02-18T23:48:06.775Z] <<< [apiv2][body] GET https://storage.googleapis.com/firemat-preview-drop/emulator/dataconnect-emulator-linux-amd64-v3.1.1 [stream]
+[info] i  dataconnect: Removing outdated emulator files: dataconnect-emulator-3.0.0 {"metadata":{"emulator":{"name":"dataconnect"},"message":"Removing outdated emulator files: dataconnect-emulator-3.0.0"}}
+[debug] [2026-02-18T23:48:27.520Z] I0218 23:48:27.371719    1610 control.go:100] [/emulator/studio-v0 a804] UpdateResources(): done
+Main schema: sources: schema/schema.gql [3721B] 
+Connector "default": sources: connector/queries.gql [2742B] connector/mutations.gql [3182B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0218 23:48:27.371719    1610 control.go:100] [/emulator/studio-v0 a804] UpdateResources(): done\nMain schema: sources: schema/schema.gql [3721B] \nConnector \"default\": sources: connector/queries.gql [2742B] connector/mutations.gql [3182B] \n"}}
+[debug] [2026-02-18T23:48:27.523Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"dataconnect"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2026-02-18T23:48:27.523Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"dataconnect"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2026-02-18T23:48:27.524Z] Starting Data Connect Emulator with command {"binary":"/home/user/.cache/firebase/emulators/dataconnect-emulator-3.1.1","args":["--logtostderr","-v=2","dev","--listen=localhost:50001","--config_dir=/home/user/studio/dataconnect","--enable_output_schema_extensions=true","--enable_output_generated_sdk=true"],"optionalArgs":["listen","config_dir","enable_output_schema_extensions","enable_output_generated_sdk"],"joinArgs":true,"shell":false,"port":9399} {"metadata":{"emulator":{"name":"dataconnect"},"message":"Starting Data Connect Emulator with command {\"binary\":\"/home/user/.cache/firebase/emulators/dataconnect-emulator-3.1.1\",\"args\":[\"--logtostderr\",\"-v=2\",\"dev\",\"--listen=localhost:50001\",\"--config_dir=/home/user/studio/dataconnect\",\"--enable_output_schema_extensions=true\",\"--enable_output_generated_sdk=true\"],\"optionalArgs\":[\"listen\",\"config_dir\",\"enable_output_schema_extensions\",\"enable_output_generated_sdk\"],\"joinArgs\":true,\"shell\":false,\"port\":9399}"}}
+[info] i  dataconnect: Data Connect Emulator logging to dataconnect-debug.log {"metadata":{"emulator":{"name":"dataconnect"},"message":"Data Connect Emulator logging to dataconnect-debug.log"}}
+[debug] [2026-02-18T23:48:27.601Z] I0218 23:48:27.599354    1615 load.go:31] Reloading schema and connectors...
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0218 23:48:27.599354    1615 load.go:31] Reloading schema and connectors...\n"}}
+[debug] [2026-02-18T23:48:27.990Z] I0218 23:48:27.988625    1615 control.go:100] [/emulator/studio-v0 b3db] UpdateResources(): done
+Main schema: sources: schema/schema.gql [3721B] 
+Connector "default": sources: connector/mutations.gql [3182B] connector/queries.gql [2742B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0218 23:48:27.988625    1615 control.go:100] [/emulator/studio-v0 b3db] UpdateResources(): done\nMain schema: sources: schema/schema.gql [3721B] \nConnector \"default\": sources: connector/mutations.gql [3182B] connector/queries.gql [2742B] \n"}}
+[debug] [2026-02-18T23:48:28.286Z] I0218 23:48:28.286457    1615 codegen.go:80] [connector "default" javascriptSdk] Generating sources into "/home/user/studio/dataconnect-generated/js/default-connector"
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0218 23:48:28.286457    1615 codegen.go:80] [connector \"default\" javascriptSdk] Generating sources into \"/home/user/studio/dataconnect-generated/js/default-connector\"\n"}}
+[debug] [2026-02-18T23:48:28.416Z] I0218 23:48:28.414477    1615 collector.go:107] schema extensions wrote into "/home/user/studio/dataconnect/.dataconnect/schema"
+Generated sources: main/mutation.gql [41655B] main/implicit.gql [3267B] prelude.gql [73281B] main/input.gql [122168B] main/relation.gql [51784B] main/query.gql [15655B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0218 23:48:28.414477    1615 collector.go:107] schema extensions wrote into \"/home/user/studio/dataconnect/.dataconnect/schema\"\nGenerated sources: main/mutation.gql [41655B] main/implicit.gql [3267B] prelude.gql [73281B] main/input.gql [122168B] main/relation.gql [51784B] main/query.gql [15655B] \n"}}
+[debug] [2026-02-18T23:48:28.454Z] I0218 23:48:28.421204    1615 collector.go:107] connector "default" javascriptSdk wrote into "/home/user/studio/dataconnect-generated/js/default-connector"
+Generated sources: index.d.ts [24807B] README.md [116341B] react/esm/index.esm.js [9027B] react/index.d.ts [12119B] .guides/setup.md [1690B] esm/index.esm.js [10374B] index.cjs.js [12004B] package.json [871B] react/esm/package.json [17B] react/index.cjs.js [9597B] esm/package.json [17B] react/package.json [468B] react/README.md [119856B] .guides/usage.md [4620B] .guides/config.json [236B] 
+I0218 23:48:28.434906    1615 installsdk.go:55] Package @firebasegen/default-connector is already installed. Skipping installation
+I0218 23:48:28.434964    1615 load.go:109] Finished reloading
+I0218 23:48:28.449327    1615 dev.go:104] Listening on address (HTTP + gRPC): 127.0.0.1:50001
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0218 23:48:28.421204    1615 collector.go:107] connector \"default\" javascriptSdk wrote into \"/home/user/studio/dataconnect-generated/js/default-connector\"\nGenerated sources: index.d.ts [24807B] README.md [116341B] react/esm/index.esm.js [9027B] react/index.d.ts [12119B] .guides/setup.md [1690B] esm/index.esm.js [10374B] index.cjs.js [12004B] package.json [871B] react/esm/package.json [17B] react/index.cjs.js [9597B] esm/package.json [17B] react/package.json [468B] react/README.md [119856B] .guides/usage.md [4620B] .guides/config.json [236B] \nI0218 23:48:28.434906    1615 installsdk.go:55] Package @firebasegen/default-connector is already installed. Skipping installation\nI0218 23:48:28.434964    1615 load.go:109] Finished reloading\nI0218 23:48:28.449327    1615 dev.go:104] Listening on address (HTTP + gRPC): 127.0.0.1:50001\n"}}
+[debug] [2026-02-18T23:48:28.637Z] I0218 23:48:28.587923    1615 engine.go:205] [/emulator/studio-v0 b3db] ExecuteGraphqlRead IntrospectionQuery: succeeded. 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0218 23:48:28.587923    1615 engine.go:205] [/emulator/studio-v0 b3db] ExecuteGraphqlRead IntrospectionQuery: succeeded. \n"}}
+[debug] [2026-02-18T23:59:08.529Z] I0218 23:59:08.437170    1615 load.go:31] Reloading schema and connectors...
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0218 23:59:08.437170    1615 load.go:31] Reloading schema and connectors...\n"}}
+[debug] [2026-02-18T23:59:09.054Z] I0218 23:59:09.050675    1615 control.go:100] [/emulator/studio-v0 59f0] UpdateResources(): done
+Main schema: sources: schema/schema.gql [3721B] 
+Connector "default": sources: connector/mutations.gql [3156B] connector/queries.gql [2742B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0218 23:59:09.050675    1615 control.go:100] [/emulator/studio-v0 59f0] UpdateResources(): done\nMain schema: sources: schema/schema.gql [3721B] \nConnector \"default\": sources: connector/mutations.gql [3156B] connector/queries.gql [2742B] \n"}}
+[debug] [2026-02-18T23:59:09.208Z] I0218 23:59:09.207865    1615 codegen.go:80] [connector "default" javascriptSdk] Generating sources into "/home/user/studio/dataconnect-generated/js/default-connector"
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0218 23:59:09.207865    1615 codegen.go:80] [connector \"default\" javascriptSdk] Generating sources into \"/home/user/studio/dataconnect-generated/js/default-connector\"\n"}}
+[debug] [2026-02-18T23:59:09.296Z] I0218 23:59:09.293870    1615 collector.go:107] schema extensions wrote into "/home/user/studio/dataconnect/.dataconnect/schema"
+Generated sources: prelude.gql [73281B] main/implicit.gql [3267B] main/input.gql [122168B] main/relation.gql [51784B] main/query.gql [15655B] main/mutation.gql [41655B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0218 23:59:09.293870    1615 collector.go:107] schema extensions wrote into \"/home/user/studio/dataconnect/.dataconnect/schema\"\nGenerated sources: prelude.gql [73281B] main/implicit.gql [3267B] main/input.gql [122168B] main/relation.gql [51784B] main/query.gql [15655B] main/mutation.gql [41655B] \n"}}
+[debug] [2026-02-18T23:59:09.307Z] I0218 23:59:09.305300    1615 collector.go:107] connector "default" javascriptSdk wrote into "/home/user/studio/dataconnect-generated/js/default-connector"
+Generated sources: .guides/setup.md [1690B] index.d.ts [24772B] esm/index.esm.js [10368B] react/package.json [468B] package.json [871B] react/index.d.ts [12133B] react/esm/index.esm.js [9027B] .guides/config.json [236B] esm/package.json [17B] README.md [116468B] react/README.md [120119B] .guides/usage.md [4620B] index.cjs.js [11998B] react/esm/package.json [17B] react/index.cjs.js [9597B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0218 23:59:09.305300    1615 collector.go:107] connector \"default\" javascriptSdk wrote into \"/home/user/studio/dataconnect-generated/js/default-connector\"\nGenerated sources: .guides/setup.md [1690B] index.d.ts [24772B] esm/index.esm.js [10368B] react/package.json [468B] package.json [871B] react/index.d.ts [12133B] react/esm/index.esm.js [9027B] .guides/config.json [236B] esm/package.json [17B] README.md [116468B] react/README.md [120119B] .guides/usage.md [4620B] index.cjs.js [11998B] react/esm/package.json [17B] react/index.cjs.js [9597B] \n"}}
+[debug] [2026-02-18T23:59:09.318Z] I0218 23:59:09.317411    1615 installsdk.go:55] Package @firebasegen/default-connector is already installed. Skipping installation
+I0218 23:59:09.317499    1615 load.go:109] Finished reloading
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0218 23:59:09.317411    1615 installsdk.go:55] Package @firebasegen/default-connector is already installed. Skipping installation\nI0218 23:59:09.317499    1615 load.go:109] Finished reloading\n"}}
+[debug] [2026-02-18T23:59:38.445Z] I0218 23:59:38.445328    1615 load.go:31] Reloading schema and connectors...
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0218 23:59:38.445328    1615 load.go:31] Reloading schema and connectors...\n"}}
+[debug] [2026-02-18T23:59:38.593Z] I0218 23:59:38.592723    1615 control.go:100] [/emulator/studio-v0 a34b] UpdateResources(): done
+Main schema: sources: schema/schema.gql [3721B] 
+Connector "default": sources: connector/mutations.gql [3114B] connector/queries.gql [2742B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0218 23:59:38.592723    1615 control.go:100] [/emulator/studio-v0 a34b] UpdateResources(): done\nMain schema: sources: schema/schema.gql [3721B] \nConnector \"default\": sources: connector/mutations.gql [3114B] connector/queries.gql [2742B] \n"}}
+[debug] [2026-02-18T23:59:38.779Z] I0218 23:59:38.779292    1615 codegen.go:80] [connector "default" javascriptSdk] Generating sources into "/home/user/studio/dataconnect-generated/js/default-connector"
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0218 23:59:38.779292    1615 codegen.go:80] [connector \"default\" javascriptSdk] Generating sources into \"/home/user/studio/dataconnect-generated/js/default-connector\"\n"}}
+[debug] [2026-02-18T23:59:38.837Z] I0218 23:59:38.835210    1615 collector.go:107] schema extensions wrote into "/home/user/studio/dataconnect/.dataconnect/schema"
+Generated sources: main/relation.gql [51784B] main/query.gql [15655B] main/mutation.gql [41655B] main/implicit.gql [3267B] prelude.gql [73281B] main/input.gql [122168B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0218 23:59:38.835210    1615 collector.go:107] schema extensions wrote into \"/home/user/studio/dataconnect/.dataconnect/schema\"\nGenerated sources: main/relation.gql [51784B] main/query.gql [15655B] main/mutation.gql [41655B] main/implicit.gql [3267B] prelude.gql [73281B] main/input.gql [122168B] \n"}}
+[debug] [2026-02-18T23:59:38.843Z] I0218 23:59:38.842987    1615 collector.go:107] connector "default" javascriptSdk wrote into "/home/user/studio/dataconnect-generated/js/default-connector"
+Generated sources: react/esm/index.esm.js [9017B] esm/package.json [17B] react/package.json [468B] react/esm/package.json [17B] .guides/config.json [236B] react/index.d.ts [11972B] react/index.cjs.js [9587B] react/README.md [119315B] .guides/usage.md [4476B] .guides/setup.md [1690B] index.d.ts [24351B] esm/index.esm.js [10297B] index.cjs.js [11927B] package.json [871B] README.md [114804B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0218 23:59:38.842987    1615 collector.go:107] connector \"default\" javascriptSdk wrote into \"/home/user/studio/dataconnect-generated/js/default-connector\"\nGenerated sources: react/esm/index.esm.js [9017B] esm/package.json [17B] react/package.json [468B] react/esm/package.json [17B] .guides/config.json [236B] react/index.d.ts [11972B] react/index.cjs.js [9587B] react/README.md [119315B] .guides/usage.md [4476B] .guides/setup.md [1690B] index.d.ts [24351B] esm/index.esm.js [10297B] index.cjs.js [11927B] package.json [871B] README.md [114804B] \n"}}
+[debug] [2026-02-18T23:59:38.852Z] I0218 23:59:38.852233    1615 installsdk.go:55] Package @firebasegen/default-connector is already installed. Skipping installation
+I0218 23:59:38.852291    1615 load.go:109] Finished reloading
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0218 23:59:38.852233    1615 installsdk.go:55] Package @firebasegen/default-connector is already installed. Skipping installation\nI0218 23:59:38.852291    1615 load.go:109] Finished reloading\n"}}
+[debug] [2026-02-19T04:30:55.767Z] [Firebase Plugin] Activating Firebase extension.
+[debug] [2026-02-19T04:31:24.811Z] [Firebase Plugin] requireAuthWrapper
+[debug] [2026-02-19T04:31:24.819Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/userinfo.email"]
+[debug] [2026-02-19T04:31:24.822Z] > authorizing via signed-in user (lumacx@gmail.com)
+[debug] [2026-02-19T04:31:24.852Z] Checked if tokens are valid: false, expires at: 1771465010300
+[debug] [2026-02-19T04:31:24.853Z] Checked if tokens are valid: false, expires at: 1771465010300
+[debug] [2026-02-19T04:31:24.855Z] > refreshing access token with scopes: []
+[debug] [2026-02-19T04:31:24.867Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2026-02-19T04:31:24.869Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-02-19T04:31:25.032Z] [Firebase Plugin] VSCode notification server listening on port 40001
+[debug] [2026-02-19T04:31:25.378Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2026-02-19T04:31:25.381Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-02-19T04:31:25.422Z] [Firebase Plugin] User found:  lumacx@gmail.com
+[info] [Firebase Plugin] (Core:Project) New user detected, fetching projects
+[debug] [2026-02-19T04:31:25.433Z] Checked if tokens are valid: true, expires at: 1771479084382
+[debug] [2026-02-19T04:31:25.440Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=1000
+[info] [Firebase Plugin] Starting Data Connect toolkit (version 3.1.1) on port 50001
+[debug] [2026-02-19T04:31:31.407Z] I0219 04:31:31.041470     583 control.go:100] [/emulator/studio-v0 b281] UpdateResources(): done
+Main schema: sources: schema/schema.gql [3721B] 
+Connector "default": sources: connector/mutations.gql [3114B] connector/queries.gql [2742B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0219 04:31:31.041470     583 control.go:100] [/emulator/studio-v0 b281] UpdateResources(): done\nMain schema: sources: schema/schema.gql [3721B] \nConnector \"default\": sources: connector/mutations.gql [3114B] connector/queries.gql [2742B] \n"}}
+[debug] [2026-02-19T04:31:31.427Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"dataconnect"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2026-02-19T04:31:31.428Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"dataconnect"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2026-02-19T04:31:31.430Z] Starting Data Connect Emulator with command {"binary":"/home/user/.cache/firebase/emulators/dataconnect-emulator-3.1.1","args":["--logtostderr","-v=2","dev","--listen=localhost:50001","--config_dir=/home/user/studio/dataconnect","--enable_output_schema_extensions=true","--enable_output_generated_sdk=true"],"optionalArgs":["listen","config_dir","enable_output_schema_extensions","enable_output_generated_sdk"],"joinArgs":true,"shell":false,"port":9399} {"metadata":{"emulator":{"name":"dataconnect"},"message":"Starting Data Connect Emulator with command {\"binary\":\"/home/user/.cache/firebase/emulators/dataconnect-emulator-3.1.1\",\"args\":[\"--logtostderr\",\"-v=2\",\"dev\",\"--listen=localhost:50001\",\"--config_dir=/home/user/studio/dataconnect\",\"--enable_output_schema_extensions=true\",\"--enable_output_generated_sdk=true\"],\"optionalArgs\":[\"listen\",\"config_dir\",\"enable_output_schema_extensions\",\"enable_output_generated_sdk\"],\"joinArgs\":true,\"shell\":false,\"port\":9399}"}}
+[info] i  dataconnect: Data Connect Emulator logging to dataconnect-debug.log {"metadata":{"emulator":{"name":"dataconnect"},"message":"Data Connect Emulator logging to dataconnect-debug.log"}}
+[debug] [2026-02-19T04:31:31.960Z] I0219 04:31:31.776857     588 load.go:31] Reloading schema and connectors...
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0219 04:31:31.776857     588 load.go:31] Reloading schema and connectors...\n"}}
+[debug] [2026-02-19T04:31:33.499Z] I0219 04:31:32.634186     588 control.go:100] [/emulator/studio-v0 e362] UpdateResources(): done
+Main schema: sources: schema/schema.gql [3721B] 
+Connector "default": sources: connector/queries.gql [2742B] connector/mutations.gql [3114B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0219 04:31:32.634186     588 control.go:100] [/emulator/studio-v0 e362] UpdateResources(): done\nMain schema: sources: schema/schema.gql [3721B] \nConnector \"default\": sources: connector/queries.gql [2742B] connector/mutations.gql [3114B] \n"}}
+[debug] [2026-02-19T04:31:33.821Z] I0219 04:31:33.783909     588 codegen.go:80] [connector "default" javascriptSdk] Generating sources into "/home/user/studio/dataconnect-generated/js/default-connector"
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0219 04:31:33.783909     588 codegen.go:80] [connector \"default\" javascriptSdk] Generating sources into \"/home/user/studio/dataconnect-generated/js/default-connector\"\n"}}
+[debug] [2026-02-19T04:31:33.828Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2026-02-19T04:31:33.831Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[debug] [2026-02-19T04:31:34.228Z] I0219 04:31:34.076945     588 collector.go:107] schema extensions wrote into "/home/user/studio/dataconnect/.dataconnect/schema"
+Generated sources: prelude.gql [73281B] main/implicit.gql [3267B] main/input.gql [122168B] main/relation.gql [51784B] main/query.gql [15655B] main/mutation.gql [41655B] 
+I0219 04:31:34.086122     588 collector.go:107] connector "default" javascriptSdk wrote into "/home/user/studio/dataconnect-generated/js/default-connector"
+Generated sources: index.d.ts [24351B] esm/package.json [17B] package.json [871B] react/index.cjs.js [9587B] .guides/setup.md [1690B] index.cjs.js [11927B] README.md [114804B] esm/index.esm.js [10297B] react/package.json [468B] react/esm/index.esm.js [9017B] react/index.d.ts [11972B] react/esm/package.json [17B] react/README.md [119315B] .guides/usage.md [4476B] .guides/config.json [236B] 
+I0219 04:31:34.139264     588 installsdk.go:55] Package @firebasegen/default-connector is already installed. Skipping installation
+I0219 04:31:34.139369     588 load.go:109] Finished reloading
+I0219 04:31:34.210594     588 dev.go:104] Listening on address (HTTP + gRPC): 127.0.0.1:50001
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0219 04:31:34.076945     588 collector.go:107] schema extensions wrote into \"/home/user/studio/dataconnect/.dataconnect/schema\"\nGenerated sources: prelude.gql [73281B] main/implicit.gql [3267B] main/input.gql [122168B] main/relation.gql [51784B] main/query.gql [15655B] main/mutation.gql [41655B] \nI0219 04:31:34.086122     588 collector.go:107] connector \"default\" javascriptSdk wrote into \"/home/user/studio/dataconnect-generated/js/default-connector\"\nGenerated sources: index.d.ts [24351B] esm/package.json [17B] package.json [871B] react/index.cjs.js [9587B] .guides/setup.md [1690B] index.cjs.js [11927B] README.md [114804B] esm/index.esm.js [10297B] react/package.json [468B] react/esm/index.esm.js [9017B] react/index.d.ts [11972B] react/esm/package.json [17B] react/README.md [119315B] .guides/usage.md [4476B] .guides/config.json [236B] \nI0219 04:31:34.139264     588 installsdk.go:55] Package @firebasegen/default-connector is already installed. Skipping installation\nI0219 04:31:34.139369     588 load.go:109] Finished reloading\nI0219 04:31:34.210594     588 dev.go:104] Listening on address (HTTP + gRPC): 127.0.0.1:50001\n"}}
+[debug] [2026-02-19T04:31:35.139Z] I0219 04:31:34.743691     588 engine.go:205] [/emulator/studio-v0 e362] ExecuteGraphqlRead IntrospectionQuery: succeeded. 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0219 04:31:34.743691     588 engine.go:205] [/emulator/studio-v0 e362] ExecuteGraphqlRead IntrospectionQuery: succeeded. \n"}}
+[debug] [2026-02-19T04:41:29.288Z] [Firebase Plugin] Activating Firebase extension.
+[debug] [2026-02-19T04:42:01.386Z] [Firebase Plugin] requireAuthWrapper
+[debug] [2026-02-19T04:42:01.399Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/userinfo.email"]
+[debug] [2026-02-19T04:42:01.401Z] > authorizing via signed-in user (lumacx@gmail.com)
+[debug] [2026-02-19T04:42:01.421Z] Checked if tokens are valid: true, expires at: 1771479084382
+[debug] [2026-02-19T04:42:01.422Z] Checked if tokens are valid: true, expires at: 1771479084382
+[debug] [2026-02-19T04:42:01.423Z] [Firebase Plugin] User found:  lumacx@gmail.com
+[info] [Firebase Plugin] (Core:Project) New user detected, fetching projects
+[debug] [2026-02-19T04:42:01.426Z] Checked if tokens are valid: true, expires at: 1771479084382
+[debug] [2026-02-19T04:42:01.431Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=1000
+[debug] [2026-02-19T04:42:01.538Z] [Firebase Plugin] VSCode notification server listening on port 40002
+[debug] [2026-02-19T04:42:02.102Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2026-02-19T04:42:02.105Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[info] [Firebase Plugin] Starting Data Connect toolkit (version 3.1.1) on port 50002
+[debug] [2026-02-19T04:42:12.611Z] I0219 04:42:12.521372    2722 control.go:100] [/emulator/studio-v0 bcca] UpdateResources(): done
+Main schema: sources: schema/schema.gql [3721B] 
+Connector "default": sources: connector/mutations.gql [3114B] connector/queries.gql [2742B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0219 04:42:12.521372    2722 control.go:100] [/emulator/studio-v0 bcca] UpdateResources(): done\nMain schema: sources: schema/schema.gql [3721B] \nConnector \"default\": sources: connector/mutations.gql [3114B] connector/queries.gql [2742B] \n"}}
+[debug] [2026-02-19T04:42:12.615Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"dataconnect"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2026-02-19T04:42:12.615Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"dataconnect"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2026-02-19T04:42:12.616Z] Starting Data Connect Emulator with command {"binary":"/home/user/.cache/firebase/emulators/dataconnect-emulator-3.1.1","args":["--logtostderr","-v=2","dev","--listen=localhost:50002","--config_dir=/home/user/studio/dataconnect","--enable_output_schema_extensions=true","--enable_output_generated_sdk=true"],"optionalArgs":["listen","config_dir","enable_output_schema_extensions","enable_output_generated_sdk"],"joinArgs":true,"shell":false,"port":9399} {"metadata":{"emulator":{"name":"dataconnect"},"message":"Starting Data Connect Emulator with command {\"binary\":\"/home/user/.cache/firebase/emulators/dataconnect-emulator-3.1.1\",\"args\":[\"--logtostderr\",\"-v=2\",\"dev\",\"--listen=localhost:50002\",\"--config_dir=/home/user/studio/dataconnect\",\"--enable_output_schema_extensions=true\",\"--enable_output_generated_sdk=true\"],\"optionalArgs\":[\"listen\",\"config_dir\",\"enable_output_schema_extensions\",\"enable_output_generated_sdk\"],\"joinArgs\":true,\"shell\":false,\"port\":9399}"}}
+[info] i  dataconnect: Data Connect Emulator logging to dataconnect-debug.log {"metadata":{"emulator":{"name":"dataconnect"},"message":"Data Connect Emulator logging to dataconnect-debug.log"}}
+[debug] [2026-02-19T04:42:12.746Z] I0219 04:42:12.669695    2745 load.go:31] Reloading schema and connectors...
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0219 04:42:12.669695    2745 load.go:31] Reloading schema and connectors...\n"}}
+[debug] [2026-02-19T04:42:12.994Z] I0219 04:42:12.992493    2745 control.go:100] [/emulator/studio-v0 8724] UpdateResources(): done
+Main schema: sources: schema/schema.gql [3721B] 
+Connector "default": sources: connector/mutations.gql [3114B] connector/queries.gql [2742B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0219 04:42:12.992493    2745 control.go:100] [/emulator/studio-v0 8724] UpdateResources(): done\nMain schema: sources: schema/schema.gql [3721B] \nConnector \"default\": sources: connector/mutations.gql [3114B] connector/queries.gql [2742B] \n"}}
+[debug] [2026-02-19T04:42:13.288Z] I0219 04:42:13.287934    2745 codegen.go:80] [connector "default" javascriptSdk] Generating sources into "/home/user/studio/dataconnect-generated/js/default-connector"
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0219 04:42:13.287934    2745 codegen.go:80] [connector \"default\" javascriptSdk] Generating sources into \"/home/user/studio/dataconnect-generated/js/default-connector\"\n"}}
+[debug] [2026-02-19T04:42:13.602Z] I0219 04:42:13.601328    2745 collector.go:107] schema extensions wrote into "/home/user/studio/dataconnect/.dataconnect/schema"
+Generated sources: prelude.gql [73281B] main/mutation.gql [41655B] main/implicit.gql [3267B] main/input.gql [122168B] main/relation.gql [51784B] main/query.gql [15655B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0219 04:42:13.601328    2745 collector.go:107] schema extensions wrote into \"/home/user/studio/dataconnect/.dataconnect/schema\"\nGenerated sources: prelude.gql [73281B] main/mutation.gql [41655B] main/implicit.gql [3267B] main/input.gql [122168B] main/relation.gql [51784B] main/query.gql [15655B] \n"}}
+[debug] [2026-02-19T04:42:13.904Z] I0219 04:42:13.902171    2745 collector.go:107] connector "default" javascriptSdk wrote into "/home/user/studio/dataconnect-generated/js/default-connector"
+Generated sources: esm/package.json [17B] index.cjs.js [11927B] react/package.json [468B] react/README.md [119315B] index.d.ts [24351B] esm/index.esm.js [10297B] react/index.d.ts [11972B] .guides/setup.md [1690B] .guides/config.json [236B] package.json [871B] react/esm/index.esm.js [9017B] README.md [114804B] react/esm/package.json [17B] react/index.cjs.js [9587B] .guides/usage.md [4476B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0219 04:42:13.902171    2745 collector.go:107] connector \"default\" javascriptSdk wrote into \"/home/user/studio/dataconnect-generated/js/default-connector\"\nGenerated sources: esm/package.json [17B] index.cjs.js [11927B] react/package.json [468B] react/README.md [119315B] index.d.ts [24351B] esm/index.esm.js [10297B] react/index.d.ts [11972B] .guides/setup.md [1690B] .guides/config.json [236B] package.json [871B] react/esm/index.esm.js [9017B] README.md [114804B] react/esm/package.json [17B] react/index.cjs.js [9587B] .guides/usage.md [4476B] \n"}}
+[debug] [2026-02-19T04:42:14.265Z] I0219 04:42:14.234695    2745 installsdk.go:55] Package @firebasegen/default-connector is already installed. Skipping installation
+I0219 04:42:14.234784    2745 load.go:109] Finished reloading
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0219 04:42:14.234695    2745 installsdk.go:55] Package @firebasegen/default-connector is already installed. Skipping installation\nI0219 04:42:14.234784    2745 load.go:109] Finished reloading\n"}}
+[debug] [2026-02-19T04:42:14.468Z] I0219 04:42:14.467733    2745 dev.go:104] Listening on address (HTTP + gRPC): 127.0.0.1:50002
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0219 04:42:14.467733    2745 dev.go:104] Listening on address (HTTP + gRPC): 127.0.0.1:50002\n"}}
+[debug] [2026-02-19T04:42:14.776Z] I0219 04:42:14.733816    2745 engine.go:205] [/emulator/studio-v0 8724] ExecuteGraphqlRead IntrospectionQuery: succeeded. 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0219 04:42:14.733816    2745 engine.go:205] [/emulator/studio-v0 8724] ExecuteGraphqlRead IntrospectionQuery: succeeded. \n"}}
+[info] [Firebase Plugin] Stopping Data Connect toolkit
+[warn] ⚠  Data Connect Emulator has exited upon receiving signal: SIGINT 
+[info] [Firebase Plugin] Stopping Data Connect toolkit
+[warn] ⚠  Data Connect Emulator has exited upon receiving signal: SIGINT 
+[debug] [2026-02-23T19:20:42.242Z] [Firebase Plugin] Activating Firebase extension.
+[debug] [2026-02-23T19:21:11.454Z] [Firebase Plugin] requireAuthWrapper
+[debug] [2026-02-23T19:21:11.457Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/userinfo.email"]
+[debug] [2026-02-23T19:21:11.459Z] > authorizing via signed-in user (lumacx@gmail.com)
+[debug] [2026-02-23T19:21:11.467Z] Checked if tokens are valid: false, expires at: 1771479084382
+[debug] [2026-02-23T19:21:11.468Z] Checked if tokens are valid: false, expires at: 1771479084382
+[debug] [2026-02-23T19:21:11.469Z] > refreshing access token with scopes: []
+[debug] [2026-02-23T19:21:11.475Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2026-02-23T19:21:11.476Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-02-23T19:21:11.614Z] [Firebase Plugin] VSCode notification server listening on port 40001
+[debug] [2026-02-23T19:21:11.862Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2026-02-23T19:21:11.866Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-02-23T19:21:11.957Z] [Firebase Plugin] User found:  lumacx@gmail.com
+[info] [Firebase Plugin] (Core:Project) New user detected, fetching projects
+[debug] [2026-02-23T19:21:11.966Z] Checked if tokens are valid: true, expires at: 1771878070867
+[debug] [2026-02-23T19:21:11.977Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=1000
+[info] [Firebase Plugin] Starting Data Connect toolkit (version 3.1.1) on port 50001
+[debug] [2026-02-23T19:21:17.156Z] I0223 19:21:16.963062     703 control.go:100] [/emulator/studio-v0 c589] UpdateResources(): done
+Main schema: sources: schema/schema.gql [3721B] 
+Connector "default": sources: connector/queries.gql [2742B] connector/mutations.gql [3114B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0223 19:21:16.963062     703 control.go:100] [/emulator/studio-v0 c589] UpdateResources(): done\nMain schema: sources: schema/schema.gql [3721B] \nConnector \"default\": sources: connector/queries.gql [2742B] connector/mutations.gql [3114B] \n"}}
+[debug] [2026-02-23T19:21:17.159Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"dataconnect"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2026-02-23T19:21:17.160Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"dataconnect"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2026-02-23T19:21:17.161Z] Starting Data Connect Emulator with command {"binary":"/home/user/.cache/firebase/emulators/dataconnect-emulator-3.1.1","args":["--logtostderr","-v=2","dev","--listen=localhost:50001","--config_dir=/home/user/studio/dataconnect","--enable_output_schema_extensions=true","--enable_output_generated_sdk=true"],"optionalArgs":["listen","config_dir","enable_output_schema_extensions","enable_output_generated_sdk"],"joinArgs":true,"shell":false,"port":9399} {"metadata":{"emulator":{"name":"dataconnect"},"message":"Starting Data Connect Emulator with command {\"binary\":\"/home/user/.cache/firebase/emulators/dataconnect-emulator-3.1.1\",\"args\":[\"--logtostderr\",\"-v=2\",\"dev\",\"--listen=localhost:50001\",\"--config_dir=/home/user/studio/dataconnect\",\"--enable_output_schema_extensions=true\",\"--enable_output_generated_sdk=true\"],\"optionalArgs\":[\"listen\",\"config_dir\",\"enable_output_schema_extensions\",\"enable_output_generated_sdk\"],\"joinArgs\":true,\"shell\":false,\"port\":9399}"}}
+[info] i  dataconnect: Data Connect Emulator logging to dataconnect-debug.log {"metadata":{"emulator":{"name":"dataconnect"},"message":"Data Connect Emulator logging to dataconnect-debug.log"}}
+[debug] [2026-02-23T19:21:17.361Z] I0223 19:21:17.258600     708 load.go:31] Reloading schema and connectors...
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0223 19:21:17.258600     708 load.go:31] Reloading schema and connectors...\n"}}
+[debug] [2026-02-23T19:21:18.072Z] I0223 19:21:18.029991     708 control.go:100] [/emulator/studio-v0 db00] UpdateResources(): done
+Main schema: sources: schema/schema.gql [3721B] 
+Connector "default": sources: connector/mutations.gql [3114B] connector/queries.gql [2742B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0223 19:21:18.029991     708 control.go:100] [/emulator/studio-v0 db00] UpdateResources(): done\nMain schema: sources: schema/schema.gql [3721B] \nConnector \"default\": sources: connector/mutations.gql [3114B] connector/queries.gql [2742B] \n"}}
+[debug] [2026-02-23T19:21:18.174Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2026-02-23T19:21:18.175Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[debug] [2026-02-23T19:21:18.629Z] I0223 19:21:18.574519     708 codegen.go:80] [connector "default" javascriptSdk] Generating sources into "/home/user/studio/dataconnect-generated/js/default-connector"
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0223 19:21:18.574519     708 codegen.go:80] [connector \"default\" javascriptSdk] Generating sources into \"/home/user/studio/dataconnect-generated/js/default-connector\"\n"}}
+[debug] [2026-02-23T19:21:18.673Z] I0223 19:21:18.672972     708 collector.go:107] schema extensions wrote into "/home/user/studio/dataconnect/.dataconnect/schema"
+Generated sources: main/mutation.gql [41655B] main/implicit.gql [3267B] prelude.gql [73281B] main/input.gql [122168B] main/relation.gql [51784B] main/query.gql [15655B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0223 19:21:18.672972     708 collector.go:107] schema extensions wrote into \"/home/user/studio/dataconnect/.dataconnect/schema\"\nGenerated sources: main/mutation.gql [41655B] main/implicit.gql [3267B] prelude.gql [73281B] main/input.gql [122168B] main/relation.gql [51784B] main/query.gql [15655B] \n"}}
+[debug] [2026-02-23T19:21:18.735Z] I0223 19:21:18.725135     708 collector.go:107] connector "default" javascriptSdk wrote into "/home/user/studio/dataconnect-generated/js/default-connector"
+Generated sources: esm/package.json [17B] index.cjs.js [11927B] react/index.d.ts [11972B] react/package.json [468B] react/esm/index.esm.js [9017B] .guides/config.json [236B] index.d.ts [24351B] esm/index.esm.js [10297B] README.md [114804B] package.json [871B] react/index.cjs.js [9587B] react/esm/package.json [17B] react/README.md [119315B] .guides/usage.md [4476B] .guides/setup.md [1690B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0223 19:21:18.725135     708 collector.go:107] connector \"default\" javascriptSdk wrote into \"/home/user/studio/dataconnect-generated/js/default-connector\"\nGenerated sources: esm/package.json [17B] index.cjs.js [11927B] react/index.d.ts [11972B] react/package.json [468B] react/esm/index.esm.js [9017B] .guides/config.json [236B] index.d.ts [24351B] esm/index.esm.js [10297B] README.md [114804B] package.json [871B] react/index.cjs.js [9587B] react/esm/package.json [17B] react/README.md [119315B] .guides/usage.md [4476B] .guides/setup.md [1690B] \n"}}
+[debug] [2026-02-23T19:21:18.763Z] I0223 19:21:18.763398     708 installsdk.go:55] Package @firebasegen/default-connector is already installed. Skipping installation
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0223 19:21:18.763398     708 installsdk.go:55] Package @firebasegen/default-connector is already installed. Skipping installation\n"}}
+[debug] [2026-02-23T19:21:18.772Z] I0223 19:21:18.763477     708 load.go:109] Finished reloading
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0223 19:21:18.763477     708 load.go:109] Finished reloading\n"}}
+[debug] [2026-02-23T19:21:18.788Z] I0223 19:21:18.787696     708 dev.go:104] Listening on address (HTTP + gRPC): 127.0.0.1:50001
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0223 19:21:18.787696     708 dev.go:104] Listening on address (HTTP + gRPC): 127.0.0.1:50001\n"}}
+[debug] [2026-02-23T19:21:35.201Z] I0223 19:21:19.139561     708 engine.go:205] [/emulator/studio-v0 db00] ExecuteGraphqlRead IntrospectionQuery: succeeded. 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0223 19:21:19.139561     708 engine.go:205] [/emulator/studio-v0 db00] ExecuteGraphqlRead IntrospectionQuery: succeeded. \n"}}
+[debug] [2026-02-23T19:33:59.450Z] I0223 19:33:58.926216     708 load.go:31] Reloading schema and connectors...
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0223 19:33:58.926216     708 load.go:31] Reloading schema and connectors...\n"}}
+[debug] [2026-02-23T19:34:01.172Z] W0223 19:34:01.130676     708 control.go:74] [/emulator/studio-v0 2f3e] connector "default" has errors: connector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`
+
+sources: connector/queries.gql [2756B] connector/mutations.gql [3114B] 
+I0223 19:34:01.171887     708 control.go:100] [/emulator/studio-v0 2f3e] UpdateResources(): done
+Main schema: sources: schema/schema.gql [3721B] 
+Connector "default": sources: connector/mutations.gql [3114B] connector/queries.gql [2756B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"W0223 19:34:01.130676     708 control.go:74] [/emulator/studio-v0 2f3e] connector \"default\" has errors: connector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`\n\nsources: connector/queries.gql [2756B] connector/mutations.gql [3114B] \nI0223 19:34:01.171887     708 control.go:100] [/emulator/studio-v0 2f3e] UpdateResources(): done\nMain schema: sources: schema/schema.gql [3721B] \nConnector \"default\": sources: connector/mutations.gql [3114B] connector/queries.gql [2756B] \n"}}
+[debug] [2026-02-23T19:34:01.190Z] E0223 19:34:01.188737     708 load.go:73] Could not load sources: 
+Errors: connector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"E0223 19:34:01.188737     708 load.go:73] Could not load sources: \nErrors: connector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`\n"}}
+[debug] [2026-02-23T19:34:01.215Z] I0223 19:34:01.214525     708 collector.go:107] schema extensions wrote into "/home/user/studio/dataconnect/.dataconnect/schema"
+Generated sources: main/query.gql [15655B] main/mutation.gql [41655B] prelude.gql [73281B] main/implicit.gql [3267B] main/input.gql [122168B] main/relation.gql [51784B] 
+I0223 19:34:01.214572     708 load.go:74] Finished reloading
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0223 19:34:01.214525     708 collector.go:107] schema extensions wrote into \"/home/user/studio/dataconnect/.dataconnect/schema\"\nGenerated sources: main/query.gql [15655B] main/mutation.gql [41655B] prelude.gql [73281B] main/implicit.gql [3267B] main/input.gql [122168B] main/relation.gql [51784B] \nI0223 19:34:01.214572     708 load.go:74] Finished reloading\n"}}
+[debug] [2026-02-23T19:34:58.787Z] I0223 19:34:58.786596     708 load.go:31] Reloading schema and connectors...
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0223 19:34:58.786596     708 load.go:31] Reloading schema and connectors...\n"}}
+[debug] [2026-02-23T19:34:59.179Z] W0223 19:34:59.177015     708 control.go:74] [/emulator/studio-v0 731a] connector "default" has errors: connector/queries.gql:4:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:17:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`
+
+sources: connector/mutations.gql [3114B] connector/queries.gql [2800B] 
+I0223 19:34:59.177097     708 control.go:100] [/emulator/studio-v0 731a] UpdateResources(): done
+Main schema: sources: schema/schema.gql [3721B] 
+Connector "default": sources: connector/mutations.gql [3114B] connector/queries.gql [2800B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"W0223 19:34:59.177015     708 control.go:74] [/emulator/studio-v0 731a] connector \"default\" has errors: connector/queries.gql:4:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:17:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`\n\nsources: connector/mutations.gql [3114B] connector/queries.gql [2800B] \nI0223 19:34:59.177097     708 control.go:100] [/emulator/studio-v0 731a] UpdateResources(): done\nMain schema: sources: schema/schema.gql [3721B] \nConnector \"default\": sources: connector/mutations.gql [3114B] connector/queries.gql [2800B] \n"}}
+[debug] [2026-02-23T19:34:59.186Z] E0223 19:34:59.185297     708 load.go:73] Could not load sources: 
+Errors: connector/queries.gql:4:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:17:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"E0223 19:34:59.185297     708 load.go:73] Could not load sources: \nErrors: connector/queries.gql:4:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:17:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`\n"}}
+[debug] [2026-02-23T19:34:59.197Z] I0223 19:34:59.192899     708 collector.go:107] schema extensions wrote into "/home/user/studio/dataconnect/.dataconnect/schema"
+Generated sources: prelude.gql [73281B] main/implicit.gql [3267B] main/input.gql [122168B] main/relation.gql [51784B] main/query.gql [15655B] main/mutation.gql [41655B] 
+I0223 19:34:59.192946     708 load.go:74] Finished reloading
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0223 19:34:59.192899     708 collector.go:107] schema extensions wrote into \"/home/user/studio/dataconnect/.dataconnect/schema\"\nGenerated sources: prelude.gql [73281B] main/implicit.gql [3267B] main/input.gql [122168B] main/relation.gql [51784B] main/query.gql [15655B] main/mutation.gql [41655B] \nI0223 19:34:59.192946     708 load.go:74] Finished reloading\n"}}
+[debug] [2026-02-23T19:35:08.814Z] I0223 19:35:08.785424     708 load.go:31] Reloading schema and connectors...
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0223 19:35:08.785424     708 load.go:31] Reloading schema and connectors...\n"}}
+[debug] [2026-02-23T19:35:09.277Z] W0223 19:35:09.264842     708 control.go:74] [/emulator/studio-v0 be1f] connector "default" has errors: connector/queries.gql:4:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:17:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:63:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:73:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:82:1: On @auth: cannot specify both `level` and `expr`
+
+sources: connector/mutations.gql [3114B] connector/queries.gql [2866B] 
+I0223 19:35:09.264911     708 control.go:100] [/emulator/studio-v0 be1f] UpdateResources(): done
+Main schema: sources: schema/schema.gql [3721B] 
+Connector "default": sources: connector/mutations.gql [3114B] connector/queries.gql [2866B] 
+E0223 19:35:09.271621     708 load.go:73] Could not load sources: 
+Errors: connector/queries.gql:4:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:17:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:63:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:73:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:82:1: On @auth: cannot specify both `level` and `expr`
+I0223 19:35:09.275315     708 collector.go:107] schema extensions wrote into "/home/user/studio/dataconnect/.dataconnect/schema"
+Generated sources: prelude.gql [73281B] main/input.gql [122168B] main/relation.gql [51784B] main/query.gql [15655B] main/mutation.gql [41655B] main/implicit.gql [3267B] 
+I0223 19:35:09.275460     708 load.go:74] Finished reloading
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"W0223 19:35:09.264842     708 control.go:74] [/emulator/studio-v0 be1f] connector \"default\" has errors: connector/queries.gql:4:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:17:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:63:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:73:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:82:1: On @auth: cannot specify both `level` and `expr`\n\nsources: connector/mutations.gql [3114B] connector/queries.gql [2866B] \nI0223 19:35:09.264911     708 control.go:100] [/emulator/studio-v0 be1f] UpdateResources(): done\nMain schema: sources: schema/schema.gql [3721B] \nConnector \"default\": sources: connector/mutations.gql [3114B] connector/queries.gql [2866B] \nE0223 19:35:09.271621     708 load.go:73] Could not load sources: \nErrors: connector/queries.gql:4:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:17:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:63:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:73:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:82:1: On @auth: cannot specify both `level` and `expr`\nI0223 19:35:09.275315     708 collector.go:107] schema extensions wrote into \"/home/user/studio/dataconnect/.dataconnect/schema\"\nGenerated sources: prelude.gql [73281B] main/input.gql [122168B] main/relation.gql [51784B] main/query.gql [15655B] main/mutation.gql [41655B] main/implicit.gql [3267B] \nI0223 19:35:09.275460     708 load.go:74] Finished reloading\n"}}
+[debug] [2026-02-23T19:35:18.778Z] I0223 19:35:18.777589     708 load.go:31] Reloading schema and connectors...
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0223 19:35:18.777589     708 load.go:31] Reloading schema and connectors...\n"}}
+[debug] [2026-02-23T19:35:18.965Z] W0223 19:35:18.964660     708 control.go:74] [/emulator/studio-v0 05c8] connector "default" has errors: connector/queries.gql:4:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:17:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:63:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:73:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:82:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:91:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:102:1: On @auth: cannot specify both `level` and `expr`
+
+sources: connector/mutations.gql [3114B] connector/queries.gql [2910B] 
+I0223 19:35:18.964804     708 control.go:100] [/emulator/studio-v0 05c8] UpdateResources(): done
+Main schema: sources: schema/schema.gql [3721B] 
+Connector "default": sources: connector/queries.gql [2910B] connector/mutations.gql [3114B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"W0223 19:35:18.964660     708 control.go:74] [/emulator/studio-v0 05c8] connector \"default\" has errors: connector/queries.gql:4:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:17:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:63:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:73:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:82:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:91:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:102:1: On @auth: cannot specify both `level` and `expr`\n\nsources: connector/mutations.gql [3114B] connector/queries.gql [2910B] \nI0223 19:35:18.964804     708 control.go:100] [/emulator/studio-v0 05c8] UpdateResources(): done\nMain schema: sources: schema/schema.gql [3721B] \nConnector \"default\": sources: connector/queries.gql [2910B] connector/mutations.gql [3114B] \n"}}
+[debug] [2026-02-23T19:35:18.974Z] E0223 19:35:18.974251     708 load.go:73] Could not load sources: 
+Errors: connector/queries.gql:4:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:17:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:63:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:73:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:82:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:91:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:102:1: On @auth: cannot specify both `level` and `expr`
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"E0223 19:35:18.974251     708 load.go:73] Could not load sources: \nErrors: connector/queries.gql:4:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:17:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:63:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:73:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:82:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:91:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:102:1: On @auth: cannot specify both `level` and `expr`\n"}}
+[debug] [2026-02-23T19:35:18.986Z] I0223 19:35:18.986035     708 collector.go:107] schema extensions wrote into "/home/user/studio/dataconnect/.dataconnect/schema"
+Generated sources: main/implicit.gql [3267B] main/input.gql [122168B] main/relation.gql [51784B] prelude.gql [73281B] main/query.gql [15655B] main/mutation.gql [41655B] 
+I0223 19:35:18.986085     708 load.go:74] Finished reloading
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0223 19:35:18.986035     708 collector.go:107] schema extensions wrote into \"/home/user/studio/dataconnect/.dataconnect/schema\"\nGenerated sources: main/implicit.gql [3267B] main/input.gql [122168B] main/relation.gql [51784B] prelude.gql [73281B] main/query.gql [15655B] main/mutation.gql [41655B] \nI0223 19:35:18.986085     708 load.go:74] Finished reloading\n"}}
+[debug] [2026-02-23T19:35:28.801Z] I0223 19:35:28.786514     708 load.go:31] Reloading schema and connectors...
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0223 19:35:28.786514     708 load.go:31] Reloading schema and connectors...\n"}}
+[debug] [2026-02-23T19:35:29.162Z] W0223 19:35:29.151083     708 control.go:74] [/emulator/studio-v0 92ae] connector "default" has errors: connector/queries.gql:4:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:17:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:63:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:73:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:82:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:91:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:102:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:110:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:120:1: On @auth: cannot specify both `level` and `expr`
+
+sources: connector/mutations.gql [3114B] connector/queries.gql [2954B] 
+I0223 19:35:29.151197     708 control.go:100] [/emulator/studio-v0 92ae] UpdateResources(): done
+Main schema: sources: schema/schema.gql [3721B] 
+Connector "default": sources: connector/mutations.gql [3114B] connector/queries.gql [2954B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"W0223 19:35:29.151083     708 control.go:74] [/emulator/studio-v0 92ae] connector \"default\" has errors: connector/queries.gql:4:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:17:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:63:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:73:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:82:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:91:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:102:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:110:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:120:1: On @auth: cannot specify both `level` and `expr`\n\nsources: connector/mutations.gql [3114B] connector/queries.gql [2954B] \nI0223 19:35:29.151197     708 control.go:100] [/emulator/studio-v0 92ae] UpdateResources(): done\nMain schema: sources: schema/schema.gql [3721B] \nConnector \"default\": sources: connector/mutations.gql [3114B] connector/queries.gql [2954B] \n"}}
+[debug] [2026-02-23T19:35:29.190Z] E0223 19:35:29.175566     708 load.go:73] Could not load sources: 
+Errors: connector/queries.gql:4:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:17:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:63:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:73:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:82:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:91:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:102:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:110:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:120:1: On @auth: cannot specify both `level` and `expr`
+I0223 19:35:29.180414     708 collector.go:107] schema extensions wrote into "/home/user/studio/dataconnect/.dataconnect/schema"
+Generated sources: main/query.gql [15655B] prelude.gql [73281B] main/mutation.gql [41655B] main/implicit.gql [3267B] main/input.gql [122168B] main/relation.gql [51784B] 
+I0223 19:35:29.180455     708 load.go:74] Finished reloading
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"E0223 19:35:29.175566     708 load.go:73] Could not load sources: \nErrors: connector/queries.gql:4:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:17:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:63:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:73:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:82:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:91:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:102:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:110:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:120:1: On @auth: cannot specify both `level` and `expr`\nI0223 19:35:29.180414     708 collector.go:107] schema extensions wrote into \"/home/user/studio/dataconnect/.dataconnect/schema\"\nGenerated sources: main/query.gql [15655B] prelude.gql [73281B] main/mutation.gql [41655B] main/implicit.gql [3267B] main/input.gql [122168B] main/relation.gql [51784B] \nI0223 19:35:29.180455     708 load.go:74] Finished reloading\n"}}
+[debug] [2026-02-23T19:35:38.790Z] I0223 19:35:38.785350     708 load.go:31] Reloading schema and connectors...
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0223 19:35:38.785350     708 load.go:31] Reloading schema and connectors...\n"}}
+[debug] [2026-02-23T19:35:39.093Z] W0223 19:35:39.092512     708 control.go:74] [/emulator/studio-v0 5137] connector "default" has errors: connector/queries.gql:4:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:17:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:63:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:73:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:82:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:91:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:102:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:110:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:120:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:131:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:140:1: On @auth: cannot specify both `level` and `expr`
+
+sources: connector/mutations.gql [3114B] connector/queries.gql [2998B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"W0223 19:35:39.092512     708 control.go:74] [/emulator/studio-v0 5137] connector \"default\" has errors: connector/queries.gql:4:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:17:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:63:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:73:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:82:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:91:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:102:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:110:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:120:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:131:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:140:1: On @auth: cannot specify both `level` and `expr`\n\nsources: connector/mutations.gql [3114B] connector/queries.gql [2998B] \n"}}
+[debug] [2026-02-23T19:35:39.095Z] I0223 19:35:39.094720     708 control.go:100] [/emulator/studio-v0 5137] UpdateResources(): done
+Main schema: sources: schema/schema.gql [3721B] 
+Connector "default": sources: connector/mutations.gql [3114B] connector/queries.gql [2998B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0223 19:35:39.094720     708 control.go:100] [/emulator/studio-v0 5137] UpdateResources(): done\nMain schema: sources: schema/schema.gql [3721B] \nConnector \"default\": sources: connector/mutations.gql [3114B] connector/queries.gql [2998B] \n"}}
+[debug] [2026-02-23T19:35:39.108Z] E0223 19:35:39.106570     708 load.go:73] Could not load sources: 
+Errors: connector/queries.gql:4:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:17:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:63:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:73:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:82:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:91:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:102:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:110:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:120:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:131:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:140:1: On @auth: cannot specify both `level` and `expr`
+I0223 19:35:39.108049     708 collector.go:107] schema extensions wrote into "/home/user/studio/dataconnect/.dataconnect/schema"
+Generated sources: prelude.gql [73281B] main/relation.gql [51784B] main/query.gql [15655B] main/mutation.gql [41655B] main/implicit.gql [3267B] main/input.gql [122168B] 
+I0223 19:35:39.108085     708 load.go:74] Finished reloading
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"E0223 19:35:39.106570     708 load.go:73] Could not load sources: \nErrors: connector/queries.gql:4:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:17:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:63:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:73:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:82:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:91:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:102:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:110:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:120:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:131:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:140:1: On @auth: cannot specify both `level` and `expr`\nI0223 19:35:39.108049     708 collector.go:107] schema extensions wrote into \"/home/user/studio/dataconnect/.dataconnect/schema\"\nGenerated sources: prelude.gql [73281B] main/relation.gql [51784B] main/query.gql [15655B] main/mutation.gql [41655B] main/implicit.gql [3267B] main/input.gql [122168B] \nI0223 19:35:39.108085     708 load.go:74] Finished reloading\n"}}
+[debug] [2026-02-23T19:35:58.787Z] I0223 19:35:58.787323     708 load.go:31] Reloading schema and connectors...
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0223 19:35:58.787323     708 load.go:31] Reloading schema and connectors...\n"}}
+[debug] [2026-02-23T19:35:59.069Z] W0223 19:35:59.069186     708 control.go:74] [/emulator/studio-v0 5467] connector "default" has errors: connector/mutations.gql:8:1: On @auth: cannot specify both `level` and `expr`
+connector/mutations.gql:11:1: On @auth: cannot specify both `level` and `expr`
+connector/mutations.gql:26:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:4:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:17:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:63:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:73:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:82:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:91:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:102:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:110:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:120:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:131:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:140:1: On @auth: cannot specify both `level` and `expr`
+
+sources: connector/mutations.gql [3180B] connector/queries.gql [2998B] 
+I0223 19:35:59.069303     708 control.go:100] [/emulator/studio-v0 5467] UpdateResources(): done
+Main schema: sources: schema/schema.gql [3721B] 
+Connector "default": sources: connector/queries.gql [2998B] connector/mutations.gql [3180B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"W0223 19:35:59.069186     708 control.go:74] [/emulator/studio-v0 5467] connector \"default\" has errors: connector/mutations.gql:8:1: On @auth: cannot specify both `level` and `expr`\nconnector/mutations.gql:11:1: On @auth: cannot specify both `level` and `expr`\nconnector/mutations.gql:26:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:4:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:17:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:63:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:73:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:82:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:91:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:102:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:110:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:120:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:131:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:140:1: On @auth: cannot specify both `level` and `expr`\n\nsources: connector/mutations.gql [3180B] connector/queries.gql [2998B] \nI0223 19:35:59.069303     708 control.go:100] [/emulator/studio-v0 5467] UpdateResources(): done\nMain schema: sources: schema/schema.gql [3721B] \nConnector \"default\": sources: connector/queries.gql [2998B] connector/mutations.gql [3180B] \n"}}
+[debug] [2026-02-23T19:35:59.082Z] E0223 19:35:59.078917     708 load.go:73] Could not load sources: 
+Errors: connector/mutations.gql:8:1: On @auth: cannot specify both `level` and `expr`
+connector/mutations.gql:11:1: On @auth: cannot specify both `level` and `expr`
+connector/mutations.gql:26:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:4:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:17:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:63:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:73:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:82:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:91:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:102:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:110:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:120:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:131:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:140:1: On @auth: cannot specify both `level` and `expr`
+I0223 19:35:59.081279     708 collector.go:107] schema extensions wrote into "/home/user/studio/dataconnect/.dataconnect/schema"
+Generated sources: main/relation.gql [51784B] main/query.gql [15655B] prelude.gql [73281B] main/mutation.gql [41655B] main/implicit.gql [3267B] main/input.gql [122168B] 
+I0223 19:35:59.081316     708 load.go:74] Finished reloading
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"E0223 19:35:59.078917     708 load.go:73] Could not load sources: \nErrors: connector/mutations.gql:8:1: On @auth: cannot specify both `level` and `expr`\nconnector/mutations.gql:11:1: On @auth: cannot specify both `level` and `expr`\nconnector/mutations.gql:26:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:4:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:17:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:63:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:73:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:82:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:91:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:102:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:110:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:120:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:131:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:140:1: On @auth: cannot specify both `level` and `expr`\nI0223 19:35:59.081279     708 collector.go:107] schema extensions wrote into \"/home/user/studio/dataconnect/.dataconnect/schema\"\nGenerated sources: main/relation.gql [51784B] main/query.gql [15655B] prelude.gql [73281B] main/mutation.gql [41655B] main/implicit.gql [3267B] main/input.gql [122168B] \nI0223 19:35:59.081316     708 load.go:74] Finished reloading\n"}}
+[debug] [2026-02-23T19:36:08.787Z] I0223 19:36:08.785527     708 load.go:31] Reloading schema and connectors...
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0223 19:36:08.785527     708 load.go:31] Reloading schema and connectors...\n"}}
+[debug] [2026-02-23T19:36:08.974Z] W0223 19:36:08.973564     708 control.go:74] [/emulator/studio-v0 ec1e] connector "default" has errors: connector/mutations.gql:8:1: On @auth: cannot specify both `level` and `expr`
+connector/mutations.gql:11:1: On @auth: cannot specify both `level` and `expr`
+connector/mutations.gql:26:1: On @auth: cannot specify both `level` and `expr`
+connector/mutations.gql:43:1: On @auth: cannot specify both `level` and `expr`
+connector/mutations.gql:57:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:4:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:17:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:63:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:73:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:82:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:91:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:102:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:110:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:120:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:131:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:140:1: On @auth: cannot specify both `level` and `expr`
+
+sources: connector/mutations.gql [3224B] connector/queries.gql [2998B] 
+I0223 19:36:08.973695     708 control.go:100] [/emulator/studio-v0 ec1e] UpdateResources(): done
+Main schema: sources: schema/schema.gql [3721B] 
+Connector "default": sources: connector/mutations.gql [3224B] connector/queries.gql [2998B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"W0223 19:36:08.973564     708 control.go:74] [/emulator/studio-v0 ec1e] connector \"default\" has errors: connector/mutations.gql:8:1: On @auth: cannot specify both `level` and `expr`\nconnector/mutations.gql:11:1: On @auth: cannot specify both `level` and `expr`\nconnector/mutations.gql:26:1: On @auth: cannot specify both `level` and `expr`\nconnector/mutations.gql:43:1: On @auth: cannot specify both `level` and `expr`\nconnector/mutations.gql:57:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:4:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:17:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:63:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:73:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:82:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:91:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:102:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:110:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:120:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:131:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:140:1: On @auth: cannot specify both `level` and `expr`\n\nsources: connector/mutations.gql [3224B] connector/queries.gql [2998B] \nI0223 19:36:08.973695     708 control.go:100] [/emulator/studio-v0 ec1e] UpdateResources(): done\nMain schema: sources: schema/schema.gql [3721B] \nConnector \"default\": sources: connector/mutations.gql [3224B] connector/queries.gql [2998B] \n"}}
+[debug] [2026-02-23T19:36:08.983Z] E0223 19:36:08.983544     708 load.go:73] Could not load sources: 
+Errors: connector/mutations.gql:8:1: On @auth: cannot specify both `level` and `expr`
+connector/mutations.gql:11:1: On @auth: cannot specify both `level` and `expr`
+connector/mutations.gql:26:1: On @auth: cannot specify both `level` and `expr`
+connector/mutations.gql:43:1: On @auth: cannot specify both `level` and `expr`
+connector/mutations.gql:57:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:4:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:17:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:63:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:73:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:82:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:91:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:102:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:110:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:120:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:131:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:140:1: On @auth: cannot specify both `level` and `expr`
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"E0223 19:36:08.983544     708 load.go:73] Could not load sources: \nErrors: connector/mutations.gql:8:1: On @auth: cannot specify both `level` and `expr`\nconnector/mutations.gql:11:1: On @auth: cannot specify both `level` and `expr`\nconnector/mutations.gql:26:1: On @auth: cannot specify both `level` and `expr`\nconnector/mutations.gql:43:1: On @auth: cannot specify both `level` and `expr`\nconnector/mutations.gql:57:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:4:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:17:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:63:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:73:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:82:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:91:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:102:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:110:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:120:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:131:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:140:1: On @auth: cannot specify both `level` and `expr`\n"}}
+[debug] [2026-02-23T19:36:08.989Z] I0223 19:36:08.988185     708 collector.go:107] schema extensions wrote into "/home/user/studio/dataconnect/.dataconnect/schema"
+Generated sources: prelude.gql [73281B] main/mutation.gql [41655B] main/implicit.gql [3267B] main/input.gql [122168B] main/relation.gql [51784B] main/query.gql [15655B] 
+I0223 19:36:08.988228     708 load.go:74] Finished reloading
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0223 19:36:08.988185     708 collector.go:107] schema extensions wrote into \"/home/user/studio/dataconnect/.dataconnect/schema\"\nGenerated sources: prelude.gql [73281B] main/mutation.gql [41655B] main/implicit.gql [3267B] main/input.gql [122168B] main/relation.gql [51784B] main/query.gql [15655B] \nI0223 19:36:08.988228     708 load.go:74] Finished reloading\n"}}

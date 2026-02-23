@@ -1,5 +1,5 @@
 // functions/src/genkit.ts
-import * as functions from "firebase-functions";
+import * as functions from "firebase-functions/v1";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 /**
@@ -16,7 +16,7 @@ let _model: ReturnType<GoogleGenerativeAI["getGenerativeModel"]> | null = null;
 
 function getApiKey(): string {
   // 1) firebase functions:config:set genai.apikey="XYZ"
-  const cfgKey = functions.config()?.genai?.apikey as string | undefined;
+  const cfgKey = (functions as any).config?.()?.genai?.apikey as string | undefined;
   // 2) variables de entorno comunes
   const envKey =
     process.env.GOOGLE_GENAI_API_KEY ||

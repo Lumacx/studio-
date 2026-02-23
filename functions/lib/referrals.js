@@ -35,7 +35,7 @@ var __importStar = (this && this.__importStar) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ensureReferralCodeOnUpdate = exports.ensureReferralCodeOnCreate = void 0;
 // functions/src/referrals.ts
-const functions = __importStar(require("firebase-functions"));
+const functions = __importStar(require("firebase-functions/v1"));
 const firebaseAdmin_1 = require("./firebaseAdmin");
 const USERS = 'users';
 const MAX_SUFFIX_TRIES = 50;

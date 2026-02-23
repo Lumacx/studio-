@@ -35,7 +35,7 @@ var __importStar = (this && this.__importStar) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.redeemPromoCode = void 0;
 //functions/src/promoCodes.ts
-const functions = __importStar(require("firebase-functions"));
+const functions = __importStar(require("firebase-functions/v1"));
 const firebaseAdmin_1 = require("./firebaseAdmin");
 exports.redeemPromoCode = functions.https.onCall(async (data, context) => {
     if (!context.auth) {

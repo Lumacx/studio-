@@ -1,5 +1,5 @@
 // functions/src/index.ts
-import * as functions from 'firebase-functions';
+import * as functions from 'firebase-functions/v1';
 import * as admin from 'firebase-admin';
 
 import type {

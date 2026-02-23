@@ -34,7 +34,7 @@ var __importStar = (this && this.__importStar) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.generateNarratumImage = void 0;
-const functions = __importStar(require("firebase-functions"));
+const functions = __importStar(require("firebase-functions/v1"));
 const uuid_1 = require("uuid");
 const node_buffer_1 = require("node:buffer");
 const genkit_1 = require("./genkit");

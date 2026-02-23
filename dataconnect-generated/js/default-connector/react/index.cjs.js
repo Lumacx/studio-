@@ -76,8 +76,8 @@ exports.useCreateAnalyticsEntry = function useCreateAnalyticsEntry(dcOrOptions, 
 
 exports.useLogLegalDisclaimerAcceptance = function useLogLegalDisclaimerAcceptance(dcOrOptions, options) {
   const { dc: dcInstance, vars: inputOpts } = validateArgs(connectorConfig, dcOrOptions, options);
-  function refFactory(vars) {
-    return logLegalDisclaimerAcceptanceRef(dcInstance, vars);
+  function refFactory() {
+    return logLegalDisclaimerAcceptanceRef(dcInstance);
   }
   return useDataConnectMutation(refFactory, inputOpts, CallerSdkTypeEnum.GeneratedReact);
 }

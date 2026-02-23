@@ -1,4 +1,4 @@
-import * as functions from 'firebase-functions';
+import * as functions from 'firebase-functions/v1';
 import { getPayPalAccessToken, resolvePayPalBase } from './utils/paypal';
 
 // Keep these in one place (server is SoT). Consider moving to Firestore config.

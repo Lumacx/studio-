@@ -1,13 +1,237 @@
-I0112 18:37:58.002712   12233 load.go:31] Reloading schema and connectors...
-I0112 18:37:58.658073   12233 control.go:94] [/emulator/studio-v0 9573] UpdateResources(): done
+I0223 19:21:17.258600     708 load.go:31] Reloading schema and connectors...
+I0223 19:21:18.029991     708 control.go:100] [/emulator/studio-v0 db00] UpdateResources(): done
 Main schema: sources: schema/schema.gql [3721B] 
-Connector "default": sources: connector/mutations.gql [3182B] connector/queries.gql [2742B] 
-I0112 18:37:59.471027   12233 codegen.go:80] [connector "default" javascriptSdk] Generating sources into "/home/user/studio/dataconnect-generated/js/default-connector"
-I0112 18:37:59.754378   12233 collector.go:107] schema extensions wrote into "/home/user/studio/dataconnect/.dataconnect/schema"
-Generated sources: main/input.gql [122168B] main/relation.gql [51784B] main/query.gql [15655B] main/mutation.gql [41655B] prelude.gql [73219B] main/implicit.gql [3267B] 
-I0112 18:37:59.773396   12233 collector.go:107] connector "default" javascriptSdk wrote into "/home/user/studio/dataconnect-generated/js/default-connector"
-Generated sources: .guides/setup.md [1690B] esm/index.esm.js [10374B] react/esm/package.json [17B] react/index.cjs.js [9597B] react/package.json [468B] .guides/config.json [236B] react/README.md [119856B] index.d.ts [24807B] esm/package.json [17B] package.json [871B] README.md [116341B] react/esm/index.esm.js [9027B] index.cjs.js [12004B] react/index.d.ts [12119B] .guides/usage.md [4620B] 
-I0112 18:37:59.839115   12233 installsdk.go:55] Package @firebasegen/default-connector is already installed. Skipping installation
-I0112 18:37:59.839244   12233 load.go:109] Finished reloading
-I0112 18:37:59.912922   12233 dev.go:104] Listening on address (HTTP + gRPC): 127.0.0.1:50001
-I0112 18:38:01.630592   12233 engine.go:179] [/emulator/studio-v0 9573] ExecuteGraphqlRead IntrospectionQuery: succeeded. 
+Connector "default": sources: connector/mutations.gql [3114B] connector/queries.gql [2742B] 
+I0223 19:21:18.574519     708 codegen.go:80] [connector "default" javascriptSdk] Generating sources into "/home/user/studio/dataconnect-generated/js/default-connector"
+I0223 19:21:18.672972     708 collector.go:107] schema extensions wrote into "/home/user/studio/dataconnect/.dataconnect/schema"
+Generated sources: main/mutation.gql [41655B] main/implicit.gql [3267B] prelude.gql [73281B] main/input.gql [122168B] main/relation.gql [51784B] main/query.gql [15655B] 
+I0223 19:21:18.725135     708 collector.go:107] connector "default" javascriptSdk wrote into "/home/user/studio/dataconnect-generated/js/default-connector"
+Generated sources: esm/package.json [17B] index.cjs.js [11927B] react/index.d.ts [11972B] react/package.json [468B] react/esm/index.esm.js [9017B] .guides/config.json [236B] index.d.ts [24351B] esm/index.esm.js [10297B] README.md [114804B] package.json [871B] react/index.cjs.js [9587B] react/esm/package.json [17B] react/README.md [119315B] .guides/usage.md [4476B] .guides/setup.md [1690B] 
+I0223 19:21:18.763398     708 installsdk.go:55] Package @firebasegen/default-connector is already installed. Skipping installation
+I0223 19:21:18.763477     708 load.go:109] Finished reloading
+I0223 19:21:18.787696     708 dev.go:104] Listening on address (HTTP + gRPC): 127.0.0.1:50001
+I0223 19:21:19.139561     708 engine.go:205] [/emulator/studio-v0 db00] ExecuteGraphqlRead IntrospectionQuery: succeeded. 
+I0223 19:33:58.926216     708 load.go:31] Reloading schema and connectors...
+W0223 19:34:01.130676     708 control.go:74] [/emulator/studio-v0 2f3e] connector "default" has errors: connector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`
+
+sources: connector/queries.gql [2756B] connector/mutations.gql [3114B] 
+I0223 19:34:01.171887     708 control.go:100] [/emulator/studio-v0 2f3e] UpdateResources(): done
+Main schema: sources: schema/schema.gql [3721B] 
+Connector "default": sources: connector/mutations.gql [3114B] connector/queries.gql [2756B] 
+E0223 19:34:01.188737     708 load.go:73] Could not load sources: 
+Errors: connector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`
+I0223 19:34:01.214525     708 collector.go:107] schema extensions wrote into "/home/user/studio/dataconnect/.dataconnect/schema"
+Generated sources: main/query.gql [15655B] main/mutation.gql [41655B] prelude.gql [73281B] main/implicit.gql [3267B] main/input.gql [122168B] main/relation.gql [51784B] 
+I0223 19:34:01.214572     708 load.go:74] Finished reloading
+I0223 19:34:58.786596     708 load.go:31] Reloading schema and connectors...
+W0223 19:34:59.177015     708 control.go:74] [/emulator/studio-v0 731a] connector "default" has errors: connector/queries.gql:4:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:17:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`
+
+sources: connector/mutations.gql [3114B] connector/queries.gql [2800B] 
+I0223 19:34:59.177097     708 control.go:100] [/emulator/studio-v0 731a] UpdateResources(): done
+Main schema: sources: schema/schema.gql [3721B] 
+Connector "default": sources: connector/mutations.gql [3114B] connector/queries.gql [2800B] 
+E0223 19:34:59.185297     708 load.go:73] Could not load sources: 
+Errors: connector/queries.gql:4:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:17:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`
+I0223 19:34:59.192899     708 collector.go:107] schema extensions wrote into "/home/user/studio/dataconnect/.dataconnect/schema"
+Generated sources: prelude.gql [73281B] main/implicit.gql [3267B] main/input.gql [122168B] main/relation.gql [51784B] main/query.gql [15655B] main/mutation.gql [41655B] 
+I0223 19:34:59.192946     708 load.go:74] Finished reloading
+I0223 19:35:08.785424     708 load.go:31] Reloading schema and connectors...
+W0223 19:35:09.264842     708 control.go:74] [/emulator/studio-v0 be1f] connector "default" has errors: connector/queries.gql:4:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:17:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:63:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:73:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:82:1: On @auth: cannot specify both `level` and `expr`
+
+sources: connector/mutations.gql [3114B] connector/queries.gql [2866B] 
+I0223 19:35:09.264911     708 control.go:100] [/emulator/studio-v0 be1f] UpdateResources(): done
+Main schema: sources: schema/schema.gql [3721B] 
+Connector "default": sources: connector/mutations.gql [3114B] connector/queries.gql [2866B] 
+E0223 19:35:09.271621     708 load.go:73] Could not load sources: 
+Errors: connector/queries.gql:4:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:17:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:63:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:73:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:82:1: On @auth: cannot specify both `level` and `expr`
+I0223 19:35:09.275315     708 collector.go:107] schema extensions wrote into "/home/user/studio/dataconnect/.dataconnect/schema"
+Generated sources: prelude.gql [73281B] main/input.gql [122168B] main/relation.gql [51784B] main/query.gql [15655B] main/mutation.gql [41655B] main/implicit.gql [3267B] 
+I0223 19:35:09.275460     708 load.go:74] Finished reloading
+I0223 19:35:18.777589     708 load.go:31] Reloading schema and connectors...
+W0223 19:35:18.964660     708 control.go:74] [/emulator/studio-v0 05c8] connector "default" has errors: connector/queries.gql:4:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:17:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:63:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:73:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:82:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:91:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:102:1: On @auth: cannot specify both `level` and `expr`
+
+sources: connector/mutations.gql [3114B] connector/queries.gql [2910B] 
+I0223 19:35:18.964804     708 control.go:100] [/emulator/studio-v0 05c8] UpdateResources(): done
+Main schema: sources: schema/schema.gql [3721B] 
+Connector "default": sources: connector/queries.gql [2910B] connector/mutations.gql [3114B] 
+E0223 19:35:18.974251     708 load.go:73] Could not load sources: 
+Errors: connector/queries.gql:4:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:17:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:63:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:73:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:82:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:91:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:102:1: On @auth: cannot specify both `level` and `expr`
+I0223 19:35:18.986035     708 collector.go:107] schema extensions wrote into "/home/user/studio/dataconnect/.dataconnect/schema"
+Generated sources: main/implicit.gql [3267B] main/input.gql [122168B] main/relation.gql [51784B] prelude.gql [73281B] main/query.gql [15655B] main/mutation.gql [41655B] 
+I0223 19:35:18.986085     708 load.go:74] Finished reloading
+I0223 19:35:28.786514     708 load.go:31] Reloading schema and connectors...
+W0223 19:35:29.151083     708 control.go:74] [/emulator/studio-v0 92ae] connector "default" has errors: connector/queries.gql:4:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:17:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:63:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:73:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:82:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:91:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:102:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:110:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:120:1: On @auth: cannot specify both `level` and `expr`
+
+sources: connector/mutations.gql [3114B] connector/queries.gql [2954B] 
+I0223 19:35:29.151197     708 control.go:100] [/emulator/studio-v0 92ae] UpdateResources(): done
+Main schema: sources: schema/schema.gql [3721B] 
+Connector "default": sources: connector/mutations.gql [3114B] connector/queries.gql [2954B] 
+E0223 19:35:29.175566     708 load.go:73] Could not load sources: 
+Errors: connector/queries.gql:4:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:17:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:63:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:73:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:82:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:91:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:102:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:110:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:120:1: On @auth: cannot specify both `level` and `expr`
+I0223 19:35:29.180414     708 collector.go:107] schema extensions wrote into "/home/user/studio/dataconnect/.dataconnect/schema"
+Generated sources: main/query.gql [15655B] prelude.gql [73281B] main/mutation.gql [41655B] main/implicit.gql [3267B] main/input.gql [122168B] main/relation.gql [51784B] 
+I0223 19:35:29.180455     708 load.go:74] Finished reloading
+I0223 19:35:38.785350     708 load.go:31] Reloading schema and connectors...
+W0223 19:35:39.092512     708 control.go:74] [/emulator/studio-v0 5137] connector "default" has errors: connector/queries.gql:4:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:17:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:63:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:73:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:82:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:91:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:102:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:110:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:120:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:131:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:140:1: On @auth: cannot specify both `level` and `expr`
+
+sources: connector/mutations.gql [3114B] connector/queries.gql [2998B] 
+I0223 19:35:39.094720     708 control.go:100] [/emulator/studio-v0 5137] UpdateResources(): done
+Main schema: sources: schema/schema.gql [3721B] 
+Connector "default": sources: connector/mutations.gql [3114B] connector/queries.gql [2998B] 
+E0223 19:35:39.106570     708 load.go:73] Could not load sources: 
+Errors: connector/queries.gql:4:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:17:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:63:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:73:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:82:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:91:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:102:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:110:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:120:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:131:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:140:1: On @auth: cannot specify both `level` and `expr`
+I0223 19:35:39.108049     708 collector.go:107] schema extensions wrote into "/home/user/studio/dataconnect/.dataconnect/schema"
+Generated sources: prelude.gql [73281B] main/relation.gql [51784B] main/query.gql [15655B] main/mutation.gql [41655B] main/implicit.gql [3267B] main/input.gql [122168B] 
+I0223 19:35:39.108085     708 load.go:74] Finished reloading
+I0223 19:35:58.787323     708 load.go:31] Reloading schema and connectors...
+W0223 19:35:59.069186     708 control.go:74] [/emulator/studio-v0 5467] connector "default" has errors: connector/mutations.gql:8:1: On @auth: cannot specify both `level` and `expr`
+connector/mutations.gql:11:1: On @auth: cannot specify both `level` and `expr`
+connector/mutations.gql:26:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:4:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:17:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:63:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:73:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:82:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:91:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:102:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:110:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:120:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:131:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:140:1: On @auth: cannot specify both `level` and `expr`
+
+sources: connector/mutations.gql [3180B] connector/queries.gql [2998B] 
+I0223 19:35:59.069303     708 control.go:100] [/emulator/studio-v0 5467] UpdateResources(): done
+Main schema: sources: schema/schema.gql [3721B] 
+Connector "default": sources: connector/queries.gql [2998B] connector/mutations.gql [3180B] 
+E0223 19:35:59.078917     708 load.go:73] Could not load sources: 
+Errors: connector/mutations.gql:8:1: On @auth: cannot specify both `level` and `expr`
+connector/mutations.gql:11:1: On @auth: cannot specify both `level` and `expr`
+connector/mutations.gql:26:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:4:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:17:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:63:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:73:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:82:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:91:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:102:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:110:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:120:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:131:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:140:1: On @auth: cannot specify both `level` and `expr`
+I0223 19:35:59.081279     708 collector.go:107] schema extensions wrote into "/home/user/studio/dataconnect/.dataconnect/schema"
+Generated sources: main/relation.gql [51784B] main/query.gql [15655B] prelude.gql [73281B] main/mutation.gql [41655B] main/implicit.gql [3267B] main/input.gql [122168B] 
+I0223 19:35:59.081316     708 load.go:74] Finished reloading
+I0223 19:36:08.785527     708 load.go:31] Reloading schema and connectors...
+W0223 19:36:08.973564     708 control.go:74] [/emulator/studio-v0 ec1e] connector "default" has errors: connector/mutations.gql:8:1: On @auth: cannot specify both `level` and `expr`
+connector/mutations.gql:11:1: On @auth: cannot specify both `level` and `expr`
+connector/mutations.gql:26:1: On @auth: cannot specify both `level` and `expr`
+connector/mutations.gql:43:1: On @auth: cannot specify both `level` and `expr`
+connector/mutations.gql:57:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:4:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:17:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:63:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:73:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:82:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:91:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:102:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:110:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:120:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:131:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:140:1: On @auth: cannot specify both `level` and `expr`
+
+sources: connector/mutations.gql [3224B] connector/queries.gql [2998B] 
+I0223 19:36:08.973695     708 control.go:100] [/emulator/studio-v0 ec1e] UpdateResources(): done
+Main schema: sources: schema/schema.gql [3721B] 
+Connector "default": sources: connector/mutations.gql [3224B] connector/queries.gql [2998B] 
+E0223 19:36:08.983544     708 load.go:73] Could not load sources: 
+Errors: connector/mutations.gql:8:1: On @auth: cannot specify both `level` and `expr`
+connector/mutations.gql:11:1: On @auth: cannot specify both `level` and `expr`
+connector/mutations.gql:26:1: On @auth: cannot specify both `level` and `expr`
+connector/mutations.gql:43:1: On @auth: cannot specify both `level` and `expr`
+connector/mutations.gql:57:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:4:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:17:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:63:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:73:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:82:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:91:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:102:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:110:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:120:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:131:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:140:1: On @auth: cannot specify both `level` and `expr`
+I0223 19:36:08.988185     708 collector.go:107] schema extensions wrote into "/home/user/studio/dataconnect/.dataconnect/schema"
+Generated sources: prelude.gql [73281B] main/mutation.gql [41655B] main/implicit.gql [3267B] main/input.gql [122168B] main/relation.gql [51784B] main/query.gql [15655B] 
+I0223 19:36:08.988228     708 load.go:74] Finished reloading

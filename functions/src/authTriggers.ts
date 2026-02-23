@@ -1,5 +1,5 @@
 // functions/src/authTriggers.ts
-import * as functions from 'firebase-functions';
+import * as functions from 'firebase-functions/v1';
 import { db, FieldValue } from './firebaseAdmin';
 import type { UserRecord } from 'firebase-admin/auth';
 

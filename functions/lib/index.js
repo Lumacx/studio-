@@ -38,7 +38,7 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.propagateUserProfileToStories = exports.initiateHostedCreditPurchase = exports.redeemPromoCode = exports.processPayPalSubscriptionHttp = exports.processPayPalSubscription = exports.grantMonthlyFreeCredits = exports.sendTipToWriter = exports.deductCreditsForReadHttp = exports.deductCreditsForRead = exports.createPayPalOrder = exports.processPayPalOneTimePayment = exports.describeImage = exports.suggestScene = exports.downloadStoryPdf = exports.generateWithImagen = exports.generateWithGemini = exports.removeIndexOnDelete = exports.indexAssetOnFinalize = exports.incrementCommentCount = exports.createuserprofile = exports.generateNarratumImage = exports.deductCreditsForCreation = void 0;
 // functions/src/index.ts
-const functions = __importStar(require("firebase-functions"));
+const functions = __importStar(require("firebase-functions/v1"));
 const admin = __importStar(require("firebase-admin"));
 if (!admin.apps.length) {
     admin.initializeApp();

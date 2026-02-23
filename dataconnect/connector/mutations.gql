@@ -2,20 +2,20 @@
 mutation CreateUserProfile($username: String!, $email: String!, $displayname: String!, $avatarUrl: String) @auth(level: USER) {
   user_insert( data: { username: $username, email: $email, displayname: $displayname, avatarUrl: $avatarUrl } )
 }
-mutation CreateStory($creatorId: String!, $title: String, $genres: [String!], $description: String, $coverImageUrl: String) @auth(level: USER) {
-  story_insert( data: { creatorId: $creatorId, title: $title, genres: $genres, description: $description, coverImageUrl: $coverImageUrl } )
+mutation CreateStory($title: String, $genres: [String!], $description: String, $coverImageUrl: String) @auth(level: USER) {
+  story_insert( data: { creatorId_expr: "auth.uid", title: $title, genres: $genres, description: $description, coverImageUrl: $coverImageUrl } )
 }
-mutation CreateStoryContent($storyId: String!, $textContent: String, $pageNumber: Int, $imageUrl: String, $audioUrl: String) @auth(level: USER) {
+mutation CreateStoryContent($storyId: String!, $textContent: String, $pageNumber: Int, $imageUrl: String, $audioUrl: String) @auth(level: USER, expr: "auth != null") {
   storyContent_insert( data: { storyId: $storyId, textContent: $textContent, pageNumber: $pageNumber, imageUrl: $imageUrl, audioUrl: $audioUrl } )
 }
-mutation CreateTemplate($title: String!, $structureJson: String, $exampleStoryId: String) @auth(level: USER) {
+mutation CreateTemplate($title: String!, $structureJson: String, $exampleStoryId: String) @auth(level: USER, expr: "auth != null") {
   template_insert( data: { title: $title, structureJson: $structureJson, exampleStoryId: $exampleStoryId } )
 }
-mutation CreateAiGeneratedImage($imageId: String!, $userId: String!, $promptText: String, $sketchUrl: String, $generatedImageUrl: String) @auth(level: USER) { # Added $imageId parameter
+mutation CreateAiGeneratedImage($imageId: String!, $promptText: String, $sketchUrl: String, $generatedImageUrl: String) @auth(level: USER) { # Added $imageId parameter
   aiGeneratedImage_insert(
     data: {
       id: $imageId, # ID is now provided@tanstack-query-firebase/react/data-connect
-      userId: $userId,
+      userId_expr: "auth.uid",
       promptText: $promptText,
       sketchUrl: $sketchUrl,
       generatedImageUrl: $generatedImageUrl
@@ -23,20 +23,20 @@ mutation CreateAiGeneratedImage($imageId: String!, $userId: String!, $promptText
     }
   )
 }
-mutation CreateAiGeneratedGif($imageId: String!, $gifUrl: String!) @auth(level: USER) {
+mutation CreateAiGeneratedGif($imageId: String!, $gifUrl: String!) @auth(level: USER, expr: "auth != null") {
   aiGeneratedGif_insert( data: { imageId: $imageId, gifUrl: $gifUrl } )
 }
-mutation CreatePayment($userId: String!, $appSubscriptionId: String!, $amount: Float!) @auth(level: USER) {
-  payment_insert( data: { userId: $userId, appSubscriptionId: $appSubscriptionId, amount: $amount } )
+mutation CreatePayment($appSubscriptionId: String!, $amount: Float!) @auth(level: USER) {
+  payment_insert( data: { userId_expr: "auth.uid", appSubscriptionId: $appSubscriptionId, amount: $amount } )
 }
-mutation CreateAdminAction($adminId: String!, $actionType: String!, $targetId: String, $description: String) @auth(level: USER) { # TODO: Change to ADMIN_ONLY when roles are robust
-  adminAction_insert( data: { adminId: $adminId, actionType: $actionType, targetId: $targetId, description: $description } )
+mutation CreateAdminAction($actionType: String!, $targetId: String, $description: String) @auth(level: USER) { # TODO: Change to ADMIN_ONLY when roles are robust
+  adminAction_insert( data: { adminId_expr: "auth.uid", actionType: $actionType, targetId: $targetId, description: $description } )
 }
-mutation CreateAnalyticsEntry($userId: String!, $storyId: String!, $action: String!) @auth(level: USER) {
-  analytics_insert( data: { userId: $userId, storyId: $storyId, action: $action } )
+mutation CreateAnalyticsEntry($storyId: String!, $action: String!) @auth(level: USER) {
+  analytics_insert( data: { userId_expr: "auth.uid", storyId: $storyId, action: $action } )
 }
-mutation LogLegalDisclaimerAcceptance($userId: String!) @auth(level: USER) {
-  legalDisclaimer_insert( data: { userId: $userId, accepted: true } ) # acceptedDate is nullable, set by app
+mutation LogLegalDisclaimerAcceptance @auth(level: USER) {
+  legalDisclaimer_insert( data: { userId_expr: "auth.uid", accepted: true } ) # acceptedDate is nullable, set by app
 }
 
 # ✅ Update an existing StoryContent page
@@ -46,7 +46,7 @@ mutation UpdateStoryContent(
   $pageNumber: Int,
   $imageUrl: String,
   $audioUrl: String
-) @auth(level: USER) {
+) @auth(level: USER, expr: "auth != null") {
   storyContent_update(
     id: $id,
     data: { textContent: $textContent, pageNumber: $pageNumber, imageUrl: $imageUrl, audioUrl: $audioUrl }
@@ -57,7 +57,7 @@ mutation UpdateStoryContent(
 mutation UpdateStory(
   $id: String!,
   $commentsCount: Int
-) @auth(level: USER) {
+) @auth(level: USER, expr: "auth != null") {
   story_update(
     id: $id,
     data: { commentsCount: $commentsCount }

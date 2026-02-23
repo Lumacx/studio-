@@ -1,4 +1,4 @@
-import * as functions from 'firebase-functions';
+import * as functions from 'firebase-functions/v1';
 import { Buffer } from 'buffer';
 
 // Interface for PayPal Access Token Response
@@ -105,12 +105,12 @@ let cachedAccessToken: { token: string; expiry: number } | null = null;
 
 export async function getPayPalAccessToken(): Promise<string> {
   const PAYPAL_CLIENT_ID =
-    process.env.PAYPAL_CLIENT_ID || functions.config().paypal?.client_id;
+    process.env.PAYPAL_CLIENT_ID || (functions as any).config()?.paypal?.client_id;
   const PAYPAL_SECRET_KEY =
     process.env.PAYPAL_CLIENT_SECRET ||
     process.env.PAYPAL_SECRET_KEY || // fallback naming support
-    functions.config().paypal?.secret ||
-    functions.config().paypal?.secret_key;
+    (functions as any).config()?.paypal?.secret ||
+    (functions as any).config()?.paypal?.secret_key;
 
   if (!PAYPAL_CLIENT_ID || !PAYPAL_SECRET_KEY) {
     throw new functions.https.HttpsError(
@@ -169,7 +169,7 @@ export async function verifyPayPalWebhookSignature(
   webhookEvent: any
 ): Promise<boolean> {
   const PAYPAL_WEBHOOK_ID =
-    process.env.PAYPAL_WEBHOOK_ID || functions.config().paypal?.webhook_id;
+    process.env.PAYPAL_WEBHOOK_ID || (functions as any).config()?.paypal?.webhook_id;
 
   if (!PAYPAL_WEBHOOK_ID) {
     throw new functions.https.HttpsError(

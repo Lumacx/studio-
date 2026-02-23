@@ -1,4 +1,4 @@
-import * as functions from "firebase-functions";
+import * as functions from "firebase-functions/v1";
 import { v4 as uuidv4 } from "uuid";
 import { Buffer } from "node:buffer";
 import { ai, type Part } from "./genkit";

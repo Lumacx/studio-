@@ -9,7 +9,7 @@ export const fetchCache = 'force-no-store';
 
 type Body = { idea: string; pages?: number; language?: string };
 
-const MODEL_JSON = 'gemini-2.0-flash'; // estable y fiable para JSON
+const MODEL_JSON = 'gemini-2.5-flash'; // estable y fiable para JSON
 
 function clampPages(n?: number) {
   const x = Number.isFinite(n as number) ? (n as number) : 8;

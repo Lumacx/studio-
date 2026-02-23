@@ -1303,19 +1303,18 @@ export default function CreateUserProfileComponent() {
 ## CreateStory
 You can execute the `CreateStory` Mutation using the `UseMutationResult` object returned by the following Mutation hook function (which is defined in [default-connector/react/index.d.ts](./index.d.ts)):
 ```javascript
-useCreateStory(options?: useDataConnectMutationOptions<CreateStoryData, FirebaseError, CreateStoryVariables>): UseDataConnectMutationResult<CreateStoryData, CreateStoryVariables>;
+useCreateStory(options?: useDataConnectMutationOptions<CreateStoryData, FirebaseError, CreateStoryVariables | void>): UseDataConnectMutationResult<CreateStoryData, CreateStoryVariables>;
 ```
 You can also pass in a `DataConnect` instance to the Mutation hook function.
 ```javascript
-useCreateStory(dc: DataConnect, options?: useDataConnectMutationOptions<CreateStoryData, FirebaseError, CreateStoryVariables>): UseDataConnectMutationResult<CreateStoryData, CreateStoryVariables>;
+useCreateStory(dc: DataConnect, options?: useDataConnectMutationOptions<CreateStoryData, FirebaseError, CreateStoryVariables | void>): UseDataConnectMutationResult<CreateStoryData, CreateStoryVariables>;
 ```
 
 ### Variables
-The `CreateStory` Mutation requires an argument of type `CreateStoryVariables`, which is defined in [default-connector/index.d.ts](../index.d.ts). It has the following fields:
+The `CreateStory` Mutation has an optional argument of type `CreateStoryVariables`, which is defined in [default-connector/index.d.ts](../index.d.ts). It has the following fields:
 
 ```javascript
 export interface CreateStoryVariables {
-  creatorId: string;
   title?: string | null;
   genres?: string[] | null;
   description?: string | null;
@@ -1367,9 +1366,8 @@ export default function CreateStoryComponent() {
   const mutation = useCreateStory(dataConnect, options);
 
   // After calling the Mutation hook function, you must call `UseMutationResult.mutate()` to execute the Mutation.
-  // The `useCreateStory` Mutation requires an argument of type `CreateStoryVariables`:
+  // The `useCreateStory` Mutation has an optional argument of type `CreateStoryVariables`:
   const createStoryVars: CreateStoryVariables = {
-    creatorId: ..., 
     title: ..., // optional
     genres: ..., // optional
     description: ..., // optional
@@ -1377,13 +1375,17 @@ export default function CreateStoryComponent() {
   };
   mutation.mutate(createStoryVars);
   // Variables can be defined inline as well.
-  mutation.mutate({ creatorId: ..., title: ..., genres: ..., description: ..., coverImageUrl: ..., });
+  mutation.mutate({ title: ..., genres: ..., description: ..., coverImageUrl: ..., });
+  // Since all variables are optional for this Mutation, you can omit the `CreateStoryVariables` argument.
+  mutation.mutate();
 
   // You can also pass in a `useDataConnectMutationOptions` object to `UseMutationResult.mutate()`.
+  // Since all variables are optional for this Mutation, you can provide options without providing any variables.
+  // To do so, you must pass `undefined` where you would normally pass the variables.
   const options = {
     onSuccess: () => { console.log('Mutation succeeded!'); }
   };
-  mutation.mutate(createStoryVars, options);
+  mutation.mutate(createStoryVars /** or undefined */, options);
 
   // Then, you can render your component dynamically based on the status of the Mutation.
   if (mutation.isPending) {
@@ -1618,7 +1620,6 @@ The `CreateAiGeneratedImage` Mutation requires an argument of type `CreateAiGene
 ```javascript
 export interface CreateAiGeneratedImageVariables {
   imageId: string;
-  userId: string;
   promptText?: string | null;
   sketchUrl?: string | null;
   generatedImageUrl?: string | null;
@@ -1672,14 +1673,13 @@ export default function CreateAiGeneratedImageComponent() {
   // The `useCreateAiGeneratedImage` Mutation requires an argument of type `CreateAiGeneratedImageVariables`:
   const createAiGeneratedImageVars: CreateAiGeneratedImageVariables = {
     imageId: ..., 
-    userId: ..., 
     promptText: ..., // optional
     sketchUrl: ..., // optional
     generatedImageUrl: ..., // optional
   };
   mutation.mutate(createAiGeneratedImageVars);
   // Variables can be defined inline as well.
-  mutation.mutate({ imageId: ..., userId: ..., promptText: ..., sketchUrl: ..., generatedImageUrl: ..., });
+  mutation.mutate({ imageId: ..., promptText: ..., sketchUrl: ..., generatedImageUrl: ..., });
 
   // You can also pass in a `useDataConnectMutationOptions` object to `UseMutationResult.mutate()`.
   const options = {
@@ -1815,7 +1815,6 @@ The `CreatePayment` Mutation requires an argument of type `CreatePaymentVariable
 
 ```javascript
 export interface CreatePaymentVariables {
-  userId: string;
   appSubscriptionId: string;
   amount: number;
 }
@@ -1867,13 +1866,12 @@ export default function CreatePaymentComponent() {
   // After calling the Mutation hook function, you must call `UseMutationResult.mutate()` to execute the Mutation.
   // The `useCreatePayment` Mutation requires an argument of type `CreatePaymentVariables`:
   const createPaymentVars: CreatePaymentVariables = {
-    userId: ..., 
     appSubscriptionId: ..., 
     amount: ..., 
   };
   mutation.mutate(createPaymentVars);
   // Variables can be defined inline as well.
-  mutation.mutate({ userId: ..., appSubscriptionId: ..., amount: ..., });
+  mutation.mutate({ appSubscriptionId: ..., amount: ..., });
 
   // You can also pass in a `useDataConnectMutationOptions` object to `UseMutationResult.mutate()`.
   const options = {
@@ -1913,7 +1911,6 @@ The `CreateAdminAction` Mutation requires an argument of type `CreateAdminAction
 
 ```javascript
 export interface CreateAdminActionVariables {
-  adminId: string;
   actionType: string;
   targetId?: string | null;
   description?: string | null;
@@ -1966,14 +1963,13 @@ export default function CreateAdminActionComponent() {
   // After calling the Mutation hook function, you must call `UseMutationResult.mutate()` to execute the Mutation.
   // The `useCreateAdminAction` Mutation requires an argument of type `CreateAdminActionVariables`:
   const createAdminActionVars: CreateAdminActionVariables = {
-    adminId: ..., 
     actionType: ..., 
     targetId: ..., // optional
     description: ..., // optional
   };
   mutation.mutate(createAdminActionVars);
   // Variables can be defined inline as well.
-  mutation.mutate({ adminId: ..., actionType: ..., targetId: ..., description: ..., });
+  mutation.mutate({ actionType: ..., targetId: ..., description: ..., });
 
   // You can also pass in a `useDataConnectMutationOptions` object to `UseMutationResult.mutate()`.
   const options = {
@@ -2013,7 +2009,6 @@ The `CreateAnalyticsEntry` Mutation requires an argument of type `CreateAnalytic
 
 ```javascript
 export interface CreateAnalyticsEntryVariables {
-  userId: string;
   storyId: string;
   action: string;
 }
@@ -2065,13 +2060,12 @@ export default function CreateAnalyticsEntryComponent() {
   // After calling the Mutation hook function, you must call `UseMutationResult.mutate()` to execute the Mutation.
   // The `useCreateAnalyticsEntry` Mutation requires an argument of type `CreateAnalyticsEntryVariables`:
   const createAnalyticsEntryVars: CreateAnalyticsEntryVariables = {
-    userId: ..., 
     storyId: ..., 
     action: ..., 
   };
   mutation.mutate(createAnalyticsEntryVars);
   // Variables can be defined inline as well.
-  mutation.mutate({ userId: ..., storyId: ..., action: ..., });
+  mutation.mutate({ storyId: ..., action: ..., });
 
   // You can also pass in a `useDataConnectMutationOptions` object to `UseMutationResult.mutate()`.
   const options = {
@@ -2099,21 +2093,15 @@ export default function CreateAnalyticsEntryComponent() {
 ## LogLegalDisclaimerAcceptance
 You can execute the `LogLegalDisclaimerAcceptance` Mutation using the `UseMutationResult` object returned by the following Mutation hook function (which is defined in [default-connector/react/index.d.ts](./index.d.ts)):
 ```javascript
-useLogLegalDisclaimerAcceptance(options?: useDataConnectMutationOptions<LogLegalDisclaimerAcceptanceData, FirebaseError, LogLegalDisclaimerAcceptanceVariables>): UseDataConnectMutationResult<LogLegalDisclaimerAcceptanceData, LogLegalDisclaimerAcceptanceVariables>;
+useLogLegalDisclaimerAcceptance(options?: useDataConnectMutationOptions<LogLegalDisclaimerAcceptanceData, FirebaseError, void>): UseDataConnectMutationResult<LogLegalDisclaimerAcceptanceData, undefined>;
 ```
 You can also pass in a `DataConnect` instance to the Mutation hook function.
 ```javascript
-useLogLegalDisclaimerAcceptance(dc: DataConnect, options?: useDataConnectMutationOptions<LogLegalDisclaimerAcceptanceData, FirebaseError, LogLegalDisclaimerAcceptanceVariables>): UseDataConnectMutationResult<LogLegalDisclaimerAcceptanceData, LogLegalDisclaimerAcceptanceVariables>;
+useLogLegalDisclaimerAcceptance(dc: DataConnect, options?: useDataConnectMutationOptions<LogLegalDisclaimerAcceptanceData, FirebaseError, void>): UseDataConnectMutationResult<LogLegalDisclaimerAcceptanceData, undefined>;
 ```
 
 ### Variables
-The `LogLegalDisclaimerAcceptance` Mutation requires an argument of type `LogLegalDisclaimerAcceptanceVariables`, which is defined in [default-connector/index.d.ts](../index.d.ts). It has the following fields:
-
-```javascript
-export interface LogLegalDisclaimerAcceptanceVariables {
-  userId: string;
-}
-```
+The `LogLegalDisclaimerAcceptance` Mutation has no variables.
 ### Return Type
 Recall that calling the `LogLegalDisclaimerAcceptance` Mutation hook function returns a `UseMutationResult` object. This object holds the state of your Mutation, including whether the Mutation is loading, has completed, or has succeeded/failed, among other things.
 
@@ -2134,7 +2122,7 @@ To learn more about the `UseMutationResult` object, see the [TanStack React Quer
 
 ```javascript
 import { getDataConnect } from 'firebase/data-connect';
-import { connectorConfig, LogLegalDisclaimerAcceptanceVariables } from '@firebasegen/default-connector';
+import { connectorConfig } from '@firebasegen/default-connector';
 import { useLogLegalDisclaimerAcceptance } from '@firebasegen/default-connector/react'
 
 export default function LogLegalDisclaimerAcceptanceComponent() {
@@ -2159,19 +2147,14 @@ export default function LogLegalDisclaimerAcceptanceComponent() {
   const mutation = useLogLegalDisclaimerAcceptance(dataConnect, options);
 
   // After calling the Mutation hook function, you must call `UseMutationResult.mutate()` to execute the Mutation.
-  // The `useLogLegalDisclaimerAcceptance` Mutation requires an argument of type `LogLegalDisclaimerAcceptanceVariables`:
-  const logLegalDisclaimerAcceptanceVars: LogLegalDisclaimerAcceptanceVariables = {
-    userId: ..., 
-  };
-  mutation.mutate(logLegalDisclaimerAcceptanceVars);
-  // Variables can be defined inline as well.
-  mutation.mutate({ userId: ..., });
+  mutation.mutate();
 
   // You can also pass in a `useDataConnectMutationOptions` object to `UseMutationResult.mutate()`.
+  // Since this Mutation accepts no variables, you must pass `undefined` where you would normally pass the variables.
   const options = {
     onSuccess: () => { console.log('Mutation succeeded!'); }
   };
-  mutation.mutate(logLegalDisclaimerAcceptanceVars, options);
+  mutation.mutate(undefined, options);
 
   // Then, you can render your component dynamically based on the status of the Mutation.
   if (mutation.isPending) {

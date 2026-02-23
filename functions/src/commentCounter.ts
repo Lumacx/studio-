@@ -1,5 +1,5 @@
 // functions/src/commentCounter.ts
-import * as functions from 'firebase-functions';
+import * as functions from 'firebase-functions/v1';
 import { db, FieldValue, Timestamp } from './firebaseAdmin';
 
 /**
