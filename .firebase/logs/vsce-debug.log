@@ -1078,3 +1078,290 @@ connector/queries.gql:140:1: On @auth: cannot specify both `level` and `expr`
 Generated sources: prelude.gql [73281B] main/mutation.gql [41655B] main/implicit.gql [3267B] main/input.gql [122168B] main/relation.gql [51784B] main/query.gql [15655B] 
 I0223 19:36:08.988228     708 load.go:74] Finished reloading
  {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0223 19:36:08.988185     708 collector.go:107] schema extensions wrote into \"/home/user/studio/dataconnect/.dataconnect/schema\"\nGenerated sources: prelude.gql [73281B] main/mutation.gql [41655B] main/implicit.gql [3267B] main/input.gql [122168B] main/relation.gql [51784B] main/query.gql [15655B] \nI0223 19:36:08.988228     708 load.go:74] Finished reloading\n"}}
+[info] [Firebase Plugin] Stopping Data Connect toolkit
+[warn] ⚠  Data Connect Emulator has exited upon receiving signal: SIGINT 
+[debug] [2026-02-23T20:36:09.702Z] [Firebase Plugin] Activating Firebase extension.
+[debug] [2026-02-23T20:36:24.032Z] [Firebase Plugin] requireAuthWrapper
+[debug] [2026-02-23T20:36:24.036Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/userinfo.email"]
+[debug] [2026-02-23T20:36:24.038Z] > authorizing via signed-in user (lumacx@gmail.com)
+[debug] [2026-02-23T20:36:24.046Z] Checked if tokens are valid: true, expires at: 1771880772915
+[debug] [2026-02-23T20:36:24.047Z] Checked if tokens are valid: true, expires at: 1771880772915
+[debug] [2026-02-23T20:36:24.048Z] [Firebase Plugin] User found:  lumacx@gmail.com
+[info] [Firebase Plugin] (Core:Project) New user detected, fetching projects
+[debug] [2026-02-23T20:36:24.052Z] Checked if tokens are valid: true, expires at: 1771880772915
+[debug] [2026-02-23T20:36:24.056Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=1000
+[debug] [2026-02-23T20:36:24.156Z] [Firebase Plugin] VSCode notification server listening on port 40001
+[debug] [2026-02-23T20:36:24.932Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2026-02-23T20:36:24.941Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[info] [Firebase Plugin] Starting Data Connect toolkit (version 3.1.1) on port 50001
+[info] i  dataconnect: downloading dataconnect-emulator-3.1.1... {"metadata":{"emulator":{"name":"dataconnect"},"message":"downloading dataconnect-emulator-3.1.1..."}}
+[debug] [2026-02-23T20:36:27.848Z] >>> [apiv2][query] GET https://storage.googleapis.com/firemat-preview-drop/emulator/dataconnect-emulator-linux-amd64-v3.1.1 
+[debug] [2026-02-23T20:36:28.929Z] <<< [apiv2][status] GET https://storage.googleapis.com/firemat-preview-drop/emulator/dataconnect-emulator-linux-amd64-v3.1.1 200
+[debug] [2026-02-23T20:36:28.930Z] <<< [apiv2][body] GET https://storage.googleapis.com/firemat-preview-drop/emulator/dataconnect-emulator-linux-amd64-v3.1.1 [stream]
+[info] i  dataconnect: Removing outdated emulator files: dataconnect-emulator-2.17.3 {"metadata":{"emulator":{"name":"dataconnect"},"message":"Removing outdated emulator files: dataconnect-emulator-2.17.3"}}
+[debug] [2026-02-23T20:36:34.137Z] W0223 20:36:34.128959   20357 control.go:74] [/emulator/studio-v0 eb80] connector "default" has errors: connector/mutations.gql:8:1: On @auth: cannot specify both `level` and `expr`
+connector/mutations.gql:11:1: On @auth: cannot specify both `level` and `expr`
+connector/mutations.gql:26:1: On @auth: cannot specify both `level` and `expr`
+connector/mutations.gql:43:1: On @auth: cannot specify both `level` and `expr`
+connector/mutations.gql:57:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:4:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:17:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:63:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:73:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:82:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:91:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:102:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:110:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:120:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:131:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:140:1: On @auth: cannot specify both `level` and `expr`
+
+sources: connector/mutations.gql [3224B] connector/queries.gql [2998B] 
+I0223 20:36:34.129224   20357 control.go:100] [/emulator/studio-v0 eb80] UpdateResources(): done
+Main schema: sources: schema/schema.gql [3721B] 
+Connector "default": sources: connector/mutations.gql [3224B] connector/queries.gql [2998B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"W0223 20:36:34.128959   20357 control.go:74] [/emulator/studio-v0 eb80] connector \"default\" has errors: connector/mutations.gql:8:1: On @auth: cannot specify both `level` and `expr`\nconnector/mutations.gql:11:1: On @auth: cannot specify both `level` and `expr`\nconnector/mutations.gql:26:1: On @auth: cannot specify both `level` and `expr`\nconnector/mutations.gql:43:1: On @auth: cannot specify both `level` and `expr`\nconnector/mutations.gql:57:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:4:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:17:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:63:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:73:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:82:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:91:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:102:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:110:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:120:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:131:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:140:1: On @auth: cannot specify both `level` and `expr`\n\nsources: connector/mutations.gql [3224B] connector/queries.gql [2998B] \nI0223 20:36:34.129224   20357 control.go:100] [/emulator/studio-v0 eb80] UpdateResources(): done\nMain schema: sources: schema/schema.gql [3721B] \nConnector \"default\": sources: connector/mutations.gql [3224B] connector/queries.gql [2998B] \n"}}
+[debug] [2026-02-23T20:36:34.141Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"dataconnect"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2026-02-23T20:36:34.142Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"dataconnect"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2026-02-23T20:36:34.142Z] Starting Data Connect Emulator with command {"binary":"/home/user/.cache/firebase/emulators/dataconnect-emulator-3.1.1","args":["--logtostderr","-v=2","dev","--listen=localhost:50001","--config_dir=/home/user/studio/dataconnect","--enable_output_schema_extensions=true","--enable_output_generated_sdk=true"],"optionalArgs":["listen","config_dir","enable_output_schema_extensions","enable_output_generated_sdk"],"joinArgs":true,"shell":false,"port":9399} {"metadata":{"emulator":{"name":"dataconnect"},"message":"Starting Data Connect Emulator with command {\"binary\":\"/home/user/.cache/firebase/emulators/dataconnect-emulator-3.1.1\",\"args\":[\"--logtostderr\",\"-v=2\",\"dev\",\"--listen=localhost:50001\",\"--config_dir=/home/user/studio/dataconnect\",\"--enable_output_schema_extensions=true\",\"--enable_output_generated_sdk=true\"],\"optionalArgs\":[\"listen\",\"config_dir\",\"enable_output_schema_extensions\",\"enable_output_generated_sdk\"],\"joinArgs\":true,\"shell\":false,\"port\":9399}"}}
+[info] i  dataconnect: Data Connect Emulator logging to dataconnect-debug.log {"metadata":{"emulator":{"name":"dataconnect"},"message":"Data Connect Emulator logging to dataconnect-debug.log"}}
+[debug] [2026-02-23T20:36:34.256Z] I0223 20:36:34.234588   20362 load.go:31] Reloading schema and connectors...
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0223 20:36:34.234588   20362 load.go:31] Reloading schema and connectors...\n"}}
+[debug] [2026-02-23T20:36:34.945Z] W0223 20:36:34.884910   20362 control.go:74] [/emulator/studio-v0 6136] connector "default" has errors: connector/mutations.gql:8:1: On @auth: cannot specify both `level` and `expr`
+connector/mutations.gql:11:1: On @auth: cannot specify both `level` and `expr`
+connector/mutations.gql:26:1: On @auth: cannot specify both `level` and `expr`
+connector/mutations.gql:43:1: On @auth: cannot specify both `level` and `expr`
+connector/mutations.gql:57:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:4:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:17:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:63:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:73:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:82:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:91:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:102:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:110:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:120:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:131:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:140:1: On @auth: cannot specify both `level` and `expr`
+
+sources: connector/mutations.gql [3224B] connector/queries.gql [2998B] 
+I0223 20:36:34.885020   20362 control.go:100] [/emulator/studio-v0 6136] UpdateResources(): done
+Main schema: sources: schema/schema.gql [3721B] 
+Connector "default": sources: connector/mutations.gql [3224B] connector/queries.gql [2998B] 
+E0223 20:36:34.892570   20362 load.go:73] Could not load sources: 
+Errors: connector/mutations.gql:8:1: On @auth: cannot specify both `level` and `expr`
+connector/mutations.gql:11:1: On @auth: cannot specify both `level` and `expr`
+connector/mutations.gql:26:1: On @auth: cannot specify both `level` and `expr`
+connector/mutations.gql:43:1: On @auth: cannot specify both `level` and `expr`
+connector/mutations.gql:57:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:4:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:17:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:63:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:73:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:82:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:91:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:102:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:110:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:120:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:131:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:140:1: On @auth: cannot specify both `level` and `expr`
+I0223 20:36:34.895624   20362 collector.go:107] schema extensions wrote into "/home/user/studio/dataconnect/.dataconnect/schema"
+Generated sources: main/input.gql [122168B] main/relation.gql [51784B] main/query.gql [15655B] main/mutation.gql [41655B] main/implicit.gql [3267B] prelude.gql [73281B] 
+I0223 20:36:34.897772   20362 load.go:74] Finished reloading
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"W0223 20:36:34.884910   20362 control.go:74] [/emulator/studio-v0 6136] connector \"default\" has errors: connector/mutations.gql:8:1: On @auth: cannot specify both `level` and `expr`\nconnector/mutations.gql:11:1: On @auth: cannot specify both `level` and `expr`\nconnector/mutations.gql:26:1: On @auth: cannot specify both `level` and `expr`\nconnector/mutations.gql:43:1: On @auth: cannot specify both `level` and `expr`\nconnector/mutations.gql:57:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:4:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:17:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:63:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:73:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:82:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:91:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:102:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:110:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:120:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:131:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:140:1: On @auth: cannot specify both `level` and `expr`\n\nsources: connector/mutations.gql [3224B] connector/queries.gql [2998B] \nI0223 20:36:34.885020   20362 control.go:100] [/emulator/studio-v0 6136] UpdateResources(): done\nMain schema: sources: schema/schema.gql [3721B] \nConnector \"default\": sources: connector/mutations.gql [3224B] connector/queries.gql [2998B] \nE0223 20:36:34.892570   20362 load.go:73] Could not load sources: \nErrors: connector/mutations.gql:8:1: On @auth: cannot specify both `level` and `expr`\nconnector/mutations.gql:11:1: On @auth: cannot specify both `level` and `expr`\nconnector/mutations.gql:26:1: On @auth: cannot specify both `level` and `expr`\nconnector/mutations.gql:43:1: On @auth: cannot specify both `level` and `expr`\nconnector/mutations.gql:57:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:4:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:17:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:63:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:73:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:82:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:91:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:102:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:110:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:120:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:131:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:140:1: On @auth: cannot specify both `level` and `expr`\nI0223 20:36:34.895624   20362 collector.go:107] schema extensions wrote into \"/home/user/studio/dataconnect/.dataconnect/schema\"\nGenerated sources: main/input.gql [122168B] main/relation.gql [51784B] main/query.gql [15655B] main/mutation.gql [41655B] main/implicit.gql [3267B] prelude.gql [73281B] \nI0223 20:36:34.897772   20362 load.go:74] Finished reloading\n"}}
+[debug] [2026-02-23T20:36:34.963Z] I0223 20:36:34.951223   20362 dev.go:104] Listening on address (HTTP + gRPC): 127.0.0.1:50001
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0223 20:36:34.951223   20362 dev.go:104] Listening on address (HTTP + gRPC): 127.0.0.1:50001\n"}}
+[debug] [2026-02-23T20:36:35.356Z] I0223 20:36:35.355941   20362 engine.go:205] [/emulator/studio-v0 6136] ExecuteGraphqlRead IntrospectionQuery: succeeded. 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0223 20:36:35.355941   20362 engine.go:205] [/emulator/studio-v0 6136] ExecuteGraphqlRead IntrospectionQuery: succeeded. \n"}}
+[info] [Firebase Plugin] Stopping Data Connect toolkit
+[warn] ⚠  Data Connect Emulator has exited upon receiving signal: SIGINT 
+[debug] [2026-02-23T20:42:58.905Z] [Firebase Plugin] Activating Firebase extension.
+[debug] [2026-02-23T20:43:22.148Z] [Firebase Plugin] requireAuthWrapper
+[debug] [2026-02-23T20:43:22.155Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/userinfo.email"]
+[debug] [2026-02-23T20:43:22.156Z] > authorizing via signed-in user (lumacx@gmail.com)
+[debug] [2026-02-23T20:43:22.171Z] Checked if tokens are valid: true, expires at: 1771880772915
+[debug] [2026-02-23T20:43:22.174Z] Checked if tokens are valid: true, expires at: 1771880772915
+[debug] [2026-02-23T20:43:22.176Z] [Firebase Plugin] User found:  lumacx@gmail.com
+[info] [Firebase Plugin] (Core:Project) New user detected, fetching projects
+[debug] [2026-02-23T20:43:22.181Z] Checked if tokens are valid: true, expires at: 1771880772915
+[debug] [2026-02-23T20:43:22.191Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=1000
+[debug] [2026-02-23T20:43:22.362Z] [Firebase Plugin] VSCode notification server listening on port 40001
+[info] [Firebase Plugin] Starting Data Connect toolkit (version 3.1.1) on port 50001
+[debug] [2026-02-23T20:43:28.197Z] W0223 20:43:28.185506   23632 control.go:74] [/emulator/studio-v0 d0b8] connector "default" has errors: connector/mutations.gql:8:1: On @auth: cannot specify both `level` and `expr`
+connector/mutations.gql:11:1: On @auth: cannot specify both `level` and `expr`
+connector/mutations.gql:26:1: On @auth: cannot specify both `level` and `expr`
+connector/mutations.gql:43:1: On @auth: cannot specify both `level` and `expr`
+connector/mutations.gql:57:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:4:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:17:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:63:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:73:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:82:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:91:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:102:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:110:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:120:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:131:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:140:1: On @auth: cannot specify both `level` and `expr`
+
+sources: connector/mutations.gql [3224B] connector/queries.gql [2998B] 
+I0223 20:43:28.185678   23632 control.go:100] [/emulator/studio-v0 d0b8] UpdateResources(): done
+Main schema: sources: schema/schema.gql [3721B] 
+Connector "default": sources: connector/mutations.gql [3224B] connector/queries.gql [2998B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"W0223 20:43:28.185506   23632 control.go:74] [/emulator/studio-v0 d0b8] connector \"default\" has errors: connector/mutations.gql:8:1: On @auth: cannot specify both `level` and `expr`\nconnector/mutations.gql:11:1: On @auth: cannot specify both `level` and `expr`\nconnector/mutations.gql:26:1: On @auth: cannot specify both `level` and `expr`\nconnector/mutations.gql:43:1: On @auth: cannot specify both `level` and `expr`\nconnector/mutations.gql:57:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:4:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:17:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:63:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:73:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:82:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:91:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:102:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:110:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:120:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:131:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:140:1: On @auth: cannot specify both `level` and `expr`\n\nsources: connector/mutations.gql [3224B] connector/queries.gql [2998B] \nI0223 20:43:28.185678   23632 control.go:100] [/emulator/studio-v0 d0b8] UpdateResources(): done\nMain schema: sources: schema/schema.gql [3721B] \nConnector \"default\": sources: connector/mutations.gql [3224B] connector/queries.gql [2998B] \n"}}
+[debug] [2026-02-23T20:43:28.208Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"dataconnect"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2026-02-23T20:43:28.208Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"dataconnect"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2026-02-23T20:43:28.209Z] Starting Data Connect Emulator with command {"binary":"/home/user/.cache/firebase/emulators/dataconnect-emulator-3.1.1","args":["--logtostderr","-v=2","dev","--listen=localhost:50001","--config_dir=/home/user/studio/dataconnect","--enable_output_schema_extensions=true","--enable_output_generated_sdk=true"],"optionalArgs":["listen","config_dir","enable_output_schema_extensions","enable_output_generated_sdk"],"joinArgs":true,"shell":false,"port":9399} {"metadata":{"emulator":{"name":"dataconnect"},"message":"Starting Data Connect Emulator with command {\"binary\":\"/home/user/.cache/firebase/emulators/dataconnect-emulator-3.1.1\",\"args\":[\"--logtostderr\",\"-v=2\",\"dev\",\"--listen=localhost:50001\",\"--config_dir=/home/user/studio/dataconnect\",\"--enable_output_schema_extensions=true\",\"--enable_output_generated_sdk=true\"],\"optionalArgs\":[\"listen\",\"config_dir\",\"enable_output_schema_extensions\",\"enable_output_generated_sdk\"],\"joinArgs\":true,\"shell\":false,\"port\":9399}"}}
+[info] i  dataconnect: Data Connect Emulator logging to dataconnect-debug.log {"metadata":{"emulator":{"name":"dataconnect"},"message":"Data Connect Emulator logging to dataconnect-debug.log"}}
+[debug] [2026-02-23T20:43:28.446Z] I0223 20:43:28.337080   23637 load.go:31] Reloading schema and connectors...
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0223 20:43:28.337080   23637 load.go:31] Reloading schema and connectors...\n"}}
+[debug] [2026-02-23T20:43:28.583Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2026-02-23T20:43:28.592Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[debug] [2026-02-23T20:43:29.135Z] W0223 20:43:29.012883   23637 control.go:74] [/emulator/studio-v0 b2ed] connector "default" has errors: connector/queries.gql:4:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:17:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:63:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:73:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:82:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:91:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:102:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:110:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:120:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:131:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:140:1: On @auth: cannot specify both `level` and `expr`
+connector/mutations.gql:8:1: On @auth: cannot specify both `level` and `expr`
+connector/mutations.gql:11:1: On @auth: cannot specify both `level` and `expr`
+connector/mutations.gql:26:1: On @auth: cannot specify both `level` and `expr`
+connector/mutations.gql:43:1: On @auth: cannot specify both `level` and `expr`
+connector/mutations.gql:57:1: On @auth: cannot specify both `level` and `expr`
+
+sources: connector/mutations.gql [3224B] connector/queries.gql [2998B] 
+I0223 20:43:29.013152   23637 control.go:100] [/emulator/studio-v0 b2ed] UpdateResources(): done
+Main schema: sources: schema/schema.gql [3721B] 
+Connector "default": sources: connector/mutations.gql [3224B] connector/queries.gql [2998B] 
+E0223 20:43:29.033183   23637 load.go:73] Could not load sources: 
+Errors: connector/queries.gql:4:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:17:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:63:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:73:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:82:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:91:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:102:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:110:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:120:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:131:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:140:1: On @auth: cannot specify both `level` and `expr`
+connector/mutations.gql:8:1: On @auth: cannot specify both `level` and `expr`
+connector/mutations.gql:11:1: On @auth: cannot specify both `level` and `expr`
+connector/mutations.gql:26:1: On @auth: cannot specify both `level` and `expr`
+connector/mutations.gql:43:1: On @auth: cannot specify both `level` and `expr`
+connector/mutations.gql:57:1: On @auth: cannot specify both `level` and `expr`
+I0223 20:43:29.038019   23637 collector.go:107] schema extensions wrote into "/home/user/studio/dataconnect/.dataconnect/schema"
+Generated sources: prelude.gql [73281B] main/mutation.gql [41655B] main/implicit.gql [3267B] main/input.gql [122168B] main/relation.gql [51784B] main/query.gql [15655B] 
+I0223 20:43:29.039892   23637 load.go:74] Finished reloading
+I0223 20:43:29.071295   23637 dev.go:104] Listening on address (HTTP + gRPC): 127.0.0.1:50001
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"W0223 20:43:29.012883   23637 control.go:74] [/emulator/studio-v0 b2ed] connector \"default\" has errors: connector/queries.gql:4:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:17:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:63:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:73:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:82:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:91:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:102:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:110:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:120:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:131:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:140:1: On @auth: cannot specify both `level` and `expr`\nconnector/mutations.gql:8:1: On @auth: cannot specify both `level` and `expr`\nconnector/mutations.gql:11:1: On @auth: cannot specify both `level` and `expr`\nconnector/mutations.gql:26:1: On @auth: cannot specify both `level` and `expr`\nconnector/mutations.gql:43:1: On @auth: cannot specify both `level` and `expr`\nconnector/mutations.gql:57:1: On @auth: cannot specify both `level` and `expr`\n\nsources: connector/mutations.gql [3224B] connector/queries.gql [2998B] \nI0223 20:43:29.013152   23637 control.go:100] [/emulator/studio-v0 b2ed] UpdateResources(): done\nMain schema: sources: schema/schema.gql [3721B] \nConnector \"default\": sources: connector/mutations.gql [3224B] connector/queries.gql [2998B] \nE0223 20:43:29.033183   23637 load.go:73] Could not load sources: \nErrors: connector/queries.gql:4:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:17:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:63:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:73:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:82:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:91:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:102:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:110:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:120:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:131:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:140:1: On @auth: cannot specify both `level` and `expr`\nconnector/mutations.gql:8:1: On @auth: cannot specify both `level` and `expr`\nconnector/mutations.gql:11:1: On @auth: cannot specify both `level` and `expr`\nconnector/mutations.gql:26:1: On @auth: cannot specify both `level` and `expr`\nconnector/mutations.gql:43:1: On @auth: cannot specify both `level` and `expr`\nconnector/mutations.gql:57:1: On @auth: cannot specify both `level` and `expr`\nI0223 20:43:29.038019   23637 collector.go:107] schema extensions wrote into \"/home/user/studio/dataconnect/.dataconnect/schema\"\nGenerated sources: prelude.gql [73281B] main/mutation.gql [41655B] main/implicit.gql [3267B] main/input.gql [122168B] main/relation.gql [51784B] main/query.gql [15655B] \nI0223 20:43:29.039892   23637 load.go:74] Finished reloading\nI0223 20:43:29.071295   23637 dev.go:104] Listening on address (HTTP + gRPC): 127.0.0.1:50001\n"}}
+[debug] [2026-02-23T20:43:29.439Z] I0223 20:43:29.385105   23637 engine.go:205] [/emulator/studio-v0 b2ed] ExecuteGraphqlRead IntrospectionQuery: succeeded. 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0223 20:43:29.385105   23637 engine.go:205] [/emulator/studio-v0 b2ed] ExecuteGraphqlRead IntrospectionQuery: succeeded. \n"}}
+[info] [Firebase Plugin] Stopping Data Connect toolkit
+[warn] ⚠  Data Connect Emulator has exited upon receiving signal: SIGINT 
+[debug] [2026-02-23T20:51:28.897Z] [Firebase Plugin] Activating Firebase extension.
+[debug] [2026-02-23T20:52:02.648Z] [Firebase Plugin] requireAuthWrapper
+[debug] [2026-02-23T20:52:02.669Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/userinfo.email"]
+[debug] [2026-02-23T20:52:02.677Z] > authorizing via signed-in user (lumacx@gmail.com)
+[debug] [2026-02-23T20:52:02.722Z] Checked if tokens are valid: false, expires at: 1771880772915
+[debug] [2026-02-23T20:52:02.724Z] Checked if tokens are valid: false, expires at: 1771880772915
+[debug] [2026-02-23T20:52:02.733Z] > refreshing access token with scopes: []
+[debug] [2026-02-23T20:52:02.756Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2026-02-23T20:52:02.757Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-02-23T20:52:03.016Z] [Firebase Plugin] VSCode notification server listening on port 40001
+[debug] [2026-02-23T20:52:05.866Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2026-02-23T20:52:05.870Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-02-23T20:52:05.932Z] [Firebase Plugin] User found:  lumacx@gmail.com
+[info] [Firebase Plugin] (Core:Project) New user detected, fetching projects
+[debug] [2026-02-23T20:52:05.969Z] Checked if tokens are valid: true, expires at: 1771883524872
+[debug] [2026-02-23T20:52:05.988Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=1000
+[info] [Firebase Plugin] Starting Data Connect toolkit (version 3.1.1) on port 50001
+[debug] [2026-02-23T20:52:12.376Z] W0223 20:52:12.361186     439 control.go:74] [/emulator/studio-v0 23ae] connector "default" has errors: connector/mutations.gql:8:1: On @auth: cannot specify both `level` and `expr`
+connector/mutations.gql:11:1: On @auth: cannot specify both `level` and `expr`
+connector/mutations.gql:26:1: On @auth: cannot specify both `level` and `expr`
+connector/mutations.gql:43:1: On @auth: cannot specify both `level` and `expr`
+connector/mutations.gql:57:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:4:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:17:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:63:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:73:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:82:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:91:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:102:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:110:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:120:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:131:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:140:1: On @auth: cannot specify both `level` and `expr`
+
+sources: connector/queries.gql [2998B] connector/mutations.gql [3224B] 
+I0223 20:52:12.363549     439 control.go:100] [/emulator/studio-v0 23ae] UpdateResources(): done
+Main schema: sources: schema/schema.gql [3721B] 
+Connector "default": sources: connector/mutations.gql [3224B] connector/queries.gql [2998B] 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"W0223 20:52:12.361186     439 control.go:74] [/emulator/studio-v0 23ae] connector \"default\" has errors: connector/mutations.gql:8:1: On @auth: cannot specify both `level` and `expr`\nconnector/mutations.gql:11:1: On @auth: cannot specify both `level` and `expr`\nconnector/mutations.gql:26:1: On @auth: cannot specify both `level` and `expr`\nconnector/mutations.gql:43:1: On @auth: cannot specify both `level` and `expr`\nconnector/mutations.gql:57:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:4:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:17:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:63:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:73:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:82:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:91:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:102:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:110:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:120:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:131:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:140:1: On @auth: cannot specify both `level` and `expr`\n\nsources: connector/queries.gql [2998B] connector/mutations.gql [3224B] \nI0223 20:52:12.363549     439 control.go:100] [/emulator/studio-v0 23ae] UpdateResources(): done\nMain schema: sources: schema/schema.gql [3721B] \nConnector \"default\": sources: connector/mutations.gql [3224B] connector/queries.gql [2998B] \n"}}
+[debug] [2026-02-23T20:52:12.382Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"dataconnect"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2026-02-23T20:52:12.383Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"dataconnect"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2026-02-23T20:52:12.386Z] Starting Data Connect Emulator with command {"binary":"/home/user/.cache/firebase/emulators/dataconnect-emulator-3.1.1","args":["--logtostderr","-v=2","dev","--listen=localhost:50001","--config_dir=/home/user/studio/dataconnect","--enable_output_schema_extensions=true","--enable_output_generated_sdk=true"],"optionalArgs":["listen","config_dir","enable_output_schema_extensions","enable_output_generated_sdk"],"joinArgs":true,"shell":false,"port":9399} {"metadata":{"emulator":{"name":"dataconnect"},"message":"Starting Data Connect Emulator with command {\"binary\":\"/home/user/.cache/firebase/emulators/dataconnect-emulator-3.1.1\",\"args\":[\"--logtostderr\",\"-v=2\",\"dev\",\"--listen=localhost:50001\",\"--config_dir=/home/user/studio/dataconnect\",\"--enable_output_schema_extensions=true\",\"--enable_output_generated_sdk=true\"],\"optionalArgs\":[\"listen\",\"config_dir\",\"enable_output_schema_extensions\",\"enable_output_generated_sdk\"],\"joinArgs\":true,\"shell\":false,\"port\":9399}"}}
+[info] i  dataconnect: Data Connect Emulator logging to dataconnect-debug.log {"metadata":{"emulator":{"name":"dataconnect"},"message":"Data Connect Emulator logging to dataconnect-debug.log"}}
+[debug] [2026-02-23T20:52:12.896Z] I0223 20:52:12.593531     444 load.go:31] Reloading schema and connectors...
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0223 20:52:12.593531     444 load.go:31] Reloading schema and connectors...\n"}}
+[debug] [2026-02-23T20:52:14.360Z] W0223 20:52:13.695135     444 control.go:74] [/emulator/studio-v0 ff71] connector "default" has errors: connector/mutations.gql:8:1: On @auth: cannot specify both `level` and `expr`
+connector/mutations.gql:11:1: On @auth: cannot specify both `level` and `expr`
+connector/mutations.gql:26:1: On @auth: cannot specify both `level` and `expr`
+connector/mutations.gql:43:1: On @auth: cannot specify both `level` and `expr`
+connector/mutations.gql:57:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:4:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:17:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:63:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:73:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:82:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:91:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:102:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:110:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:120:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:131:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:140:1: On @auth: cannot specify both `level` and `expr`
+
+sources: connector/mutations.gql [3224B] connector/queries.gql [2998B] 
+I0223 20:52:13.695285     444 control.go:100] [/emulator/studio-v0 ff71] UpdateResources(): done
+Main schema: sources: schema/schema.gql [3721B] 
+Connector "default": sources: connector/mutations.gql [3224B] connector/queries.gql [2998B] 
+E0223 20:52:13.766791     444 load.go:73] Could not load sources: 
+Errors: connector/mutations.gql:8:1: On @auth: cannot specify both `level` and `expr`
+connector/mutations.gql:11:1: On @auth: cannot specify both `level` and `expr`
+connector/mutations.gql:26:1: On @auth: cannot specify both `level` and `expr`
+connector/mutations.gql:43:1: On @auth: cannot specify both `level` and `expr`
+connector/mutations.gql:57:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:4:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:17:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:63:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:73:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:82:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:91:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:102:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:110:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:120:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:131:1: On @auth: cannot specify both `level` and `expr`
+connector/queries.gql:140:1: On @auth: cannot specify both `level` and `expr`
+I0223 20:52:13.779243     444 collector.go:107] schema extensions wrote into "/home/user/studio/dataconnect/.dataconnect/schema"
+Generated sources: main/implicit.gql [3267B] main/input.gql [122168B] main/relation.gql [51784B] main/query.gql [15655B] main/mutation.gql [41655B] prelude.gql [73281B] 
+I0223 20:52:13.788557     444 load.go:74] Finished reloading
+I0223 20:52:13.816979     444 dev.go:104] Listening on address (HTTP + gRPC): 127.0.0.1:50001
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"W0223 20:52:13.695135     444 control.go:74] [/emulator/studio-v0 ff71] connector \"default\" has errors: connector/mutations.gql:8:1: On @auth: cannot specify both `level` and `expr`\nconnector/mutations.gql:11:1: On @auth: cannot specify both `level` and `expr`\nconnector/mutations.gql:26:1: On @auth: cannot specify both `level` and `expr`\nconnector/mutations.gql:43:1: On @auth: cannot specify both `level` and `expr`\nconnector/mutations.gql:57:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:4:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:17:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:63:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:73:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:82:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:91:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:102:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:110:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:120:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:131:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:140:1: On @auth: cannot specify both `level` and `expr`\n\nsources: connector/mutations.gql [3224B] connector/queries.gql [2998B] \nI0223 20:52:13.695285     444 control.go:100] [/emulator/studio-v0 ff71] UpdateResources(): done\nMain schema: sources: schema/schema.gql [3721B] \nConnector \"default\": sources: connector/mutations.gql [3224B] connector/queries.gql [2998B] \nE0223 20:52:13.766791     444 load.go:73] Could not load sources: \nErrors: connector/mutations.gql:8:1: On @auth: cannot specify both `level` and `expr`\nconnector/mutations.gql:11:1: On @auth: cannot specify both `level` and `expr`\nconnector/mutations.gql:26:1: On @auth: cannot specify both `level` and `expr`\nconnector/mutations.gql:43:1: On @auth: cannot specify both `level` and `expr`\nconnector/mutations.gql:57:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:4:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:17:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:63:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:73:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:82:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:91:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:102:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:110:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:120:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:131:1: On @auth: cannot specify both `level` and `expr`\nconnector/queries.gql:140:1: On @auth: cannot specify both `level` and `expr`\nI0223 20:52:13.779243     444 collector.go:107] schema extensions wrote into \"/home/user/studio/dataconnect/.dataconnect/schema\"\nGenerated sources: main/implicit.gql [3267B] main/input.gql [122168B] main/relation.gql [51784B] main/query.gql [15655B] main/mutation.gql [41655B] prelude.gql [73281B] \nI0223 20:52:13.788557     444 load.go:74] Finished reloading\nI0223 20:52:13.816979     444 dev.go:104] Listening on address (HTTP + gRPC): 127.0.0.1:50001\n"}}
+[debug] [2026-02-23T20:52:16.797Z] I0223 20:52:16.301728     444 engine.go:205] [/emulator/studio-v0 ff71] ExecuteGraphqlRead IntrospectionQuery: succeeded. 
+ {"metadata":{"emulator":{"name":"dataconnect"},"message":"I0223 20:52:16.301728     444 engine.go:205] [/emulator/studio-v0 ff71] ExecuteGraphqlRead IntrospectionQuery: succeeded. \n"}}
+[debug] [2026-02-23T20:52:16.833Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2026-02-23T20:52:16.839Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
