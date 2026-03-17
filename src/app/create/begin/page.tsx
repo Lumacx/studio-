@@ -1156,15 +1156,16 @@ export default function BeginPage() {
                 <div className="mt-3">
                   <label className="block text-sm font-bold mb-1">{t('aiDescription')}</label>
                   <textarea
-                    className={`
-                      w-full p-3 border-2 rounded-md
-                      bg-white text-slate-900 border-slate-300
-                      dark:bg-[#0f2334] dark:text-white dark:border-[#2c3f55]
-                    `}
-                    rows={3}
-                    value={descText}
-                    onChange={(e) => setDescText(e.target.value)}
-                  />
+                      className={`
+                        w-full p-3 border-2 rounded-md transition-colors duration-200
+                        bg-white text-slate-900 border-slate-300
+                        dark:bg-[#0a121a] dark:text-[#E0C9A0] dark:border-[#344b63] 
+                        dark:focus:border-[#E97451] focus:outline-none
+                      `}
+                      rows={3}
+                      value={descText}
+                      onChange={(e) => setDescText(e.target.value)}
+                    />
                   <div className="flex gap-2 mt-2">
                     <button
                       onClick={() => setDraft((d) => ({ ...d, synopsis: descText }))}
@@ -1248,18 +1249,34 @@ export default function BeginPage() {
         )}
       </div>
 
-      {/* 🔧 Dark-mode input text & placeholder fix (page scoped) */}
-      <style jsx global>{`
-        .dark #begin-page input,
-        .dark #begin-page textarea,
-        .dark #begin-page select {
-          color: #ffffff !important;
-        }
-        .dark #begin-page input::placeholder,
-        .dark #begin-page textarea::placeholder {
-          color: rgba(255, 255, 255, 0.75) !important;
-        }
-      `}</style>
+     {/* 🔧 Refined Dark-mode input styling */}
+        <style jsx global>{`
+          /* Standard Inputs & Textareas */
+          .dark #begin-page input,
+          .dark #begin-page textarea,
+          .dark #begin-page select {
+            color: #E0C9A0 !important;
+            background-color: #0f2334;
+          }
+
+          /* Placeholder contrast - using a muted gold */
+          .dark #begin-page input::placeholder,
+          .dark #begin-page textarea::placeholder {
+            color: rgba(224, 201, 160, 0.4) !important;
+          }
+
+          /* High-contrast focus state to match your 'Start Story' button */
+          .dark #begin-page input:focus,
+          .dark #begin-page textarea:focus {
+            border-color: #E97451 !important;
+            ring-color: #E97451 !important;
+          }
+
+          /* Specifically styling the AI Description box background to be slightly darker */
+          .dark #begin-page .ai-description-box {
+            background-color: #08111a !important;
+          }
+        `}</style>
     </div>
   );
 }
