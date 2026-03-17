@@ -18,10 +18,10 @@ This README will guide you through the process of using the generated JavaScript
   - [*GetAllTemplates*](#getalltemplates)
   - [*GetAiGeneratedImage*](#getaigeneratedimage)
   - [*GetAiGeneratedGif*](#getaigeneratedgif)
-  - [*GetPayment*](#getpayment)
+  - [*GetMyPayments*](#getmypayments)
   - [*GetAdminAction*](#getadminaction)
   - [*GetAnalyticsEntry*](#getanalyticsentry)
-  - [*GetLegalDisclaimer*](#getlegaldisclaimer)
+  - [*GetMyLegalDisclaimers*](#getmylegaldisclaimers)
 - [**Mutations**](#mutations)
   - [*CreateUserProfile*](#createuserprofile)
   - [*CreateStory*](#createstory)
@@ -84,22 +84,22 @@ Below are examples of how to use the `default` connector's generated functions t
 ## GetUserProfile
 You can execute the `GetUserProfile` query using the following action shortcut function, or by calling `executeQuery()` after calling the following `QueryRef` function, both of which are defined in [default-connector/index.d.ts](./index.d.ts):
 ```typescript
-getUserProfile(vars: GetUserProfileVariables): QueryPromise<GetUserProfileData, GetUserProfileVariables>;
+getUserProfile(): QueryPromise<GetUserProfileData, undefined>;
 
 interface GetUserProfileRef {
   ...
   /* Allow users to create refs without passing in DataConnect */
-  (vars: GetUserProfileVariables): QueryRef<GetUserProfileData, GetUserProfileVariables>;
+  (): QueryRef<GetUserProfileData, undefined>;
 }
 export const getUserProfileRef: GetUserProfileRef;
 ```
 You can also pass in a `DataConnect` instance to the action shortcut function or `QueryRef` function.
 ```typescript
-getUserProfile(dc: DataConnect, vars: GetUserProfileVariables): QueryPromise<GetUserProfileData, GetUserProfileVariables>;
+getUserProfile(dc: DataConnect): QueryPromise<GetUserProfileData, undefined>;
 
 interface GetUserProfileRef {
   ...
-  (dc: DataConnect, vars: GetUserProfileVariables): QueryRef<GetUserProfileData, GetUserProfileVariables>;
+  (dc: DataConnect): QueryRef<GetUserProfileData, undefined>;
 }
 export const getUserProfileRef: GetUserProfileRef;
 ```
@@ -111,13 +111,7 @@ console.log(name);
 ```
 
 ### Variables
-The `GetUserProfile` query requires an argument of type `GetUserProfileVariables`, which is defined in [default-connector/index.d.ts](./index.d.ts). It has the following fields:
-
-```typescript
-export interface GetUserProfileVariables {
-  userId: string;
-}
-```
+The `GetUserProfile` query has no variables.
 ### Return Type
 Recall that executing the `GetUserProfile` query returns a `QueryPromise` that resolves to an object with a `data` property.
 
@@ -139,27 +133,21 @@ export interface GetUserProfileData {
 
 ```typescript
 import { getDataConnect } from 'firebase/data-connect';
-import { connectorConfig, getUserProfile, GetUserProfileVariables } from '@firebasegen/default-connector';
+import { connectorConfig, getUserProfile } from '@firebasegen/default-connector';
 
-// The `GetUserProfile` query requires an argument of type `GetUserProfileVariables`:
-const getUserProfileVars: GetUserProfileVariables = {
-  userId: ..., 
-};
 
 // Call the `getUserProfile()` function to execute the query.
 // You can use the `await` keyword to wait for the promise to resolve.
-const { data } = await getUserProfile(getUserProfileVars);
-// Variables can be defined inline as well.
-const { data } = await getUserProfile({ userId: ..., });
+const { data } = await getUserProfile();
 
 // You can also pass in a `DataConnect` instance to the action shortcut function.
 const dataConnect = getDataConnect(connectorConfig);
-const { data } = await getUserProfile(dataConnect, getUserProfileVars);
+const { data } = await getUserProfile(dataConnect);
 
 console.log(data.user);
 
 // Or, you can use the `Promise` API.
-getUserProfile(getUserProfileVars).then((response) => {
+getUserProfile().then((response) => {
   const data = response.data;
   console.log(data.user);
 });
@@ -169,21 +157,15 @@ getUserProfile(getUserProfileVars).then((response) => {
 
 ```typescript
 import { getDataConnect, executeQuery } from 'firebase/data-connect';
-import { connectorConfig, getUserProfileRef, GetUserProfileVariables } from '@firebasegen/default-connector';
+import { connectorConfig, getUserProfileRef } from '@firebasegen/default-connector';
 
-// The `GetUserProfile` query requires an argument of type `GetUserProfileVariables`:
-const getUserProfileVars: GetUserProfileVariables = {
-  userId: ..., 
-};
 
 // Call the `getUserProfileRef()` function to get a reference to the query.
-const ref = getUserProfileRef(getUserProfileVars);
-// Variables can be defined inline as well.
-const ref = getUserProfileRef({ userId: ..., });
+const ref = getUserProfileRef();
 
 // You can also pass in a `DataConnect` instance to the `QueryRef` function.
 const dataConnect = getDataConnect(connectorConfig);
-const ref = getUserProfileRef(dataConnect, getUserProfileVars);
+const ref = getUserProfileRef(dataConnect);
 
 // Call `executeQuery()` on the reference to execute the query.
 // You can use the `await` keyword to wait for the promise to resolve.
@@ -984,117 +966,99 @@ executeQuery(ref).then((response) => {
 });
 ```
 
-## GetPayment
-You can execute the `GetPayment` query using the following action shortcut function, or by calling `executeQuery()` after calling the following `QueryRef` function, both of which are defined in [default-connector/index.d.ts](./index.d.ts):
+## GetMyPayments
+You can execute the `GetMyPayments` query using the following action shortcut function, or by calling `executeQuery()` after calling the following `QueryRef` function, both of which are defined in [default-connector/index.d.ts](./index.d.ts):
 ```typescript
-getPayment(vars: GetPaymentVariables): QueryPromise<GetPaymentData, GetPaymentVariables>;
+getMyPayments(): QueryPromise<GetMyPaymentsData, undefined>;
 
-interface GetPaymentRef {
+interface GetMyPaymentsRef {
   ...
   /* Allow users to create refs without passing in DataConnect */
-  (vars: GetPaymentVariables): QueryRef<GetPaymentData, GetPaymentVariables>;
+  (): QueryRef<GetMyPaymentsData, undefined>;
 }
-export const getPaymentRef: GetPaymentRef;
+export const getMyPaymentsRef: GetMyPaymentsRef;
 ```
 You can also pass in a `DataConnect` instance to the action shortcut function or `QueryRef` function.
 ```typescript
-getPayment(dc: DataConnect, vars: GetPaymentVariables): QueryPromise<GetPaymentData, GetPaymentVariables>;
+getMyPayments(dc: DataConnect): QueryPromise<GetMyPaymentsData, undefined>;
 
-interface GetPaymentRef {
+interface GetMyPaymentsRef {
   ...
-  (dc: DataConnect, vars: GetPaymentVariables): QueryRef<GetPaymentData, GetPaymentVariables>;
+  (dc: DataConnect): QueryRef<GetMyPaymentsData, undefined>;
 }
-export const getPaymentRef: GetPaymentRef;
+export const getMyPaymentsRef: GetMyPaymentsRef;
 ```
 
-If you need the name of the operation without creating a ref, you can retrieve the operation name by calling the `operationName` property on the getPaymentRef:
+If you need the name of the operation without creating a ref, you can retrieve the operation name by calling the `operationName` property on the getMyPaymentsRef:
 ```typescript
-const name = getPaymentRef.operationName;
+const name = getMyPaymentsRef.operationName;
 console.log(name);
 ```
 
 ### Variables
-The `GetPayment` query requires an argument of type `GetPaymentVariables`, which is defined in [default-connector/index.d.ts](./index.d.ts). It has the following fields:
-
-```typescript
-export interface GetPaymentVariables {
-  paymentId: string;
-}
-```
+The `GetMyPayments` query has no variables.
 ### Return Type
-Recall that executing the `GetPayment` query returns a `QueryPromise` that resolves to an object with a `data` property.
+Recall that executing the `GetMyPayments` query returns a `QueryPromise` that resolves to an object with a `data` property.
 
-The `data` property is an object of type `GetPaymentData`, which is defined in [default-connector/index.d.ts](./index.d.ts). It has the following fields:
+The `data` property is an object of type `GetMyPaymentsData`, which is defined in [default-connector/index.d.ts](./index.d.ts). It has the following fields:
 ```typescript
-export interface GetPaymentData {
-  payment?: {
+export interface GetMyPaymentsData {
+  payments: ({
     id: string;
     amount?: number | null;
     status: string;
     paymentDate: TimestampString;
-  } & Payment_Key;
+  } & Payment_Key)[];
 }
 ```
-### Using `GetPayment`'s action shortcut function
+### Using `GetMyPayments`'s action shortcut function
 
 ```typescript
 import { getDataConnect } from 'firebase/data-connect';
-import { connectorConfig, getPayment, GetPaymentVariables } from '@firebasegen/default-connector';
+import { connectorConfig, getMyPayments } from '@firebasegen/default-connector';
 
-// The `GetPayment` query requires an argument of type `GetPaymentVariables`:
-const getPaymentVars: GetPaymentVariables = {
-  paymentId: ..., 
-};
 
-// Call the `getPayment()` function to execute the query.
+// Call the `getMyPayments()` function to execute the query.
 // You can use the `await` keyword to wait for the promise to resolve.
-const { data } = await getPayment(getPaymentVars);
-// Variables can be defined inline as well.
-const { data } = await getPayment({ paymentId: ..., });
+const { data } = await getMyPayments();
 
 // You can also pass in a `DataConnect` instance to the action shortcut function.
 const dataConnect = getDataConnect(connectorConfig);
-const { data } = await getPayment(dataConnect, getPaymentVars);
+const { data } = await getMyPayments(dataConnect);
 
-console.log(data.payment);
+console.log(data.payments);
 
 // Or, you can use the `Promise` API.
-getPayment(getPaymentVars).then((response) => {
+getMyPayments().then((response) => {
   const data = response.data;
-  console.log(data.payment);
+  console.log(data.payments);
 });
 ```
 
-### Using `GetPayment`'s `QueryRef` function
+### Using `GetMyPayments`'s `QueryRef` function
 
 ```typescript
 import { getDataConnect, executeQuery } from 'firebase/data-connect';
-import { connectorConfig, getPaymentRef, GetPaymentVariables } from '@firebasegen/default-connector';
+import { connectorConfig, getMyPaymentsRef } from '@firebasegen/default-connector';
 
-// The `GetPayment` query requires an argument of type `GetPaymentVariables`:
-const getPaymentVars: GetPaymentVariables = {
-  paymentId: ..., 
-};
 
-// Call the `getPaymentRef()` function to get a reference to the query.
-const ref = getPaymentRef(getPaymentVars);
-// Variables can be defined inline as well.
-const ref = getPaymentRef({ paymentId: ..., });
+// Call the `getMyPaymentsRef()` function to get a reference to the query.
+const ref = getMyPaymentsRef();
 
 // You can also pass in a `DataConnect` instance to the `QueryRef` function.
 const dataConnect = getDataConnect(connectorConfig);
-const ref = getPaymentRef(dataConnect, getPaymentVars);
+const ref = getMyPaymentsRef(dataConnect);
 
 // Call `executeQuery()` on the reference to execute the query.
 // You can use the `await` keyword to wait for the promise to resolve.
 const { data } = await executeQuery(ref);
 
-console.log(data.payment);
+console.log(data.payments);
 
 // Or, you can use the `Promise` API.
 executeQuery(ref).then((response) => {
   const data = response.data;
-  console.log(data.payment);
+  console.log(data.payments);
 });
 ```
 
@@ -1326,117 +1290,99 @@ executeQuery(ref).then((response) => {
 });
 ```
 
-## GetLegalDisclaimer
-You can execute the `GetLegalDisclaimer` query using the following action shortcut function, or by calling `executeQuery()` after calling the following `QueryRef` function, both of which are defined in [default-connector/index.d.ts](./index.d.ts):
+## GetMyLegalDisclaimers
+You can execute the `GetMyLegalDisclaimers` query using the following action shortcut function, or by calling `executeQuery()` after calling the following `QueryRef` function, both of which are defined in [default-connector/index.d.ts](./index.d.ts):
 ```typescript
-getLegalDisclaimer(vars: GetLegalDisclaimerVariables): QueryPromise<GetLegalDisclaimerData, GetLegalDisclaimerVariables>;
+getMyLegalDisclaimers(): QueryPromise<GetMyLegalDisclaimersData, undefined>;
 
-interface GetLegalDisclaimerRef {
+interface GetMyLegalDisclaimersRef {
   ...
   /* Allow users to create refs without passing in DataConnect */
-  (vars: GetLegalDisclaimerVariables): QueryRef<GetLegalDisclaimerData, GetLegalDisclaimerVariables>;
+  (): QueryRef<GetMyLegalDisclaimersData, undefined>;
 }
-export const getLegalDisclaimerRef: GetLegalDisclaimerRef;
+export const getMyLegalDisclaimersRef: GetMyLegalDisclaimersRef;
 ```
 You can also pass in a `DataConnect` instance to the action shortcut function or `QueryRef` function.
 ```typescript
-getLegalDisclaimer(dc: DataConnect, vars: GetLegalDisclaimerVariables): QueryPromise<GetLegalDisclaimerData, GetLegalDisclaimerVariables>;
+getMyLegalDisclaimers(dc: DataConnect): QueryPromise<GetMyLegalDisclaimersData, undefined>;
 
-interface GetLegalDisclaimerRef {
+interface GetMyLegalDisclaimersRef {
   ...
-  (dc: DataConnect, vars: GetLegalDisclaimerVariables): QueryRef<GetLegalDisclaimerData, GetLegalDisclaimerVariables>;
+  (dc: DataConnect): QueryRef<GetMyLegalDisclaimersData, undefined>;
 }
-export const getLegalDisclaimerRef: GetLegalDisclaimerRef;
+export const getMyLegalDisclaimersRef: GetMyLegalDisclaimersRef;
 ```
 
-If you need the name of the operation without creating a ref, you can retrieve the operation name by calling the `operationName` property on the getLegalDisclaimerRef:
+If you need the name of the operation without creating a ref, you can retrieve the operation name by calling the `operationName` property on the getMyLegalDisclaimersRef:
 ```typescript
-const name = getLegalDisclaimerRef.operationName;
+const name = getMyLegalDisclaimersRef.operationName;
 console.log(name);
 ```
 
 ### Variables
-The `GetLegalDisclaimer` query requires an argument of type `GetLegalDisclaimerVariables`, which is defined in [default-connector/index.d.ts](./index.d.ts). It has the following fields:
-
-```typescript
-export interface GetLegalDisclaimerVariables {
-  disclaimerId: string;
-}
-```
+The `GetMyLegalDisclaimers` query has no variables.
 ### Return Type
-Recall that executing the `GetLegalDisclaimer` query returns a `QueryPromise` that resolves to an object with a `data` property.
+Recall that executing the `GetMyLegalDisclaimers` query returns a `QueryPromise` that resolves to an object with a `data` property.
 
-The `data` property is an object of type `GetLegalDisclaimerData`, which is defined in [default-connector/index.d.ts](./index.d.ts). It has the following fields:
+The `data` property is an object of type `GetMyLegalDisclaimersData`, which is defined in [default-connector/index.d.ts](./index.d.ts). It has the following fields:
 ```typescript
-export interface GetLegalDisclaimerData {
-  legalDisclaimer?: {
+export interface GetMyLegalDisclaimersData {
+  legalDisclaimers: ({
     id: string;
     accepted: boolean;
     acceptedDate?: TimestampString | null;
     createdAt: TimestampString;
-  } & LegalDisclaimer_Key;
+  } & LegalDisclaimer_Key)[];
 }
 ```
-### Using `GetLegalDisclaimer`'s action shortcut function
+### Using `GetMyLegalDisclaimers`'s action shortcut function
 
 ```typescript
 import { getDataConnect } from 'firebase/data-connect';
-import { connectorConfig, getLegalDisclaimer, GetLegalDisclaimerVariables } from '@firebasegen/default-connector';
+import { connectorConfig, getMyLegalDisclaimers } from '@firebasegen/default-connector';
 
-// The `GetLegalDisclaimer` query requires an argument of type `GetLegalDisclaimerVariables`:
-const getLegalDisclaimerVars: GetLegalDisclaimerVariables = {
-  disclaimerId: ..., 
-};
 
-// Call the `getLegalDisclaimer()` function to execute the query.
+// Call the `getMyLegalDisclaimers()` function to execute the query.
 // You can use the `await` keyword to wait for the promise to resolve.
-const { data } = await getLegalDisclaimer(getLegalDisclaimerVars);
-// Variables can be defined inline as well.
-const { data } = await getLegalDisclaimer({ disclaimerId: ..., });
+const { data } = await getMyLegalDisclaimers();
 
 // You can also pass in a `DataConnect` instance to the action shortcut function.
 const dataConnect = getDataConnect(connectorConfig);
-const { data } = await getLegalDisclaimer(dataConnect, getLegalDisclaimerVars);
+const { data } = await getMyLegalDisclaimers(dataConnect);
 
-console.log(data.legalDisclaimer);
+console.log(data.legalDisclaimers);
 
 // Or, you can use the `Promise` API.
-getLegalDisclaimer(getLegalDisclaimerVars).then((response) => {
+getMyLegalDisclaimers().then((response) => {
   const data = response.data;
-  console.log(data.legalDisclaimer);
+  console.log(data.legalDisclaimers);
 });
 ```
 
-### Using `GetLegalDisclaimer`'s `QueryRef` function
+### Using `GetMyLegalDisclaimers`'s `QueryRef` function
 
 ```typescript
 import { getDataConnect, executeQuery } from 'firebase/data-connect';
-import { connectorConfig, getLegalDisclaimerRef, GetLegalDisclaimerVariables } from '@firebasegen/default-connector';
+import { connectorConfig, getMyLegalDisclaimersRef } from '@firebasegen/default-connector';
 
-// The `GetLegalDisclaimer` query requires an argument of type `GetLegalDisclaimerVariables`:
-const getLegalDisclaimerVars: GetLegalDisclaimerVariables = {
-  disclaimerId: ..., 
-};
 
-// Call the `getLegalDisclaimerRef()` function to get a reference to the query.
-const ref = getLegalDisclaimerRef(getLegalDisclaimerVars);
-// Variables can be defined inline as well.
-const ref = getLegalDisclaimerRef({ disclaimerId: ..., });
+// Call the `getMyLegalDisclaimersRef()` function to get a reference to the query.
+const ref = getMyLegalDisclaimersRef();
 
 // You can also pass in a `DataConnect` instance to the `QueryRef` function.
 const dataConnect = getDataConnect(connectorConfig);
-const ref = getLegalDisclaimerRef(dataConnect, getLegalDisclaimerVars);
+const ref = getMyLegalDisclaimersRef(dataConnect);
 
 // Call `executeQuery()` on the reference to execute the query.
 // You can use the `await` keyword to wait for the promise to resolve.
 const { data } = await executeQuery(ref);
 
-console.log(data.legalDisclaimer);
+console.log(data.legalDisclaimers);
 
 // Or, you can use the `Promise` API.
 executeQuery(ref).then((response) => {
   const data = response.data;
-  console.log(data.legalDisclaimer);
+  console.log(data.legalDisclaimers);
 });
 ```
 
@@ -1611,6 +1557,7 @@ export interface CreateStoryVariables {
   genres?: string[] | null;
   description?: string | null;
   coverImageUrl?: string | null;
+  backgroundMusicUrl?: string | null;
 }
 ```
 ### Return Type
@@ -1634,13 +1581,14 @@ const createStoryVars: CreateStoryVariables = {
   genres: ..., // optional
   description: ..., // optional
   coverImageUrl: ..., // optional
+  backgroundMusicUrl: ..., // optional
 };
 
 // Call the `createStory()` function to execute the mutation.
 // You can use the `await` keyword to wait for the promise to resolve.
 const { data } = await createStory(createStoryVars);
 // Variables can be defined inline as well.
-const { data } = await createStory({ title: ..., genres: ..., description: ..., coverImageUrl: ..., });
+const { data } = await createStory({ title: ..., genres: ..., description: ..., coverImageUrl: ..., backgroundMusicUrl: ..., });
 // Since all variables are optional for this mutation, you can omit the `CreateStoryVariables` argument.
 const { data } = await createStory();
 
@@ -1669,12 +1617,13 @@ const createStoryVars: CreateStoryVariables = {
   genres: ..., // optional
   description: ..., // optional
   coverImageUrl: ..., // optional
+  backgroundMusicUrl: ..., // optional
 };
 
 // Call the `createStoryRef()` function to get a reference to the mutation.
 const ref = createStoryRef(createStoryVars);
 // Variables can be defined inline as well.
-const ref = createStoryRef({ title: ..., genres: ..., description: ..., coverImageUrl: ..., });
+const ref = createStoryRef({ title: ..., genres: ..., description: ..., coverImageUrl: ..., backgroundMusicUrl: ..., });
 // Since all variables are optional for this mutation, you can omit the `CreateStoryVariables` argument.
 const ref = createStoryRef();
 
@@ -1734,6 +1683,7 @@ export interface CreateStoryContentVariables {
   pageNumber?: number | null;
   imageUrl?: string | null;
   audioUrl?: string | null;
+  backgroundUrl?: string | null;
 }
 ```
 ### Return Type
@@ -1758,13 +1708,14 @@ const createStoryContentVars: CreateStoryContentVariables = {
   pageNumber: ..., // optional
   imageUrl: ..., // optional
   audioUrl: ..., // optional
+  backgroundUrl: ..., // optional
 };
 
 // Call the `createStoryContent()` function to execute the mutation.
 // You can use the `await` keyword to wait for the promise to resolve.
 const { data } = await createStoryContent(createStoryContentVars);
 // Variables can be defined inline as well.
-const { data } = await createStoryContent({ storyId: ..., textContent: ..., pageNumber: ..., imageUrl: ..., audioUrl: ..., });
+const { data } = await createStoryContent({ storyId: ..., textContent: ..., pageNumber: ..., imageUrl: ..., audioUrl: ..., backgroundUrl: ..., });
 
 // You can also pass in a `DataConnect` instance to the action shortcut function.
 const dataConnect = getDataConnect(connectorConfig);
@@ -1792,12 +1743,13 @@ const createStoryContentVars: CreateStoryContentVariables = {
   pageNumber: ..., // optional
   imageUrl: ..., // optional
   audioUrl: ..., // optional
+  backgroundUrl: ..., // optional
 };
 
 // Call the `createStoryContentRef()` function to get a reference to the mutation.
 const ref = createStoryContentRef(createStoryContentVars);
 // Variables can be defined inline as well.
-const ref = createStoryContentRef({ storyId: ..., textContent: ..., pageNumber: ..., imageUrl: ..., audioUrl: ..., });
+const ref = createStoryContentRef({ storyId: ..., textContent: ..., pageNumber: ..., imageUrl: ..., audioUrl: ..., backgroundUrl: ..., });
 
 // You can also pass in a `DataConnect` instance to the `MutationRef` function.
 const dataConnect = getDataConnect(connectorConfig);
@@ -2630,6 +2582,7 @@ export interface UpdateStoryContentVariables {
   pageNumber?: number | null;
   imageUrl?: string | null;
   audioUrl?: string | null;
+  backgroundUrl?: string | null;
 }
 ```
 ### Return Type
@@ -2654,13 +2607,14 @@ const updateStoryContentVars: UpdateStoryContentVariables = {
   pageNumber: ..., // optional
   imageUrl: ..., // optional
   audioUrl: ..., // optional
+  backgroundUrl: ..., // optional
 };
 
 // Call the `updateStoryContent()` function to execute the mutation.
 // You can use the `await` keyword to wait for the promise to resolve.
 const { data } = await updateStoryContent(updateStoryContentVars);
 // Variables can be defined inline as well.
-const { data } = await updateStoryContent({ id: ..., textContent: ..., pageNumber: ..., imageUrl: ..., audioUrl: ..., });
+const { data } = await updateStoryContent({ id: ..., textContent: ..., pageNumber: ..., imageUrl: ..., audioUrl: ..., backgroundUrl: ..., });
 
 // You can also pass in a `DataConnect` instance to the action shortcut function.
 const dataConnect = getDataConnect(connectorConfig);
@@ -2688,12 +2642,13 @@ const updateStoryContentVars: UpdateStoryContentVariables = {
   pageNumber: ..., // optional
   imageUrl: ..., // optional
   audioUrl: ..., // optional
+  backgroundUrl: ..., // optional
 };
 
 // Call the `updateStoryContentRef()` function to get a reference to the mutation.
 const ref = updateStoryContentRef(updateStoryContentVars);
 // Variables can be defined inline as well.
-const ref = updateStoryContentRef({ id: ..., textContent: ..., pageNumber: ..., imageUrl: ..., audioUrl: ..., });
+const ref = updateStoryContentRef({ id: ..., textContent: ..., pageNumber: ..., imageUrl: ..., audioUrl: ..., backgroundUrl: ..., });
 
 // You can also pass in a `DataConnect` instance to the `MutationRef` function.
 const dataConnect = getDataConnect(connectorConfig);
@@ -2748,6 +2703,7 @@ The `UpdateStory` mutation requires an argument of type `UpdateStoryVariables`, 
 export interface UpdateStoryVariables {
   id: string;
   commentsCount?: number | null;
+  backgroundMusicUrl?: string | null;
 }
 ```
 ### Return Type
@@ -2756,7 +2712,7 @@ Recall that executing the `UpdateStory` mutation returns a `MutationPromise` tha
 The `data` property is an object of type `UpdateStoryData`, which is defined in [default-connector/index.d.ts](./index.d.ts). It has the following fields:
 ```typescript
 export interface UpdateStoryData {
-  story_update?: Story_Key | null;
+  story_updateMany: number;
 }
 ```
 ### Using `UpdateStory`'s action shortcut function
@@ -2769,24 +2725,25 @@ import { connectorConfig, updateStory, UpdateStoryVariables } from '@firebasegen
 const updateStoryVars: UpdateStoryVariables = {
   id: ..., 
   commentsCount: ..., // optional
+  backgroundMusicUrl: ..., // optional
 };
 
 // Call the `updateStory()` function to execute the mutation.
 // You can use the `await` keyword to wait for the promise to resolve.
 const { data } = await updateStory(updateStoryVars);
 // Variables can be defined inline as well.
-const { data } = await updateStory({ id: ..., commentsCount: ..., });
+const { data } = await updateStory({ id: ..., commentsCount: ..., backgroundMusicUrl: ..., });
 
 // You can also pass in a `DataConnect` instance to the action shortcut function.
 const dataConnect = getDataConnect(connectorConfig);
 const { data } = await updateStory(dataConnect, updateStoryVars);
 
-console.log(data.story_update);
+console.log(data.story_updateMany);
 
 // Or, you can use the `Promise` API.
 updateStory(updateStoryVars).then((response) => {
   const data = response.data;
-  console.log(data.story_update);
+  console.log(data.story_updateMany);
 });
 ```
 
@@ -2800,12 +2757,13 @@ import { connectorConfig, updateStoryRef, UpdateStoryVariables } from '@firebase
 const updateStoryVars: UpdateStoryVariables = {
   id: ..., 
   commentsCount: ..., // optional
+  backgroundMusicUrl: ..., // optional
 };
 
 // Call the `updateStoryRef()` function to get a reference to the mutation.
 const ref = updateStoryRef(updateStoryVars);
 // Variables can be defined inline as well.
-const ref = updateStoryRef({ id: ..., commentsCount: ..., });
+const ref = updateStoryRef({ id: ..., commentsCount: ..., backgroundMusicUrl: ..., });
 
 // You can also pass in a `DataConnect` instance to the `MutationRef` function.
 const dataConnect = getDataConnect(connectorConfig);
@@ -2815,12 +2773,12 @@ const ref = updateStoryRef(dataConnect, updateStoryVars);
 // You can use the `await` keyword to wait for the promise to resolve.
 const { data } = await executeMutation(ref);
 
-console.log(data.story_update);
+console.log(data.story_updateMany);
 
 // Or, you can use the `Promise` API.
 executeMutation(ref).then((response) => {
   const data = response.data;
-  console.log(data.story_update);
+  console.log(data.story_updateMany);
 });
 ```
 

@@ -1,20 +1,20 @@
 # Mutations
 mutation CreateUserProfile($username: String!, $email: String!, $displayname: String!, $avatarUrl: String) @auth(level: USER) {
-  user_insert( data: { username: $username, email: $email, displayname: $displayname, avatarUrl: $avatarUrl } )
+  user_insert( data: { id_expr: "auth.uid", username: $username, email: $email, displayname: $displayname, avatarUrl: $avatarUrl } )
 }
-mutation CreateStory($title: String, $genres: [String!], $description: String, $coverImageUrl: String) @auth(level: USER) {
-  story_insert( data: { creatorId_expr: "auth.uid", title: $title, genres: $genres, description: $description, coverImageUrl: $coverImageUrl } )
+mutation CreateStory($title: String, $genres: [String!], $description: String, $coverImageUrl: String, $backgroundMusicUrl: String) @auth(level: USER) {
+  story_insert( data: { creatorId_expr: "auth.uid", title: $title, genres: $genres, description: $description, coverImageUrl: $coverImageUrl, backgroundMusicUrl: $backgroundMusicUrl } )
 }
-mutation CreateStoryContent($storyId: String!, $textContent: String, $pageNumber: Int, $imageUrl: String, $audioUrl: String) @auth(level: USER, expr: "auth != null") {
-  storyContent_insert( data: { storyId: $storyId, textContent: $textContent, pageNumber: $pageNumber, imageUrl: $imageUrl, audioUrl: $audioUrl } )
+mutation CreateStoryContent($storyId: String!, $textContent: String, $pageNumber: Int, $imageUrl: String, $audioUrl: String, $backgroundUrl: String) @auth(level: USER) {
+  storyContent_insert( data: { storyId: $storyId, textContent: $textContent, pageNumber: $pageNumber, imageUrl: $imageUrl, audioUrl: $audioUrl, backgroundUrl: $backgroundUrl } )
 }
-mutation CreateTemplate($title: String!, $structureJson: String, $exampleStoryId: String) @auth(level: USER, expr: "auth != null") {
+mutation CreateTemplate($title: String!, $structureJson: String, $exampleStoryId: String) @auth(level: USER) {
   template_insert( data: { title: $title, structureJson: $structureJson, exampleStoryId: $exampleStoryId } )
 }
 mutation CreateAiGeneratedImage($imageId: String!, $promptText: String, $sketchUrl: String, $generatedImageUrl: String) @auth(level: USER) { # Added $imageId parameter
   aiGeneratedImage_insert(
     data: {
-      id: $imageId, # ID is now provided@tanstack-query-firebase/react/data-connect
+      id: $imageId, # ID is now provided
       userId_expr: "auth.uid",
       promptText: $promptText,
       sketchUrl: $sketchUrl,
@@ -23,7 +23,7 @@ mutation CreateAiGeneratedImage($imageId: String!, $promptText: String, $sketchU
     }
   )
 }
-mutation CreateAiGeneratedGif($imageId: String!, $gifUrl: String!) @auth(level: USER, expr: "auth != null") {
+mutation CreateAiGeneratedGif($imageId: String!, $gifUrl: String!) @auth(level: USER) {
   aiGeneratedGif_insert( data: { imageId: $imageId, gifUrl: $gifUrl } )
 }
 mutation CreatePayment($appSubscriptionId: String!, $amount: Float!) @auth(level: USER) {
@@ -45,21 +45,23 @@ mutation UpdateStoryContent(
   $textContent: String,
   $pageNumber: Int,
   $imageUrl: String,
-  $audioUrl: String
-) @auth(level: USER, expr: "auth != null") {
+  $audioUrl: String,
+  $backgroundUrl: String
+) @auth(level: USER) {
   storyContent_update(
     id: $id,
-    data: { textContent: $textContent, pageNumber: $pageNumber, imageUrl: $imageUrl, audioUrl: $audioUrl }
+    data: { textContent: $textContent, pageNumber: $pageNumber, imageUrl: $imageUrl, audioUrl: $audioUrl, backgroundUrl: $backgroundUrl }
   )
 }
 
 # Add UpdateStory mutation to support commentsCount
 mutation UpdateStory(
   $id: String!,
-  $commentsCount: Int
-) @auth(level: USER, expr: "auth != null") {
-  story_update(
-    id: $id,
-    data: { commentsCount: $commentsCount }
+  $commentsCount: Int,
+  $backgroundMusicUrl: String
+) @auth(level: USER) {
+  story_updateMany(
+    where: { id: { eq: $id }, creatorId: { eq_expr: "auth.uid" } },
+    data: { commentsCount: $commentsCount, backgroundMusicUrl: $backgroundMusicUrl }
   )
 }

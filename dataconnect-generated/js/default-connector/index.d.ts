@@ -93,6 +93,7 @@ export interface CreateStoryContentVariables {
   pageNumber?: number | null;
   imageUrl?: string | null;
   audioUrl?: string | null;
+  backgroundUrl?: string | null;
 }
 
 export interface CreateStoryData {
@@ -104,6 +105,7 @@ export interface CreateStoryVariables {
   genres?: string[] | null;
   description?: string | null;
   coverImageUrl?: string | null;
+  backgroundMusicUrl?: string | null;
 }
 
 export interface CreateTemplateData {
@@ -213,30 +215,22 @@ export interface GetAppSubscriptionVariables {
   subscriptionId: string;
 }
 
-export interface GetLegalDisclaimerData {
-  legalDisclaimer?: {
+export interface GetMyLegalDisclaimersData {
+  legalDisclaimers: ({
     id: string;
     accepted: boolean;
     acceptedDate?: TimestampString | null;
     createdAt: TimestampString;
-  } & LegalDisclaimer_Key;
+  } & LegalDisclaimer_Key)[];
 }
 
-export interface GetLegalDisclaimerVariables {
-  disclaimerId: string;
-}
-
-export interface GetPaymentData {
-  payment?: {
+export interface GetMyPaymentsData {
+  payments: ({
     id: string;
     amount?: number | null;
     status: string;
     paymentDate: TimestampString;
-  } & Payment_Key;
-}
-
-export interface GetPaymentVariables {
-  paymentId: string;
+  } & Payment_Key)[];
 }
 
 export interface GetStoryWithContentData {
@@ -294,10 +288,6 @@ export interface GetUserProfileData {
   } & User_Key;
 }
 
-export interface GetUserProfileVariables {
-  userId: string;
-}
-
 export interface LegalDisclaimer_Key {
   id: string;
   __typename?: 'LegalDisclaimer_Key';
@@ -337,21 +327,167 @@ export interface UpdateStoryContentVariables {
   pageNumber?: number | null;
   imageUrl?: string | null;
   audioUrl?: string | null;
+  backgroundUrl?: string | null;
 }
 
 export interface UpdateStoryData {
-  story_update?: Story_Key | null;
+  story_updateMany: number;
 }
 
 export interface UpdateStoryVariables {
   id: string;
   commentsCount?: number | null;
+  backgroundMusicUrl?: string | null;
 }
 
 export interface User_Key {
   id: string;
   __typename?: 'User_Key';
 }
+
+interface GetUserProfileRef {
+  /* Allow users to create refs without passing in DataConnect */
+  (): QueryRef<GetUserProfileData, undefined>;
+  /* Allow users to pass in custom DataConnect instances */
+  (dc: DataConnect): QueryRef<GetUserProfileData, undefined>;
+  operationName: string;
+}
+export const getUserProfileRef: GetUserProfileRef;
+
+export function getUserProfile(): QueryPromise<GetUserProfileData, undefined>;
+export function getUserProfile(dc: DataConnect): QueryPromise<GetUserProfileData, undefined>;
+
+interface GetStoryWithContentRef {
+  /* Allow users to create refs without passing in DataConnect */
+  (vars: GetStoryWithContentVariables): QueryRef<GetStoryWithContentData, GetStoryWithContentVariables>;
+  /* Allow users to pass in custom DataConnect instances */
+  (dc: DataConnect, vars: GetStoryWithContentVariables): QueryRef<GetStoryWithContentData, GetStoryWithContentVariables>;
+  operationName: string;
+}
+export const getStoryWithContentRef: GetStoryWithContentRef;
+
+export function getStoryWithContent(vars: GetStoryWithContentVariables): QueryPromise<GetStoryWithContentData, GetStoryWithContentVariables>;
+export function getStoryWithContent(dc: DataConnect, vars: GetStoryWithContentVariables): QueryPromise<GetStoryWithContentData, GetStoryWithContentVariables>;
+
+interface GetAllStoriesRef {
+  /* Allow users to create refs without passing in DataConnect */
+  (): QueryRef<GetAllStoriesData, undefined>;
+  /* Allow users to pass in custom DataConnect instances */
+  (dc: DataConnect): QueryRef<GetAllStoriesData, undefined>;
+  operationName: string;
+}
+export const getAllStoriesRef: GetAllStoriesRef;
+
+export function getAllStories(): QueryPromise<GetAllStoriesData, undefined>;
+export function getAllStories(dc: DataConnect): QueryPromise<GetAllStoriesData, undefined>;
+
+interface GetAppSubscriptionRef {
+  /* Allow users to create refs without passing in DataConnect */
+  (vars: GetAppSubscriptionVariables): QueryRef<GetAppSubscriptionData, GetAppSubscriptionVariables>;
+  /* Allow users to pass in custom DataConnect instances */
+  (dc: DataConnect, vars: GetAppSubscriptionVariables): QueryRef<GetAppSubscriptionData, GetAppSubscriptionVariables>;
+  operationName: string;
+}
+export const getAppSubscriptionRef: GetAppSubscriptionRef;
+
+export function getAppSubscription(vars: GetAppSubscriptionVariables): QueryPromise<GetAppSubscriptionData, GetAppSubscriptionVariables>;
+export function getAppSubscription(dc: DataConnect, vars: GetAppSubscriptionVariables): QueryPromise<GetAppSubscriptionData, GetAppSubscriptionVariables>;
+
+interface GetTemplateRef {
+  /* Allow users to create refs without passing in DataConnect */
+  (vars: GetTemplateVariables): QueryRef<GetTemplateData, GetTemplateVariables>;
+  /* Allow users to pass in custom DataConnect instances */
+  (dc: DataConnect, vars: GetTemplateVariables): QueryRef<GetTemplateData, GetTemplateVariables>;
+  operationName: string;
+}
+export const getTemplateRef: GetTemplateRef;
+
+export function getTemplate(vars: GetTemplateVariables): QueryPromise<GetTemplateData, GetTemplateVariables>;
+export function getTemplate(dc: DataConnect, vars: GetTemplateVariables): QueryPromise<GetTemplateData, GetTemplateVariables>;
+
+interface GetAllTemplatesRef {
+  /* Allow users to create refs without passing in DataConnect */
+  (): QueryRef<GetAllTemplatesData, undefined>;
+  /* Allow users to pass in custom DataConnect instances */
+  (dc: DataConnect): QueryRef<GetAllTemplatesData, undefined>;
+  operationName: string;
+}
+export const getAllTemplatesRef: GetAllTemplatesRef;
+
+export function getAllTemplates(): QueryPromise<GetAllTemplatesData, undefined>;
+export function getAllTemplates(dc: DataConnect): QueryPromise<GetAllTemplatesData, undefined>;
+
+interface GetAiGeneratedImageRef {
+  /* Allow users to create refs without passing in DataConnect */
+  (vars: GetAiGeneratedImageVariables): QueryRef<GetAiGeneratedImageData, GetAiGeneratedImageVariables>;
+  /* Allow users to pass in custom DataConnect instances */
+  (dc: DataConnect, vars: GetAiGeneratedImageVariables): QueryRef<GetAiGeneratedImageData, GetAiGeneratedImageVariables>;
+  operationName: string;
+}
+export const getAiGeneratedImageRef: GetAiGeneratedImageRef;
+
+export function getAiGeneratedImage(vars: GetAiGeneratedImageVariables): QueryPromise<GetAiGeneratedImageData, GetAiGeneratedImageVariables>;
+export function getAiGeneratedImage(dc: DataConnect, vars: GetAiGeneratedImageVariables): QueryPromise<GetAiGeneratedImageData, GetAiGeneratedImageVariables>;
+
+interface GetAiGeneratedGifRef {
+  /* Allow users to create refs without passing in DataConnect */
+  (vars: GetAiGeneratedGifVariables): QueryRef<GetAiGeneratedGifData, GetAiGeneratedGifVariables>;
+  /* Allow users to pass in custom DataConnect instances */
+  (dc: DataConnect, vars: GetAiGeneratedGifVariables): QueryRef<GetAiGeneratedGifData, GetAiGeneratedGifVariables>;
+  operationName: string;
+}
+export const getAiGeneratedGifRef: GetAiGeneratedGifRef;
+
+export function getAiGeneratedGif(vars: GetAiGeneratedGifVariables): QueryPromise<GetAiGeneratedGifData, GetAiGeneratedGifVariables>;
+export function getAiGeneratedGif(dc: DataConnect, vars: GetAiGeneratedGifVariables): QueryPromise<GetAiGeneratedGifData, GetAiGeneratedGifVariables>;
+
+interface GetMyPaymentsRef {
+  /* Allow users to create refs without passing in DataConnect */
+  (): QueryRef<GetMyPaymentsData, undefined>;
+  /* Allow users to pass in custom DataConnect instances */
+  (dc: DataConnect): QueryRef<GetMyPaymentsData, undefined>;
+  operationName: string;
+}
+export const getMyPaymentsRef: GetMyPaymentsRef;
+
+export function getMyPayments(): QueryPromise<GetMyPaymentsData, undefined>;
+export function getMyPayments(dc: DataConnect): QueryPromise<GetMyPaymentsData, undefined>;
+
+interface GetAdminActionRef {
+  /* Allow users to create refs without passing in DataConnect */
+  (vars: GetAdminActionVariables): QueryRef<GetAdminActionData, GetAdminActionVariables>;
+  /* Allow users to pass in custom DataConnect instances */
+  (dc: DataConnect, vars: GetAdminActionVariables): QueryRef<GetAdminActionData, GetAdminActionVariables>;
+  operationName: string;
+}
+export const getAdminActionRef: GetAdminActionRef;
+
+export function getAdminAction(vars: GetAdminActionVariables): QueryPromise<GetAdminActionData, GetAdminActionVariables>;
+export function getAdminAction(dc: DataConnect, vars: GetAdminActionVariables): QueryPromise<GetAdminActionData, GetAdminActionVariables>;
+
+interface GetAnalyticsEntryRef {
+  /* Allow users to create refs without passing in DataConnect */
+  (vars: GetAnalyticsEntryVariables): QueryRef<GetAnalyticsEntryData, GetAnalyticsEntryVariables>;
+  /* Allow users to pass in custom DataConnect instances */
+  (dc: DataConnect, vars: GetAnalyticsEntryVariables): QueryRef<GetAnalyticsEntryData, GetAnalyticsEntryVariables>;
+  operationName: string;
+}
+export const getAnalyticsEntryRef: GetAnalyticsEntryRef;
+
+export function getAnalyticsEntry(vars: GetAnalyticsEntryVariables): QueryPromise<GetAnalyticsEntryData, GetAnalyticsEntryVariables>;
+export function getAnalyticsEntry(dc: DataConnect, vars: GetAnalyticsEntryVariables): QueryPromise<GetAnalyticsEntryData, GetAnalyticsEntryVariables>;
+
+interface GetMyLegalDisclaimersRef {
+  /* Allow users to create refs without passing in DataConnect */
+  (): QueryRef<GetMyLegalDisclaimersData, undefined>;
+  /* Allow users to pass in custom DataConnect instances */
+  (dc: DataConnect): QueryRef<GetMyLegalDisclaimersData, undefined>;
+  operationName: string;
+}
+export const getMyLegalDisclaimersRef: GetMyLegalDisclaimersRef;
+
+export function getMyLegalDisclaimers(): QueryPromise<GetMyLegalDisclaimersData, undefined>;
+export function getMyLegalDisclaimers(dc: DataConnect): QueryPromise<GetMyLegalDisclaimersData, undefined>;
 
 interface CreateUserProfileRef {
   /* Allow users to create refs without passing in DataConnect */
@@ -496,148 +632,4 @@ export const updateStoryRef: UpdateStoryRef;
 
 export function updateStory(vars: UpdateStoryVariables): MutationPromise<UpdateStoryData, UpdateStoryVariables>;
 export function updateStory(dc: DataConnect, vars: UpdateStoryVariables): MutationPromise<UpdateStoryData, UpdateStoryVariables>;
-
-interface GetUserProfileRef {
-  /* Allow users to create refs without passing in DataConnect */
-  (vars: GetUserProfileVariables): QueryRef<GetUserProfileData, GetUserProfileVariables>;
-  /* Allow users to pass in custom DataConnect instances */
-  (dc: DataConnect, vars: GetUserProfileVariables): QueryRef<GetUserProfileData, GetUserProfileVariables>;
-  operationName: string;
-}
-export const getUserProfileRef: GetUserProfileRef;
-
-export function getUserProfile(vars: GetUserProfileVariables): QueryPromise<GetUserProfileData, GetUserProfileVariables>;
-export function getUserProfile(dc: DataConnect, vars: GetUserProfileVariables): QueryPromise<GetUserProfileData, GetUserProfileVariables>;
-
-interface GetStoryWithContentRef {
-  /* Allow users to create refs without passing in DataConnect */
-  (vars: GetStoryWithContentVariables): QueryRef<GetStoryWithContentData, GetStoryWithContentVariables>;
-  /* Allow users to pass in custom DataConnect instances */
-  (dc: DataConnect, vars: GetStoryWithContentVariables): QueryRef<GetStoryWithContentData, GetStoryWithContentVariables>;
-  operationName: string;
-}
-export const getStoryWithContentRef: GetStoryWithContentRef;
-
-export function getStoryWithContent(vars: GetStoryWithContentVariables): QueryPromise<GetStoryWithContentData, GetStoryWithContentVariables>;
-export function getStoryWithContent(dc: DataConnect, vars: GetStoryWithContentVariables): QueryPromise<GetStoryWithContentData, GetStoryWithContentVariables>;
-
-interface GetAllStoriesRef {
-  /* Allow users to create refs without passing in DataConnect */
-  (): QueryRef<GetAllStoriesData, undefined>;
-  /* Allow users to pass in custom DataConnect instances */
-  (dc: DataConnect): QueryRef<GetAllStoriesData, undefined>;
-  operationName: string;
-}
-export const getAllStoriesRef: GetAllStoriesRef;
-
-export function getAllStories(): QueryPromise<GetAllStoriesData, undefined>;
-export function getAllStories(dc: DataConnect): QueryPromise<GetAllStoriesData, undefined>;
-
-interface GetAppSubscriptionRef {
-  /* Allow users to create refs without passing in DataConnect */
-  (vars: GetAppSubscriptionVariables): QueryRef<GetAppSubscriptionData, GetAppSubscriptionVariables>;
-  /* Allow users to pass in custom DataConnect instances */
-  (dc: DataConnect, vars: GetAppSubscriptionVariables): QueryRef<GetAppSubscriptionData, GetAppSubscriptionVariables>;
-  operationName: string;
-}
-export const getAppSubscriptionRef: GetAppSubscriptionRef;
-
-export function getAppSubscription(vars: GetAppSubscriptionVariables): QueryPromise<GetAppSubscriptionData, GetAppSubscriptionVariables>;
-export function getAppSubscription(dc: DataConnect, vars: GetAppSubscriptionVariables): QueryPromise<GetAppSubscriptionData, GetAppSubscriptionVariables>;
-
-interface GetTemplateRef {
-  /* Allow users to create refs without passing in DataConnect */
-  (vars: GetTemplateVariables): QueryRef<GetTemplateData, GetTemplateVariables>;
-  /* Allow users to pass in custom DataConnect instances */
-  (dc: DataConnect, vars: GetTemplateVariables): QueryRef<GetTemplateData, GetTemplateVariables>;
-  operationName: string;
-}
-export const getTemplateRef: GetTemplateRef;
-
-export function getTemplate(vars: GetTemplateVariables): QueryPromise<GetTemplateData, GetTemplateVariables>;
-export function getTemplate(dc: DataConnect, vars: GetTemplateVariables): QueryPromise<GetTemplateData, GetTemplateVariables>;
-
-interface GetAllTemplatesRef {
-  /* Allow users to create refs without passing in DataConnect */
-  (): QueryRef<GetAllTemplatesData, undefined>;
-  /* Allow users to pass in custom DataConnect instances */
-  (dc: DataConnect): QueryRef<GetAllTemplatesData, undefined>;
-  operationName: string;
-}
-export const getAllTemplatesRef: GetAllTemplatesRef;
-
-export function getAllTemplates(): QueryPromise<GetAllTemplatesData, undefined>;
-export function getAllTemplates(dc: DataConnect): QueryPromise<GetAllTemplatesData, undefined>;
-
-interface GetAiGeneratedImageRef {
-  /* Allow users to create refs without passing in DataConnect */
-  (vars: GetAiGeneratedImageVariables): QueryRef<GetAiGeneratedImageData, GetAiGeneratedImageVariables>;
-  /* Allow users to pass in custom DataConnect instances */
-  (dc: DataConnect, vars: GetAiGeneratedImageVariables): QueryRef<GetAiGeneratedImageData, GetAiGeneratedImageVariables>;
-  operationName: string;
-}
-export const getAiGeneratedImageRef: GetAiGeneratedImageRef;
-
-export function getAiGeneratedImage(vars: GetAiGeneratedImageVariables): QueryPromise<GetAiGeneratedImageData, GetAiGeneratedImageVariables>;
-export function getAiGeneratedImage(dc: DataConnect, vars: GetAiGeneratedImageVariables): QueryPromise<GetAiGeneratedImageData, GetAiGeneratedImageVariables>;
-
-interface GetAiGeneratedGifRef {
-  /* Allow users to create refs without passing in DataConnect */
-  (vars: GetAiGeneratedGifVariables): QueryRef<GetAiGeneratedGifData, GetAiGeneratedGifVariables>;
-  /* Allow users to pass in custom DataConnect instances */
-  (dc: DataConnect, vars: GetAiGeneratedGifVariables): QueryRef<GetAiGeneratedGifData, GetAiGeneratedGifVariables>;
-  operationName: string;
-}
-export const getAiGeneratedGifRef: GetAiGeneratedGifRef;
-
-export function getAiGeneratedGif(vars: GetAiGeneratedGifVariables): QueryPromise<GetAiGeneratedGifData, GetAiGeneratedGifVariables>;
-export function getAiGeneratedGif(dc: DataConnect, vars: GetAiGeneratedGifVariables): QueryPromise<GetAiGeneratedGifData, GetAiGeneratedGifVariables>;
-
-interface GetPaymentRef {
-  /* Allow users to create refs without passing in DataConnect */
-  (vars: GetPaymentVariables): QueryRef<GetPaymentData, GetPaymentVariables>;
-  /* Allow users to pass in custom DataConnect instances */
-  (dc: DataConnect, vars: GetPaymentVariables): QueryRef<GetPaymentData, GetPaymentVariables>;
-  operationName: string;
-}
-export const getPaymentRef: GetPaymentRef;
-
-export function getPayment(vars: GetPaymentVariables): QueryPromise<GetPaymentData, GetPaymentVariables>;
-export function getPayment(dc: DataConnect, vars: GetPaymentVariables): QueryPromise<GetPaymentData, GetPaymentVariables>;
-
-interface GetAdminActionRef {
-  /* Allow users to create refs without passing in DataConnect */
-  (vars: GetAdminActionVariables): QueryRef<GetAdminActionData, GetAdminActionVariables>;
-  /* Allow users to pass in custom DataConnect instances */
-  (dc: DataConnect, vars: GetAdminActionVariables): QueryRef<GetAdminActionData, GetAdminActionVariables>;
-  operationName: string;
-}
-export const getAdminActionRef: GetAdminActionRef;
-
-export function getAdminAction(vars: GetAdminActionVariables): QueryPromise<GetAdminActionData, GetAdminActionVariables>;
-export function getAdminAction(dc: DataConnect, vars: GetAdminActionVariables): QueryPromise<GetAdminActionData, GetAdminActionVariables>;
-
-interface GetAnalyticsEntryRef {
-  /* Allow users to create refs without passing in DataConnect */
-  (vars: GetAnalyticsEntryVariables): QueryRef<GetAnalyticsEntryData, GetAnalyticsEntryVariables>;
-  /* Allow users to pass in custom DataConnect instances */
-  (dc: DataConnect, vars: GetAnalyticsEntryVariables): QueryRef<GetAnalyticsEntryData, GetAnalyticsEntryVariables>;
-  operationName: string;
-}
-export const getAnalyticsEntryRef: GetAnalyticsEntryRef;
-
-export function getAnalyticsEntry(vars: GetAnalyticsEntryVariables): QueryPromise<GetAnalyticsEntryData, GetAnalyticsEntryVariables>;
-export function getAnalyticsEntry(dc: DataConnect, vars: GetAnalyticsEntryVariables): QueryPromise<GetAnalyticsEntryData, GetAnalyticsEntryVariables>;
-
-interface GetLegalDisclaimerRef {
-  /* Allow users to create refs without passing in DataConnect */
-  (vars: GetLegalDisclaimerVariables): QueryRef<GetLegalDisclaimerData, GetLegalDisclaimerVariables>;
-  /* Allow users to pass in custom DataConnect instances */
-  (dc: DataConnect, vars: GetLegalDisclaimerVariables): QueryRef<GetLegalDisclaimerData, GetLegalDisclaimerVariables>;
-  operationName: string;
-}
-export const getLegalDisclaimerRef: GetLegalDisclaimerRef;
-
-export function getLegalDisclaimer(vars: GetLegalDisclaimerVariables): QueryPromise<GetLegalDisclaimerData, GetLegalDisclaimerVariables>;
-export function getLegalDisclaimer(dc: DataConnect, vars: GetLegalDisclaimerVariables): QueryPromise<GetLegalDisclaimerData, GetLegalDisclaimerVariables>;
 

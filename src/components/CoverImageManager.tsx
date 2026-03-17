@@ -265,7 +265,7 @@ export default function CoverImageManager({
   promptContext,
 }: CoverImageManagerProps) {
   const { t } = useLocale();
-  const { user: currentUser } = useAuth();
+  const { user: currentUser, loading: authLoading } = useAuth();
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement | null>(null);
 
@@ -400,6 +400,12 @@ const lastGenMetaRef = useRef<LastGenMeta | null>(null);
 
   async function handleDescribeImage(imageSource: File | string) {
     try {
+      if (authLoading) return;
+      if (!currentUser) {
+        alert(t('coverManager.signInToManage'));
+        return;
+      }
+
       setIsDescribing(true);
       let payload: {
         dataUrl?: string;
@@ -422,9 +428,14 @@ const lastGenMetaRef = useRef<LastGenMeta | null>(null);
       payload.responseModalities = ['TEXT'];
       payload.language = lang;
 
+      const token = await currentUser.getIdToken(true);
+
       const res = await fetch('/api/describe-image', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
         body: JSON.stringify({
           ...payload,
           language: promptContext?.language || 'en',
@@ -445,6 +456,12 @@ const lastGenMetaRef = useRef<LastGenMeta | null>(null);
 
   async function handleGenerateImage() {
     try {
+      if (authLoading) return;
+      if (!currentUser) {
+        alert(t('coverManager.signInToManage'));
+        return;
+      }
+
       const hasContext = Boolean(promptContext?.synopsis) || Boolean(promptContext?.genres?.length) || Boolean(promptContext?.title);
 
       if (!aiPrompt.trim() && !hasContext) {
@@ -462,9 +479,14 @@ const lastGenMetaRef = useRef<LastGenMeta | null>(null);
         title: 0.55,
       });
 
+      const token = await currentUser.getIdToken(true);
+
       const res = await fetch('/api/generate-image', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
         body: JSON.stringify({
           prompt,
           negativePrompt,
@@ -503,6 +525,7 @@ const lastGenMetaRef = useRef<LastGenMeta | null>(null);
 
   async function handleUploadNewFileToGallery() {
     try {
+      if (authLoading) return;
       if (!currentUser) {
         alert(t('coverManager.alert.mustSignInUpload'));
         router.push('/login');
@@ -561,6 +584,7 @@ const lastGenMetaRef = useRef<LastGenMeta | null>(null);
 
   async function handleSaveGeneratedToGallery() {
     try {
+      if (authLoading) return;
       if (!currentUser) {
         alert(t('coverManager.alert.mustSignInSave'));
         router.push('/login');
@@ -651,7 +675,7 @@ const lastGenMetaRef = useRef<LastGenMeta | null>(null);
     : t('coverManager.guidance.other');
 
   /* ✅ Early guards */
-  if (!currentUser) {
+  if (!currentUser && !authLoading) {
     return (
       <div className="p-4 text-sm text-slate-600 dark:text-slate-300">
         {t('coverManager.signInToManage')}
@@ -810,7 +834,7 @@ const lastGenMetaRef = useRef<LastGenMeta | null>(null);
                               e.stopPropagation();
                               handleDescribeImage(it.url);
                             }}
-                            disabled={Boolean(isDescribing)}
+                            disabled={Boolean(isDescribing || authLoading)}
                             className="absolute bottom-1 left-1 opacity-0 group-hover:opacity-100 transition bg-blue-500/90 text-white text-xs px-2 py-0.5 rounded-md shadow z-10"
                           >
                             {isDescribing ? <Loader2 className="animate-spin inline mr-1" size={12} /> : null}
@@ -875,7 +899,7 @@ const lastGenMetaRef = useRef<LastGenMeta | null>(null);
               <button
                 onClick={handleGenerateImage}
                 disabled={Boolean(
-                  isGenerating || (!aiPrompt.trim() && !(promptContext?.synopsis || promptContext?.genres?.length || promptContext?.title))
+                  isGenerating || authLoading || (!aiPrompt.trim() && !(promptContext?.synopsis || promptContext?.genres?.length || promptContext?.title))
                 )}
                 className="w-full py-3 rounded-md bg-[#E97451] text-white font-semibold disabled:opacity-50 transition-colors hover:bg-[#D46342] flex items-center justify-center gap-2"
               >
@@ -886,7 +910,7 @@ const lastGenMetaRef = useRef<LastGenMeta | null>(null);
               {generatedImageUrl && (
                 <button
                   onClick={handleSaveGeneratedToGallery}
-                  disabled={Boolean(isUploading || !aiNameToSave.trim())}
+                  disabled={Boolean(isUploading || authLoading || !aiNameToSave.trim())}
                   className="w-full py-3 rounded-md bg-green-600 text-white font-semibold disabled:opacity-50 transition-colors hover:bg-green-700 flex items-center justify-center gap-2 mt-2"
                 >
                   {isUploading ? <Loader2 className="animate-spin inline mr-2" size={20} /> : null}
@@ -942,7 +966,7 @@ const lastGenMetaRef = useRef<LastGenMeta | null>(null);
                   />
                   <button
                     onClick={() => uploadedFile && handleDescribeImage(uploadedFile)}
-                    disabled={Boolean(isDescribing || !uploadedFile)}
+                    disabled={Boolean(isDescribing || !uploadedFile || authLoading)}
                     className="w-full py-2 rounded-md bg-blue-500 text-white text-sm font-semibold disabled:opacity-50 transition-colors hover:bg-blue-600 flex items-center justify-center gap-2 mt-2"
                   >
                     {isDescribing ? <Loader2 className="animate-spin inline mr-2" size={16} /> : null}
@@ -965,7 +989,7 @@ const lastGenMetaRef = useRef<LastGenMeta | null>(null);
                   )}
                   <button
                     onClick={handleUploadNewFileToGallery}
-                    disabled={Boolean(isUploading || !uploadedFile || !uploadNameToSave.trim())}
+                    disabled={Boolean(isUploading || authLoading || !uploadedFile || !uploadNameToSave.trim())}
                     className="w-full py-3 rounded-md bg-green-600 text-white font-semibold disabled:opacity-50 transition-colors hover:bg-green-700 flex items-center justify-center gap-2 mt-2"
                   >
                     {isUploading ? <Loader2 className="animate-spin inline mr-2" size={20} /> : null}

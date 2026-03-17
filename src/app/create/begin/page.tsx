@@ -184,7 +184,7 @@ export default function BeginPage() {
   );
 
   /* 🔄 credits from Auth */
-  const { user, credits: userCredits } = useAuth();
+  const { user, credits: userCredits, loading: authLoading } = useAuth();
   const createStory = useCreateStory();
 
   /* 🔗 Callable types & instances (scoped to region) */
@@ -471,7 +471,8 @@ export default function BeginPage() {
       setDescError(t('alertsCoverFirst'));
       return;
     }
-    // ADDED: Check for user existence
+    // ADDED: Check for user existence & loading
+    if (authLoading) return;
     if (!user) { setDescError(t('alertsSignIn')); return; }
 
     setDescLoading(true);
@@ -497,7 +498,7 @@ export default function BeginPage() {
           : `Describe this image in one clear, concise paragraph (no bullets). Focus on subject, setting, lighting, and mood. Respond only in ${langLabel}.`;
 
       // ADDED: Get Auth Token
-      const token = await user.getIdToken();
+      const token = await user.getIdToken(true);
 
       const res = await fetch('/api/describe-image', {
         method: 'POST',
@@ -622,6 +623,7 @@ export default function BeginPage() {
   async function onStartStory() {
     try {
       setStarting(true);
+      if (authLoading) return;
       if (storyMode === 'continue') {
         if (!existingStoryId) throw new Error(t('alertsSelectStory'));
         setDraft((d) => ({ ...d, storyId: existingStoryId }));
@@ -684,6 +686,7 @@ export default function BeginPage() {
   async function handleSkipToScenes() {
     try {
       setJumpingScenes(true);
+      if (authLoading) return;
 
       if (storyMode === 'continue') {
         if (!existingStoryId) throw new Error(t('alertsPickToContinue'));
@@ -1070,7 +1073,7 @@ export default function BeginPage() {
             <button
               onClick={onStartStory}
               disabled={
-                starting ||
+                starting || authLoading ||
                 (storyMode === 'new' ? !canStartNew : !existingStoryId)
               }
               className={`
@@ -1094,7 +1097,7 @@ export default function BeginPage() {
                   alert(e?.message || t('alertsFailedStart'));
                 }
               }}
-              disabled={!isNextButtonEnabled}
+              disabled={!isNextButtonEnabled || authLoading}
             >
               {t('nextBuildRefs')}
             </button>
@@ -1102,7 +1105,7 @@ export default function BeginPage() {
             <button
               onClick={handleSkipToScenes}
               disabled={
-                jumpingScenes ||
+                jumpingScenes || authLoading ||
                 (storyMode === 'new' ? !canStartNew : !existingStoryId)
               }
               className="px-6 py-2 rounded-md border-2 border-slate-300 text-slate-800 bg-white hover:bg-slate-100 active:scale-[.98] disabled:opacity-50 dark:border-[#3D4F60] dark:text-[#C8D6E5] dark:bg-[#0f2334] dark:hover:bg-[#152b42]"
@@ -1141,7 +1144,7 @@ export default function BeginPage() {
               <div className="flex flex-col md:flex-row md:items-center gap-3">
                 <button
                   onClick={describeCurrentCover}
-                  disabled={descLoading || !draft.coverUrl}
+                  disabled={descLoading || !draft.coverUrl || authLoading}
                   className="px-4 py-2 rounded-md bg-[#E97451] text-white font-semibold disabled:opacity-50 hover:bg-[#D46342]"
                 >
                   {descLoading ? t('describing') : t('aiDescribeBtn')}

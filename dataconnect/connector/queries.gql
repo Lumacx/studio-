@@ -1,8 +1,8 @@
 # Queries
 
-# ✅ Get a specific user profile by ID
-query GetUserProfile($userId: String!) @auth(level: USER, expr: "auth != null") {
-  user(id: $userId) {
+# ✅ Get the current user profile securely
+query GetUserProfile @auth(level: USER) {
+  user(key: { id_expr: "auth.uid" }) {
     id
     username
     email
@@ -14,7 +14,7 @@ query GetUserProfile($userId: String!) @auth(level: USER, expr: "auth != null") 
 }
 
 # ✅ Get a specific story plus its pages
-query GetStoryWithContent($storyId: String!) @auth(level: USER, expr: "auth != null") {
+query GetStoryWithContent($storyId: String!) @auth(level: USER) {
   story(id: $storyId) {
     id
     title
@@ -32,7 +32,7 @@ query GetStoryWithContent($storyId: String!) @auth(level: USER, expr: "auth != n
   }
   storyContents(
     where: { storyId: { eq: $storyId } }
-    orderBy: { pageNumber: ASC }
+    orderBy: [{ pageNumber: ASC }]
   ) {
     id
     pageNumber
@@ -45,7 +45,7 @@ query GetStoryWithContent($storyId: String!) @auth(level: USER, expr: "auth != n
 }
 
 # ✅ Get all stories (public access) - now with pagination
-query GetAllStories @auth(level: PUBLIC, expr: "true") {
+query GetAllStories @auth(level: PUBLIC) {
   stories(limit: 20) {
     id
     title
@@ -60,7 +60,7 @@ query GetAllStories @auth(level: PUBLIC, expr: "true") {
 }
 
 # ✅ Get a specific app subscription
-query GetAppSubscription($subscriptionId: String!) @auth(level: USER, expr: "auth != null") {
+query GetAppSubscription($subscriptionId: String!) @auth(level: USER) {
   appSubscription(id: $subscriptionId) {
     id
     name
@@ -70,7 +70,7 @@ query GetAppSubscription($subscriptionId: String!) @auth(level: USER, expr: "aut
 }
 
 # ✅ Get a specific template
-query GetTemplate($templateId: String!) @auth(level: USER, expr: "auth != null") {
+query GetTemplate($templateId: String!) @auth(level: USER) {
   template(id: $templateId) {
     id
     title
@@ -79,7 +79,7 @@ query GetTemplate($templateId: String!) @auth(level: USER, expr: "auth != null")
 }
 
 # ✅ Get list of all templates
-query GetAllTemplates @auth(level: USER, expr: "auth != null") {
+query GetAllTemplates @auth(level: USER) {
   templates(limit: 10) {
     id
     title
@@ -88,7 +88,7 @@ query GetAllTemplates @auth(level: USER, expr: "auth != null") {
 }
 
 # ✅ Get a specific generated image
-query GetAiGeneratedImage($imageId: String!) @auth(level: USER, expr: "auth != null") {
+query GetAiGeneratedImage($imageId: String!) @auth(level: USER) {
   aiGeneratedImage(id: $imageId) {
     id
     promptText
@@ -99,16 +99,16 @@ query GetAiGeneratedImage($imageId: String!) @auth(level: USER, expr: "auth != n
 }
 
 # ✅ Get a specific generated gif
-query GetAiGeneratedGif($gifId: String!) @auth(level: USER, expr: "auth != null") {
+query GetAiGeneratedGif($gifId: String!) @auth(level: USER) {
   aiGeneratedGif(id: $gifId) {
     id
     gifUrl
   }
 }
 
-# ✅ Get a specific payment
-query GetPayment($paymentId: String!) @auth(level: USER, expr: "auth != null") {
-  payment(id: $paymentId) {
+# ✅ Get all payments for the current user securely
+query GetMyPayments @auth(level: USER) {
+  payments(where: { userId: { eq_expr: "auth.uid" } }) {
     id
     amount
     status
@@ -117,7 +117,7 @@ query GetPayment($paymentId: String!) @auth(level: USER, expr: "auth != null") {
 }
 
 # ✅ Get a specific admin action
-query GetAdminAction($actionId: String!) @auth(level: USER, expr: "auth != null") {
+query GetAdminAction($actionId: String!) @auth(level: USER) {
   adminAction(id: $actionId) {
     id
     actionType
@@ -128,7 +128,7 @@ query GetAdminAction($actionId: String!) @auth(level: USER, expr: "auth != null"
 }
 
 # ✅ Get a specific analytics entry
-query GetAnalyticsEntry($analyticsId: String!) @auth(level: USER, expr: "auth != null") {
+query GetAnalyticsEntry($analyticsId: String!) @auth(level: USER) {
   analytics(id: $analyticsId) {
     id
     action
@@ -136,9 +136,9 @@ query GetAnalyticsEntry($analyticsId: String!) @auth(level: USER, expr: "auth !=
   }
 }
 
-# ✅ Get a specific legal disclaimer by ID
-query GetLegalDisclaimer($disclaimerId: String!) @auth(level: USER, expr: "auth != null") {
-  legalDisclaimer(id: $disclaimerId) {
+# ✅ Get legal disclaimers securely
+query GetMyLegalDisclaimers @auth(level: USER) {
+  legalDisclaimers(where: { userId: { eq_expr: "auth.uid" } }) {
     id
     accepted
     acceptedDate

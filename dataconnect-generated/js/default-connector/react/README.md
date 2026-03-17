@@ -25,10 +25,10 @@ You can also follow the instructions from the [Data Connect documentation](https
   - [*GetAllTemplates*](#getalltemplates)
   - [*GetAiGeneratedImage*](#getaigeneratedimage)
   - [*GetAiGeneratedGif*](#getaigeneratedgif)
-  - [*GetPayment*](#getpayment)
+  - [*GetMyPayments*](#getmypayments)
   - [*GetAdminAction*](#getadminaction)
   - [*GetAnalyticsEntry*](#getanalyticsentry)
-  - [*GetLegalDisclaimer*](#getlegaldisclaimer)
+  - [*GetMyLegalDisclaimers*](#getmylegaldisclaimers)
 - [**Mutations**](#mutations)
   - [*CreateUserProfile*](#createuserprofile)
   - [*CreateStory*](#createstory)
@@ -137,21 +137,15 @@ Below are examples of how to use the `default` connector's generated Query hook 
 You can execute the `GetUserProfile` Query using the following Query hook function, which is defined in [default-connector/react/index.d.ts](./index.d.ts):
 
 ```javascript
-useGetUserProfile(dc: DataConnect, vars: GetUserProfileVariables, options?: useDataConnectQueryOptions<GetUserProfileData>): UseDataConnectQueryResult<GetUserProfileData, GetUserProfileVariables>;
+useGetUserProfile(dc: DataConnect, options?: useDataConnectQueryOptions<GetUserProfileData>): UseDataConnectQueryResult<GetUserProfileData, undefined>;
 ```
 You can also pass in a `DataConnect` instance to the Query hook function.
 ```javascript
-useGetUserProfile(vars: GetUserProfileVariables, options?: useDataConnectQueryOptions<GetUserProfileData>): UseDataConnectQueryResult<GetUserProfileData, GetUserProfileVariables>;
+useGetUserProfile(options?: useDataConnectQueryOptions<GetUserProfileData>): UseDataConnectQueryResult<GetUserProfileData, undefined>;
 ```
 
 ### Variables
-The `GetUserProfile` Query requires an argument of type `GetUserProfileVariables`, which is defined in [default-connector/index.d.ts](../index.d.ts). It has the following fields:
-
-```javascript
-export interface GetUserProfileVariables {
-  userId: string;
-}
-```
+The `GetUserProfile` Query has no variables.
 ### Return Type
 Recall that calling the `GetUserProfile` Query hook function returns a `UseQueryResult` object. This object holds the state of your Query, including whether the Query is loading, has completed, or has succeeded/failed, and any data returned by the Query, among other things.
 
@@ -178,33 +172,26 @@ To learn more about the `UseQueryResult` object, see the [TanStack React Query d
 
 ```javascript
 import { getDataConnect } from 'firebase/data-connect';
-import { connectorConfig, GetUserProfileVariables } from '@firebasegen/default-connector';
+import { connectorConfig } from '@firebasegen/default-connector';
 import { useGetUserProfile } from '@firebasegen/default-connector/react'
 
 export default function GetUserProfileComponent() {
-  // The `useGetUserProfile` Query hook requires an argument of type `GetUserProfileVariables`:
-  const getUserProfileVars: GetUserProfileVariables = {
-    userId: ..., 
-  };
-
   // You don't have to do anything to "execute" the Query.
   // Call the Query hook function to get a `UseQueryResult` object which holds the state of your Query.
-  const query = useGetUserProfile(getUserProfileVars);
-  // Variables can be defined inline as well.
-  const query = useGetUserProfile({ userId: ..., });
+  const query = useGetUserProfile();
 
   // You can also pass in a `DataConnect` instance to the Query hook function.
   const dataConnect = getDataConnect(connectorConfig);
-  const query = useGetUserProfile(dataConnect, getUserProfileVars);
+  const query = useGetUserProfile(dataConnect);
 
   // You can also pass in a `useDataConnectQueryOptions` object to the Query hook function.
   const options = { staleTime: 5 * 1000 };
-  const query = useGetUserProfile(getUserProfileVars, options);
+  const query = useGetUserProfile(options);
 
   // You can also pass both a `DataConnect` instance and a `useDataConnectQueryOptions` object.
   const dataConnect = getDataConnect(connectorConfig);
   const options = { staleTime: 5 * 1000 };
-  const query = useGetUserProfile(dataConnect, getUserProfileVars, options);
+  const query = useGetUserProfile(dataConnect, options);
 
   // Then, you can render your component dynamically based on the status of the Query.
   if (query.isPending) {
@@ -827,75 +814,62 @@ export default function GetAiGeneratedGifComponent() {
 }
 ```
 
-## GetPayment
-You can execute the `GetPayment` Query using the following Query hook function, which is defined in [default-connector/react/index.d.ts](./index.d.ts):
+## GetMyPayments
+You can execute the `GetMyPayments` Query using the following Query hook function, which is defined in [default-connector/react/index.d.ts](./index.d.ts):
 
 ```javascript
-useGetPayment(dc: DataConnect, vars: GetPaymentVariables, options?: useDataConnectQueryOptions<GetPaymentData>): UseDataConnectQueryResult<GetPaymentData, GetPaymentVariables>;
+useGetMyPayments(dc: DataConnect, options?: useDataConnectQueryOptions<GetMyPaymentsData>): UseDataConnectQueryResult<GetMyPaymentsData, undefined>;
 ```
 You can also pass in a `DataConnect` instance to the Query hook function.
 ```javascript
-useGetPayment(vars: GetPaymentVariables, options?: useDataConnectQueryOptions<GetPaymentData>): UseDataConnectQueryResult<GetPaymentData, GetPaymentVariables>;
+useGetMyPayments(options?: useDataConnectQueryOptions<GetMyPaymentsData>): UseDataConnectQueryResult<GetMyPaymentsData, undefined>;
 ```
 
 ### Variables
-The `GetPayment` Query requires an argument of type `GetPaymentVariables`, which is defined in [default-connector/index.d.ts](../index.d.ts). It has the following fields:
-
-```javascript
-export interface GetPaymentVariables {
-  paymentId: string;
-}
-```
+The `GetMyPayments` Query has no variables.
 ### Return Type
-Recall that calling the `GetPayment` Query hook function returns a `UseQueryResult` object. This object holds the state of your Query, including whether the Query is loading, has completed, or has succeeded/failed, and any data returned by the Query, among other things.
+Recall that calling the `GetMyPayments` Query hook function returns a `UseQueryResult` object. This object holds the state of your Query, including whether the Query is loading, has completed, or has succeeded/failed, and any data returned by the Query, among other things.
 
 To check the status of a Query, use the `UseQueryResult.status` field. You can also check for pending / success / error status using the `UseQueryResult.isPending`, `UseQueryResult.isSuccess`, and `UseQueryResult.isError` fields.
 
-To access the data returned by a Query, use the `UseQueryResult.data` field. The data for the `GetPayment` Query is of type `GetPaymentData`, which is defined in [default-connector/index.d.ts](../index.d.ts). It has the following fields:
+To access the data returned by a Query, use the `UseQueryResult.data` field. The data for the `GetMyPayments` Query is of type `GetMyPaymentsData`, which is defined in [default-connector/index.d.ts](../index.d.ts). It has the following fields:
 ```javascript
-export interface GetPaymentData {
-  payment?: {
+export interface GetMyPaymentsData {
+  payments: ({
     id: string;
     amount?: number | null;
     status: string;
     paymentDate: TimestampString;
-  } & Payment_Key;
+  } & Payment_Key)[];
 }
 ```
 
 To learn more about the `UseQueryResult` object, see the [TanStack React Query documentation](https://tanstack.com/query/v5/docs/framework/react/reference/useQuery).
 
-### Using `GetPayment`'s Query hook function
+### Using `GetMyPayments`'s Query hook function
 
 ```javascript
 import { getDataConnect } from 'firebase/data-connect';
-import { connectorConfig, GetPaymentVariables } from '@firebasegen/default-connector';
-import { useGetPayment } from '@firebasegen/default-connector/react'
+import { connectorConfig } from '@firebasegen/default-connector';
+import { useGetMyPayments } from '@firebasegen/default-connector/react'
 
-export default function GetPaymentComponent() {
-  // The `useGetPayment` Query hook requires an argument of type `GetPaymentVariables`:
-  const getPaymentVars: GetPaymentVariables = {
-    paymentId: ..., 
-  };
-
+export default function GetMyPaymentsComponent() {
   // You don't have to do anything to "execute" the Query.
   // Call the Query hook function to get a `UseQueryResult` object which holds the state of your Query.
-  const query = useGetPayment(getPaymentVars);
-  // Variables can be defined inline as well.
-  const query = useGetPayment({ paymentId: ..., });
+  const query = useGetMyPayments();
 
   // You can also pass in a `DataConnect` instance to the Query hook function.
   const dataConnect = getDataConnect(connectorConfig);
-  const query = useGetPayment(dataConnect, getPaymentVars);
+  const query = useGetMyPayments(dataConnect);
 
   // You can also pass in a `useDataConnectQueryOptions` object to the Query hook function.
   const options = { staleTime: 5 * 1000 };
-  const query = useGetPayment(getPaymentVars, options);
+  const query = useGetMyPayments(options);
 
   // You can also pass both a `DataConnect` instance and a `useDataConnectQueryOptions` object.
   const dataConnect = getDataConnect(connectorConfig);
   const options = { staleTime: 5 * 1000 };
-  const query = useGetPayment(dataConnect, getPaymentVars, options);
+  const query = useGetMyPayments(dataConnect, options);
 
   // Then, you can render your component dynamically based on the status of the Query.
   if (query.isPending) {
@@ -908,7 +882,7 @@ export default function GetPaymentComponent() {
 
   // If the Query is successful, you can access the data returned using the `UseQueryResult.data` field.
   if (query.isSuccess) {
-    console.log(query.data.payment);
+    console.log(query.data.payments);
   }
   return <div>Query execution {query.isSuccess ? 'successful' : 'failed'}!</div>;
 }
@@ -1088,75 +1062,62 @@ export default function GetAnalyticsEntryComponent() {
 }
 ```
 
-## GetLegalDisclaimer
-You can execute the `GetLegalDisclaimer` Query using the following Query hook function, which is defined in [default-connector/react/index.d.ts](./index.d.ts):
+## GetMyLegalDisclaimers
+You can execute the `GetMyLegalDisclaimers` Query using the following Query hook function, which is defined in [default-connector/react/index.d.ts](./index.d.ts):
 
 ```javascript
-useGetLegalDisclaimer(dc: DataConnect, vars: GetLegalDisclaimerVariables, options?: useDataConnectQueryOptions<GetLegalDisclaimerData>): UseDataConnectQueryResult<GetLegalDisclaimerData, GetLegalDisclaimerVariables>;
+useGetMyLegalDisclaimers(dc: DataConnect, options?: useDataConnectQueryOptions<GetMyLegalDisclaimersData>): UseDataConnectQueryResult<GetMyLegalDisclaimersData, undefined>;
 ```
 You can also pass in a `DataConnect` instance to the Query hook function.
 ```javascript
-useGetLegalDisclaimer(vars: GetLegalDisclaimerVariables, options?: useDataConnectQueryOptions<GetLegalDisclaimerData>): UseDataConnectQueryResult<GetLegalDisclaimerData, GetLegalDisclaimerVariables>;
+useGetMyLegalDisclaimers(options?: useDataConnectQueryOptions<GetMyLegalDisclaimersData>): UseDataConnectQueryResult<GetMyLegalDisclaimersData, undefined>;
 ```
 
 ### Variables
-The `GetLegalDisclaimer` Query requires an argument of type `GetLegalDisclaimerVariables`, which is defined in [default-connector/index.d.ts](../index.d.ts). It has the following fields:
-
-```javascript
-export interface GetLegalDisclaimerVariables {
-  disclaimerId: string;
-}
-```
+The `GetMyLegalDisclaimers` Query has no variables.
 ### Return Type
-Recall that calling the `GetLegalDisclaimer` Query hook function returns a `UseQueryResult` object. This object holds the state of your Query, including whether the Query is loading, has completed, or has succeeded/failed, and any data returned by the Query, among other things.
+Recall that calling the `GetMyLegalDisclaimers` Query hook function returns a `UseQueryResult` object. This object holds the state of your Query, including whether the Query is loading, has completed, or has succeeded/failed, and any data returned by the Query, among other things.
 
 To check the status of a Query, use the `UseQueryResult.status` field. You can also check for pending / success / error status using the `UseQueryResult.isPending`, `UseQueryResult.isSuccess`, and `UseQueryResult.isError` fields.
 
-To access the data returned by a Query, use the `UseQueryResult.data` field. The data for the `GetLegalDisclaimer` Query is of type `GetLegalDisclaimerData`, which is defined in [default-connector/index.d.ts](../index.d.ts). It has the following fields:
+To access the data returned by a Query, use the `UseQueryResult.data` field. The data for the `GetMyLegalDisclaimers` Query is of type `GetMyLegalDisclaimersData`, which is defined in [default-connector/index.d.ts](../index.d.ts). It has the following fields:
 ```javascript
-export interface GetLegalDisclaimerData {
-  legalDisclaimer?: {
+export interface GetMyLegalDisclaimersData {
+  legalDisclaimers: ({
     id: string;
     accepted: boolean;
     acceptedDate?: TimestampString | null;
     createdAt: TimestampString;
-  } & LegalDisclaimer_Key;
+  } & LegalDisclaimer_Key)[];
 }
 ```
 
 To learn more about the `UseQueryResult` object, see the [TanStack React Query documentation](https://tanstack.com/query/v5/docs/framework/react/reference/useQuery).
 
-### Using `GetLegalDisclaimer`'s Query hook function
+### Using `GetMyLegalDisclaimers`'s Query hook function
 
 ```javascript
 import { getDataConnect } from 'firebase/data-connect';
-import { connectorConfig, GetLegalDisclaimerVariables } from '@firebasegen/default-connector';
-import { useGetLegalDisclaimer } from '@firebasegen/default-connector/react'
+import { connectorConfig } from '@firebasegen/default-connector';
+import { useGetMyLegalDisclaimers } from '@firebasegen/default-connector/react'
 
-export default function GetLegalDisclaimerComponent() {
-  // The `useGetLegalDisclaimer` Query hook requires an argument of type `GetLegalDisclaimerVariables`:
-  const getLegalDisclaimerVars: GetLegalDisclaimerVariables = {
-    disclaimerId: ..., 
-  };
-
+export default function GetMyLegalDisclaimersComponent() {
   // You don't have to do anything to "execute" the Query.
   // Call the Query hook function to get a `UseQueryResult` object which holds the state of your Query.
-  const query = useGetLegalDisclaimer(getLegalDisclaimerVars);
-  // Variables can be defined inline as well.
-  const query = useGetLegalDisclaimer({ disclaimerId: ..., });
+  const query = useGetMyLegalDisclaimers();
 
   // You can also pass in a `DataConnect` instance to the Query hook function.
   const dataConnect = getDataConnect(connectorConfig);
-  const query = useGetLegalDisclaimer(dataConnect, getLegalDisclaimerVars);
+  const query = useGetMyLegalDisclaimers(dataConnect);
 
   // You can also pass in a `useDataConnectQueryOptions` object to the Query hook function.
   const options = { staleTime: 5 * 1000 };
-  const query = useGetLegalDisclaimer(getLegalDisclaimerVars, options);
+  const query = useGetMyLegalDisclaimers(options);
 
   // You can also pass both a `DataConnect` instance and a `useDataConnectQueryOptions` object.
   const dataConnect = getDataConnect(connectorConfig);
   const options = { staleTime: 5 * 1000 };
-  const query = useGetLegalDisclaimer(dataConnect, getLegalDisclaimerVars, options);
+  const query = useGetMyLegalDisclaimers(dataConnect, options);
 
   // Then, you can render your component dynamically based on the status of the Query.
   if (query.isPending) {
@@ -1169,7 +1130,7 @@ export default function GetLegalDisclaimerComponent() {
 
   // If the Query is successful, you can access the data returned using the `UseQueryResult.data` field.
   if (query.isSuccess) {
-    console.log(query.data.legalDisclaimer);
+    console.log(query.data.legalDisclaimers);
   }
   return <div>Query execution {query.isSuccess ? 'successful' : 'failed'}!</div>;
 }
@@ -1319,6 +1280,7 @@ export interface CreateStoryVariables {
   genres?: string[] | null;
   description?: string | null;
   coverImageUrl?: string | null;
+  backgroundMusicUrl?: string | null;
 }
 ```
 ### Return Type
@@ -1372,10 +1334,11 @@ export default function CreateStoryComponent() {
     genres: ..., // optional
     description: ..., // optional
     coverImageUrl: ..., // optional
+    backgroundMusicUrl: ..., // optional
   };
   mutation.mutate(createStoryVars);
   // Variables can be defined inline as well.
-  mutation.mutate({ title: ..., genres: ..., description: ..., coverImageUrl: ..., });
+  mutation.mutate({ title: ..., genres: ..., description: ..., coverImageUrl: ..., backgroundMusicUrl: ..., });
   // Since all variables are optional for this Mutation, you can omit the `CreateStoryVariables` argument.
   mutation.mutate();
 
@@ -1424,6 +1387,7 @@ export interface CreateStoryContentVariables {
   pageNumber?: number | null;
   imageUrl?: string | null;
   audioUrl?: string | null;
+  backgroundUrl?: string | null;
 }
 ```
 ### Return Type
@@ -1478,10 +1442,11 @@ export default function CreateStoryContentComponent() {
     pageNumber: ..., // optional
     imageUrl: ..., // optional
     audioUrl: ..., // optional
+    backgroundUrl: ..., // optional
   };
   mutation.mutate(createStoryContentVars);
   // Variables can be defined inline as well.
-  mutation.mutate({ storyId: ..., textContent: ..., pageNumber: ..., imageUrl: ..., audioUrl: ..., });
+  mutation.mutate({ storyId: ..., textContent: ..., pageNumber: ..., imageUrl: ..., audioUrl: ..., backgroundUrl: ..., });
 
   // You can also pass in a `useDataConnectMutationOptions` object to `UseMutationResult.mutate()`.
   const options = {
@@ -2193,6 +2158,7 @@ export interface UpdateStoryContentVariables {
   pageNumber?: number | null;
   imageUrl?: string | null;
   audioUrl?: string | null;
+  backgroundUrl?: string | null;
 }
 ```
 ### Return Type
@@ -2247,10 +2213,11 @@ export default function UpdateStoryContentComponent() {
     pageNumber: ..., // optional
     imageUrl: ..., // optional
     audioUrl: ..., // optional
+    backgroundUrl: ..., // optional
   };
   mutation.mutate(updateStoryContentVars);
   // Variables can be defined inline as well.
-  mutation.mutate({ id: ..., textContent: ..., pageNumber: ..., imageUrl: ..., audioUrl: ..., });
+  mutation.mutate({ id: ..., textContent: ..., pageNumber: ..., imageUrl: ..., audioUrl: ..., backgroundUrl: ..., });
 
   // You can also pass in a `useDataConnectMutationOptions` object to `UseMutationResult.mutate()`.
   const options = {
@@ -2292,6 +2259,7 @@ The `UpdateStory` Mutation requires an argument of type `UpdateStoryVariables`, 
 export interface UpdateStoryVariables {
   id: string;
   commentsCount?: number | null;
+  backgroundMusicUrl?: string | null;
 }
 ```
 ### Return Type
@@ -2304,7 +2272,7 @@ To execute the Mutation, call `UseMutationResult.mutate()`. This function execut
 To access the data returned by a Mutation, use the `UseMutationResult.data` field. The data for the `UpdateStory` Mutation is of type `UpdateStoryData`, which is defined in [default-connector/index.d.ts](../index.d.ts). It has the following fields:
 ```javascript
 export interface UpdateStoryData {
-  story_update?: Story_Key | null;
+  story_updateMany: number;
 }
 ```
 
@@ -2343,10 +2311,11 @@ export default function UpdateStoryComponent() {
   const updateStoryVars: UpdateStoryVariables = {
     id: ..., 
     commentsCount: ..., // optional
+    backgroundMusicUrl: ..., // optional
   };
   mutation.mutate(updateStoryVars);
   // Variables can be defined inline as well.
-  mutation.mutate({ id: ..., commentsCount: ..., });
+  mutation.mutate({ id: ..., commentsCount: ..., backgroundMusicUrl: ..., });
 
   // You can also pass in a `useDataConnectMutationOptions` object to `UseMutationResult.mutate()`.
   const options = {
@@ -2365,7 +2334,7 @@ export default function UpdateStoryComponent() {
 
   // If the Mutation is successful, you can access the data returned using the `UseMutationResult.data` field.
   if (mutation.isSuccess) {
-    console.log(mutation.data.story_update);
+    console.log(mutation.data.story_updateMany);
   }
   return <div>Mutation execution {mutation.isSuccess ? 'successful' : 'failed'}!</div>;
 }

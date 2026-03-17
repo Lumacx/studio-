@@ -1,46 +1,257 @@
-I0223 20:52:12.593531     444 load.go:31] Reloading schema and connectors...
-W0223 20:52:13.695135     444 control.go:74] [/emulator/studio-v0 ff71] connector "default" has errors: connector/mutations.gql:8:1: On @auth: cannot specify both `level` and `expr`
-connector/mutations.gql:11:1: On @auth: cannot specify both `level` and `expr`
-connector/mutations.gql:26:1: On @auth: cannot specify both `level` and `expr`
-connector/mutations.gql:43:1: On @auth: cannot specify both `level` and `expr`
-connector/mutations.gql:57:1: On @auth: cannot specify both `level` and `expr`
-connector/queries.gql:4:1: On @auth: cannot specify both `level` and `expr`
-connector/queries.gql:17:1: On @auth: cannot specify both `level` and `expr`
-connector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`
-connector/queries.gql:63:1: On @auth: cannot specify both `level` and `expr`
-connector/queries.gql:73:1: On @auth: cannot specify both `level` and `expr`
-connector/queries.gql:82:1: On @auth: cannot specify both `level` and `expr`
-connector/queries.gql:91:1: On @auth: cannot specify both `level` and `expr`
-connector/queries.gql:102:1: On @auth: cannot specify both `level` and `expr`
-connector/queries.gql:110:1: On @auth: cannot specify both `level` and `expr`
-connector/queries.gql:120:1: On @auth: cannot specify both `level` and `expr`
-connector/queries.gql:131:1: On @auth: cannot specify both `level` and `expr`
-connector/queries.gql:140:1: On @auth: cannot specify both `level` and `expr`
-
-sources: connector/mutations.gql [3224B] connector/queries.gql [2998B] 
-I0223 20:52:13.695285     444 control.go:100] [/emulator/studio-v0 ff71] UpdateResources(): done
+I0317 00:31:58.966450    1489 load.go:31] Reloading schema and connectors...
+I0317 00:31:59.141786    1489 control.go:100] [projects/emulator/locations/emulator/services/studio-v0 5187] UpdateResources(): done
 Main schema: sources: schema/schema.gql [3721B] 
-Connector "default": sources: connector/mutations.gql [3224B] connector/queries.gql [2998B] 
-E0223 20:52:13.766791     444 load.go:73] Could not load sources: 
-Errors: connector/mutations.gql:8:1: On @auth: cannot specify both `level` and `expr`
-connector/mutations.gql:11:1: On @auth: cannot specify both `level` and `expr`
-connector/mutations.gql:26:1: On @auth: cannot specify both `level` and `expr`
-connector/mutations.gql:43:1: On @auth: cannot specify both `level` and `expr`
-connector/mutations.gql:57:1: On @auth: cannot specify both `level` and `expr`
-connector/queries.gql:4:1: On @auth: cannot specify both `level` and `expr`
-connector/queries.gql:17:1: On @auth: cannot specify both `level` and `expr`
-connector/queries.gql:48:1: On @auth: cannot specify both `level` and `expr`
-connector/queries.gql:63:1: On @auth: cannot specify both `level` and `expr`
-connector/queries.gql:73:1: On @auth: cannot specify both `level` and `expr`
-connector/queries.gql:82:1: On @auth: cannot specify both `level` and `expr`
-connector/queries.gql:91:1: On @auth: cannot specify both `level` and `expr`
-connector/queries.gql:102:1: On @auth: cannot specify both `level` and `expr`
-connector/queries.gql:110:1: On @auth: cannot specify both `level` and `expr`
-connector/queries.gql:120:1: On @auth: cannot specify both `level` and `expr`
-connector/queries.gql:131:1: On @auth: cannot specify both `level` and `expr`
-connector/queries.gql:140:1: On @auth: cannot specify both `level` and `expr`
-I0223 20:52:13.779243     444 collector.go:107] schema extensions wrote into "/home/user/studio/dataconnect/.dataconnect/schema"
-Generated sources: main/implicit.gql [3267B] main/input.gql [122168B] main/relation.gql [51784B] main/query.gql [15655B] main/mutation.gql [41655B] prelude.gql [73281B] 
-I0223 20:52:13.788557     444 load.go:74] Finished reloading
-I0223 20:52:13.816979     444 dev.go:104] Listening on address (HTTP + gRPC): 127.0.0.1:50001
-I0223 20:52:16.301728     444 engine.go:205] [/emulator/studio-v0 ff71] ExecuteGraphqlRead IntrospectionQuery: succeeded. 
+Connector "default": sources: connector/mutations.gql [3071B] connector/queries.gql [2744B] 
+I0317 00:31:59.276037    1489 codegen.go:80] [connector "default" javascriptSdk] Generating sources into "/home/user/studio/dataconnect-generated/js/default-connector"
+I0317 00:31:59.381300    1489 collector.go:107] schema extensions wrote into "/home/user/studio/dataconnect/.dataconnect/schema"
+Generated sources: main/input.gql [122168B] main/relation.gql [51784B] main/query.gql [15655B] main/mutation.gql [41655B] main/implicit.gql [3267B] prelude.gql [80731B] 
+I0317 00:31:59.400796    1489 collector.go:107] connector "default" javascriptSdk wrote into "/home/user/studio/dataconnect-generated/js/default-connector"
+Generated sources: index.d.ts [24351B] package.json [871B] react/esm/package.json [17B] .guides/usage.md [4476B] .guides/setup.md [1690B] README.md [114804B] react/index.d.ts [11972B] index.cjs.js [11927B] react/package.json [468B] react/index.cjs.js [9587B] react/esm/index.esm.js [9017B] esm/index.esm.js [10297B] esm/package.json [17B] react/README.md [119315B] .guides/config.json [236B] 
+I0317 00:31:59.423028    1489 installsdk.go:55] Package @firebasegen/default-connector is already installed. Skipping installation
+I0317 00:31:59.423986    1489 load.go:109] Finished reloading
+I0317 00:31:59.439668    1489 dev.go:104] Listening on address (HTTP + gRPC): 127.0.0.1:50001
+I0317 00:31:59.658485    1489 engine.go:210] [projects/emulator/locations/emulator/services/studio-v0 5187] ExecuteGraphqlRead query IntrospectionQuery: succeeded. 
+I0317 00:49:29.425834    1489 load.go:31] Reloading schema and connectors...
+W0317 00:49:29.601004    1489 control.go:74] [projects/emulator/locations/emulator/services/studio-v0 4b04] connector "default" has errors: connector/mutations.gql:28:5: Field "userId_expr" is not defined by type "StoryContent_Data". Did you mean "id_expr" or "storyId_expr"?
+connector/mutations.gql:40:5: Field "userId_expr" is not defined by type "Template_Data". Did you mean "id_expr"?
+connector/mutations.gql:63:5: Field "userId_expr" is not defined by type "AiGeneratedGif_Data". Did you mean "id_expr" or "imageId_expr"?
+connector/mutations.gql:92:3: Unknown argument "where" on field "Mutation.storyContent_update".
+connector/mutations.gql:107:3: Unknown argument "where" on field "Mutation.story_update".
+
+sources: connector/mutations.gql [3672B] connector/queries.gql [2744B] 
+I0317 00:49:29.602777    1489 control.go:100] [projects/emulator/locations/emulator/services/studio-v0 4b04] UpdateResources(): done
+Main schema: sources: schema/schema.gql [3721B] 
+Connector "default": sources: connector/mutations.gql [3672B] connector/queries.gql [2744B] 
+E0317 00:49:29.620238    1489 load.go:73] Could not load sources: 
+Errors: connector/mutations.gql:28:5: Field "userId_expr" is not defined by type "StoryContent_Data". Did you mean "id_expr" or "storyId_expr"?
+connector/mutations.gql:40:5: Field "userId_expr" is not defined by type "Template_Data". Did you mean "id_expr"?
+connector/mutations.gql:63:5: Field "userId_expr" is not defined by type "AiGeneratedGif_Data". Did you mean "id_expr" or "imageId_expr"?
+connector/mutations.gql:92:3: Unknown argument "where" on field "Mutation.storyContent_update".
+connector/mutations.gql:107:3: Unknown argument "where" on field "Mutation.story_update".
+I0317 00:49:29.625268    1489 collector.go:107] schema extensions wrote into "/home/user/studio/dataconnect/.dataconnect/schema"
+Generated sources: prelude.gql [80731B] main/implicit.gql [3267B] main/input.gql [122168B] main/relation.gql [51784B] main/query.gql [15655B] main/mutation.gql [41655B] 
+I0317 00:49:29.627580    1489 load.go:74] Finished reloading
+I0317 00:54:09.434552    1489 load.go:31] Reloading schema and connectors...
+I0317 00:54:09.631572    1489 control.go:100] [projects/emulator/locations/emulator/services/studio-v0 f141] UpdateResources(): done
+Main schema: sources: schema/schema.gql [3721B] 
+Connector "default": sources: connector/mutations.gql [3071B] connector/queries.gql [2744B] 
+I0317 00:54:09.763320    1489 codegen.go:80] [connector "default" javascriptSdk] Generating sources into "/home/user/studio/dataconnect-generated/js/default-connector"
+I0317 00:54:09.821967    1489 collector.go:107] schema extensions wrote into "/home/user/studio/dataconnect/.dataconnect/schema"
+Generated sources: prelude.gql [80731B] main/mutation.gql [41655B] main/implicit.gql [3267B] main/input.gql [122168B] main/relation.gql [51784B] main/query.gql [15655B] 
+I0317 00:54:09.835448    1489 collector.go:107] connector "default" javascriptSdk wrote into "/home/user/studio/dataconnect-generated/js/default-connector"
+Generated sources: index.d.ts [24351B] esm/package.json [17B] package.json [871B] react/esm/package.json [17B] react/esm/index.esm.js [9017B] .guides/setup.md [1690B] README.md [114804B] react/package.json [468B] .guides/usage.md [4476B] .guides/config.json [236B] react/index.d.ts [11972B] react/index.cjs.js [9587B] esm/index.esm.js [10297B] index.cjs.js [11927B] react/README.md [119315B] 
+I0317 00:54:09.863656    1489 installsdk.go:55] Package @firebasegen/default-connector is already installed. Skipping installation
+I0317 00:54:09.867047    1489 load.go:109] Finished reloading
+I0317 00:55:59.425762    1489 load.go:31] Reloading schema and connectors...
+I0317 00:55:59.682740    1489 control.go:100] [projects/emulator/locations/emulator/services/studio-v0 a8ab] UpdateResources(): done
+Main schema: sources: schema/schema.gql [3721B] 
+Connector "default": sources: connector/mutations.gql [3070B] connector/queries.gql [2744B] 
+I0317 00:55:59.991058    1489 codegen.go:80] [connector "default" javascriptSdk] Generating sources into "/home/user/studio/dataconnect-generated/js/default-connector"
+I0317 00:56:00.144502    1489 collector.go:107] schema extensions wrote into "/home/user/studio/dataconnect/.dataconnect/schema"
+Generated sources: prelude.gql [80731B] main/implicit.gql [3267B] main/input.gql [122168B] main/relation.gql [51784B] main/query.gql [15655B] main/mutation.gql [41655B] 
+I0317 00:56:00.176417    1489 collector.go:107] connector "default" javascriptSdk wrote into "/home/user/studio/dataconnect-generated/js/default-connector"
+Generated sources: react/README.md [119315B] .guides/setup.md [1690B] index.cjs.js [11927B] .guides/config.json [236B] package.json [871B] react/package.json [468B] react/esm/package.json [17B] react/index.cjs.js [9587B] .guides/usage.md [4476B] index.d.ts [24351B] esm/index.esm.js [10297B] esm/package.json [17B] README.md [114804B] react/index.d.ts [11972B] react/esm/index.esm.js [9017B] 
+I0317 00:56:00.207910    1489 installsdk.go:55] Package @firebasegen/default-connector is already installed. Skipping installation
+I0317 00:56:00.207991    1489 load.go:109] Finished reloading
+I0317 01:03:29.425751    1489 load.go:31] Reloading schema and connectors...
+W0317 01:03:29.908086    1489 control.go:74] [projects/emulator/locations/emulator/services/studio-v0 c32d] connector "default" has errors: connector/mutations.gql:8:22: Expected Name, found $
+
+sources: connector/mutations.gql [4212B] connector/queries.gql [2744B] 
+I0317 01:03:29.908158    1489 control.go:100] [projects/emulator/locations/emulator/services/studio-v0 c32d] UpdateResources(): done
+Main schema: sources: schema/schema.gql [3721B] 
+Connector "default": sources: connector/mutations.gql [4212B] connector/queries.gql [2744B] 
+E0317 01:03:29.958534    1489 load.go:73] Could not load sources: 
+Errors: connector/mutations.gql:8:22: Expected Name, found $
+I0317 01:03:29.968214    1489 collector.go:107] schema extensions wrote into "/home/user/studio/dataconnect/.dataconnect/schema"
+Generated sources: main/input.gql [122168B] main/relation.gql [51784B] main/query.gql [15655B] main/mutation.gql [41655B] main/implicit.gql [3267B] prelude.gql [80731B] 
+I0317 01:03:29.968261    1489 load.go:74] Finished reloading
+I0317 01:03:59.426446    1489 load.go:31] Reloading schema and connectors...
+I0317 01:03:59.906129    1489 control.go:100] [projects/emulator/locations/emulator/services/studio-v0 9a80] UpdateResources(): done
+Main schema: sources: schema/schema.gql [3721B] 
+Connector "default": sources: connector/mutations.gql [3345B] connector/queries.gql [2744B] 
+I0317 01:04:00.206168    1489 codegen.go:80] [connector "default" javascriptSdk] Generating sources into "/home/user/studio/dataconnect-generated/js/default-connector"
+I0317 01:04:00.303297    1489 collector.go:107] schema extensions wrote into "/home/user/studio/dataconnect/.dataconnect/schema"
+Generated sources: prelude.gql [80731B] main/input.gql [122168B] main/relation.gql [51784B] main/query.gql [15655B] main/mutation.gql [41655B] main/implicit.gql [3267B] 
+I0317 01:04:00.398902    1489 collector.go:107] connector "default" javascriptSdk wrote into "/home/user/studio/dataconnect-generated/js/default-connector"
+Generated sources: README.md [115418B] react/index.d.ts [11972B] react/esm/index.esm.js [9017B] .guides/usage.md [4476B] esm/package.json [17B] react/package.json [468B] react/esm/package.json [17B] react/index.cjs.js [9587B] .guides/setup.md [1690B] .guides/config.json [236B] index.d.ts [24493B] esm/index.esm.js [10297B] index.cjs.js [11927B] package.json [871B] react/README.md [119701B] 
+I0317 01:04:00.554828    1489 installsdk.go:55] Package @firebasegen/default-connector is already installed. Skipping installation
+I0317 01:04:00.554880    1489 load.go:109] Finished reloading
+I0317 01:06:29.426882    1489 load.go:31] Reloading schema and connectors...
+W0317 01:06:29.822311    1489 control.go:74] [projects/emulator/locations/emulator/services/studio-v0 1894] connector "default" has errors: connector/mutations.gql:37:3: Expected Name, found )
+
+sources: connector/queries.gql [2744B] connector/mutations.gql [4642B] 
+I0317 01:06:29.822386    1489 control.go:100] [projects/emulator/locations/emulator/services/studio-v0 1894] UpdateResources(): done
+Main schema: sources: schema/schema.gql [3721B] 
+Connector "default": sources: connector/mutations.gql [4642B] connector/queries.gql [2744B] 
+E0317 01:06:29.848078    1489 load.go:73] Could not load sources: 
+Errors: connector/mutations.gql:37:3: Expected Name, found )
+I0317 01:06:29.853559    1489 collector.go:107] schema extensions wrote into "/home/user/studio/dataconnect/.dataconnect/schema"
+Generated sources: prelude.gql [80731B] main/implicit.gql [3267B] main/input.gql [122168B] main/relation.gql [51784B] main/query.gql [15655B] main/mutation.gql [41655B] 
+I0317 01:06:29.874046    1489 load.go:74] Finished reloading
+I0317 01:06:39.435398    1489 load.go:31] Reloading schema and connectors...
+W0317 01:06:39.881570    1489 control.go:74] [projects/emulator/locations/emulator/services/studio-v0 8893] connector "default" has errors: connector/mutations.gql:4:5: Cannot query field "id" on type "User_KeyOutput".
+connector/mutations.gql:3:3: Field "user_insert" must not have a selection since type "User_KeyOutput" has no subfields.
+connector/mutations.gql:9:5: Cannot query field "id" on type "Story_KeyOutput".
+connector/mutations.gql:8:3: Field "story_insert" must not have a selection since type "Story_KeyOutput" has no subfields.
+connector/mutations.gql:14:5: Cannot query field "id" on type "StoryContent_KeyOutput".
+connector/mutations.gql:13:3: Field "storyContent_insert" must not have a selection since type "StoryContent_KeyOutput" has no subfields.
+connector/mutations.gql:19:5: Cannot query field "id" on type "Template_KeyOutput".
+connector/mutations.gql:18:3: Field "template_insert" must not have a selection since type "Template_KeyOutput" has no subfields.
+connector/mutations.gql:33:5: Cannot query field "id" on type "AiGeneratedImage_KeyOutput".
+connector/mutations.gql:23:3: Field "aiGeneratedImage_insert" must not have a selection since type "AiGeneratedImage_KeyOutput" has no subfields.
+connector/mutations.gql:38:5: Cannot query field "id" on type "AiGeneratedGif_KeyOutput".
+connector/mutations.gql:37:3: Field "aiGeneratedGif_insert" must not have a selection since type "AiGeneratedGif_KeyOutput" has no subfields.
+connector/mutations.gql:43:5: Cannot query field "id" on type "Payment_KeyOutput".
+connector/mutations.gql:42:3: Field "payment_insert" must not have a selection since type "Payment_KeyOutput" has no subfields.
+connector/mutations.gql:48:5: Cannot query field "id" on type "AdminAction_KeyOutput".
+connector/mutations.gql:47:3: Field "adminAction_insert" must not have a selection since type "AdminAction_KeyOutput" has no subfields.
+connector/mutations.gql:53:5: Cannot query field "id" on type "Analytics_KeyOutput".
+connector/mutations.gql:52:3: Field "analytics_insert" must not have a selection since type "Analytics_KeyOutput" has no subfields.
+connector/mutations.gql:58:5: Cannot query field "id" on type "LegalDisclaimer_KeyOutput".
+connector/mutations.gql:57:3: Field "legalDisclaimer_insert" must not have a selection since type "LegalDisclaimer_KeyOutput" has no subfields.
+connector/mutations.gql:75:5: Cannot query field "id" on type "StoryContent_KeyOutput".
+connector/mutations.gql:71:3: Field "storyContent_update" must not have a selection since type "StoryContent_KeyOutput" has no subfields.
+connector/mutations.gql:89:5: Cannot query field "id" on type "Story_KeyOutput".
+connector/mutations.gql:85:3: Field "story_update" must not have a selection since type "Story_KeyOutput" has no subfields.
+
+sources: connector/mutations.gql [3501B] connector/queries.gql [2744B] 
+I0317 01:06:39.881689    1489 control.go:100] [projects/emulator/locations/emulator/services/studio-v0 8893] UpdateResources(): done
+Main schema: sources: schema/schema.gql [3721B] 
+Connector "default": sources: connector/queries.gql [2744B] connector/mutations.gql [3501B] 
+E0317 01:06:39.920905    1489 load.go:73] Could not load sources: 
+Errors: connector/mutations.gql:4:5: Cannot query field "id" on type "User_KeyOutput".
+connector/mutations.gql:3:3: Field "user_insert" must not have a selection since type "User_KeyOutput" has no subfields.
+connector/mutations.gql:9:5: Cannot query field "id" on type "Story_KeyOutput".
+connector/mutations.gql:8:3: Field "story_insert" must not have a selection since type "Story_KeyOutput" has no subfields.
+connector/mutations.gql:14:5: Cannot query field "id" on type "StoryContent_KeyOutput".
+connector/mutations.gql:13:3: Field "storyContent_insert" must not have a selection since type "StoryContent_KeyOutput" has no subfields.
+connector/mutations.gql:19:5: Cannot query field "id" on type "Template_KeyOutput".
+connector/mutations.gql:18:3: Field "template_insert" must not have a selection since type "Template_KeyOutput" has no subfields.
+connector/mutations.gql:33:5: Cannot query field "id" on type "AiGeneratedImage_KeyOutput".
+connector/mutations.gql:23:3: Field "aiGeneratedImage_insert" must not have a selection since type "AiGeneratedImage_KeyOutput" has no subfields.
+connector/mutations.gql:38:5: Cannot query field "id" on type "AiGeneratedGif_KeyOutput".
+connector/mutations.gql:37:3: Field "aiGeneratedGif_insert" must not have a selection since type "AiGeneratedGif_KeyOutput" has no subfields.
+connector/mutations.gql:43:5: Cannot query field "id" on type "Payment_KeyOutput".
+connector/mutations.gql:42:3: Field "payment_insert" must not have a selection since type "Payment_KeyOutput" has no subfields.
+connector/mutations.gql:48:5: Cannot query field "id" on type "AdminAction_KeyOutput".
+connector/mutations.gql:47:3: Field "adminAction_insert" must not have a selection since type "AdminAction_KeyOutput" has no subfields.
+connector/mutations.gql:53:5: Cannot query field "id" on type "Analytics_KeyOutput".
+connector/mutations.gql:52:3: Field "analytics_insert" must not have a selection since type "Analytics_KeyOutput" has no subfields.
+connector/mutations.gql:58:5: Cannot query field "id" on type "LegalDisclaimer_KeyOutput".
+connector/mutations.gql:57:3: Field "legalDisclaimer_insert" must not have a selection since type "LegalDisclaimer_KeyOutput" has no subfields.
+connector/mutations.gql:75:5: Cannot query field "id" on type "StoryContent_KeyOutput".
+connector/mutations.gql:71:3: Field "storyContent_update" must not have a selection since type "StoryContent_KeyOutput" has no subfields.
+connector/mutations.gql:89:5: Cannot query field "id" on type "Story_KeyOutput".
+connector/mutations.gql:85:3: Field "story_update" must not have a selection since type "Story_KeyOutput" has no subfields.
+I0317 01:06:39.926206    1489 collector.go:107] schema extensions wrote into "/home/user/studio/dataconnect/.dataconnect/schema"
+Generated sources: main/mutation.gql [41655B] main/implicit.gql [3267B] main/input.gql [122168B] main/relation.gql [51784B] prelude.gql [80731B] main/query.gql [15655B] 
+I0317 01:06:39.926247    1489 load.go:74] Finished reloading
+I0317 01:09:09.434669    1489 load.go:31] Reloading schema and connectors...
+W0317 01:09:09.951613    1489 control.go:74] [projects/emulator/locations/emulator/services/studio-v0 f845] connector "default" has errors: connector/mutations.gql:39:3: Expected Name, found )
+
+sources: connector/mutations.gql [4642B] connector/queries.gql [2744B] 
+I0317 01:09:09.954169    1489 control.go:100] [projects/emulator/locations/emulator/services/studio-v0 f845] UpdateResources(): done
+Main schema: sources: schema/schema.gql [3721B] 
+Connector "default": sources: connector/mutations.gql [4642B] connector/queries.gql [2744B] 
+E0317 01:09:09.982036    1489 load.go:73] Could not load sources: 
+Errors: connector/mutations.gql:39:3: Expected Name, found )
+I0317 01:09:09.984712    1489 collector.go:107] schema extensions wrote into "/home/user/studio/dataconnect/.dataconnect/schema"
+Generated sources: prelude.gql [80731B] main/implicit.gql [3267B] main/input.gql [122168B] main/relation.gql [51784B] main/query.gql [15655B] main/mutation.gql [41655B] 
+I0317 01:09:09.984776    1489 load.go:74] Finished reloading
+I0317 01:09:19.434574    1489 load.go:31] Reloading schema and connectors...
+I0317 01:09:19.723616    1489 control.go:100] [projects/emulator/locations/emulator/services/studio-v0 a3d6] UpdateResources(): done
+Main schema: sources: schema/schema.gql [3721B] 
+Connector "default": sources: connector/mutations.gql [3345B] connector/queries.gql [2744B] 
+I0317 01:09:19.889219    1489 codegen.go:80] [connector "default" javascriptSdk] Generating sources into "/home/user/studio/dataconnect-generated/js/default-connector"
+I0317 01:09:20.038375    1489 collector.go:107] schema extensions wrote into "/home/user/studio/dataconnect/.dataconnect/schema"
+Generated sources: prelude.gql [80731B] main/implicit.gql [3267B] main/input.gql [122168B] main/relation.gql [51784B] main/query.gql [15655B] main/mutation.gql [41655B] 
+I0317 01:09:20.055764    1489 collector.go:107] connector "default" javascriptSdk wrote into "/home/user/studio/dataconnect-generated/js/default-connector"
+Generated sources: esm/package.json [17B] package.json [871B] react/esm/index.esm.js [9017B] react/esm/package.json [17B] .guides/setup.md [1690B] index.cjs.js [11927B] react/index.d.ts [11972B] react/index.cjs.js [9587B] react/README.md [119701B] .guides/usage.md [4476B] index.d.ts [24493B] esm/index.esm.js [10297B] README.md [115418B] react/package.json [468B] .guides/config.json [236B] 
+I0317 01:09:20.096722    1489 installsdk.go:55] Package @firebasegen/default-connector is already installed. Skipping installation
+I0317 01:09:20.104468    1489 load.go:109] Finished reloading
+I0317 01:11:09.434592    1489 load.go:31] Reloading schema and connectors...
+I0317 01:11:09.875808    1489 control.go:100] [projects/emulator/locations/emulator/services/studio-v0 8a76] UpdateResources(): done
+Main schema: sources: schema/schema.gql [3721B] 
+Connector "default": sources: connector/mutations.gql [3345B] connector/queries.gql [2782B] 
+I0317 01:11:10.348119    1489 codegen.go:80] [connector "default" javascriptSdk] Generating sources into "/home/user/studio/dataconnect-generated/js/default-connector"
+I0317 01:11:10.531518    1489 collector.go:107] schema extensions wrote into "/home/user/studio/dataconnect/.dataconnect/schema"
+Generated sources: prelude.gql [80731B] main/implicit.gql [3267B] main/input.gql [122168B] main/relation.gql [51784B] main/query.gql [15655B] main/mutation.gql [41655B] 
+I0317 01:11:10.555740    1489 collector.go:107] connector "default" javascriptSdk wrote into "/home/user/studio/dataconnect-generated/js/default-connector"
+Generated sources: index.d.ts [24080B] package.json [871B] README.md [113524B] react/index.cjs.js [9471B] .guides/usage.md [4476B] .guides/setup.md [1690B] .guides/config.json [236B] index.cjs.js [11812B] react/package.json [468B] react/esm/package.json [17B] react/esm/index.esm.js [8898B] react/README.md [118459B] esm/package.json [17B] esm/index.esm.js [10173B] react/index.d.ts [11783B] 
+I0317 01:11:10.579427    1489 installsdk.go:55] Package @firebasegen/default-connector is already installed. Skipping installation
+I0317 01:11:10.579489    1489 load.go:109] Finished reloading
+I0317 01:14:39.431300    1489 load.go:31] Reloading schema and connectors...
+W0317 01:14:39.520090    1489 control.go:74] [projects/emulator/locations/emulator/services/studio-v0 4503] connector "default" has errors: connector/queries.gql:143:26: Expected Name, found $
+
+sources: connector/mutations.gql [3345B] connector/queries.gql [3077B] 
+I0317 01:14:39.520157    1489 control.go:100] [projects/emulator/locations/emulator/services/studio-v0 4503] UpdateResources(): done
+Main schema: sources: schema/schema.gql [3721B] 
+Connector "default": sources: connector/mutations.gql [3345B] connector/queries.gql [3077B] 
+E0317 01:14:39.551452    1489 load.go:73] Could not load sources: 
+Errors: connector/queries.gql:143:26: Expected Name, found $
+I0317 01:14:39.554366    1489 collector.go:107] schema extensions wrote into "/home/user/studio/dataconnect/.dataconnect/schema"
+Generated sources: prelude.gql [80731B] main/input.gql [122168B] main/relation.gql [51784B] main/query.gql [15655B] main/mutation.gql [41655B] main/implicit.gql [3267B] 
+I0317 01:14:39.554406    1489 load.go:74] Finished reloading
+I0317 01:15:19.435282    1489 load.go:31] Reloading schema and connectors...
+W0317 01:15:19.983338    1489 control.go:74] [projects/emulator/locations/emulator/services/studio-v0 13c8] connector "default" has errors: connector/queries.gql:132:3: Unknown argument "where" on field "Query.analytics".
+
+sources: connector/mutations.gql [3404B] connector/queries.gql [2787B] 
+I0317 01:15:19.983423    1489 control.go:100] [projects/emulator/locations/emulator/services/studio-v0 13c8] UpdateResources(): done
+Main schema: sources: schema/schema.gql [3721B] 
+Connector "default": sources: connector/mutations.gql [3404B] connector/queries.gql [2787B] 
+E0317 01:15:20.027548    1489 load.go:73] Could not load sources: 
+Errors: connector/queries.gql:132:3: Unknown argument "where" on field "Query.analytics".
+I0317 01:15:20.032289    1489 collector.go:107] schema extensions wrote into "/home/user/studio/dataconnect/.dataconnect/schema"
+Generated sources: main/input.gql [122168B] main/relation.gql [51784B] main/query.gql [15655B] prelude.gql [80731B] main/mutation.gql [41655B] main/implicit.gql [3267B] 
+I0317 01:15:20.032328    1489 load.go:74] Finished reloading
+I0317 01:18:19.437581    1489 load.go:31] Reloading schema and connectors...
+W0317 01:18:19.554692    1489 control.go:74] [projects/emulator/locations/emulator/services/studio-v0 2dd7] connector "default" has errors: connector/mutations.gql:54:26: Expected :, found (
+
+sources: connector/mutations.gql [3705B] connector/queries.gql [2787B] 
+I0317 01:18:19.554787    1489 control.go:100] [projects/emulator/locations/emulator/services/studio-v0 2dd7] UpdateResources(): done
+Main schema: sources: schema/schema.gql [3721B] 
+Connector "default": sources: connector/mutations.gql [3705B] connector/queries.gql [2787B] 
+E0317 01:18:19.585840    1489 load.go:73] Could not load sources: 
+Errors: connector/mutations.gql:54:26: Expected :, found (
+I0317 01:18:19.598111    1489 collector.go:107] schema extensions wrote into "/home/user/studio/dataconnect/.dataconnect/schema"
+Generated sources: prelude.gql [80731B] main/mutation.gql [41655B] main/implicit.gql [3267B] main/input.gql [122168B] main/relation.gql [51784B] main/query.gql [15655B] 
+I0317 01:18:19.598164    1489 load.go:74] Finished reloading
+I0317 01:18:39.439056    1489 load.go:31] Reloading schema and connectors...
+W0317 01:18:39.877166    1489 control.go:74] [projects/emulator/locations/emulator/services/studio-v0 9623] connector "default" has errors: connector/mutations.gql:9:51: Field "creatorId_expr" is not defined by type "StoryContent_Data". Did you mean "createdAt_expr" or "storyId_expr"?
+connector/mutations.gql:52:31: Field "creatorId" is not defined by type "StoryContent_Filter". Did you mean "createdAt"?
+connector/queries.gql:132:3: Unknown argument "where" on field "Query.analytics".
+
+sources: connector/mutations.gql [3491B] connector/queries.gql [2787B] 
+I0317 01:18:39.877377    1489 control.go:100] [projects/emulator/locations/emulator/services/studio-v0 9623] UpdateResources(): done
+Main schema: sources: schema/schema.gql [3721B] 
+Connector "default": sources: connector/mutations.gql [3491B] connector/queries.gql [2787B] 
+E0317 01:18:39.926649    1489 load.go:73] Could not load sources: 
+Errors: connector/mutations.gql:9:51: Field "creatorId_expr" is not defined by type "StoryContent_Data". Did you mean "createdAt_expr" or "storyId_expr"?
+connector/mutations.gql:52:31: Field "creatorId" is not defined by type "StoryContent_Filter". Did you mean "createdAt"?
+connector/queries.gql:132:3: Unknown argument "where" on field "Query.analytics".
+I0317 01:18:39.954928    1489 collector.go:107] schema extensions wrote into "/home/user/studio/dataconnect/.dataconnect/schema"
+Generated sources: prelude.gql [80731B] main/implicit.gql [3267B] main/input.gql [122168B] main/relation.gql [51784B] main/query.gql [15655B] main/mutation.gql [41655B] 
+I0317 01:18:39.954986    1489 load.go:74] Finished reloading
+I0317 01:22:19.435587    1489 load.go:31] Reloading schema and connectors...
+W0317 01:22:19.560747    1489 control.go:74] [projects/emulator/locations/emulator/services/studio-v0 6018] connector "default" has errors: connector/queries.gql:134:25: Expected Name, found $
+
+sources: connector/mutations.gql [3491B] connector/queries.gql [2924B] 
+I0317 01:22:19.560830    1489 control.go:100] [projects/emulator/locations/emulator/services/studio-v0 6018] UpdateResources(): done
+Main schema: sources: schema/schema.gql [3721B] 
+Connector "default": sources: connector/mutations.gql [3491B] connector/queries.gql [2924B] 
+E0317 01:22:19.586059    1489 load.go:73] Could not load sources: 
+Errors: connector/queries.gql:134:25: Expected Name, found $
+I0317 01:22:19.596493    1489 collector.go:107] schema extensions wrote into "/home/user/studio/dataconnect/.dataconnect/schema"
+Generated sources: prelude.gql [80731B] main/query.gql [15655B] main/mutation.gql [41655B] main/implicit.gql [3267B] main/input.gql [122168B] main/relation.gql [51784B] 
+I0317 01:22:19.596544    1489 load.go:74] Finished reloading
+I0317 01:22:29.426152    1489 load.go:31] Reloading schema and connectors...
+I0317 01:22:29.632304    1489 control.go:100] [projects/emulator/locations/emulator/services/studio-v0 abae] UpdateResources(): done
+Main schema: sources: schema/schema.gql [3721B] 
+Connector "default": sources: connector/mutations.gql [3404B] connector/queries.gql [2780B] 
+I0317 01:22:30.070133    1489 codegen.go:80] [connector "default" javascriptSdk] Generating sources into "/home/user/studio/dataconnect-generated/js/default-connector"
+I0317 01:22:30.350194    1489 collector.go:107] schema extensions wrote into "/home/user/studio/dataconnect/.dataconnect/schema"
+Generated sources: prelude.gql [80731B] main/implicit.gql [3267B] main/input.gql [122168B] main/relation.gql [51784B] main/query.gql [15655B] main/mutation.gql [41655B] 
+I0317 01:22:30.366568    1489 collector.go:107] connector "default" javascriptSdk wrote into "/home/user/studio/dataconnect-generated/js/default-connector"
+Generated sources: index.cjs.js [11768B] esm/index.esm.js [10120B] esm/package.json [17B] index.d.ts [23825B] package.json [871B] README.md [112455B] react/index.d.ts [11669B] react/esm/index.esm.js [8843B] .guides/config.json [236B] react/package.json [468B] react/esm/package.json [17B] react/index.cjs.js [9419B] react/README.md [117761B] .guides/usage.md [3999B] .guides/setup.md [1690B] 
+I0317 01:22:30.431115    1489 installsdk.go:55] Package @firebasegen/default-connector is already installed. Skipping installation
+I0317 01:22:30.431192    1489 load.go:109] Finished reloading
